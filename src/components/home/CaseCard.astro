@@ -5,11 +5,17 @@ import type { CaseMeta } from '../../data/cases';
 interface Props { c: CaseMeta; lang: Lang; big?: boolean }
 const { c, lang, big = false } = Astro.props;
 const kind = c.status === 'concept' ? 'concept' : 'live';
+// Custom card art (designed by Aranza) wins when present: src/assets/cards/<slug>.(png|jpg|webp)
+const cards = import.meta.glob('/src/assets/cards/*.{png,jpg,jpeg,webp}');
+const customKey = Object.keys(cards).find((k) => k.split('/').pop()!.replace(/\.\w+$/, '') === c.slug);
+const custom = customKey ? customKey.replace('/src/assets/', '') : null;
 ---
 <article class:list={['card', { 'card--big': big }]}>
   <a href={caseUrl(lang, c.slug)} class="card__link">
-    <div class:list={['card__media', { 'card__media--phones': c.coverFit === 'phones' }]}>
-      {c.coverFit === 'phones' && c.coverPhones ? (
+    <div class:list={['card__media', { 'card__media--phones': !custom && c.coverFit === 'phones' }]}>
+      {custom ? (
+        <Img src={custom} alt={c.coverAlt[lang]} widths={[640, 960, 1600]} sizes="(min-width: 1100px) 800px, 92vw" />
+      ) : c.coverFit === 'phones' && c.coverPhones ? (
         <div class="card__phones">
           {c.coverPhones.map((p, i) => <div class="card__phone"><Img src={p} alt={i === 0 ? c.coverAlt[lang] : ''} widths={[300, 450]} sizes="(min-width: 1100px) 200px, 28vw" /></div>)}
         </div>
@@ -49,7 +55,8 @@ const kind = c.status === 'concept' ? 'concept' : 'live';
   .card__cta{margin-top:auto;padding-top:10px;color:var(--ai);font-weight:500;font-size:15px}
   @media (min-width:1100px){
     .card--big .card__link{display:grid;grid-template-columns:1.45fr 1fr}
-    .card--big .card__media{aspect-ratio:auto;height:100%;max-height:560px;border-bottom:0;border-right:1px solid var(--line)}
+    .card--big .card__media{aspect-ratio:16/10;align-self:center;border-bottom:0;border-right:1px solid var(--line)}
+    .card--big .card__link{align-items:center}
     .card--big .card__body{padding:36px}
   }
 </style>

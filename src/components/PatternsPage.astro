@@ -21,6 +21,9 @@ const P: P[] = en ? [
   { n: '05', t: 'Falla parcial, no un spinner', why: 'Con varios agentes, “algo salió mal” no sirve. La persona necesita saber qué parte falló y qué sigue en pie.', how: 'Cada agente tiene su estado, los reintentos y tiempos de espera se ven, y la persona puede seguir con lo que terminó o destrabar el resto a mano.', img: 'cases/vantage/case-context-failed.jpg', alt: 'Caso de Vantage donde falló el agente de Contexto', cases: [['vantage', 'Vantage']] },
   { n: '06', t: 'Decir qué se supuso', why: 'Las suposiciones silenciosas son donde se rompe la confianza: el plan parece correcto hasta que no lo es.', how: 'Cuando la IA completa algo que la persona no dijo, el valor queda marcado como “supuesto” y se corrige con un toque.', img: 'cases/numi/voice-summary.png', alt: 'Resumen de Numi con el horario marcado como supuesto', cases: [['numi', 'Numi']] },
 ];
+// Custom pattern art (designed by Aranza) wins when present: src/assets/patterns/p01..p06.(png|jpg|webp)
+const custom = import.meta.glob('/src/assets/patterns/*.{png,jpg,jpeg,webp}');
+const art = (n: string) => { const k = Object.keys(custom).find((x) => x.split('/').pop()!.startsWith('p' + n + '.')); return k ? k.replace('/src/assets/', '') : null; };
 const title = en ? 'AI design patterns | Aranza Isea' : 'Patrones de diseño de IA | Aranza Isea';
 const desc = en ? 'Six patterns for designing AI products people can trust, each taken from a shipped or prototyped case.' : 'Seis patrones para diseñar productos con IA en los que la gente pueda confiar, cada uno tomado de un caso real o prototipado.';
 ---
@@ -40,7 +43,7 @@ const desc = en ? 'Six patterns for designing AI products people can trust, each
           <p class="pat__how">{p.how}</p>
           <p class="pat__cases">{p.cases.map(([s, n]) => <a class="chip" href={caseUrl(lang, s)}>{n} →</a>)}</p>
         </div>
-        <div class="pat__img"><Img src={p.img} alt={p.alt} zoom lang={lang} sizes="(min-width: 1100px) 760px, 92vw" /></div>
+        <div class:list={['pat__img', { 'pat__img--art': art(p.n) }]}><Img src={art(p.n) ?? p.img} alt={p.alt} zoom lang={lang} sizes="(min-width: 1100px) 760px, 92vw" /></div>
       </article>
     ))}
   </div>
@@ -56,7 +59,9 @@ const desc = en ? 'Six patterns for designing AI products people can trust, each
   .pat__how{color:var(--ink-2);margin:0}
   .pat__cases{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
   .pat__cases a{text-decoration:none}
-  .pat__img{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;max-height:460px}
+  .pat__img{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;aspect-ratio:16/10}
+  .pat__img :global(img){height:100%;object-fit:cover;object-position:top left}
+  .pat__img--art{background:var(--bg-deep)}
   .pat__img :global(img){width:100%}
   @media (max-width:900px){.pat{grid-template-columns:1fr}}
 </style>
