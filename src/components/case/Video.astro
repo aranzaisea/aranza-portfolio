@@ -1,0 +1,40 @@
+---
+interface Props { src: string; poster?: string; title?: string; caption?: string; steps?: string[]; d?: 'standard' | 'deep'; label?: string }
+const { src, poster, title, caption, steps = [], d, label = '' } = Astro.props;
+---
+<figure class="vid" data-d={d}>
+  {title && (
+    <figcaption class="vid__bar">
+      <span class="vid__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="vid__title">{title}</span>
+      <button type="button" class="vid__btn" data-vid-toggle aria-label="Pause">❚❚</button>
+    </figcaption>
+  )}
+  <div class="vid__frame">
+    <video poster={poster} autoplay muted loop playsinline preload="metadata" aria-label={label || title}><source src={src} type="video/mp4" /><source src={src.replace(/\.mp4$/, '.webm')} type="video/webm" /></video>
+  </div>
+  {steps.length > 0 && <ol class="vid__steps">{steps.map((s, i) => <li><span>{String(i + 1).padStart(2, '0')}</span>{s}</li>)}</ol>}
+  {caption && <p class="vid__cap">{caption}</p>}
+</figure>
+<script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll<HTMLElement>('.vid').forEach((fig) => {
+    const v = fig.querySelector('video')!; const b = fig.querySelector<HTMLButtonElement>('[data-vid-toggle]');
+    const set = () => { if (b) { b.textContent = v.paused ? '▶' : '❚❚'; b.setAttribute('aria-label', v.paused ? 'Play' : 'Pause'); } };
+    if (reduce) { v.removeAttribute('autoplay'); v.pause(); }
+    b?.addEventListener('click', () => { v.paused ? v.play() : v.pause(); set(); });
+    v.addEventListener('play', set); v.addEventListener('pause', set); set();
+  });
+</script>
+<style>
+  .vid{margin:0}
+  .vid__bar{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;background:var(--panel-2);font:500 13px var(--mono);color:var(--ink-soft)}
+  .vid__dots{display:flex;gap:6px}.vid__dots i{width:9px;height:9px;border-radius:50%;background:var(--line-strong)}
+  .vid__title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .vid__btn{background:none;border:1px solid var(--line-strong);color:var(--ink-2);border-radius:999px;width:34px;height:26px;font-size:11px;cursor:pointer}
+  .vid__frame{border:1px solid var(--line);border-radius:0 0 var(--r) var(--r);overflow:hidden;background:#fff;line-height:0}
+  .vid__frame video{width:100%;height:auto;display:block;aspect-ratio:2880/2048}
+  .vid__steps{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px;font:13px var(--mono);color:var(--ink-soft)}
+  .vid__steps span{color:var(--ai);margin-right:8px}
+  .vid__cap{margin:12px 0 0;color:var(--ink-faint);font-size:14.5px}
+</style>
