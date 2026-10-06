@@ -22,7 +22,7 @@ export const CASES: CaseMeta[] = [
     chips: { en: ['−68% resolution time', '90%+ adoption'], es: ['−68% tiempo de resolución', '90%+ de adopción'] },
     role: { en: 'Product Designer', es: 'Product Designer' }, year: '2024–25',
     where: { en: 'at Perficient', es: 'en Perficient' },
-    cover: 'cases/claimpro/command-center.jpg', pageCover: 'cases/claimpro/command-center-light.jpg',
+    cover: 'cases/claimpro/command-center.jpg', pageCover: 'cases/claimpro/workflow.jpg',
     coverAlt: { en: 'ClaimPro Command Center: claims ranked by the AI with confidence and reasons', es: 'Command Center de ClaimPro: reclamos priorizados por la IA con confianza y motivos' },
     seoTitle: { en: 'ClaimPro — AI claims copilot case study', es: 'ClaimPro — Caso de estudio: copiloto de IA para reclamos' },
     seoDesc: {

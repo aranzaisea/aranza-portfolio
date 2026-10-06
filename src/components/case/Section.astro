@@ -19,5 +19,6 @@ const { n, id, label, title, d, tag } = Astro.props;
   .cs-sec__tag{margin-left:4px}
   .cs-sec__body > :global(.prose){max-width:68ch}
   .cs-sec__body > :global(* + *){margin-top:28px}
+  .cs-sec__body > :global(figure + figure),.cs-sec__body > :global(figure + .g),.cs-sec__body > :global(.g + figure),.cs-sec__body > :global(.g + .g),.cs-sec__body > :global(.prose + figure),.cs-sec__body > :global(.prose + .g){margin-top:clamp(56px,7vw,104px)!important}
   .cs-sec__body > :global(p){margin:0}
 </style>
