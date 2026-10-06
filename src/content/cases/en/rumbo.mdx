@@ -1,0 +1,131 @@
+---
+case: rumbo
+lang: en
+titleA: A rewards program people had,
+titleB: and finally started using.
+lead: A fuel-station chain had a points program almost nobody understood. In one month, I led the design of an MVP that closes the loop inside the app — one scan to earn, a catalog to redeem — for iOS and Android.
+statusNote: Launched MVP. No metrics are available, so the case closes with how I'd measure it.
+summary:
+  problem: Earning points depended on how you paid and on the attendant. Redeeming happened outside the app, with a PDF catalog and in-person validation. People couldn't see their points, didn't know how to earn more and didn't know where to spend them.
+  role: Lead Product Designer. I set the scope, ran the interviews, synthesized the findings and defined the flows; the visual exploration and final UI were shared with a second designer.
+  team: Me as lead and one supporting product designer, working with client stakeholders.
+  client: Loyalty app for a fuel-station chain (anonymized as Club Rumbo).
+  timeline: 1-month MVP · 2023 · at Perficient
+metrics:
+  - v: "1 month"
+    l: from scope to MVP design
+  - v: "20"
+    l: user interviews
+  - v: "2"
+    l: platforms, iOS and Android
+footnote: Brand anonymized. The UI shown here was rebuilt in 2026 on iOS 27 and Android 17 from the original MVP flows. No AI in the product; my personal AI exploration is at the end.
+---
+
+<Section n="01" id="problem" label="The problem" title="A program that existed, and didn't get used.">
+<div class="prose">
+
+The business goal was loyalty, using a points system the company already had. The problem was that people couldn't see the loop: you earned points depending on how you paid and whether the attendant remembered, and you redeemed them somewhere else, with a PDF catalog and a validation at the counter.
+
+</div>
+<Grid cols={3}>
+<Quote>No entiendo dónde canjear mis puntos.</Quote>
+<Quote>¿Cómo acumulo puntos?</Quote>
+<Quote>No veo mis puntos.</Quote>
+</Grid>
+<p class="dim" style="font-size:14.5px;margin-top:12px">Real quotes from the interviews, in Spanish: “I don't understand where to redeem my points”, “How do I earn points?”, “I can't see my points”.</p>
+</Section>
+
+<Section n="02" id="research" label="Research" title="20 interviews and a scope that fit in a month.">
+<div class="prose">
+
+I ran 20 interviews with drivers — as many as the timeline allowed — plus workshops with stakeholders, a pain-point map per journey and a heuristic evaluation of the existing app. The findings pointed to five problems: friction to earn, dependence on third parties, no earn → redeem loop, invisible benefits and low understanding of the system.
+
+**What I cut.** The original brief included ordering gas cylinders. It was the least-used feature — people bought them directly at the station — so I took it out of the MVP to focus on earning and redeeming points.
+
+</div>
+<Insights>
+<Insight n="P1" title="User autonomy">Earning shouldn't depend on the attendant. One scan at the pump or on a receipt.</Insight>
+<Insight n="P2" title="A complete loop">Every earn screen points to what you can redeem; every reward shows how far you are.</Insight>
+<Insight n="P3" title="A system people understand">Points are translated into things: “enough for a full car wash + 4 coffees”.</Insight>
+</Insights>
+</Section>
+
+<Section n="03" id="home" label="Home" title="Your points, translated into things.">
+<Phones items={[
+  {src:"rumbo/s05.png",alt:"Home with 51,034 points, what they're enough for, three actions and expiring points",label:"Home",m:[[94,28,"<strong>Points as things,</strong> not just a number: enough for a full car wash and 4 coffees."],[6,41,"<strong>The three jobs, one tap away:</strong> pay, add a receipt, redeem."],[4,52,"<strong>Expiring points surface</strong> on Home, with what you could use them on."],[88,92.5,"<strong>One scan button for everything,</strong> pump or receipt."]]},
+  {src:"rumbo/s05b.png",alt:"First visit home with a welcome gift and how to earn points",label:"First visit"},
+  {src:"rumbo/s05-dark.png",alt:"Home in dark mode",label:"Dark mode"}
+]} />
+</Section>
+
+<Section n="04" id="earn" label="Earn" title="One scan, whether you pay at the pump or inside.">
+<Phones items={[
+  {src:"rumbo/s10.png",alt:"Scanning the pump's QR code",label:"Scan pump QR"},
+  {src:"rumbo/s11.png",alt:"Confirm pump and amount with points to earn",label:"Confirm & pay"},
+  {src:"rumbo/s12.png",alt:"Payment complete with points earned and balance",label:"Points earned"},
+  {src:"rumbo/s10b.png",alt:"QR code not readable with option to enter the pump number",label:"QR not readable",badge:"Edge case",m:[[6,78,"<strong>The fallback is right there:</strong> more light, or type the pump number."]]}
+]} />
+<Phones d="standard" items={[
+  {src:"rumbo/s13.png",alt:"Scanning a receipt code",label:"Scan receipt"},
+  {src:"rumbo/s14.png",alt:"Enter receipt code manually with validation error",label:"Type the code",badge:"Edge case"},
+  {src:"rumbo/s15.png",alt:"Receipt added with points and new balance",label:"Receipt added"}
+]} />
+</Section>
+
+<Section n="05" id="redeem" label="Redeem" title="A catalog in the app, and a code the attendant scans.">
+<Phones items={[
+  {src:"rumbo/s20.png",alt:"Rewards catalog with balance, filters and rewards you can redeem now",label:"Catalog"},
+  {src:"rumbo/s22b.png",alt:"Reward detail showing points to go, progress and save as goal",label:"Not enough points",m:[[94,54,"<strong>How far you are,</strong> in points and percent."],[4,60,"<strong>Distance in real life:</strong> about 6 full-tank fill-ups."],[94,85,"<strong>Save as goal</strong> turns a no into a reason to come back."]]},
+  {src:"rumbo/s24.png",alt:"Redemption QR code with offline note and Apple Wallet button",label:"Your code",m:[[94,52,"<strong>The attendant scans it</strong> at the counter — that's how validation works in stations."],[4,68.5,"<strong>Works offline</strong> and turns brightness up, because stations have bad signal."],[94,85,"<strong>Apple Wallet pass,</strong> part of the real MVP."]]}
+]} />
+<Phones d="standard" items={[
+  {src:"rumbo/s21.png",alt:"Search and filters in the catalog",label:"Search & filters"},
+  {src:"rumbo/s23.png",alt:"Confirm redemption sheet",label:"Confirm"},
+  {src:"rumbo/s23b.png",alt:"Redemption failed with no connection, no points deducted",label:"No connection",badge:"Edge case",m:[[92,47,"<strong>No points were deducted</strong> — said first, before Try again."]]},
+  {src:"rumbo/s25.png",alt:"Reward used with rating",label:"Used · rate it"}
+]} />
+<div class="prose" data-d="standard">
+
+**Two kinds of reward, two flows.** A coffee is redeemed on the spot with a code. A product ships to a station of your choice and has tracking, a pickup code and a refund if it's late.
+
+</div>
+<Phones d="standard" items={[
+  {src:"rumbo/s26.png",alt:"Choose a pickup station sorted by distance and stock",label:"Pickup station"},
+  {src:"rumbo/s27.png",alt:"Order tracking",label:"Tracking"},
+  {src:"rumbo/s27b.png",alt:"Order delayed with new date and refund option",label:"Delayed",badge:"Edge case",m:[[4,27,"<strong>Delay with a reason and a new date,</strong> in plain words."],[92,92,"<strong>Cancel and refund the points</strong> instantly, no support ticket."]]},
+  {src:"rumbo/s28.png",alt:"Pickup code",label:"Pickup code"}
+]} />
+</Section>
+
+<Section n="06" id="more" label="Activity and profile" title="Every point accounted for." d="deep">
+<Phones items={[
+  {src:"rumbo/s30.png",alt:"Activity with earned and redeemed movements",label:"Activity"},
+  {src:"rumbo/s30b.png",alt:"Empty activity state",label:"Empty state"},
+  {src:"rumbo/s32.png",alt:"Profile with redemptions and points",label:"Profile"},
+  {src:"rumbo/s01.png",alt:"Splash screen explaining the value",label:"Onboarding"}
+]} />
+</Section>
+
+<Section n="07" id="visual" label="Visual design" title="Three directions, one system, two platforms." d="standard">
+<div class="prose">
+
+We explored three visual directions and chose one. For this portfolio I rebuilt the UI on **iOS 27 (Liquid Glass) and Android 17 (Material 3 Expressive)** with a variable-based foundation: primitives, semantic light and dark themes, platform tokens and spacing, plus a UI kit with iOS and Android versions of each component. The palette is new so the original brand isn't recognizable.
+
+</div>
+</Section>
+
+<Section n="08" id="results" label="Outcome" title="Launched, without numbers to show.">
+<div class="prose">
+
+The MVP launched in 2023. I don't have metrics from the client, so I won't invent them. These are the numbers I'd watch: **share of fill-ups linked to an account**, **share of members who redeem at least once**, **time from first earn to first redeem**, and **support requests about points**.
+
+</div>
+</Section>
+
+<Section n="09" id="ai" label="Appendix · personal exploration" title="An AI layer I explored, and why it didn't ship." d="standard">
+<Note kind="ai" title="Not part of the product">
+
+On my own, I explored natural-language search ("something for the kids under 500 points") and content that adapts to each driver's habits. I left it out: in a one-month MVP for a program people didn't understand yet, the priority was making the basic loop visible. Search, filters and rule-based recommendations covered the need with less risk.
+
+</Note>
+</Section>

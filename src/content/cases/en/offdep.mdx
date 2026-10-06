@@ -1,0 +1,106 @@
+---
+case: offdep
+lang: en
+titleA: A self-service B2B store
+titleB: where AI helps, and buyers stay in charge.
+lead: Business clients of a major office-supply retailer could only buy through a sales rep. I designed Off Dep Business, a self-service platform with team roles, budgets and approvals, and an AI that recommends, checks and drafts, but never buys on its own.
+summary:
+  problem: Enterprise clients depended on sales agents for quotes and orders. There was no Business account model, no roles or permissions, and login, checkout and reordering were full of friction. The client wanted business accounts to become a retention strategy, with AI throughout.
+  role: Product Designer. I owned flows, UI and prototyping. Research, goals and target users came defined by the client.
+  team: Perficient delivery team, working with the client's stakeholders.
+  client: B2B e-commerce for a major US office-supply retailer (shown as the fictional Off Dep).
+  timeline: About 6 months · at Perficient
+metrics:
+  - v: "+65%"
+    l: Business accounts created
+  - v: "+56%"
+    l: B2B sales growth
+  - v: "+47%"
+    l: account retention
+footnote: Results reported after launch; the measurement period isn't available. UI adapted to protect the confidentiality of the original product.
+---
+
+<Section n="01" id="problem" label="The problem" title="Buying for a company meant waiting for a sales rep.">
+<div class="prose">
+
+A buyer who needed supplies had to ask a rep for a quote and wait. Nothing in the old experience knew who belonged to which team, what budget they could spend or who had to approve.
+
+The goal was to remove that dependency: **a self-service Business platform with role-based accounts**, using AI wherever it could save buyers and approvers time. The constraint I set: the AI could recommend, compare and prepare, but **every purchase and every approval stays a person's action**.
+
+</div>
+</Section>
+
+<Section n="02" id="approach" label="Approach" title="Four ideas that shaped the platform.">
+<Insights>
+<Insight n="01" title="Self-service, not sales-dependent">Role-based Business accounts and permissions replace the sales-agent bottleneck, so login, checkout and reordering don't wait on a rep.</Insight>
+<Insight n="02" title="An agent, not a chatbot">It learns each account's patterns and recommends inside the classic e-commerce flow people already know, instead of replacing it.</Insight>
+<Insight n="03" title="Budget and policy, always visible">Live budget and policy checks surface before checkout and before approval, so nobody is surprised after the fact.</Insight>
+<Insight n="04" title="Validated with real operators">Several rounds of prototype testing with real purchasing operators shaped decisions, from cart optimization to one-click approvals.</Insight>
+</Insights>
+</Section>
+
+<Section n="03" id="requester" label="Requester · catalog and cart" title="Recommendations that show their reason.">
+<Shot src="offdep/plp.jpg" title="Catalog · recommended for Marketing" alt="Product listing with a restock alert, live budget bar, AI filters and labelled AI picks" m={[[20,13.5,"<strong>A heads-up, not an auto-order.</strong> The AI flags items likely to run out, based on the team's ordering pattern, and the buyer decides."],[30,19,"<strong>Budget above the fold</strong>, so every price is read against what's left."],[58,46,"<strong>Each AI pick says why:</strong> ordered every month, best price, low stock."]]} />
+<Shot src="offdep/smart-cart.jpg" title="Smart cart optimization" alt="Cart with three savings suggestions, the math behind each one, budget and policy check" m={[[20.5,16,"<strong>Nothing changes until you apply it.</strong> The banner sums up the savings; each suggestion can be applied or skipped."],[22,74,"<strong>The math is on the card:</strong> 10 × $79.90 → 12 × $72.50, so the buyer can check it in a second."],[74,43,"<strong>Budget after this order</strong>, not just before."],[74,51,"<strong>Policy check before submitting</strong>, including what will need approval and why."]]} />
+<Grid cols={2} d="standard">
+<Shot src="offdep/pdp-compare.jpg" title="Product detail · AI compare" alt="Product detail page comparing the item with cheaper equivalents" />
+<Shot src="offdep/needs-changes.jpg" title="My requests · needs changes" alt="Requester's list of orders with one returned for changes" />
+</Grid>
+<Grid cols={2} d="deep">
+<Shot src="offdep/requester-home.jpg" title="Requester home" alt="Requester home with recent orders and saved lists" />
+<Shot src="offdep/saved-lists.jpg" title="Saved lists and recurring orders" alt="Saved lists and recurring orders" />
+</Grid>
+</Section>
+
+<Section n="04" id="approver" label="Approver · AI-assisted approvals" title="One click, with the evidence in front of you.">
+<div class="prose">
+
+Each order arrives with a recommendation, its confidence and the three checks an approver cares about: budget, price and compliance.
+
+</div>
+<Shot src="offdep/order-review.jpg" title="Review order · AI verdict" alt="Order review with AI verdict to approve with one substitution, confidence, budget, price and compliance checks and a decision panel" m={[[21,21,"<strong>A verdict in one sentence</strong>, with the reason and the saving it found."],[36,37,"<strong>Three checks, one glance:</strong> budget impact, price check and policy compliance."],[74,25,"<strong>Three clear choices.</strong> Approve with the AI's change, approve as submitted, or reject."],[92.5,61,"<strong>The note to the requester is an AI draft</strong>, labelled as such and editable before sending."]]} />
+<Grid cols={2} d="standard">
+<Shot src="offdep/approvals-queue.jpg" title="Approvals queue" alt="Approvals queue sorted by urgency with AI verdicts" />
+<Shot src="offdep/reject.jpg" title="Reject order" alt="Reject order modal asking for a reason" />
+</Grid>
+</Section>
+
+<Section n="05" id="copilot" label="AI purchase assistant" title="A copilot that knows what it can't see.">
+<Shot src="offdep/copilot.jpg" title="AI purchase assistant" alt="Assistant panel suggesting approved alternatives and drafting a recurring order" m={[[76,12.5,"<strong>Only approved alternatives</strong>, with the saving and the quality standard they meet."],[76,41,"<strong>Every answer cites its data:</strong> catalog plus the team's last six paper orders."],[80,75,"<strong>It prepares, the buyer creates.</strong> A recurring order is a proposal with Edit items next to it."]]} />
+<Shot src="offdep/low-confidence.jpg" title="Low confidence and no access" alt="Assistant refusing to show another department's spend and declining to recommend a supplier at 41% confidence" m={[[78,23,"<strong>Permissions are part of the answer.</strong> The assistant says what the role can see and offers to request access."],[95,54,"<strong>41% is said out loud.</strong> Below the bar, it explains why and doesn't recommend."],[86,72,"<strong>What it can do instead</strong>, as concrete next steps."],[83,86.5,"<strong>Nothing was ordered or changed</strong>, stated after every non-action."]]} />
+</Section>
+
+<Section n="06" id="admin" label="Admin and analytics" title="Visibility for procurement leaders.">
+<Shot src="offdep/spend-analytics.jpg" title="Spend analytics" alt="Spend analytics with AI insights, anomaly detection and a quarterly forecast" />
+<Grid cols={2} d="standard">
+<Shot src="offdep/budgets.jpg" title="Budgets and policies" alt="Admin page for budgets and purchasing policies" />
+<Shot src="offdep/audit-log.jpg" title="Audit log" alt="Audit log of purchases, approvals and AI actions" />
+</Grid>
+<Grid cols={2} d="deep">
+<Shot src="offdep/admin.jpg" title="Admin overview" alt="Admin overview of the Business account" />
+<Shot src="offdep/ai-settings.jpg" title="AI settings" badge="Concept · what I'd add today" badgeKind="ai" alt="Admin AI settings controlling what the assistant can do" />
+</Grid>
+</Section>
+
+<Section n="07" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Decisions>
+<Decision n="01" title="Keep the classic e-commerce flow and add AI inside it" ev="shipped" tradeoff="A chat-first experience would have been more novel. Buyers already knew how to shop; we put the AI where they were already looking.">
+Catalog, cart and checkout work exactly as people expect. The AI shows up as labelled picks, savings cards and a verdict, never as a gate.
+</Decision>
+<Decision n="02" title="Savings are suggestions with the math, never silent swaps" ev="validated" tradeoff="Auto-applying every saving would maximize the number, but buyers would lose track of what's in their cart. Understanding comes first.">
+Each suggestion shows the calculation and has a Not now. The approver sees the swap too, and the requester is notified either way.
+</Decision>
+<Decision n="03" title="Approve with changes as a first-class option" ev="validated" tradeoff="A third button adds a decision to a screen designed for speed. It removed the back-and-forth of rejecting an order to fix one item.">
+Approvers can accept the AI's substitution, approve the original, or reject with a reason, without sending the order back.
+</Decision>
+</Decisions>
+</Section>
+
+<Section n="08" id="results" label="Results" title="Business accounts became a growth channel.">
+<Metrics items={[{v:"+65%",l:"Business accounts created"},{v:"+56%",l:"B2B sales growth"},{v:"+47%",l:"account retention"}]} />
+<div class="prose">
+
+Reported after launch. I don't have the exact measurement period, so I present these as the client's results rather than as a controlled before/after.
+
+</div>
+</Section>

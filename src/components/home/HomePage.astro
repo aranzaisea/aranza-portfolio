@@ -125,7 +125,7 @@ const [first, ...rest] = CASES;
     </header>
     <div class="grid-work">
       <CaseCard c={first} lang={lang} big />
-      {rest.map((x) => <CaseCard c={x} lang={lang} />)}
+      {rest.map((x, i) => <CaseCard c={x} lang={lang} big={i === rest.length - 1 && rest.length % 2 === 1} />)}
     </div>
   </section>
 

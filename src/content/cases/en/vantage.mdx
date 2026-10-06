@@ -1,0 +1,82 @@
+---
+case: vantage
+lang: en
+titleA: A team of AI agents for anti-money-laundering,
+titleB: and a named analyst behind every decision.
+lead: Vantage helps a neobank's AML analysts clear alerts faster. Four AI agents gather context, score risk, check sanctions lists and draft the recommendation; the analyst sees each one working, unblocks the ones that fail and signs every decision.
+statusNote: Launched in 2025. There are no metrics available, so this case focuses on how the design handles risk.
+summary:
+  problem: Before an analyst can judge an alert, they need data from banking systems, sanctions lists and media. Agents can do that collection, but in compliance an agent that quietly fails, or a batch signed without looking, is a regulatory problem.
+  role: Product Designer — flows, agent states, interaction design and UI.
+  team: Perficient product and engineering team, with the client's compliance stakeholders.
+  client: Anti-money-laundering operations for a neobank. Customer and case names are fictional.
+  timeline: 2025 · at Perficient
+metrics: []
+footnote: UI adapted to protect the confidentiality of the original product. All people, companies and case IDs are fictional.
+---
+
+<Section n="01" id="problem" label="The problem" title="Agents can gather the evidence. They can't own the decision.">
+<div class="prose">
+
+An AML alert is a question: is this activity suspicious? Answering it means pulling transactions from core banking, checking sanctions and PEP lists, reading adverse media and writing it up. Most of that is collection, and collection is what agents are good at.
+
+The design problem was the rest. In compliance, **a missing check that looks like a clear is worse than a slow check**, and a regulator will ask who decided. So three rules framed every screen:
+
+</div>
+<Insights>
+<Insight n="01" title="Agents gather and check; they never close, file or sign.">The line is written on the inbox itself, so nobody has to remember it.</Insight>
+<Insight n="02" title="A failed agent shows no result at all.">Never a partial score that could be read as an answer.</Insight>
+<Insight n="03" title="Speed comes from batching, not from skipping.">Low-risk cases can be signed together, but only after the analyst reviews a random sample.</Insight>
+</Insights>
+</Section>
+
+<Section n="02" id="inbox" label="Triage" title="An inbox that shows what each agent has done.">
+<Shot src="vantage/inbox.jpg" title="Inbox · L1 triage" alt="Inbox of AML alerts with per-agent progress, severity, SLA and a banner for a batch of pre-cleared cases" m={[[13,10.5,"<strong>The next best action, in one line:</strong> 62 pre-cleared cases are ready, but handle the Critical case first."],[52,31,"<strong>Four dots, four agents.</strong> The run order is always Context → Risk → Regulatory → Drafting, so a glance tells you where a case is stuck."],[59,65,"<strong>Failures stand out</strong> in the list, before anyone opens the case."],[26,98,"<strong>The rule is in the footer:</strong> agents gather and check, they never close, file or sign a case."]]} />
+</Section>
+
+<Section n="03" id="case" label="Case detail" title="When an agent fails, the case says so, and stops.">
+<Shot src="vantage/case-context-failed.jpg" title="Case detail · Context failed" alt="Case where the Context agent failed to reach core banking; the other agents wait and the decision is locked" m={[[5,26,"<strong>The run as a map.</strong> Context failed with 0 of 5 sources, and the agents that depend on it visibly wait."],[72,30,"<strong>What failed, in plain words,</strong> with each attempt and its time-out."],[72,42,"<strong>No partial score.</strong> A failed agent returns nothing, so nothing can be mistaken for a clear."],[72,52,"<strong>Two ways forward:</strong> retry, or load the transactions manually and unblock the rest."],[74,87.5,"<strong>The decision stays locked</strong> until all four agents finish, and says who approves Critical cases."]]} />
+<Grid cols={2} d="standard">
+<Shot src="vantage/case-partial.jpg" title="Regulatory partial" alt="Case where the Regulatory agent checked only some lists" />
+<Shot src="vantage/case-needs-input.jpg" title="One question before the recommendation" alt="Agent asking the analyst one question to decide whether a match is the same entity" />
+</Grid>
+</Section>
+
+<Section n="04" id="batch" label="Batch sign-off" title="Sign 62 cases at once, after checking three.">
+<div class="prose">
+
+Most alerts are low risk and pre-cleared by a rule. Signing them one by one wastes the analyst's attention; signing them blind defeats the point. The batch flow asks the analyst to review a random sample first. If one sample looks wrong, the whole batch stops.
+
+</div>
+<Shot src="vantage/batch-paused.jpg" title="Batch paused · flagged sample" alt="Batch of 62 pre-cleared cases paused because the analyst flagged one sample" m={[[57,24.5,"<strong>The analyst flagged a sample</strong>, and the other 61 stay unsigned until she decides."],[72,23.5,"<strong>Why, in structured reasons</strong>, so the rule owner gets data, not just a comment."],[72,53,"<strong>What happens next is explicit:</strong> pull the case and re-sample, keep the batch with a reason, or cancel it."],[72,91,"<strong>Logged as an exception to the rule</strong>, and reviewed weekly by Compliance."]]} />
+<Grid cols={2} d="standard">
+<Shot src="vantage/batch-review.jpg" title="Review in progress · 1 of 3" alt="Batch sign-off with the first of three samples reviewed" />
+<Shot src="vantage/batch-ready.jpg" title="Ready to sign" alt="Batch ready to sign after three samples reviewed" />
+</Grid>
+<Grid cols={2} d="deep">
+<Shot src="vantage/batch-resampled.jpg" title="Re-sampled after flag" alt="Batch with three new samples drawn after a flag" />
+<Shot src="vantage/inbox-signed.jpg" title="Inbox · batch signed" alt="Inbox after signing the batch, with an undo window" />
+</Grid>
+</Section>
+
+<Section n="05" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Decisions>
+<Decision n="01" title="Fixed agent order instead of parallel runs" tradeoff="Running everything in parallel would be faster on good days. A fixed order makes every case read the same way and makes it obvious why an agent is waiting.">
+Risk and Regulatory start only when Context has the transactions. If Context fails, they wait instead of producing results on incomplete data.
+</Decision>
+<Decision n="02" title="Ask one question instead of guessing an entity match" tradeoff="It adds a step for the analyst. A wrong “same entity” decision would change the outcome of the case.">
+When a name is close to a list entry, the agent stops and asks the analyst one question, and the answer is recorded for future matches.
+</Decision>
+<Decision n="03" title="A flagged sample pauses the whole batch" tradeoff="One flag can delay 61 good cases. A rule that let one bad case through might be letting others through too.">
+The analyst chooses what happens next, and the reason goes to the rule owner as structured data.
+</Decision>
+</Decisions>
+</Section>
+
+<Section n="06" id="results" label="Outcome" title="Launched, without numbers to show.">
+<div class="prose">
+
+Vantage launched in 2025. I don't have metrics from the client, so I won't invent them. If I were measuring it, I'd track **time from alert to decision**, **share of cases cleared by batch**, **how often samples are flagged** (a signal that a rule needs work) and **agent failure rate by source**.
+
+</div>
+</Section>

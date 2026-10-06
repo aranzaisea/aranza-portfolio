@@ -1,0 +1,69 @@
+---
+case: numi
+lang: en
+titleA: A meal planner that starts from your fridge,
+titleB: and tells you when it's guessing.
+lead: Numi plans what to eat around what you already bought, your schedule and your goals. It's an independent concept I designed end to end for iOS, with one rule throughout — the AI says what it saw, what it assumed and what it won't guess.
+statusNote: Independent concept, designed solo in 2026. Not a shipped product.
+summary:
+  problem: Meal-planning apps assume you'll shop for their plan. Most people do the opposite — they buy groceries, then wonder what to cook. And an app that silently guesses what's in your fridge produces plans you can't trust.
+  role: Product Designer, solo — research, flows, AI behaviour, UI and prototype.
+  client: Consumer · iOS · independent concept
+  timeline: "2026"
+metrics: []
+footnote: All names and data in the screens are fictional.
+---
+
+<Section n="01" id="idea" label="The idea" title="Plan from what's already there.">
+<div class="prose">
+
+Numi flips the usual order: you scan your grocery receipt (or tell Numi what you bought), it keeps a picture of your fridge, and it plans meals around that and around your day — a late meeting means a shorter dinner.
+
+The risk in that idea is obvious. Reading a crumpled receipt or a photo of a shelf is error-prone, and a plan built on a wrong fridge is useless. So the design principle was **visible uncertainty**: Numi shows what it read, marks what it assumed and refuses to guess when it can't see.
+
+</div>
+<Phones items={[
+  {src:"numi/today.jpg",alt:"Today screen with a note about a late meeting and dinner adjusted",label:"Today",m:[[94,25,"<strong>Numi explains its changes.</strong> A late meeting made dinner shorter and lighter, and it says so."],[87,52,"<strong>Every meal is swappable</strong> with one tap, without leaving the day."]]},
+  {src:"numi/recipe.jpg",alt:"Recipe with the reason Numi picked it",label:"Recipe",m:[[94,59,"<strong>Why this recipe,</strong> in one line: what's in your fridge and your available time."]]},
+  {src:"numi/chat.jpg",alt:"Chat suggesting a quicker meal from the fridge",label:"Chat",m:[[94,59,"<strong>Answers become actions:</strong> use this one, or ask for another idea."]]}
+]} />
+</Section>
+
+<Section n="02" id="input" label="Getting food in" title="Show what you read. Mark what you assumed.">
+<Phones items={[
+  {src:"numi/receipt-review.png",alt:"Review of 8 items read from the receipt",label:"Receipt review"},
+  {src:"numi/voice-summary.png",alt:"Summary of what Numi understood with the schedule marked as assumed",label:"What I understood",m:[[94,49.5,"<strong>“Assumed” is a label,</strong> not a hidden default."],[4,62,"<strong>Numi says why it assumed it</strong>, and that any item can be corrected with a tap."]]},
+  {src:"numi/read-error.png",alt:"Receipt could not be read; Numi explains why it doesn't guess",label:"Couldn't read it",badge:"Error state",m:[[94,69.5,"<strong>Why I don't guess:</strong> adding products you didn't buy would break every plan after it."],[92,86,"<strong>Two ways forward,</strong> another photo or another method."]]},
+  {src:"numi/photo-review.png",alt:"Review of products recognized in a photo with approximate quantities",label:"From a photo"}
+]} />
+<Phones d="standard" items={[
+  {src:"numi/fridge.jpg",alt:"Fridge with items marked used today and added today",label:"Fridge"},
+  {src:"numi/fridge-loaded.png",alt:"Fridge loaded from the receipt with undo",label:"Loaded · undo"},
+  {src:"numi/swap.png",alt:"Swap dinner sheet with options from the fridge",label:"Swap dinner"},
+]} />
+</Section>
+
+<Section n="03" id="process" label="Process" title="From Crazy 8s to an audited prototype." d="standard">
+<div class="prose">
+
+I started with problem framing and Crazy 8s, moved to low-fidelity flows and compared three layout variants for the Today screen before going to high fidelity. With a working prototype, I audited every AI moment against Microsoft's **Human-AI interaction guidelines (HAX)** and redesigned the screens that fell short, with clearer explanations and easier ways to correct the AI.
+
+</div>
+<Phones items={[
+  {src:"numi/welcome.png",alt:"Welcome screen",label:"Welcome"},
+  {src:"numi/goal.png",alt:"Choosing what Numi should help with",label:"Goal"},
+  {src:"numi/plan.jpg",alt:"Weekly plan",label:"Plan"},
+  {src:"numi/profile.jpg",alt:"Profile with preferences Numi uses",label:"Profile"}
+]} />
+</Section>
+
+<Section n="04" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Decisions>
+<Decision n="01" title="Refuse to read a bad receipt instead of returning a partial guess" ev="hypothesis" tradeoff="It's one more step for the user. A wrong item in the fridge silently ruins a week of plans.">
+Below a confidence bar, Numi asks for another photo or method and explains why.
+</Decision>
+<Decision n="02" title="Label assumptions in place, not in a settings page" ev="hypothesis" tradeoff="Labels add noise to a summary screen. They're also the only way the user notices a wrong default before it shapes the plan.">
+When the user doesn't mention something — like their schedule — Numi fills a sensible default and marks it “assumed” right there.
+</Decision>
+</Decisions>
+</Section>

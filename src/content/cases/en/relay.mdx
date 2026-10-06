@@ -1,0 +1,84 @@
+---
+case: relay
+lang: en
+titleA: An AI agent for the whole company,
+titleB: with rules everyone can read.
+lead: Relay works across a company's tools — Slack, Google Drive, Jira, Salesforce, Zendesk, GitHub — to draft, send and automate on people's behalf. The hard part wasn't what it could do. It was making sure every team knew what it was allowed to do, and could see what it did.
+statusNote: Launched. No metrics are available for this case, so it focuses on the design of autonomy, approvals and transparency.
+summary:
+  problem: An agent with access to email, code and the CRM can save hours a week, or send the wrong message to a customer. Admins needed control per type of action, employees needed to know what the agent could do in their name, and every action needed a trail.
+  role: Product Designer.
+  client: Enterprise SaaS · workplace AI agent. Company and people names in the screens are fictional.
+metrics: []
+---
+
+<Section n="01" id="problem" label="The problem" title="Autonomy isn't one switch.">
+<div class="prose">
+
+Sending a summary to a Slack channel and updating a deal stage in the CRM are both "actions", but they carry very different risk. Relay's design starts from that: **autonomy is set per category of action**, it is visible to everyone it affects, and the agent always plans before it acts.
+
+</div>
+<Steps items={[["Set the policy","Admins choose per category: draft only, send with review, or full autonomy."],["Plan","For each request, Relay proposes its steps and marks the ones outside the policy."],["Approve and run","The person approves; execution is live and reversible steps are labelled."],["Audit","Every action, blocked or done, is logged with the policy that allowed it."]]} />
+</Section>
+
+<Section n="02" id="setup" label="Admin setup" title="Nothing is enabled by default.">
+<Shot src="relay/a2-autonomy-policy.png" title="Setup 2 of 4 · autonomy policy" alt="Autonomy policy with four categories and three levels each: draft only, send with review, full autonomy" m={[[21,19.7,"<strong>Opt-in by design.</strong> Nothing is enabled by default and the policy can change anytime."],[81,30.9,"<strong>Three levels named by outcome:</strong> draft only, send with review, full autonomy."],[73,64.7,"<strong>Risk decides the default.</strong> Code and finance start at draft only."]]} />
+<Grid cols={2} d="standard">
+<Shot src="relay/a1-connect-integrations.png" title="Setup 1 of 4 · connect tools" alt="Connecting Slack, Jira, Google Drive, Salesforce, GitHub and Zendesk" />
+<Shot src="relay/a3-roles-teams.png" title="Setup 3 of 4 · roles" alt="Roles for admin, manager, contributor and viewer with what each can do" />
+</Grid>
+</Section>
+
+<Section n="03" id="tasks" label="Everyday use" title="A plan first, then the work.">
+<Shot src="relay/b3-plan-proposal.png" title="Plan proposal" alt="Four-step plan with three reversible steps and one needing approval" m={[[21,12.7,"<strong>Nothing runs until you approve</strong>, and Relay says how many steps fall outside its auto-approve policy."],[92,22.5,"<strong>Reversible steps are labelled</strong>, so people know where mistakes are cheap."],[90,52,"<strong>The risky step asks for you:</strong> sending to 12 executives needs explicit approval."],[31.5,63,"<strong>Edit before approving.</strong> The plan is a draft, not an ultimatum."]]} />
+<Grid cols={2} d="standard">
+<Shot src="relay/b4-live-execution.png" title="Live execution" alt="Relay working through the plan step by step" />
+<Shot src="relay/b5-task-summary.png" title="Task summary" alt="Summary of the completed task with steps, approvals and time saved" />
+</Grid>
+<Grid cols={2} d="deep">
+<Shot src="relay/b1-home.png" title="Home · needs your attention" alt="Home with items needing attention and recent activity" />
+<Shot src="relay/b2-conversation.png" title="Conversation" alt="Conversation with Relay before it proposes a plan" />
+</Grid>
+</Section>
+
+<Section n="04" id="automations" label="Automations" title="Test on real data before switching on.">
+<Grid cols={2}>
+<Shot src="relay/c1-workflow-canvas.png" title="Describe the workflow" alt="New automation described in words and drafted as steps" />
+<Shot src="relay/c3-test-run.png" title="Test run on a real record" alt="Test run simulated on a real record where nothing is actually sent" />
+</Grid>
+<Grid cols={2} d="standard">
+<Shot src="relay/c4-active-automations.png" title="Active automations" alt="List of active automations with one paused for review" />
+<Shot src="relay/c5-automation-paused.png" title="Automation paused" alt="Automation paused because a reminder would exceed the auto-send threshold" />
+</Grid>
+</Section>
+
+<Section n="05" id="governance" label="Governance" title="When the policy says no, the agent stops — and says why.">
+<Shot src="relay/d4-flagged-action.png" title="Audit log · blocked action" alt="Blocked email reminder that exceeded the $25,000 auto-send threshold, with policy reference and options" m={[[22.5,27.4,"<strong>Stopped before it reached Gmail</strong>, with the rule it broke in one line."],[34,59,"<strong>The policy is cited</strong>, and the screen says who else can see this event."],[51,75.2,"<strong>Two honest options:</strong> approve this one, or change the rule for everyone."]]} />
+<Grid cols={2} d="standard">
+<Shot src="relay/d1-permission-matrix.png" title="Role × capability matrix" alt="Matrix of what each role can do" />
+<Shot src="relay/d3-audit-log.png" title="Audit log" alt="Audit log of autonomous actions across teams" />
+</Grid>
+<Grid cols={2} d="deep">
+<Shot src="relay/d2-team-autonomy.png" title="Team overrides" alt="Per-team overrides of the autonomy policy" />
+<Shot src="relay/d5-integrations-api.png" title="Integrations and API access" alt="Integrations and API keys with scopes" />
+</Grid>
+</Section>
+
+<Section n="06" id="trust" label="Transparency for everyone" title="Every employee can see what Relay can do for them.">
+<Shot src="relay/e1-trust-center.png" title="Trust center" alt="Plain-language summary of what Relay can do for the current user, by category" />
+<Grid cols={2} d="standard">
+<Shot src="relay/e2-my-activity.png" title="My activity" alt="Everything Relay has done for this user and why" />
+<Shot src="relay/e3-notification-panel.png" title="Notifications" alt="Notifications with undo on recent actions" />
+</Grid>
+</Section>
+
+<Section n="07" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Decisions>
+<Decision n="01" title="Policy by category of action, not by tool" tradeoff="Per-tool settings map to how IT thinks. Per-category settings map to risk, which is what admins and employees actually reason about.">
+“Communications” covers email, Slack and DMs alike, because the risk is the same: a message goes out in someone's name.
+</Decision>
+<Decision n="02" title="Blocked actions offer a one-off approval and a policy change, separately" tradeoff="One button would be simpler. Keeping them apart stops a single exception from silently loosening the rule for everyone.">
+The admin can approve this email, or raise the threshold, but has to choose which.
+</Decision>
+</Decisions>
+</Section>

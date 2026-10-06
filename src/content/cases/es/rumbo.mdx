@@ -1,0 +1,131 @@
+---
+case: rumbo
+lang: es
+titleA: Un programa de puntos que la gente tenía
+titleB: y por fin empezó a usar.
+lead: Una red de estaciones de servicio tenía un programa de puntos que casi nadie entendía. En un mes lideré el diseño de un MVP que cierra el ciclo dentro de la app — un escaneo para sumar, un catálogo para canjear — en iOS y Android.
+statusNote: MVP lanzado. No hay métricas disponibles, así que el caso cierra con cómo lo mediría.
+summary:
+  problem: Sumar puntos dependía de cómo pagabas y del playero. El canje era fuera de la app, con un catálogo en PDF y validación presencial. La gente no veía sus puntos, no sabía cómo sumar más ni dónde usarlos.
+  role: Lead Product Designer. Definí el alcance, dirigí las entrevistas, sinteticé los hallazgos y definí los flujos; la exploración visual y la UI final las hicimos entre las dos personas de diseño.
+  team: Yo como lead y otra persona de diseño de apoyo, junto a los stakeholders del cliente.
+  client: App de fidelización de una red de estaciones de servicio (anonimizada como Club Rumbo).
+  timeline: MVP en 1 mes · 2023 · en Perficient
+metrics:
+  - v: "1 mes"
+    l: del alcance al diseño del MVP
+  - v: "20"
+    l: entrevistas a usuarios
+  - v: "2"
+    l: plataformas, iOS y Android
+footnote: Marca anonimizada. La UI que se ve acá se reconstruyó en 2026 sobre iOS 27 y Android 17 a partir de los flujos del MVP original. El producto no tiene IA; mi exploración personal con IA está al final.
+---
+
+<Section n="01" id="problem" label="El problema" title="Un programa que existía y no se usaba.">
+<div class="prose">
+
+El objetivo de negocio era la fidelización, usando un sistema de puntos que la empresa ya tenía. El problema era que la gente no veía el ciclo: sumabas puntos según cómo pagabas y si el playero se acordaba, y los canjeabas en otro lado, con un catálogo en PDF y una validación en el mostrador.
+
+</div>
+<Grid cols={3}>
+<Quote>No entiendo dónde canjear mis puntos.</Quote>
+<Quote>¿Cómo acumulo puntos?</Quote>
+<Quote>No veo mis puntos.</Quote>
+</Grid>
+<p class="dim" style="font-size:14.5px;margin-top:12px">Citas reales de las entrevistas.</p>
+</Section>
+
+<Section n="02" id="research" label="Research" title="20 entrevistas y un alcance que entrara en un mes.">
+<div class="prose">
+
+Hice 20 entrevistas a conductores — las que permitía el plazo — además de workshops con stakeholders, un mapa de pain points por journey y una evaluación heurística de la app existente. Los hallazgos apuntaron a cinco problemas: fricción para sumar, dependencia de terceros, ningún ciclo sumar → canjear, beneficios invisibles y poca comprensión del sistema.
+
+**Lo que saqué.** El brief original incluía el pedido de garrafas de gas. Era la función menos usada — la gente las compraba directo en la estación — así que la dejé fuera del MVP para enfocarnos en sumar y canjear puntos.
+
+</div>
+<Insights>
+<Insight n="P1" title="Autonomía">Sumar no debería depender del playero. Un escaneo en el surtidor o en el ticket.</Insight>
+<Insight n="P2" title="Un ciclo completo">Cada pantalla de suma lleva a lo que podés canjear; cada recompensa muestra cuánto te falta.</Insight>
+<Insight n="P3" title="Un sistema que se entiende">Los puntos se traducen en cosas: “te alcanza para un lavado completo y 4 cafés”.</Insight>
+</Insights>
+</Section>
+
+<Section n="03" id="home" label="Home" title="Tus puntos, traducidos en cosas.">
+<Phones items={[
+  {src:"rumbo/s05.png",alt:"Home con 51.034 puntos, para qué alcanzan, tres acciones y puntos por vencer",label:"Home",m:[[94,28,"<strong>Puntos como cosas,</strong> no solo un número: alcanzan para un lavado completo y 4 cafés."],[6,41,"<strong>Las tres tareas, a un toque:</strong> pagar, cargar un ticket, canjear."],[4,52,"<strong>Los puntos por vencer aparecen</strong> en el Home, con en qué podrías usarlos."],[88,92.5,"<strong>Un solo botón de escaneo para todo,</strong> surtidor o ticket."]]},
+  {src:"rumbo/s05b.png",alt:"Home de primera visita con regalo de bienvenida y cómo sumar puntos",label:"Primera visita"},
+  {src:"rumbo/s05-dark.png",alt:"Home en modo oscuro",label:"Modo oscuro"}
+]} />
+</Section>
+
+<Section n="04" id="earn" label="Sumar" title="Un escaneo, pagues en el surtidor o adentro.">
+<Phones items={[
+  {src:"rumbo/s10.png",alt:"Escaneo del QR del surtidor",label:"Escanear QR"},
+  {src:"rumbo/s11.png",alt:"Confirmar surtidor y monto con los puntos a sumar",label:"Confirmar y pagar"},
+  {src:"rumbo/s12.png",alt:"Pago completo con puntos sumados y saldo",label:"Puntos sumados"},
+  {src:"rumbo/s10b.png",alt:"QR ilegible con opción de ingresar el número de surtidor",label:"QR ilegible",badge:"Caso borde",m:[[6,78,"<strong>La alternativa está ahí mismo:</strong> más luz, o tipear el número de surtidor."]]}
+]} />
+<Phones d="standard" items={[
+  {src:"rumbo/s13.png",alt:"Escaneo del código de un ticket",label:"Escanear ticket"},
+  {src:"rumbo/s14.png",alt:"Ingreso manual del código con error de validación",label:"Tipear el código",badge:"Caso borde"},
+  {src:"rumbo/s15.png",alt:"Ticket cargado con puntos y saldo nuevo",label:"Ticket cargado"}
+]} />
+</Section>
+
+<Section n="05" id="redeem" label="Canjear" title="Un catálogo en la app y un código que escanea el playero.">
+<Phones items={[
+  {src:"rumbo/s20.png",alt:"Catálogo de recompensas con saldo, filtros y lo que podés canjear ya",label:"Catálogo"},
+  {src:"rumbo/s22b.png",alt:"Detalle de recompensa con puntos faltantes, progreso y guardar como meta",label:"No alcanzan los puntos",m:[[94,54,"<strong>Cuánto te falta,</strong> en puntos y porcentaje."],[4,60,"<strong>La distancia en la vida real:</strong> unas 6 cargas de tanque lleno."],[94,85,"<strong>Guardar como meta</strong> convierte un no en un motivo para volver."]]},
+  {src:"rumbo/s24.png",alt:"Código QR de canje con aviso de uso sin conexión y botón de Apple Wallet",label:"Tu código",m:[[94,52,"<strong>Lo escanea el playero</strong> en el mostrador — así funciona la validación en las estaciones."],[4,68.5,"<strong>Funciona sin conexión</strong> y sube el brillo, porque en las estaciones la señal es mala."],[94,85,"<strong>Pase de Apple Wallet,</strong> parte del MVP real."]]}
+]} />
+<Phones d="standard" items={[
+  {src:"rumbo/s21.png",alt:"Búsqueda y filtros en el catálogo",label:"Búsqueda y filtros"},
+  {src:"rumbo/s23.png",alt:"Hoja de confirmación del canje",label:"Confirmar"},
+  {src:"rumbo/s23b.png",alt:"Canje fallido sin conexión, sin descontar puntos",label:"Sin conexión",badge:"Caso borde",m:[[92,47,"<strong>No se descontaron puntos</strong> — lo primero que se dice, antes de Reintentar."]]},
+  {src:"rumbo/s25.png",alt:"Recompensa usada con calificación",label:"Usado · calificar"}
+]} />
+<div class="prose" data-d="standard">
+
+**Dos tipos de recompensa, dos flujos.** Un café se canjea en el momento con un código. Un producto se envía a la estación que elijas y tiene seguimiento, código de retiro y devolución de puntos si se demora.
+
+</div>
+<Phones d="standard" items={[
+  {src:"rumbo/s26.png",alt:"Elegir estación de retiro ordenada por distancia y stock",label:"Estación de retiro"},
+  {src:"rumbo/s27.png",alt:"Seguimiento del pedido",label:"Seguimiento"},
+  {src:"rumbo/s27b.png",alt:"Pedido demorado con nueva fecha y opción de devolución",label:"Demorado",badge:"Caso borde",m:[[4,27,"<strong>La demora con motivo y fecha nueva,</strong> en palabras simples."],[92,92,"<strong>Cancelar y recuperar los puntos</strong> al instante, sin reclamos."]]},
+  {src:"rumbo/s28.png",alt:"Código de retiro",label:"Código de retiro"}
+]} />
+</Section>
+
+<Section n="06" id="more" label="Actividad y perfil" title="Cada punto, a la vista." d="deep">
+<Phones items={[
+  {src:"rumbo/s30.png",alt:"Actividad con movimientos sumados y canjeados",label:"Actividad"},
+  {src:"rumbo/s30b.png",alt:"Actividad vacía",label:"Estado vacío"},
+  {src:"rumbo/s32.png",alt:"Perfil con canjes y puntos",label:"Perfil"},
+  {src:"rumbo/s01.png",alt:"Pantalla de bienvenida con la propuesta de valor",label:"Onboarding"}
+]} />
+</Section>
+
+<Section n="07" id="visual" label="Diseño visual" title="Tres direcciones, un sistema, dos plataformas." d="standard">
+<div class="prose">
+
+Exploramos tres direcciones visuales y elegimos una. Para este portafolio reconstruí la UI sobre **iOS 27 (Liquid Glass) y Android 17 (Material 3 Expressive)** con una base de variables: primitivos, temas semánticos claro y oscuro, tokens por plataforma y espaciado, más un UI kit con versión iOS y Android de cada componente. La paleta es nueva para que la marca original no se reconozca.
+
+</div>
+</Section>
+
+<Section n="08" id="results" label="Resultado" title="Lanzado, sin números para mostrar.">
+<div class="prose">
+
+El MVP se lanzó en 2023. No tengo métricas del cliente, así que no las invento. Estos son los números que miraría: **proporción de cargas asociadas a una cuenta**, **proporción de socios que canjean al menos una vez**, **tiempo entre la primera suma y el primer canje** y **consultas a soporte sobre puntos**.
+
+</div>
+</Section>
+
+<Section n="09" id="ai" label="Anexo · exploración personal" title="Una capa de IA que exploré, y por qué no se incluyó." d="standard">
+<Note kind="ai" title="No es parte del producto">
+
+Por mi cuenta exploré búsqueda en lenguaje natural (“algo para los chicos por menos de 500 puntos”) y contenido que se adapta a los hábitos de cada conductor. Lo dejé afuera: en un MVP de un mes, para un programa que la gente todavía no entendía, la prioridad era hacer visible el ciclo básico. La búsqueda, los filtros y las recomendaciones por reglas cubrían la necesidad con menos riesgo.
+
+</Note>
+</Section>

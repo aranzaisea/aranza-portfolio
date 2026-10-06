@@ -1,0 +1,69 @@
+---
+case: numi
+lang: es
+titleA: Un planificador de comidas que parte de tu heladera,
+titleB: y te avisa cuando está suponiendo.
+lead: Numi planifica qué comer según lo que ya compraste, tu agenda y tus objetivos. Es un concepto independiente que diseñé de punta a punta para iOS, con una regla en todo el recorrido — la IA dice qué vio, qué supuso y qué no va a adivinar.
+statusNote: Concepto independiente, diseñado sola en 2026. No es un producto lanzado.
+summary:
+  problem: Las apps de planificación asumen que vas a comprar para su plan. La mayoría hace lo contrario — compra y después piensa qué cocinar. Y una app que adivina en silencio qué hay en tu heladera arma planes en los que no se puede confiar.
+  role: Product Designer, sola — research, flujos, comportamiento de la IA, UI y prototipo.
+  client: Consumo · iOS · concepto independiente
+  timeline: "2026"
+metrics: []
+footnote: Todos los nombres y datos de las pantallas son ficticios.
+---
+
+<Section n="01" id="idea" label="La idea" title="Planificar desde lo que ya hay.">
+<div class="prose">
+
+Numi invierte el orden habitual: escaneás el ticket del súper (o le contás qué compraste), mantiene una imagen de tu heladera y planifica las comidas según eso y según tu día — una reunión tarde significa una cena más corta.
+
+El riesgo de esa idea es evidente. Leer un ticket arrugado o la foto de un estante falla seguido, y un plan armado sobre una heladera equivocada no sirve. Por eso el principio de diseño fue la **incertidumbre visible**: Numi muestra qué leyó, marca qué supuso y se niega a adivinar cuando no puede ver.
+
+</div>
+<Phones items={[
+  {src:"numi/today.jpg",alt:"Pantalla Hoy con un aviso sobre una reunión tarde y la cena ajustada",label:"Hoy",m:[[94,25,"<strong>Numi explica sus cambios.</strong> Una reunión tarde hizo la cena más corta y liviana, y lo dice."],[87,52,"<strong>Cada comida se cambia</strong> con un toque, sin salir del día."]]},
+  {src:"numi/recipe.jpg",alt:"Receta con el motivo por el que Numi la eligió",label:"Receta",m:[[94,59,"<strong>Por qué esta receta,</strong> en una línea: lo que hay en tu heladera y el tiempo que tenés."]]},
+  {src:"numi/chat.jpg",alt:"Chat que sugiere una comida más rápida con lo que hay en la heladera",label:"Chat",m:[[94,59,"<strong>Las respuestas se vuelven acciones:</strong> usar esta, o pedir otra idea."]]}
+]} />
+</Section>
+
+<Section n="02" id="input" label="Cargar la comida" title="Mostrar qué leyó. Marcar qué supuso.">
+<Phones items={[
+  {src:"numi/receipt-review.png",alt:"Revisión de 8 productos leídos del ticket",label:"Revisar el ticket"},
+  {src:"numi/voice-summary.png",alt:"Resumen de lo que Numi entendió con el horario marcado como supuesto",label:"Lo que entendí",m:[[94,49.5,"<strong>“Supuesto” es una etiqueta,</strong> no un valor por defecto escondido."],[4,62,"<strong>Numi dice por qué lo supuso</strong>, y que cualquier dato se corrige con un toque."]]},
+  {src:"numi/read-error.png",alt:"No se pudo leer el ticket; Numi explica por qué no adivina",label:"No pude leerlo",badge:"Estado de error",m:[[94,69.5,"<strong>Por qué no adivino:</strong> sumar productos que no compraste rompería todos los planes siguientes."],[92,86,"<strong>Dos caminos,</strong> otra foto u otro método."]]},
+  {src:"numi/photo-review.png",alt:"Revisión de productos reconocidos en una foto con cantidades aproximadas",label:"Desde una foto"}
+]} />
+<Phones d="standard" items={[
+  {src:"numi/fridge.jpg",alt:"Heladera con productos usados hoy y agregados hoy",label:"Heladera"},
+  {src:"numi/fridge-loaded.png",alt:"Heladera cargada desde el ticket con opción de deshacer",label:"Cargada · deshacer"},
+  {src:"numi/swap.png",alt:"Hoja para cambiar la cena con opciones de la heladera",label:"Cambiar la cena"},
+]} />
+</Section>
+
+<Section n="03" id="process" label="Proceso" title="De Crazy 8s a un prototipo auditado." d="standard">
+<div class="prose">
+
+Empecé con el encuadre del problema y Crazy 8s, pasé a flujos de baja fidelidad y comparé tres variantes de layout para la pantalla Hoy antes de ir a alta fidelidad. Con el prototipo funcionando, audité cada momento de IA contra las **pautas de interacción humano-IA de Microsoft (HAX)** y rediseñé las pantallas que no las cumplían, con explicaciones más claras y formas más simples de corregir a la IA.
+
+</div>
+<Phones items={[
+  {src:"numi/welcome.png",alt:"Pantalla de bienvenida",label:"Bienvenida"},
+  {src:"numi/goal.png",alt:"Elegir en qué te ayuda Numi",label:"Objetivo"},
+  {src:"numi/plan.jpg",alt:"Plan semanal",label:"Plan"},
+  {src:"numi/profile.jpg",alt:"Perfil con las preferencias que usa Numi",label:"Perfil"}
+]} />
+</Section>
+
+<Section n="04" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
+<Decisions>
+<Decision n="01" title="No leer un ticket malo en lugar de devolver una lectura parcial" ev="hypothesis" tradeoff="Es un paso más para la persona. Un producto equivocado en la heladera arruina en silencio una semana de planes.">
+Debajo de cierto nivel de confianza, Numi pide otra foto u otro método y explica por qué.
+</Decision>
+<Decision n="02" title="Marcar los supuestos en el lugar, no en una página de ajustes" ev="hypothesis" tradeoff="Las etiquetas suman ruido a una pantalla de resumen. También son la única forma de notar un valor equivocado antes de que defina el plan.">
+Cuando la persona no menciona algo — como su horario — Numi completa un valor razonable y lo marca como “supuesto” ahí mismo.
+</Decision>
+</Decisions>
+</Section>

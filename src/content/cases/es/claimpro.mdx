@@ -1,0 +1,143 @@
+---
+case: claimpro
+lang: es
+titleA: Un copiloto de IA para reclamos de seguros
+titleB: que le devuelve las decisiones difíciles a las personas.
+lead: Los ajustadores de un administrador de siniestros de EE. UU. perdían días priorizando, volviendo a tipear documentos y persiguiendo aprobaciones. Fui la dueña del diseño de ClaimPro de punta a punta, de 20 entrevistas al handoff, y diseñé el comportamiento de la IA con el mismo cuidado que sus pantallas.
+summary:
+  problem: Un reclamo podía tardar semanas. Los ajustadores empezaban el día decidiendo qué atender, copiaban a mano datos de PDFs a formularios y los supervisores aprobaban sin la evidencia en un solo lugar. La IA podía acelerar esto solo si las personas veían qué hacía y podían corregirla.
+  role: Product Designer, dueña de punta a punta — research, flujos, comportamiento de la IA, prototipos y handoff. Dos diseñadores visuales trabajaron en la UI final.
+  team: PM, BA, 4 desarrolladores, QA, 2 diseñadores visuales y stakeholders del cliente.
+  client: Siniestros de autos para un administrador de reclamos de seguros de EE. UU. (se muestra como la ficticia Harborline Insurance).
+  timeline: Unos 6 meses · 2024–25 · en Perficient
+metrics:
+  - v: "−68%"
+    l: tiempo de resolución de reclamos
+    note: dato del cliente, ventana de 3 meses · de semanas a días, algunos en horas
+  - v: "90%+"
+    l: de adopción entre ~500 ajustadores
+    note: el resto seguía en capacitación a los 2 meses
+  - v: "Estándar"
+    l: reemplazó a la herramienta anterior en toda la empresa
+footnote: UI adaptada para proteger la confidencialidad del producto original. Las pantallas marcadas ✦ Extensión se diseñaron en 2026 para este portafolio, para mostrar estados que el alcance original no cubría.
+---
+
+<Section n="01" id="problem" label="El problema" title="El cuello de botella no era la velocidad. Era la confianza.">
+<div class="prose">
+
+Los ajustadores manejaban muchos reclamos abiertos a la vez. El día empezaba siempre igual: abrir la cola, detectar qué reclamos estaban por vencer su SLA y copiar números de póliza, VINs y fechas de PDFs a formularios. Cuando un reclamo necesitaba a un supervisor, la evidencia estaba repartida entre documentos y herramientas.
+
+El cliente quería IA en el flujo. El riesgo quedó claro desde las primeras entrevistas: **una IA que completa mal un reclamo es peor que no tener IA**, porque el ajustador tiene que encontrar el error antes de poder corregirlo. Así que el brief que me escribí no fue "automatizar reclamos". Fue: *que la IA lea y prepare, y que cada decisión sea visiblemente de una persona.*
+
+</div>
+</Section>
+
+<Section n="02" id="research" label="Research" title="20 entrevistas entre todos los roles del sistema.">
+<div class="prose">
+
+Lideré 20 entrevistas entre los distintos roles del sistema, además de evaluaciones heurísticas, desk research y un benchmark. Después probé los prototipos con usuarios antes del handoff. Resumí lo aprendido en cuatro preguntas que el producto tenía que responder en cada pantalla:
+
+</div>
+<Insights>
+<Insight n="P1" title="¿Qué atiendo primero?">Los ajustadores arrancaban el día armando su propia lista de prioridades. → Una cola ordenada por la IA, con el motivo de cada posición.</Insight>
+<Insight n="P2" title="¿Puedo confiar en lo que completó?">Nadie iba a aceptar campos autocompletados sin poder verificarlos. → Confianza y documento fuente en cada valor.</Insight>
+<Insight n="P3" title="¿Qué pasa cuando no está segura?">Que la IA adivine era el miedo principal. → Debajo de un umbral, deja el campo vacío y pregunta.</Insight>
+<Insight n="P4" title="¿Quién decidió y por qué?">Supervisores y auditores necesitaban trazabilidad. → Cada acción de la IA y cada corrección humana queda registrada con su motivo.</Insight>
+</Insights>
+</Section>
+
+<Section n="03" id="command-center" label="Lanzado · Command Center" title="Una cola que explica su propio orden.">
+<div class="prose">
+
+El Command Center reemplazó la priorización manual del inicio del día. La IA ordena los reclamos por riesgo de SLA, exposición financiera y señales de fraude, pero nunca esconde el porqué: cada tarjeta dice qué bloquea el reclamo y cuánto debería llevar el próximo paso.
+
+</div>
+<Shot src="claimpro/command-center.jpg" title="Command Center · espacio del ajustador" alt="Command Center de ClaimPro con reclamos ordenados por puntaje de prioridad, bloqueos y esfuerzo estimado" m={[[17.6,22.5,"<strong>Un puntaje con motivo.</strong> 98 solo no dice nada; la frase de al lado explica qué evita resolverlo hoy."],[52,51.5,"<strong>La IA deriva, no decide.</strong> Un posible fraude va a revisión manual y la tarjeta lo aclara: la IA no rechaza ni demora el pago."],[90,9,"<strong>Los pronósticos se presentan como pronósticos.</strong> Los cuellos de botella previstos muestran su base (72 h, historial de la aseguradora) y una acción concreta."],[30,80,"<strong>Automatización que arranca la persona.</strong> Los seguimientos de bajo riesgo corren solo cuando el ajustador toca Run, con 10 minutos para deshacer."]]} />
+</Section>
+
+<Section n="04" id="intake" label="Lanzado · carga con IA" title="La IA lee los documentos. El ajustador revisa su trabajo.">
+<div class="prose">
+
+El ajustador suelta la póliza, la denuncia policial y las fotos en el reclamo. El copiloto extrae los campos y muestra su progreso en vivo, así la persona sigue trabajando en lugar de mirar un spinner.
+
+</div>
+<Shot src="claimpro/draft.jpg" title="Borrador del reclamo · extracción en vivo" alt="Borrador del reclamo con la confianza de la IA en cada campo, una lista de pasos de extracción y un registro en vivo" m={[[51.5,37,"<strong>Confianza en cada campo</strong>, no un puntaje para todo el reclamo. La gente revisa el 82%, no el 99%."],[88,47,"<strong>Progreso legible.</strong> La lista muestra qué paso terminó y cuál sigue corriendo."],[88,75,"<strong>Un registro en vivo</strong> en lenguaje claro: qué hizo la IA y con qué lo cruzó."],[15,97,"<strong>El copiloto aclara sus límites.</strong> Trabaja sobre este reclamo y dice que no puede aprobar, rechazar ni pagar."]]} />
+<Shot d="standard" src="claimpro/handoff.jpg" title="Borrador completo · responsable y pendientes" alt="Borrador completo con responsable recomendado por la IA, pendientes y recomendaciones" m={[[19,35,"<strong>Recomendado, no asignado.</strong> La IA sugiere un responsable según carga y especialidad; el ajustador confirma."],[74,57.5,"<strong>Los pendientes siguen a la vista</strong> después del borrador, con qué o quién está esperando cada uno."],[82,17,"<strong>Cada recomendación muestra su base</strong>, como la estimación de reparación hecha con reclamos similares de Camry 2021."]]} />
+</Section>
+
+<Section n="05" id="uncertainty" label="Cuando la IA no está segura" title="Debajo del 85%, la IA deja de adivinar.">
+<div class="prose">
+
+Esta regla salió al mercado: las acciones con menos de 85% de confianza pasan a una persona. Para el portafolio la extendí a los estados que el alcance original no llegó a cubrir, para mostrar cómo cambia la interfaz cuando se cruza el umbral.
+
+</div>
+<Shot src="claimpro/fields-below-85.jpg" title="Borrador · 2 campos debajo del 85%" badge="✦ Extensión" alt="Borrador donde el kilometraje y el daño trasero quedan vacíos para revisión, con el motivo de cada uno" m={[[31,22,"<strong>Vacío, no equivocado.</strong> Los campos debajo del umbral quedan en blanco y el reclamo pasa a “Necesita tu decisión”."],[72,48,"<strong>La confianza es la etiqueta</strong>, al lado del campo que necesita atención."],[56,56,"<strong>El porqué en una línea:</strong> reflejo en la foto del odómetro, y cuántas alternativas encontró."],[16,23,"<strong>El copiloto lo dice en voz alta:</strong> “Los dejé vacíos en lugar de adivinar”."]]} />
+<Shot d="standard" src="claimpro/low-confidence.jpg" title="Revisión de baja confianza" badge="✦ Extensión" alt="Pantalla de revisión que compara la foto del odómetro con la renovación de la póliza y valores candidatos" m={[[63,33,"<strong>La evidencia, no solo la respuesta.</strong> El recorte exacto que leyó la IA, con los dígitos dudosos marcados."],[88,34,"<strong>Una segunda fuente</strong> que respalda o contradice la lectura."],[52,53,"<strong>Alternativas ordenadas</strong> por probabilidad, para elegir en lugar de tipear desde cero."],[38,40,"<strong>La regla está en pantalla:</strong> debajo del 85% decide una persona, y la decisión queda registrada con su motivo."]]} />
+</Section>
+
+<Section n="06" id="failure" label="Estados de falla" title="Primero se diseñan los caminos infelices.">
+<div class="prose">
+
+Las personas confían más en una IA cuando ya vieron cómo falla. Diseñé cada falla para que el reclamo siga avanzando con la IA a un costado.
+
+</div>
+<Shot src="claimpro/contradictory.jpg" title="Las fuentes no coinciden · VIN" badge="✦ Extensión" alt="Dos documentos con VINs distintos lado a lado, esperando que el ajustador elija" m={[[33,22,"<strong>Sin desempates silenciosos.</strong> Cuando dos documentos no coinciden, la IA dice que no eligió."],[54,41,"<strong>Las dos fuentes lado a lado</strong>, con página y sección, y una elección de un clic."],[90,83,"<strong>Las confirmaciones humanas se ven distinto</strong> de los valores de la IA, con el nombre de quien confirmó."]]} />
+<Grid cols={2} d="standard">
+<Shot src="claimpro/unreadable.jpg" title="Documento ilegible" badge="✦ Extensión" alt="Documento que la IA no pudo leer, con opciones para tipear los datos clave o pedir una copia nueva" />
+<Shot src="claimpro/unavailable.jpg" title="Copiloto no disponible · modo manual" badge="✦ Extensión" alt="Reclamo en modo manual mientras el copiloto no está disponible" />
+</Grid>
+<Grid cols={2} d="deep">
+<Shot src="claimpro/out-of-scope.jpg" title="Pregunta fuera de alcance · derivación" badge="✦ Extensión" alt="El copiloto rechaza una pregunta fuera de su alcance y la deriva a una persona" />
+<Shot src="claimpro/dismiss-flag.jpg" title="Descartar una alerta con motivo" badge="✦ Extensión" alt="Descartar una alerta de la IA exige un motivo que queda registrado" />
+</Grid>
+</Section>
+
+<Section n="07" id="autonomy" label="La autonomía como ajuste" title="Cuánto hace sola la IA es una decisión del cliente, y se puede deshacer.">
+<div class="prose">
+
+El copiloto salió en modo **Borrador para aprobación**: la IA prepara cada acción y nada corre hasta que una persona aprueba. En lugar de dejar eso fijo, diseñé la autonomía como un ajuste con cuatro niveles, un umbral de confianza bloqueado y una lista de decisiones que ningún nivel puede automatizar.
+
+</div>
+<Shot src="claimpro/copilot-settings.jpg" title="Configuración del copiloto" alt="Configuración con cuatro niveles de autonomía, criterios de prioridad, umbral de confianza del 85% y acciones que siempre decide una persona" narrow m={[[27,12,"<strong>Cuatro niveles, nombrados según quién actúa:</strong> solo sugerir, borrador para aprobación, automático dentro de límites, procesamiento directo."],[64,43,"<strong>El umbral del 85% lo fija la política de la organización.</strong> Solo Admin y Compliance pueden cambiarlo; los campos financieros usan 95%."],[27,66.5,"<strong>Siempre lo decide una persona:</strong> aprobar o rechazar un reclamo, liberar un pago, la firma de nivel 2."]]} />
+<Shot d="standard" src="claimpro/impact-sim.jpg" title="Vista previa del impacto antes de guardar" badge="✦ Extensión" alt="Vista previa de cómo un cambio de configuración afectaría la cola actual" m={[[73,3.5,"<strong>Simulado sobre la cola real</strong> antes de cambiar nada, y etiquetado como simulación."],[95,20,"<strong>El cambio en números:</strong> cuántos reclamos cambian de carril y cuántas acciones pasan a ser automáticas."],[70,48,"<strong>Los límites que no se mueven</strong> quedan listados, para ver qué no puede tocar el cambio."]]} />
+</Section>
+
+<Section n="08" id="supervisor" label="Aprobación del supervisor" title="Aprobaciones con la evidencia adjunta.">
+<div class="prose">
+
+Una aprobación vale lo que vale la evidencia que la persona tiene delante. El paquete de aprobación reúne el resumen de la IA, la nota del ajustador y la evidencia en un solo panel, y exige un motivo para cada decisión.
+
+</div>
+<Shot src="claimpro/approval-decision.jpg" title="Aprobación · supervisor" badge="✦ Extensión" alt="Panel de aprobación del supervisor con cifras del reclamo, resumen de la IA con fuentes, nota del ajustador y decisión con motivo obligatorio" m={[[84,15.5,"<strong>Verificado por regla, no por IA:</strong> la cuenta del excedente se valida de forma determinística."],[62,30,"<strong>El resumen de la IA cita sus fuentes</strong>, hasta la página y la sección de la póliza."],[77,54.5,"<strong>El motivo es obligatorio.</strong> Decisión, motivo y nombre quedan registrados y se avisa al ajustador."]]} />
+<Grid cols={2} d="deep">
+<Shot src="claimpro/audit-log.jpg" title="Actividad del reclamo · registro" badge="✦ Extensión" alt="Registro de acciones de la IA y de personas sobre un reclamo" />
+<Shot src="claimpro/ai-quality.jpg" title="Calidad de la IA · supervisor" badge="✦ Extensión" alt="Tablero del supervisor que sigue la precisión de la IA y las correcciones" />
+</Grid>
+<Shot d="deep" src="claimpro/portfolio.jpg" title="Portfolio del supervisor" alt="Vista del supervisor con reclamos por riesgo y SLA" />
+</Section>
+
+<Section n="09" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
+<Decisions>
+<Decision n="01" title="Dejar campos vacíos en lugar de precompletar la mejor apuesta" ev="hypothesis" tradeoff="Suma clics en los reclamos difíciles, pero encontrar un valor precompletado erróneo cuesta más que completar uno vacío. Es parte de la extensión de la regla del 85% que salió al mercado.">
+Un valor precompletado parece terminado y la gente lo pasa por alto. Debajo del umbral el campo queda vacío y el reclamo no avanza, así la incertidumbre no se puede ignorar.
+</Decision>
+<Decision n="02" title="Un umbral que todos ven, en lugar de ajustes ocultos por campo" ev="shipped" tradeoff="Una regla única del 85% es más gruesa que modelos por campo. Los campos financieros tienen un umbral más estricto del 95%; el resto quedó lo bastante simple para explicarlo en una frase.">
+Ajustadores y supervisores necesitaban anticipar cuándo la IA iba a pedir ayuda. Una regla que se puede decir en voz alta genera eso más rápido que una más inteligente que nadie sabe explicar.
+</Decision>
+<Decision n="03" title="Automatizaciones que arranca el ajustador, con tiempo para deshacer" ev="shipped" tradeoff="Seguimientos totalmente automáticos ahorrarían más tiempo. El disparo humano mantiene a las personas a cargo mientras se construye la confianza, y la configuración permite subir la autonomía más adelante.">
+Los recordatorios a proveedores corren desde un carril “Listo para ejecutar”. Nada le llega a un asegurado sin que una persona lo lea antes.
+</Decision>
+<Decision n="04" title="Simular antes de guardar cualquier cambio de autonomía" ev="hypothesis" tradeoff="Diseñado para la extensión del portafolio; no validado con usuarios.">
+Subir la autonomía es el cambio más riesgoso que puede hacer un admin. Ver su efecto sobre la cola actual convierte un salto de fe en una decisión con números.
+</Decision>
+</Decisions>
+</Section>
+
+<Section n="10" id="results" label="Resultados" title="De semanas a días.">
+<Metrics items={[{v:"−68%",l:"tiempo de resolución de reclamos",note:"Dato del cliente, medido en 3 meses. Reclamos que tardaban semanas se resuelven en días, algunos en horas."},{v:"90%+",l:"de adopción entre ~500 ajustadores",note:"Reemplazó a la herramienta anterior. El resto seguía en capacitación a los 2 meses."}]} />
+<div class="prose" data-d="standard">
+
+**Qué haría distinto.** Mediría las correcciones desde el primer día: cuántas veces los ajustadores corrigen a la IA y por qué. Ese es el número que indica dónde se puede subir la autonomía con seguridad, y es el centro de la pantalla de calidad de la IA de la extensión.
+
+</div>
+</Section>

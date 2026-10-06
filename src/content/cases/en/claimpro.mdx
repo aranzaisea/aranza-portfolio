@@ -49,7 +49,7 @@ I led 20 interviews across the roles in the system, plus heuristic evaluations, 
 <Section n="03" id="command-center" label="Shipped · Command Center" title="A queue that explains its own order.">
 <div class="prose">
 
-The Command Center replaced the adjuster's morning spreadsheet. The AI ranks claims by SLA risk, financial exposure and fraud signals, but it never hides why: every card says what is blocking the claim and how long the next step should take.
+The Command Center replaced the start-of-day triage. The AI ranks claims by SLA risk, financial exposure and fraud signals, but it never hides why: every card says what is blocking the claim and how long the next step should take.
 
 </div>
 <Shot src="claimpro/command-center.jpg" title="Command Center · adjuster workspace" alt="ClaimPro Command Center with claims ranked by priority score, blockers and estimated effort" m={[[17.6,22.5,"<strong>A score with a reason.</strong> 98 means nothing on its own, so the sentence next to it says what resolving the claim prevents today."],[52,51.5,"<strong>The AI routes, it doesn't decide.</strong> A possible fraud case goes to manual review, and the card says so: the AI does not deny or delay payment."],[90,9,"<strong>Forecasts are labelled as forecasts.</strong> Predicted bottlenecks show their basis (72h, carrier history) and a concrete next action."],[30,80,"<strong>Automation you start yourself.</strong> Low-risk follow-ups run only when the adjuster presses Run, with a 10-minute undo window."]]} />
@@ -118,7 +118,7 @@ A supervisor's sign-off is only as good as the evidence in front of them. The ap
 
 <Section n="09" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
 <Decisions>
-<Decision n="01" title="Leave fields empty instead of pre-filling a best guess" ev="shipped" tradeoff="It adds clicks on hard claims. We accepted that because a wrong pre-filled value costs more to find than an empty one costs to fill.">
+<Decision n="01" title="Leave fields empty instead of pre-filling a best guess" ev="hypothesis" tradeoff="It adds clicks on hard claims, but a wrong pre-filled value costs more to find than an empty one costs to fill. Part of the portfolio extension of the shipped 85% rule.">
 A pre-filled value looks finished, and people skim past it. Below the threshold the field stays empty and the claim can't move on, so the uncertainty can't be ignored.
 </Decision>
 <Decision n="02" title="One threshold everyone can see, instead of hidden per-field tuning" ev="shipped" tradeoff="A single 85% rule is blunter than per-field models. Financial fields got a stricter 95% gate; everything else stayed simple enough to explain in one sentence.">
@@ -137,7 +137,7 @@ Raising autonomy is the riskiest change an admin can make. Showing its effect on
 <Metrics items={[{v:"−68%",l:"claim resolution time",note:"Client-reported, measured over 3 months. Claims that took weeks now close in days, some in hours."},{v:"90%+",l:"adoption among ~500 adjusters",note:"It replaced the previous tool. The rest were still in training at 2 months."}]} />
 <div class="prose" data-d="standard">
 
-**What I'd do differently.** I'd instrument overrides from day one. We knew adoption and resolution time, but not how often adjusters corrected the AI and why. That number would have told us where to raise autonomy next, which is exactly what the AI quality screen in the extension is for.
+**What I'd do differently.** I'd instrument overrides from day one: how often adjusters correct the AI, and why. That's the number that tells you where autonomy can safely go up next, and it's what the AI quality screen in the extension is designed around.
 
 </div>
 </Section>

@@ -11,7 +11,7 @@ const cases = defineCollection({
     titleB: z.string(),
     lead: z.string(),
     statusNote: z.string().optional(),
-    summary: z.object({ problem: z.string(), role: z.string(), team: z.string(), client: z.string(), timeline: z.string() }),
+    summary: z.object({ problem: z.string(), role: z.string().default(''), team: z.string().default(''), client: z.string().default(''), timeline: z.string().default('') }),
     metrics: z.array(z.object({ v: z.string(), l: z.string(), note: z.string().optional() })).default([]),
     legend: z.boolean().default(true),
     footnote: z.string().optional(),

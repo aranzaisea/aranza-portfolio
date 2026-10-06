@@ -98,7 +98,7 @@ export const CASES: CaseMeta[] = [
     chips: { en: ['Autonomy policy', 'Plan → approve → run'], es: ['Política de autonomía', 'Plan → aprobar → ejecutar'] },
     role: { en: 'Product Designer', es: 'Product Designer' }, year: '',
     where: { en: '', es: '' },
-    cover: 'cases/relay/b3-plan-proposal.png',
+    cover: 'cases/relay/b3-plan-proposal.png', pageCover: 'cases/relay/c2-review-workflow.png',
     coverAlt: { en: 'Relay plan proposal: four steps, one waiting for the user’s approval', es: 'Propuesta de plan en Relay: cuatro pasos, uno esperando la aprobación del usuario' },
     seoTitle: { en: 'Relay — Workplace AI agent case study', es: 'Relay — Caso de estudio: agente de IA para equipos' },
     seoDesc: {

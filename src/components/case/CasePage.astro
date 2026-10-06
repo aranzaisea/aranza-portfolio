@@ -46,10 +46,10 @@ const legend = lang === 'en'
         <h2 id="sum-h" class="label">{t.summary}</h2>
         <dl class="summary__dl">
           <div class="span2"><dt>{t.problem}</dt><dd>{d.summary.problem}</dd></div>
-          <div><dt>{t.role}</dt><dd>{d.summary.role}</dd></div>
-          <div><dt>{t.team}</dt><dd>{d.summary.team}</dd></div>
-          <div><dt>{t.client}</dt><dd>{d.summary.client}</dd></div>
-          <div><dt>{t.timeline}</dt><dd>{d.summary.timeline}</dd></div>
+          {d.summary.role && <div><dt>{t.role}</dt><dd>{d.summary.role}</dd></div>}
+          {d.summary.team && <div><dt>{t.team}</dt><dd>{d.summary.team}</dd></div>}
+          {d.summary.client && <div><dt>{t.client}</dt><dd>{d.summary.client}</dd></div>}
+          {d.summary.timeline && <div><dt>{t.timeline}</dt><dd>{d.summary.timeline}</dd></div>}
         </dl>
         {d.metrics.length > 0 && (
           <dl class="summary__mets">
