@@ -1,0 +1,28 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+  src: string; alt: string; sizes?: string; widths?: number[]; zoom?: boolean; eager?: boolean;
+  class?: string; lang?: Lang; ratio?: string;
+}
+const { src, alt, sizes = '(min-width: 1440px) 1328px, 92vw', widths = [640, 1024, 1600], zoom = false, eager = false, class: cls, lang = 'en', ratio = '16/10' } = Astro.props;
+const all = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{png,jpg,jpeg,webp}');
+const key = all[`/src/assets/${src}`] ? `/src/assets/${src}` : `/src/assets/cases/${src}`;
+const img = all[key] ? (await all[key]()).default : null;
+// Always include the original width: the full-resolution file is never dropped.
+const w = img ? [...new Set([...widths.filter((x) => x < img.width), img.width])].sort((a, b) => a - b) : [];
+const fallback = img && img.format === 'png' ? 'png' : 'jpg';
+---
+{img ? (
+  zoom ? (
+    <a class="img-zoom" href={img.src} target="_blank" rel="noopener" aria-label={`${alt} — ${ui[lang].zoom}`}>
+      <Picture src={img} alt={alt} widths={w} sizes={sizes} formats={['webp']} fallbackFormat={fallback} quality={92} class={cls} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
+    </a>
+  ) : (
+    <Picture src={img} alt={alt} widths={w} sizes={sizes} formats={['webp']} fallbackFormat={fallback} quality={92} class={cls} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
+  )
+) : (
+  <div class="img-missing" style={`aspect-ratio:${ratio}`} role="img" aria-label={alt}>missing: {src}</div>
+)}

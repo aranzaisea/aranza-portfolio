@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from './Img.astro';
+import { caseUrl, type Lang } from '../i18n/ui';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+type P = { n: string; t: string; why: string; how: string; img: string; alt: string; cases: [string, string][] };
+const P: P[] = en ? [
+  { n: '01', t: 'Confidence changes the screen', why: 'A confidence score only matters if it changes what the person does next.', how: 'Below a threshold the field is flagged, its source is one click away and the claim can’t move on until a person reviews it. Above it, the AI’s work stays quiet.', img: 'cases/claimpro/fields-below-85.jpg', alt: 'ClaimPro draft with fields below 85% flagged for review', cases: [['claimpro', 'ClaimPro'], ['offdep', 'Off Dep']] },
+  { n: '02', t: 'Every answer shows where it came from', why: 'People check the AI the way they check a colleague: by looking at the evidence.', how: 'Each AI-filled value links to the page and line it was read from, and contradictions between sources are shown side by side instead of averaged away.', img: 'cases/claimpro/contradictory.jpg', alt: 'ClaimPro showing two documents that disagree', cases: [['claimpro', 'ClaimPro'], ['vantage', 'Vantage']] },
+  { n: '03', t: 'Autonomy is a policy people can read', why: 'Teams don’t trust an AI that might act on its own; they trust rules they can see.', how: 'An admin sets per category whether the AI only drafts, sends with review or acts alone. Changes are simulated against past cases, logged and reversible.', img: 'cases/relay/a2-autonomy-policy.png', alt: 'Relay autonomy policy by category', cases: [['relay', 'Relay'], ['claimpro', 'ClaimPro']] },
+  { n: '04', t: 'Plan first, then act', why: 'An agent that explains its steps before running them can be corrected cheaply.', how: 'The agent proposes a plan, marks which steps fall outside the user’s auto-approve policy and waits. Execution is live and every step is linked to the result.', img: 'cases/relay/b3-plan-proposal.png', alt: 'Relay plan proposal with one step waiting for approval', cases: [['relay', 'Relay']] },
+  { n: '05', t: 'Partial failure, not a spinner', why: 'With several agents, “something went wrong” is useless. The person needs to know which part failed and what still holds.', how: 'Each agent has its own state, retries and time-outs are visible, and the person can continue with what finished or unblock the rest manually.', img: 'cases/vantage/case-context-failed.jpg', alt: 'Vantage case where the Context agent failed and the rest waits', cases: [['vantage', 'Vantage']] },
+  { n: '06', t: 'Say what you assumed', why: 'Silent assumptions are where trust breaks: the plan looks right until it isn’t.', how: 'When the AI fills a gap the user didn’t cover, the value is labelled “assumed” and stays one tap away from correction.', img: 'cases/numi/voice-summary.png', alt: 'Numi summary with the schedule marked as assumed', cases: [['numi', 'Numi']] },
+] : [
+  { n: '01', t: 'La confianza cambia la pantalla', why: 'Un puntaje de confianza solo importa si cambia lo que la persona hace después.', how: 'Debajo del umbral el campo se marca, su fuente está a un clic y el reclamo no avanza hasta que una persona lo revisa. Por encima, el trabajo de la IA no interrumpe.', img: 'cases/claimpro/fields-below-85.jpg', alt: 'Borrador de ClaimPro con campos debajo del 85% marcados para revisión', cases: [['claimpro', 'ClaimPro'], ['offdep', 'Off Dep']] },
+  { n: '02', t: 'Cada respuesta muestra de dónde salió', why: 'La gente revisa a la IA como revisa a un colega: mirando la evidencia.', how: 'Cada valor completado por la IA enlaza a la página y la línea de donde se leyó, y las contradicciones entre fuentes se muestran lado a lado en lugar de promediarse.', img: 'cases/claimpro/contradictory.jpg', alt: 'ClaimPro mostrando dos documentos que no coinciden', cases: [['claimpro', 'ClaimPro'], ['vantage', 'Vantage']] },
+  { n: '03', t: 'La autonomía es una política legible', why: 'Los equipos no confían en una IA que podría actuar sola; confían en reglas que pueden ver.', how: 'Un admin define por categoría si la IA solo prepara, envía con revisión o actúa sola. Los cambios se simulan sobre casos pasados, quedan registrados y se pueden revertir.', img: 'cases/relay/a2-autonomy-policy.png', alt: 'Política de autonomía de Relay por categoría', cases: [['relay', 'Relay'], ['claimpro', 'ClaimPro']] },
+  { n: '04', t: 'Primero el plan, después la acción', why: 'Un agente que explica sus pasos antes de ejecutarlos se puede corregir barato.', how: 'El agente propone un plan, marca qué pasos quedan fuera de la política de aprobación automática y espera. La ejecución es en vivo y cada paso enlaza al resultado.', img: 'cases/relay/b3-plan-proposal.png', alt: 'Propuesta de plan en Relay con un paso esperando aprobación', cases: [['relay', 'Relay']] },
+  { n: '05', t: 'Falla parcial, no un spinner', why: 'Con varios agentes, “algo salió mal” no sirve. La persona necesita saber qué parte falló y qué sigue en pie.', how: 'Cada agente tiene su estado, los reintentos y tiempos de espera se ven, y la persona puede seguir con lo que terminó o destrabar el resto a mano.', img: 'cases/vantage/case-context-failed.jpg', alt: 'Caso de Vantage donde falló el agente de Contexto', cases: [['vantage', 'Vantage']] },
+  { n: '06', t: 'Decir qué se supuso', why: 'Las suposiciones silenciosas son donde se rompe la confianza: el plan parece correcto hasta que no lo es.', how: 'Cuando la IA completa algo que la persona no dijo, el valor queda marcado como “supuesto” y se corrige con un toque.', img: 'cases/numi/voice-summary.png', alt: 'Resumen de Numi con el horario marcado como supuesto', cases: [['numi', 'Numi']] },
+];
+const title = en ? 'AI design patterns | Aranza Isea' : 'Patrones de diseño de IA | Aranza Isea';
+const desc = en ? 'Six patterns for designing AI products people can trust, each taken from a shipped or prototyped case.' : 'Seis patrones para diseñar productos con IA en los que la gente pueda confiar, cada uno tomado de un caso real o prototipado.';
+---
+<Base lang={lang} title={title} description={desc} variant="page">
+  <header class="wrap ph">
+    <p class="eyebrow">{en ? 'Patterns' : 'Patrones'}</p>
+    <h1 class="h-1">{en ? 'Six patterns I keep coming back to.' : 'Seis patrones a los que siempre vuelvo.'}</h1>
+    <p class="lead">{en ? 'Each one comes from a real screen in my work. They’re not rules for every product; they’re the decisions that made people trust the AI in these ones.' : 'Cada uno sale de una pantalla real de mi trabajo. No son reglas para cualquier producto; son las decisiones que hicieron que la gente confiara en la IA en estos.'}</p>
+  </header>
+  <div class="wrap pl">
+    {P.map((p) => (
+      <article class="pat" id={`p${p.n}`}>
+        <div class="pat__t">
+          <span class="mono pn">{p.n}</span>
+          <h2 class="h-2">{p.t}</h2>
+          <p class="pat__why">{p.why}</p>
+          <p class="pat__how">{p.how}</p>
+          <p class="pat__cases">{p.cases.map(([s, n]) => <a class="chip" href={caseUrl(lang, s)}>{n} →</a>)}</p>
+        </div>
+        <div class="pat__img"><Img src={p.img} alt={p.alt} zoom lang={lang} sizes="(min-width: 1100px) 760px, 92vw" /></div>
+      </article>
+    ))}
+  </div>
+</Base>
+<style>
+  .ph{padding-top:clamp(56px,8vw,112px);max-width:980px}
+  .ph .h-1{margin:18px 0}
+  .pl{display:grid;gap:20px;margin-top:56px}
+  .pat{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.3fr);gap:clamp(20px,4vw,48px);align-items:center;border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,36px);background:var(--panel-2)}
+  .pn{color:var(--ai);font-size:13px}
+  .pat .h-2{margin:10px 0 14px}
+  .pat__why{color:var(--ink);margin:0 0 10px;font-size:17.5px}
+  .pat__how{color:var(--ink-2);margin:0}
+  .pat__cases{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+  .pat__cases a{text-decoration:none}
+  .pat__img{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;max-height:460px}
+  .pat__img :global(img){width:100%}
+  @media (max-width:900px){.pat{grid-template-columns:1fr}}
+</style>

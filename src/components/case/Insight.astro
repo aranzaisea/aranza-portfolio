@@ -1,0 +1,17 @@
+---
+interface Props { n?: string; title: string; quote?: string }
+const { n, title, quote } = Astro.props;
+---
+<article class="ins">
+  {n && <span class="ins__n">{n}</span>}
+  <h3 class="h-3">{title}</h3>
+  <div class="ins__body"><slot /></div>
+  {quote && <p class="ins__q">“{quote}”</p>}
+</article>
+<style>
+  .ins{border:1px solid var(--line);background:var(--panel-2);border-radius:var(--r);padding:22px 22px 20px}
+  .ins__n{font:500 12.5px var(--mono);color:var(--ai);display:block;margin-bottom:10px}
+  .ins__body{color:var(--ink-2);font-size:16px;margin-top:8px}
+  .ins__body :global(p){margin:0}
+  .ins__q{margin:14px 0 0;padding-left:12px;border-left:2px solid var(--human);color:var(--ink);font-size:15.5px}
+</style>

@@ -1,0 +1,11 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+interface Props { lang: Lang; why?: boolean }
+const { lang, why = true } = Astro.props;
+const t = ui[lang];
+const opts = [['skim', t.depth.skim, t.depth.tSkim], ['standard', t.depth.standard, t.depth.tStandard], ['deep', t.depth.deep, t.depth.tDeep]];
+---
+<div class="dial" role="group" aria-label={t.depth.label}>
+  {opts.map(([k, l, tm]) => <button type="button" data-set-depth={k} aria-pressed={k === 'standard' ? 'true' : 'false'}>{l}<span class="t">· {tm}</span></button>)}
+</div>
+{why && <button type="button" class="why-btn" data-toggle-why aria-pressed="true" title={t.why}>✦ <span class="w">{t.whyShort}</span></button>}

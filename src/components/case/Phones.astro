@@ -1,0 +1,43 @@
+---
+import Img from '../Img.astro';
+import type { Lang } from '../../i18n/ui';
+interface Item { src: string; alt: string; label?: string; m?: [number, number, string][]; badge?: string }
+interface Props { items: Item[]; d?: 'standard' | 'deep'; caption?: string; lang?: Lang; cols?: number }
+const { items, d, caption, lang = (Astro.url.pathname.startsWith('/es/') ? 'es' : 'en'), cols } = Astro.props;
+let k = 0;
+const numbered = items.map((it) => ({ ...it, ms: (it.m ?? []).map(([x, y, note]) => ({ x, y, note, n: ++k })) }));
+const notes = numbered.flatMap((i) => i.ms);
+---
+<figure class="phones" data-d={d}>
+  <div class="phones__row" style={cols ? `--cols:${cols}` : undefined}>
+    {numbered.map((it) => (
+      <div class="phone">
+        <div class="phone__frame">
+          <Img src={it.src} alt={it.alt} zoom lang={lang} widths={[360, 540]} sizes="(min-width: 1100px) 300px, 44vw" />
+          {it.ms.map((m) => <span class="marker" style={`left:${m.x}%;top:${m.y}%`} aria-hidden="true">{m.n}</span>)}
+        </div>
+        {(it.label || it.badge) && <p class="phone__label">{it.label}{it.badge && <span class="badge badge--human">{it.badge}</span>}</p>}
+      </div>
+    ))}
+  </div>
+  {notes.length > 0 && (
+    <ol class="notes">
+      {notes.map((m) => <li><span class="notes__n">{m.n}</span><span set:html={m.note} /></li>)}
+    </ol>
+  )}
+  {caption && <p class="shot__cap">{caption}</p>}
+</figure>
+<style>
+  .phones{margin:0}
+  .phones__row{display:grid;grid-template-columns:repeat(var(--cols,auto-fit),minmax(150px,1fr));gap:clamp(12px,2vw,28px);align-items:start}
+  .phone__frame{position:relative;border-radius:clamp(18px,2.4vw,34px);overflow:hidden;border:1px solid var(--line-strong);background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+  .phone__frame :global(img){width:100%}
+  .phone__label{margin:12px 0 0;font:500 13px var(--mono);color:var(--ink-soft);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .marker{position:absolute;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50%;background:var(--ai);color:#0B0E14;font:600 12.5px/26px var(--mono);text-align:center;box-shadow:0 0 0 5px rgba(138,156,255,.28),0 4px 14px rgba(0,0,0,.35);pointer-events:none}
+  .notes{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 28px}
+  .notes li{display:flex;gap:12px;color:var(--ink-2);font-size:15.5px;line-height:1.5}
+  .notes__n{flex:none;width:22px;height:22px;border-radius:50%;border:1px solid var(--ai);color:var(--ai);font:600 11.5px/20px var(--mono);text-align:center;margin-top:1px}
+  .notes :global(strong){color:var(--ink)}
+  .shot__cap{margin:12px 0 0;color:var(--ink-faint);font-size:14.5px}
+  @media (max-width:700px){.phones__row{grid-template-columns:repeat(2,1fr)}.marker{width:20px;height:20px;font-size:10.5px;line-height:20px;box-shadow:0 0 0 3px rgba(138,156,255,.28)}}
+</style>

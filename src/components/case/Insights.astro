@@ -1,0 +1,6 @@
+---
+interface Props { d?: 'standard' | 'deep' }
+const { d } = Astro.props;
+---
+<div class="insights" data-d={d}><slot /></div>
+<style>.insights{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}</style>

@@ -1,0 +1,23 @@
+---
+interface Props { n?: string; id?: string; label?: string; title: string; d?: 'standard' | 'deep'; tag?: string }
+const { n, id, label, title, d, tag } = Astro.props;
+---
+<section class="cs-sec" id={id} data-d={d}>
+  <div class="wrap">
+    <header class="cs-sec__head">
+      <p class="label">{n && <span class="cs-sec__n">{n}</span>}{label}{tag && <span class="badge badge--neutral cs-sec__tag">{tag}</span>}</p>
+      <h2 class="h-2">{title}</h2>
+    </header>
+    <div class="cs-sec__body"><slot /></div>
+  </div>
+</section>
+<style>
+  .cs-sec{padding:72px 0 8px}
+  .cs-sec__head{max-width:880px;margin-bottom:28px}
+  .cs-sec__head .label{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+  .cs-sec__n{color:var(--ai);margin-right:2px}
+  .cs-sec__tag{margin-left:4px}
+  .cs-sec__body > :global(.prose){max-width:68ch}
+  .cs-sec__body > :global(* + *){margin-top:28px}
+  .cs-sec__body > :global(p){margin:0}
+</style>

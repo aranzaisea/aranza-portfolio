@@ -1,0 +1,10 @@
+---
+interface Props { by?: string }
+const { by } = Astro.props;
+---
+<blockquote class="qt"><p><slot /></p>{by && <footer>— {by}</footer>}</blockquote>
+<style>
+  .qt{margin:0;padding:6px 0 6px 22px;border-left:3px solid var(--human);max-width:760px}
+  .qt p{margin:0;font-size:clamp(20px,2vw,25px);line-height:1.4;letter-spacing:-.01em;color:var(--ink)}
+  .qt footer{margin-top:10px;color:var(--ink-faint);font:13px var(--mono)}
+</style>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aranzaisea.netlify.app/sitemap-index.xml

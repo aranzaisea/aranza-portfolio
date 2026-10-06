@@ -1,0 +1,51 @@
+---
+import Img from '../Img.astro';
+import type { Lang } from '../../i18n/ui';
+interface Props {
+  src: string; alt: string; title?: string; caption?: string; badge?: string; badgeKind?: 'ext' | 'ai' | 'human' | 'live' | 'neutral';
+  m?: [number, number, string][]; d?: 'standard' | 'deep'; narrow?: boolean; crop?: number; lang?: Lang; eager?: boolean;
+}
+const { src, alt, title, caption, badge, badgeKind = 'ext', m = [], d, narrow = false, crop, lang = (Astro.url.pathname.startsWith('/es/') ? 'es' : 'en'), eager = false } = Astro.props;
+---
+<figure class:list={['shot', { 'shot--narrow': narrow }]} data-d={d}>
+  {(title || badge) && (
+    <figcaption class="shot__bar">
+      <span class="shot__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      {title && <span class="shot__title">{title}</span>}
+      {badge && <span class={`badge badge--${badgeKind}`}>{badge}</span>}
+    </figcaption>
+  )}
+  <div class="shot__frame" style={crop ? `max-height:${crop}px` : undefined}>
+    <div class="shot__inner">
+    <Img src={src} alt={alt} zoom lang={lang} eager={eager} sizes={narrow ? '(min-width: 1100px) 880px, 92vw' : '(min-width: 1440px) 1328px, 92vw'} />
+    {m.map(([x, y], i) => <span class="marker" style={`left:${x}%;top:${y}%`} aria-hidden="true">{i + 1}</span>)}
+    </div>
+    {crop && <span class="shot__fade" aria-hidden="true"></span>}
+  </div>
+  {m.length > 0 && (
+    <ol class="notes">
+      {m.map(([, , note], i) => <li><span class="notes__n">{i + 1}</span><span set:html={note} /></li>)}
+    </ol>
+  )}
+  {caption && <p class="shot__cap">{caption}</p>}
+</figure>
+<style>
+  .shot{margin:0}
+  .shot--narrow{max-width:880px}
+  .shot__bar{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;background:var(--panel-2);font:500 13px var(--mono);color:var(--ink-soft)}
+  .shot__bar + .shot__frame{border-radius:0 0 var(--r) var(--r)}
+  .shot__dots{display:flex;gap:6px}
+  .shot__dots i{width:9px;height:9px;border-radius:50%;background:var(--line-strong)}
+  .shot__title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .shot__frame{position:relative;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff}
+  .shot__frame :global(img){width:100%}
+  .shot__inner{position:relative}
+  .shot__fade{position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(transparent,rgba(15,19,27,.9));pointer-events:none}
+  .marker{position:absolute;transform:translate(-50%,-50%);width:28px;height:28px;border-radius:50%;background:var(--ai);color:#0B0E14;font:600 13px/28px var(--mono);text-align:center;box-shadow:0 0 0 5px rgba(138,156,255,.28),0 4px 14px rgba(0,0,0,.35);pointer-events:none}
+  .notes{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 28px}
+  .notes li{display:flex;gap:12px;color:var(--ink-2);font-size:15.5px;line-height:1.5}
+  .notes__n{flex:none;width:22px;height:22px;border-radius:50%;border:1px solid var(--ai);color:var(--ai);font:600 11.5px/20px var(--mono);text-align:center;margin-top:1px}
+  .notes :global(strong){color:var(--ink)}
+  .shot__cap{margin:12px 0 0;color:var(--ink-faint);font-size:14.5px}
+  @media (max-width:640px){.marker{width:22px;height:22px;font-size:11px;line-height:22px;box-shadow:0 0 0 3px rgba(138,156,255,.28)}}
+</style>

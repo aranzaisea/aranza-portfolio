@@ -1,0 +1,55 @@
+---
+import Img from '../Img.astro';
+import { caseUrl, ui, type Lang } from '../../i18n/ui';
+import type { CaseMeta } from '../../data/cases';
+interface Props { c: CaseMeta; lang: Lang; big?: boolean }
+const { c, lang, big = false } = Astro.props;
+const kind = c.status === 'concept' ? 'concept' : 'live';
+---
+<article class:list={['card', { 'card--big': big }]}>
+  <a href={caseUrl(lang, c.slug)} class="card__link">
+    <div class:list={['card__media', { 'card__media--phones': c.coverFit === 'phones' }]}>
+      {c.coverFit === 'phones' && c.coverPhones ? (
+        <div class="card__phones">
+          {c.coverPhones.map((p, i) => <div class="card__phone"><Img src={p} alt={i === 0 ? c.coverAlt[lang] : ''} widths={[300, 450]} sizes="(min-width: 1100px) 200px, 28vw" /></div>)}
+        </div>
+      ) : (
+        <Img src={c.cover} alt={c.coverAlt[lang]} widths={[640, 960, 1400]} sizes={big ? '(min-width: 1100px) 900px, 92vw' : '(min-width: 1100px) 640px, 92vw'} />
+      )}
+    </div>
+    <div class="card__body">
+      <p class="card__top"><span class="mono dim">{c.no}</span><span class={`badge badge--${kind}`}>{c.statusLabel[lang]}</span>{c.ai && <span class="badge badge--ai">AI</span>}</p>
+      <h3 class="h-2">{c.name}</h3>
+      <p class="card__tag mono">{c.tag[lang]}</p>
+      <p class="card__s">{c.sentence[lang]}</p>
+      <ul class="chips">{c.chips[lang].map((ch) => <li class="chip">{ch}</li>)}</ul>
+      <p class="card__meta mono dim">{c.role[lang]}{c.where[lang] && ` · ${c.where[lang]}`}{c.year && ` · ${c.year}`}</p>
+      <span class="card__cta">{ui[lang].viewCase} →</span>
+    </div>
+  </a>
+</article>
+<style>
+  .card{border:1px solid var(--line);border-radius:18px;background:var(--panel-2);overflow:hidden;transition:border-color .15s,transform .2s}
+  .card:hover{border-color:var(--line-strong)}
+  .card__link{display:flex;flex-direction:column;height:100%;text-decoration:none;color:inherit}
+  .card__media{aspect-ratio:16/10;overflow:hidden;background:#fff;border-bottom:1px solid var(--line)}
+  .card__media :global(img){width:100%;height:100%;object-fit:cover;object-position:top left;transition:transform .5s}
+  .card:hover .card__media :global(img){transform:scale(1.015)}
+  .card__media--phones{background:radial-gradient(120% 100% at 50% 0%,#1b2333,var(--bg-deep));display:flex;align-items:flex-start;justify-content:center;padding:7% 6% 0}
+  .card__phones{display:grid;grid-template-columns:repeat(3,1fr);gap:5%;width:100%}
+  .card__phone{border-radius:14px 14px 0 0;overflow:hidden;border:1px solid var(--line-strong);border-bottom:0}
+  .card__phone :global(img){height:auto;object-fit:initial}
+  .card:hover .card__phone :global(img){transform:none}
+  .card__body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .card__top{display:flex;align-items:center;gap:10px;margin:0}
+  .card .h-2{font-size:clamp(24px,2.4vw,30px)}
+  .card__tag{margin:-4px 0 0;font-size:13px;color:var(--ink-faint)}
+  .card__s{margin:0;color:var(--ink-2)}
+  .card__meta{margin:4px 0 0;font-size:12.5px}
+  .card__cta{margin-top:auto;padding-top:10px;color:var(--ai);font-weight:500;font-size:15px}
+  @media (min-width:1100px){
+    .card--big .card__link{display:grid;grid-template-columns:1.45fr 1fr}
+    .card--big .card__media{aspect-ratio:auto;height:100%;max-height:560px;border-bottom:0;border-right:1px solid var(--line)}
+    .card--big .card__body{padding:36px}
+  }
+</style>

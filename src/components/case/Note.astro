@@ -1,0 +1,19 @@
+---
+interface Props { kind?: 'ai' | 'human' | 'neutral'; title?: string; d?: 'standard' | 'deep' }
+const { kind = 'neutral', title, d } = Astro.props;
+---
+<aside class={`note note--${kind}`} data-d={d}>
+  {title && <p class="label note__t">{title}</p>}
+  <div class="note__b"><slot /></div>
+</aside>
+<style>
+  .note{border-radius:var(--r);padding:18px 22px;border:1px solid var(--line);background:var(--panel-2);max-width:880px}
+  .note--ai{border-color:#33407a;background:var(--ai-bg)}
+  .note--human{border-color:#5a4826;background:var(--human-bg)}
+  .note__t{margin:0 0 8px}
+  .note--ai .note__t{color:var(--ai)}
+  .note--human .note__t{color:var(--human)}
+  .note__b{color:var(--ink-2);font-size:16px}
+  .note__b :global(p){margin:0 0 .5em}
+  .note__b :global(p:last-child){margin:0}
+</style>

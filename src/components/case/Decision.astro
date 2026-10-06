@@ -1,0 +1,26 @@
+---
+import { ui, type Lang } from '../../i18n/ui';
+interface Props { title: string; ev?: 'validated' | 'measured' | 'shipped' | 'hypothesis'; tradeoff?: string; lang?: Lang; n?: string }
+const { title, ev, tradeoff, lang = (Astro.url.pathname.startsWith('/es/') ? 'es' : 'en'), n } = Astro.props;
+const t = ui[lang];
+---
+<article class="dec">
+  <div class="dec__head">
+    {n && <span class="dec__n">{n}</span>}
+    <h3 class="h-3">{title}</h3>
+    {ev && <span class={`ev ev--${ev}`}>{t.ev[ev]}</span>}
+  </div>
+  <div class="dec__body"><slot /></div>
+  {tradeoff && <p class="dec__trade" data-d="deep"><span class="label">{t.tradeoff}</span> {tradeoff}</p>}
+</article>
+<style>
+  .dec{border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;background:var(--panel-2)}
+  .dec__head{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+  .dec__head .h-3{flex:1 1 320px}
+  .dec__n{font:500 12.5px var(--mono);color:var(--ai)}
+  .dec__body{color:var(--ink-2);margin-top:10px;max-width:76ch}
+  .dec__body :global(p){margin:0 0 .6em}
+  .dec__body :global(p:last-child){margin:0}
+  .dec__trade{margin:14px 0 0;padding-top:14px;border-top:1px dashed var(--line);color:var(--ink-2);font-size:15.5px}
+  .dec__trade .label{color:var(--human);margin-right:6px}
+</style>

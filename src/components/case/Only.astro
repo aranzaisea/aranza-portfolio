@@ -1,0 +1,6 @@
+---
+interface Props { skim?: boolean; d?: 'standard' | 'deep' }
+const { skim, d } = Astro.props;
+---
+<div class="only" data-only={skim ? 'skim' : undefined} data-d={d}><slot /></div>
+<style>.only{display:contents}</style>

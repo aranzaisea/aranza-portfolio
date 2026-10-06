@@ -1,0 +1,143 @@
+---
+case: claimpro
+lang: en
+titleA: An AI copilot for insurance claims
+titleB: that hands the hard calls back to people.
+lead: Adjusters at a US claims administrator were losing days to triage, re-typing documents and chasing approvals. I owned the design of ClaimPro end to end, from 20 interviews to handoff, and designed the AI's behaviour as carefully as its screens.
+summary:
+  problem: Claims could sit for weeks. Adjusters started each day deciding what to work on, copied data from PDFs into forms by hand, and supervisors signed off without the evidence in one place. An AI could speed this up only if people could see what it did and overrule it.
+  role: Product Designer, owner end to end — research, flows, AI behaviour, prototypes and handoff. Two visual designers worked on the final UI.
+  team: PM, BA, 4 developers, QA, 2 visual designers and client stakeholders.
+  client: Auto claims for a US insurance claims administrator (shown as the fictional Harborline Insurance).
+  timeline: About 6 months · 2024–25 · at Perficient
+metrics:
+  - v: "−68%"
+    l: claim resolution time
+    note: client-reported, 3-month window · weeks → days, some in hours
+  - v: "90%+"
+    l: adoption among ~500 adjusters
+    note: the rest were still in training at 2 months
+  - v: "Standard"
+    l: replaced the previous tool company-wide
+footnote: UI adapted to protect the confidentiality of the original product. Screens marked ✦ Extension were designed in 2026 for this portfolio, to show states the original scope didn't cover.
+---
+
+<Section n="01" id="problem" label="The problem" title="Speed wasn't the bottleneck. Trust was.">
+<div class="prose">
+
+Adjusters juggled many open claims at once. Their day started with the same work: open the queue, work out which claims were close to breaching their SLA, then copy policy numbers, VINs and dates from PDFs into forms. When a claim needed a supervisor, the evidence was spread across documents and tools.
+
+The client wanted AI in the workflow. The risk was obvious from the first interviews: **an AI that fills in a claim wrongly is worse than no AI**, because an adjuster has to find the mistake before they can fix it. So the brief I wrote for myself was not "automate claims". It was: *let the AI do the reading and the preparing, and make every decision visibly a person's.*
+
+</div>
+</Section>
+
+<Section n="02" id="research" label="Research" title="20 interviews across every role in the system.">
+<div class="prose">
+
+I led 20 interviews across the roles in the system, plus heuristic evaluations, desk research and a benchmark. I then tested prototypes with users before handoff. I summarised what we learned as four questions the product had to answer on every screen:
+
+</div>
+<Insights>
+<Insight n="Q1" title="What should I work on first?">Adjusters lost the start of each day building their own priority list. → An AI-ranked queue with the reason for each rank.</Insight>
+<Insight n="Q2" title="Can I trust what it filled in?">Nobody would accept autofilled fields they couldn't check. → Confidence and the source document on every value.</Insight>
+<Insight n="Q3" title="What happens when it isn't sure?">Guessing was the failure people feared most. → Below a threshold, the AI leaves the field empty and asks.</Insight>
+<Insight n="Q4" title="Who decided, and why?">Supervisors and auditors needed a trail. → Every AI action and every human override is logged with a reason.</Insight>
+</Insights>
+</Section>
+
+<Section n="03" id="command-center" label="Shipped · Command Center" title="A queue that explains its own order.">
+<div class="prose">
+
+The Command Center replaced the adjuster's morning spreadsheet. The AI ranks claims by SLA risk, financial exposure and fraud signals, but it never hides why: every card says what is blocking the claim and how long the next step should take.
+
+</div>
+<Shot src="claimpro/command-center.jpg" title="Command Center · adjuster workspace" alt="ClaimPro Command Center with claims ranked by priority score, blockers and estimated effort" m={[[17.6,22.5,"<strong>A score with a reason.</strong> 98 means nothing on its own, so the sentence next to it says what resolving the claim prevents today."],[52,51.5,"<strong>The AI routes, it doesn't decide.</strong> A possible fraud case goes to manual review, and the card says so: the AI does not deny or delay payment."],[90,9,"<strong>Forecasts are labelled as forecasts.</strong> Predicted bottlenecks show their basis (72h, carrier history) and a concrete next action."],[30,80,"<strong>Automation you start yourself.</strong> Low-risk follow-ups run only when the adjuster presses Run, with a 10-minute undo window."]]} />
+</Section>
+
+<Section n="04" id="intake" label="Shipped · AI intake" title="The AI reads the documents. The adjuster checks its work.">
+<div class="prose">
+
+Adjusters drop the policy, police report and photos into the claim. The copilot extracts the fields and shows its progress live, so the adjuster can keep working instead of waiting for a spinner.
+
+</div>
+<Shot src="claimpro/draft.jpg" title="Claim draft · live extraction" alt="Claim draft with each field tagged with AI confidence, an extraction checklist and a live activity log" m={[[51.5,37,"<strong>Confidence on every field</strong>, not one score for the whole claim. People check the 82%, not the 99%."],[88,47,"<strong>Progress you can read.</strong> The checklist shows which step is done and which is still running."],[88,75,"<strong>A live activity log</strong> in plain language: what the AI did and what it matched it with."],[15,97,"<strong>The copilot states its limits.</strong> It is scoped to this claim and says it can't approve, deny or pay."]]} />
+<Shot d="standard" src="claimpro/handoff.jpg" title="Draft complete · ownership and follow-ups" alt="Completed draft with AI-recommended owner, outstanding follow-ups and AI recommendations" m={[[19,35,"<strong>Recommended, not assigned.</strong> The AI suggests an owner from case load and specialization; the adjuster confirms."],[74,57.5,"<strong>Open items stay visible</strong> after the draft is done, with who or what each one is waiting for."],[82,17,"<strong>Each recommendation carries its basis</strong>, like the repair estimate built from similar 2021 Camry claims."]]} />
+</Section>
+
+<Section n="05" id="uncertainty" label="When the AI isn't sure" title="Below 85%, the AI stops guessing.">
+<div class="prose">
+
+This rule shipped: actions under 85% confidence go to a person. For the portfolio I extended it into the states the original scope didn't reach, to show how the interface changes when the threshold is crossed.
+
+</div>
+<Shot src="claimpro/fields-below-85.jpg" title="Claim draft · 2 fields below 85%" badge="✦ Extension" alt="Draft where mileage and rear damage area are left empty for review, with the reason for each" m={[[31,22,"<strong>Empty, not wrong.</strong> Fields under the threshold are left blank for review and the claim moves to “Needs your decision”."],[72,48,"<strong>The confidence is the label</strong>, next to the field that needs attention."],[56,56,"<strong>Why, in one line:</strong> glare on the odometer photo, and how many alternatives it found."],[16,23,"<strong>The copilot says it out loud:</strong> “I left them empty instead of guessing.”"]]} />
+<Shot d="standard" src="claimpro/low-confidence.jpg" title="Low-confidence review" badge="✦ Extension" alt="Review screen comparing the odometer photo with the policy renewal and ranked candidate values" m={[[63,33,"<strong>The evidence, not just the answer.</strong> The exact crop the AI read, with the uncertain digits outlined."],[88,34,"<strong>A second source</strong> that supports or contradicts the reading."],[52,53,"<strong>Ranked alternatives</strong> with their probability, so the person chooses instead of typing from scratch."],[38,40,"<strong>The rule is on screen:</strong> below 85% a person decides, and the decision is logged with a reason."]]} />
+</Section>
+
+<Section n="06" id="failure" label="Failure states" title="Designing the unhappy paths first.">
+<div class="prose">
+
+Adjusters trust an AI more when they've seen how it fails. I designed each failure so the claim keeps moving with the AI out of the way.
+
+</div>
+<Shot src="claimpro/contradictory.jpg" title="Sources disagree · VIN" badge="✦ Extension" alt="Two documents with different VINs shown side by side, waiting for the adjuster to choose" m={[[33,22,"<strong>No silent tie-break.</strong> When two documents disagree, the AI says it hasn't chosen."],[54,41,"<strong>Both sources side by side</strong>, with page and section, and a one-click choice."],[90,83,"<strong>Human confirmations are marked differently</strong> from AI values, with the name of the person who confirmed."]]} />
+<Grid cols={2} d="standard">
+<Shot src="claimpro/unreadable.jpg" title="Unreadable document" badge="✦ Extension" alt="Document the AI could not read, with options to type key figures or request a new copy" />
+<Shot src="claimpro/unavailable.jpg" title="Copilot unavailable · manual mode" badge="✦ Extension" alt="Claim screen in manual mode while the copilot is unavailable" />
+</Grid>
+<Grid cols={2} d="deep">
+<Shot src="claimpro/out-of-scope.jpg" title="Out-of-scope question · hand-off" badge="✦ Extension" alt="Copilot declining a question outside its scope and routing it to a person" />
+<Shot src="claimpro/dismiss-flag.jpg" title="Dismiss a flag with a reason" badge="✦ Extension" alt="Dismissing an AI flag requires a reason that is logged" />
+</Grid>
+</Section>
+
+<Section n="07" id="autonomy" label="Autonomy as a setting" title="How much the AI does alone is a decision the client makes, and can undo.">
+<div class="prose">
+
+The launched copilot shipped in **Draft for approval**: the AI prepares every action and nothing runs until a person approves. Instead of hard-coding that, I designed autonomy as a setting with four levels, a locked confidence threshold and a list of decisions no level can automate.
+
+</div>
+<Shot src="claimpro/copilot-settings.jpg" title="AI Copilot Settings" alt="Settings with four autonomy levels, prioritization criteria, an 85% confidence threshold and actions always decided by a person" narrow m={[[27,12,"<strong>Four levels, named by who acts:</strong> suggest only, draft for approval, auto within guardrails, straight-through."],[64,43,"<strong>The 85% threshold is locked by org policy.</strong> Only Admin and Compliance can change it; financial fields use 95%."],[27,66.5,"<strong>Always decided by a person:</strong> approving or denying a claim, releasing a payment, Level 2 sign-off."]]} />
+<Shot d="standard" src="claimpro/impact-sim.jpg" title="Impact preview before saving" badge="✦ Extension" alt="Impact preview showing how a settings change would affect the current queue" m={[[73,3.5,"<strong>Simulated on the real queue</strong> before anything changes, and labelled as a simulation."],[95,20,"<strong>The change in numbers:</strong> how many claims move lanes and how many actions become automatic."],[70,48,"<strong>Guardrails that don't move</strong> are listed, so admins see what the change can't touch."]]} />
+</Section>
+
+<Section n="08" id="supervisor" label="Supervisor sign-off" title="Approvals with the evidence attached.">
+<div class="prose">
+
+A supervisor's sign-off is only as good as the evidence in front of them. The approval package brings the AI summary, the adjuster's note and the evidence into one panel, and requires a reason for every decision.
+
+</div>
+<Shot src="claimpro/approval-decision.jpg" title="Approval · supervisor" badge="✦ Extension" alt="Supervisor approval panel with claim figures, AI summary with sources, adjuster note and decision with required reason" m={[[84,15.5,"<strong>Checked by rule, not by AI:</strong> the overage math is verified deterministically."],[62,30,"<strong>The AI summary cites its sources</strong>, down to the page and the policy section."],[77,54.5,"<strong>A reason is required.</strong> Decision, reason and name are logged, and the adjuster is notified."]]} />
+<Grid cols={2} d="deep">
+<Shot src="claimpro/audit-log.jpg" title="Claim activity · audit log" badge="✦ Extension" alt="Audit log of AI and human actions on a claim" />
+<Shot src="claimpro/ai-quality.jpg" title="AI quality · supervisor" badge="✦ Extension" alt="Supervisor dashboard tracking AI accuracy and overrides" />
+</Grid>
+<Shot d="deep" src="claimpro/portfolio.jpg" title="Supervisor portfolio" alt="Supervisor portfolio view of claims by risk and SLA" />
+</Section>
+
+<Section n="09" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Decisions>
+<Decision n="01" title="Leave fields empty instead of pre-filling a best guess" ev="shipped" tradeoff="It adds clicks on hard claims. We accepted that because a wrong pre-filled value costs more to find than an empty one costs to fill.">
+A pre-filled value looks finished, and people skim past it. Below the threshold the field stays empty and the claim can't move on, so the uncertainty can't be ignored.
+</Decision>
+<Decision n="02" title="One threshold everyone can see, instead of hidden per-field tuning" ev="shipped" tradeoff="A single 85% rule is blunter than per-field models. Financial fields got a stricter 95% gate; everything else stayed simple enough to explain in one sentence.">
+Adjusters and supervisors needed to predict when the AI would ask for help. A rule you can say out loud builds that faster than a smarter one nobody can explain.
+</Decision>
+<Decision n="03" title="Automation that the adjuster starts, with an undo window" ev="shipped" tradeoff="Fully automatic follow-ups would save more time. The human trigger keeps people in charge while trust builds, and the settings let the client raise autonomy later.">
+Reminders to providers run from a "Ready to run" lane. Nothing reaches a claimant without a person reading it first.
+</Decision>
+<Decision n="04" title="Simulate before saving any autonomy change" ev="hypothesis" tradeoff="Designed for the portfolio extension; not validated with users.">
+Raising autonomy is the riskiest change an admin can make. Showing its effect on the current queue turns a leap of faith into a decision with numbers.
+</Decision>
+</Decisions>
+</Section>
+
+<Section n="10" id="results" label="Results" title="From weeks to days.">
+<Metrics items={[{v:"−68%",l:"claim resolution time",note:"Client-reported, measured over 3 months. Claims that took weeks now close in days, some in hours."},{v:"90%+",l:"adoption among ~500 adjusters",note:"It replaced the previous tool. The rest were still in training at 2 months."}]} />
+<div class="prose" data-d="standard">
+
+**What I'd do differently.** I'd instrument overrides from day one. We knew adoption and resolution time, but not how often adjusters corrected the AI and why. That number would have told us where to raise autonomy next, which is exactly what the AI quality screen in the extension is for.
+
+</div>
+</Section>

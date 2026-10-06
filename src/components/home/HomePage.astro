@@ -1,0 +1,229 @@
+---
+import Base from '../../layouts/Base.astro';
+import Img from '../Img.astro';
+import CaseCard from './CaseCard.astro';
+import { CASES } from '../../data/cases';
+import { CV, EMAIL, LINKEDIN, WEBTOON, SITE, caseUrl, patternsUrl, type Lang } from '../../i18n/ui';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const en = lang === 'en';
+
+const c = en ? {
+  title: 'Aranza Isea — Senior Product Designer · AI products',
+  desc: 'Senior Product Designer with 10+ years. I design AI copilots and agent workflows where decisions carry real risk: autonomy, confidence, failure states and audit trails, so people stay in control.',
+  eyebrow: 'Senior Product Designer · AI products',
+  h1a: 'I design AI that knows', h1b: 'when to hand the decision back.',
+  lead: 'Copilots and agent workflows for work where a wrong answer costs money or trust. I design the AI’s behaviour as carefully as the screens: how much it can do alone, how sure it is, what happens when it fails, and who signed what.',
+  ctaWork: 'See the work', ctaCv: 'Download resume',
+  trace: 'Illustrative trace · ClaimPro hand-off rule',
+  stats: [['10+', 'years in product, UX, UI and research'], ['~500', 'adjusters using the ClaimPro copilot'], ['−68%', 'claim resolution time with ClaimPro', 'client-reported, 3 months'], ['+65%', 'Business accounts after Off Dep launched']],
+  workEyebrow: 'Selected work', workH: 'Six products, four shipped with AI inside.',
+  workLead: 'Every case opens with a 30-second summary. Use the reading dial inside to go deeper.',
+  apEyebrow: 'Approach', apH: 'Three rules I design AI by.',
+  principles: [
+    ['Autonomy is a setting, not a launch decision', 'The AI drafts and a person approves by default. Teams earn more autonomy per task, with thresholds an admin can see, simulate and undo.'],
+    ['Confidence has to change the interface', 'A number nobody acts on is decoration. Below the threshold, the screen changes: fields are flagged, sources are shown and the case goes to a person.'],
+    ['Design the failure first', 'Unreadable documents, sources that disagree, the model being down. If the unhappy path isn’t designed, people stop trusting the happy one.'],
+  ],
+  patternsCta: 'See the AI patterns behind these cases →',
+  exEyebrow: 'Experience', exH: '10+ years, from visual systems to AI products.',
+  jobs: [
+    ['2024 – 2025', 'Product Designer · AI products', 'Perficient', 'Owned ClaimPro end to end and designed Vantage, a multi-agent compliance platform.'],
+    ['2022 – 2024', 'Senior UX/UI Designer', 'Perficient', 'Off Dep Business (B2B self-service with AI), Club Rumbo (loyalty MVP), enterprise SaaS and admin systems.'],
+    ['2019 – 2022', 'Senior Visual Designer', 'Perficient', 'Built and scaled Perficient’s Advanced Design System.'],
+    ['2017 – 2019', 'Product Designer', 'Distrito Moda', 'Multi-sided fashion e-commerce for retail and wholesale buyers, from research to handoff.'],
+    ['2015 – 2017', 'UX Designer', 'Tsserapp', ''],
+  ],
+  edu: 'Postgraduate Diploma in Product Design · Bachelor’s Degree in Graphic Design · IBM Generative AI certifications',
+  abEyebrow: 'About', abH: 'Hi, I’m Aranza.',
+  about: [
+    'I’m a product designer in Buenos Aires, working remotely (GMT-3). I don’t run the same playbook twice: every project starts with a diagnostic of the goal, the scope and what we already know, and the method follows from there.',
+    'Spanish is my first language and I work in English every day (C1).',
+    'Outside work I write and draw a webcomic, Delirium.',
+  ],
+  comic: 'Read Delirium on Webtoon ↗',
+  ctH: 'Hiring for an AI product team?', ctLead: 'I’m open to senior product design roles, remote or hybrid from Buenos Aires.',
+} : {
+  title: 'Aranza Isea — Product Designer Senior · Productos con IA',
+  desc: 'Product Designer Senior con más de 10 años. Diseño copilotos de IA y flujos con agentes donde las decisiones tienen riesgo real: autonomía, confianza, estados de falla y trazabilidad, para que las personas mantengan el control.',
+  eyebrow: 'Product Designer Senior · Productos con IA',
+  h1a: 'Diseño IA que sabe', h1b: 'cuándo devolver la decisión.',
+  lead: 'Copilotos y flujos con agentes para trabajos donde una respuesta equivocada cuesta dinero o confianza. Diseño el comportamiento de la IA con el mismo cuidado que las pantallas: cuánto puede hacer sola, qué tan segura está, qué pasa cuando falla y quién firmó qué.',
+  ctaWork: 'Ver proyectos', ctaCv: 'Descargar CV',
+  trace: 'Traza ilustrativa · regla de derivación de ClaimPro',
+  stats: [['10+', 'años en producto, UX, UI e investigación'], ['~500', 'ajustadores usan el copiloto de ClaimPro'], ['−68%', 'tiempo de resolución de siniestros con ClaimPro', 'dato del cliente, 3 meses'], ['+65%', 'cuentas Business tras el lanzamiento de Off Dep']],
+  workEyebrow: 'Proyectos', workH: 'Seis productos, cuatro lanzados con IA adentro.',
+  workLead: 'Cada caso abre con un resumen de 30 segundos. Con el dial de lectura podés profundizar.',
+  apEyebrow: 'Enfoque', apH: 'Tres reglas con las que diseño IA.',
+  principles: [
+    ['La autonomía es un ajuste, no una decisión de lanzamiento', 'Por defecto la IA prepara y una persona aprueba. Cada equipo gana más autonomía por tarea, con umbrales que un admin puede ver, simular y deshacer.'],
+    ['La confianza tiene que cambiar la interfaz', 'Un número sobre el que nadie actúa es decoración. Debajo del umbral la pantalla cambia: se marcan campos, se muestran las fuentes y el caso pasa a una persona.'],
+    ['Primero se diseña la falla', 'Documentos ilegibles, fuentes que no coinciden, el modelo caído. Si el camino infeliz no está diseñado, la gente deja de confiar en el feliz.'],
+  ],
+  patternsCta: 'Ver los patrones de IA detrás de estos casos →',
+  exEyebrow: 'Trayectoria', exH: 'Más de 10 años, de sistemas visuales a productos con IA.',
+  jobs: [
+    ['2024 – 2025', 'Product Designer · Productos con IA', 'Perficient', 'Dueña de ClaimPro de punta a punta y diseño de Vantage, una plataforma de compliance multiagente.'],
+    ['2022 – 2024', 'Senior UX/UI Designer', 'Perficient', 'Off Dep Business (B2B autoservicio con IA), Club Rumbo (MVP de fidelización), SaaS empresarial y sistemas de administración.'],
+    ['2019 – 2022', 'Senior Visual Designer', 'Perficient', 'Construí y escalé el Advanced Design System de Perficient.'],
+    ['2017 – 2019', 'Product Designer', 'Distrito Moda', 'E-commerce de moda multilado para compradores minoristas y mayoristas, del research al handoff.'],
+    ['2015 – 2017', 'UX Designer', 'Tsserapp', ''],
+  ],
+  edu: 'Posgrado en Product Design · Licenciatura en Diseño Gráfico · Certificaciones de IA Generativa de IBM',
+  abEyebrow: 'Sobre mí', abH: 'Hola, soy Aranza.',
+  about: [
+    'Soy product designer en Buenos Aires y trabajo de forma remota (GMT-3). No repito la misma receta: cada proyecto empieza con un diagnóstico del objetivo, el alcance y lo que ya sabemos, y el método sale de ahí.',
+    'El español es mi lengua materna y trabajo en inglés todos los días (C1).',
+    'Fuera del trabajo escribo y dibujo un webcomic, Delirium.',
+  ],
+  comic: 'Leer Delirium en Webtoon ↗',
+  ctH: '¿Buscás diseño para un equipo de producto con IA?', ctLead: 'Estoy abierta a roles senior de diseño de producto, remotos o híbridos desde Buenos Aires.',
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Person', name: 'Aranza Isea', jobTitle: 'Senior Product Designer', url: SITE + '/',
+  email: `mailto:${EMAIL}`, sameAs: [LINKEDIN], address: { '@type': 'PostalAddress', addressLocality: 'Buenos Aires', addressCountry: 'AR' },
+  knowsAbout: ['AI product design', 'Human-in-the-loop design', 'Product design', 'UX research', 'Design systems'],
+};
+const [first, ...rest] = CASES;
+---
+<Base lang={lang} title={c.title} description={c.desc} jsonLd={jsonLd} variant="home">
+  <section class="hero wrap">
+    <div class="hero__text">
+      <p class="eyebrow">{c.eyebrow}</p>
+      <h1 class="h-display">{c.h1a} <span class="hero__b">{c.h1b}</span></h1>
+      <p class="lead">{c.lead}</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#work">{c.ctaWork}</a>
+        <a class="btn btn--ghost" href={CV[lang]} download>{c.ctaCv} ↓</a>
+      </div>
+    </div>
+    <aside class="trace" aria-label={c.trace}>
+      <p class="trace__h"><span class="label">{c.trace}</span></p>
+      <ol class="trace__log mono">
+        <li><span class="k">intake</span> police_report.pdf <span class="ok">read ✓</span></li>
+        <li><span class="k">draft</span> 14 fields filled · sources linked</li>
+        <li><span class="k">field</span> liability <span class="warn">confidence 82%</span></li>
+        <li><span class="k">rule</span> &lt; 85% → <span class="hu">human review</span></li>
+        <li><span class="k">handoff</span> adjuster · reason: sources disagree</li>
+        <li><span class="k">adjuster</span> corrected · reason saved <span class="ok">logged</span></li>
+      </ol>
+      <p class="trace__f"><span class="badge badge--ai">AI drafts</span><span class="badge badge--human">{en ? 'Person decides' : 'La persona decide'}</span></p>
+    </aside>
+  </section>
+
+  <section class="wrap stats" aria-label={en ? 'Highlights' : 'Destacados'}>
+    {c.stats.map(([v, l, n]) => <div><p class="stats__v">{v}</p><p class="stats__l">{l}{n && <small>{n}</small>}</p></div>)}
+  </section>
+
+  <section id="work" class="wrap block">
+    <header class="block__h">
+      <p class="eyebrow">{c.workEyebrow}</p>
+      <h2 class="h-1">{c.workH}</h2>
+      <p class="lead">{c.workLead}</p>
+    </header>
+    <div class="grid-work">
+      <CaseCard c={first} lang={lang} big />
+      {rest.map((x) => <CaseCard c={x} lang={lang} />)}
+    </div>
+  </section>
+
+  <section id="approach" class="wrap block">
+    <header class="block__h">
+      <p class="eyebrow">{c.apEyebrow}</p>
+      <h2 class="h-1">{c.apH}</h2>
+    </header>
+    <ol class="principles">
+      {c.principles.map(([h, b], i) => <li><span class="mono pn">0{i + 1}</span><h3 class="h-3">{h}</h3><p>{b}</p></li>)}
+    </ol>
+    <p class="more"><a href={patternsUrl(lang)}>{c.patternsCta}</a></p>
+  </section>
+
+  <section id="experience" class="wrap block">
+    <header class="block__h">
+      <p class="eyebrow">{c.exEyebrow}</p>
+      <h2 class="h-1">{c.exH}</h2>
+    </header>
+    <ol class="log">
+      {c.jobs.map(([y, r, co, d]) => <li><span class="mono dim">{y}</span><div><p class="log__r"><strong>{r}</strong> · {co}</p>{d && <p class="log__d">{d}</p>}</div></li>)}
+    </ol>
+    <p class="edu mono dim">{c.edu}</p>
+  </section>
+
+  <section id="about" class="wrap block about">
+    <div class="about__img"><Img src="site/hero-portrait.webp" alt="Aranza Isea" widths={[398]} sizes="320px" /></div>
+    <div>
+      <p class="eyebrow">{c.abEyebrow}</p>
+      <h2 class="h-1">{c.abH}</h2>
+      <div class="prose about__p">{c.about.map((p) => <p>{p}</p>)}</div>
+      <a class="comic" href={WEBTOON} target="_blank" rel="noopener">
+        <Img src="site/delirium-art.webp" alt="Delirium webcomic artwork" widths={[160]} sizes="80px" />
+        <span>{c.comic}</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="contact" class="wrap block contact">
+    <h2 class="h-1">{c.ctH}</h2>
+    <p class="lead">{c.ctLead}</p>
+    <div class="hero__cta">
+      <a class="btn btn--primary" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      <a class="btn btn--ghost" href={LINKEDIN} target="_blank" rel="me noopener">LinkedIn ↗</a>
+      <a class="btn btn--ghost" href={CV[lang]} download>{c.ctaCv} ↓</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center;padding-top:clamp(56px,9vw,128px);padding-bottom:56px}
+  .hero .h-display{margin:22px 0 26px}
+  .hero__b{color:var(--ink-faint)}
+  .hero .lead{max-width:60ch}
+  .hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+  .trace{border:1px solid var(--line);border-radius:18px;background:var(--bg-deep);padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+  .trace__h{margin:0 0 14px}
+  .trace__log{list-style:none;margin:0;padding:0;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+  .trace__log li{padding:9px 0;border-top:1px solid var(--line-soft)}
+  .trace__log li:first-child{border-top:0}
+  .k{display:inline-block;min-width:76px;color:var(--ai)}
+  .ok{color:var(--live)} .warn{color:var(--human)} .hu{color:var(--human);font-weight:600}
+  .trace__f{display:flex;gap:8px;margin:16px 0 0}
+  @media (max-width:980px){.hero{grid-template-columns:1fr}}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stats div{padding:28px 20px 28px 0}
+  .stats div + div{padding-left:24px;border-left:1px solid var(--line)}
+  .stats__v{margin:0;font-size:clamp(32px,3.6vw,48px);font-weight:600;letter-spacing:-.03em;line-height:1}
+  .stats__l{margin:10px 0 0;color:var(--ink-soft);font-size:15px}
+  .stats small{display:block;color:var(--ink-faint);font:12px var(--mono);margin-top:4px}
+  @media (max-width:860px){.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(3){padding-left:0;border-left:0}.stats div:nth-child(n+3){border-top:1px solid var(--line)}}
+  .block{padding-top:clamp(80px,10vw,140px)}
+  .block__h{max-width:860px;margin-bottom:40px}
+  .block__h .h-1{margin:16px 0 14px}
+  .grid-work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+  .grid-work > :global(.card--big){grid-column:1/-1}
+  @media (max-width:860px){.grid-work{grid-template-columns:1fr}}
+  .principles{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .principles li{border:1px solid var(--line);border-radius:18px;padding:26px;background:var(--panel-2)}
+  .principles p{color:var(--ink-2);margin:10px 0 0}
+  .pn{color:var(--ai);font-size:13px;display:block;margin-bottom:12px}
+  @media (max-width:980px){.principles{grid-template-columns:1fr}}
+  .more{margin:24px 0 0}
+  .more a{color:var(--ai);text-decoration:none;font-weight:500}
+  .log{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+  .log li{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .log p{margin:0}
+  .log__r strong{font-weight:600}
+  .log__d{color:var(--ink-soft);margin-top:4px!important;max-width:70ch}
+  @media (max-width:640px){.log li{grid-template-columns:1fr;gap:4px}}
+  .edu{margin:22px 0 0;font-size:13.5px}
+  .about{display:grid;grid-template-columns:300px 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+  .about__img{border-radius:18px;overflow:hidden;border:1px solid var(--line)}
+  .about .h-1{margin:16px 0 20px}
+  .comic{display:inline-flex;align-items:center;gap:14px;margin-top:10px;text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:8px 16px 8px 8px;color:var(--ink-2)}
+  .comic:hover{border-color:var(--ink-faint)}
+  .comic :global(img){width:56px;height:56px;border-radius:8px;object-fit:cover}
+  @media (max-width:760px){.about{grid-template-columns:1fr}.about__img{max-width:240px}}
+  .contact{text-align:left;max-width:var(--maxw)}
+  .contact .h-1{max-width:18ch;margin-bottom:16px}
+</style>

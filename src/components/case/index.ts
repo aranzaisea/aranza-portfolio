@@ -1,0 +1,13 @@
+export { default as Section } from './Section.astro';
+export { default as Shot } from './Shot.astro';
+export { default as Phones } from './Phones.astro';
+export { default as Only } from './Only.astro';
+export { default as Insights } from './Insights.astro';
+export { default as Insight } from './Insight.astro';
+export { default as Decisions } from './Decisions.astro';
+export { default as Decision } from './Decision.astro';
+export { default as Quote } from './Quote.astro';
+export { default as Note } from './Note.astro';
+export { default as Steps } from './Steps.astro';
+export { default as Metrics } from './Metrics.astro';
+export { default as Grid } from './Grid.astro';

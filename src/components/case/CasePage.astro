@@ -1,0 +1,129 @@
+---
+import Base from '../../layouts/Base.astro';
+import Dial from '../Dial.astro';
+import Img from '../Img.astro';
+import { render } from 'astro:content';
+import { ui, home, caseUrl, SITE, type Lang } from '../../i18n/ui';
+import { bySlug, nextCase } from '../../data/cases';
+import * as C from './index';
+
+const { entry } = Astro.props as { entry: any };
+const d = entry.data;
+const lang = d.lang as Lang;
+const t = ui[lang];
+const meta = bySlug(d.case);
+const nx = nextCase(d.case);
+const { Content } = await render(entry);
+const statusKind = meta.status === 'concept' ? 'concept' : 'live';
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'CreativeWork', name: meta.seoTitle[lang], description: meta.seoDesc[lang],
+  url: new URL(caseUrl(lang, meta.slug), SITE).href, inLanguage: lang, image: new URL(`/og/${meta.slug}.png`, SITE).href,
+  author: { '@type': 'Person', name: 'Aranza Isea', url: SITE + '/' },
+};
+const legend = lang === 'en'
+  ? ['Numbered markers explain why a screen works the way it does. Turn them off with ✦.', 'Change the reading depth at the top: Skim, Standard or Deep.']
+  : ['Los marcadores numerados explican por qué cada pantalla funciona así. Se apagan con ✦.', 'Cambiá la profundidad de lectura arriba: Rápido, Estándar o Completo.'];
+---
+<Base lang={lang} title={`${meta.seoTitle[lang]} | Aranza Isea`} description={meta.seoDesc[lang]} ogImage={`/og/${meta.slug}.png`} jsonLd={jsonLd} variant="case"
+  crumbs={[{ label: t.allWork, href: home(lang) + '#work' }, { label: meta.name }]}>
+  <Fragment slot="tools"><Dial lang={lang} /></Fragment>
+
+  <article class="case">
+    <header class="hero wrap">
+      <p class="eyebrow">{meta.no} · {meta.tag[lang]}</p>
+      <h1 class="h-1">{d.titleA} <span class="dim">{d.titleB}</span></h1>
+      <p class="lead">{d.lead}</p>
+      <ul class="hero__meta">
+        <li><span class={`badge badge--${statusKind}`}>{meta.statusLabel[lang]}</span></li>
+        {meta.ai ? <li><span class="badge badge--ai">AI</span></li> : <li><span class="badge badge--neutral">{lang === 'en' ? 'No AI in product' : 'Sin IA en el producto'}</span></li>}
+        <li class="mono dim">{meta.role[lang]}{meta.where[lang] && ` · ${meta.where[lang]}`}{meta.year && ` · ${meta.year}`}</li>
+      </ul>
+      {d.statusNote && <p class="hero__note">{d.statusNote}</p>}
+    </header>
+
+    <section class="wrap summary" aria-labelledby="sum-h">
+      <div class="summary__panel">
+        <h2 id="sum-h" class="label">{t.summary}</h2>
+        <dl class="summary__dl">
+          <div class="span2"><dt>{t.problem}</dt><dd>{d.summary.problem}</dd></div>
+          <div><dt>{t.role}</dt><dd>{d.summary.role}</dd></div>
+          <div><dt>{t.team}</dt><dd>{d.summary.team}</dd></div>
+          <div><dt>{t.client}</dt><dd>{d.summary.client}</dd></div>
+          <div><dt>{t.timeline}</dt><dd>{d.summary.timeline}</dd></div>
+        </dl>
+        {d.metrics.length > 0 && (
+          <dl class="summary__mets">
+            {d.metrics.map((m: any) => <div><dt>{m.v}</dt><dd>{m.l}{m.note && <small>{m.note}</small>}</dd></div>)}
+          </dl>
+        )}
+        {d.footnote && <p class="summary__foot">{d.footnote}</p>}
+      </div>
+    </section>
+
+    <div class="wrap cover">
+      {meta.coverFit === 'phones' && meta.coverPhones ? (
+        <div class="cover__phones">
+          {meta.coverPhones.map((p, i) => <div class="cover__phone"><Img src={p} alt={i === 0 ? meta.coverAlt[lang] : ''} eager={i === 0} widths={[360, 540]} sizes="(min-width: 1100px) 340px, 30vw" /></div>)}
+        </div>
+      ) : (
+        <div class="cover__img"><Img src={meta.pageCover ?? meta.cover} alt={meta.coverAlt[lang]} eager zoom lang={lang} /></div>
+      )}
+    </div>
+
+    {d.legend && (
+      <div class="wrap legend" data-only="standard-up">
+        <span class="marker-demo" aria-hidden="true">1</span>
+        <p>{legend[0]} {legend[1]}</p>
+      </div>
+    )}
+
+    <div class="case__body"><Content components={C} /></div>
+
+    <nav class="wrap nextcase" aria-label={t.next}>
+      <a href={caseUrl(lang, nx.slug)}>
+        <span class="label">{t.next} · {nx.no}</span>
+        <span class="h-2">{nx.name}</span>
+        <span class="dim">{nx.sentence[lang]}</span>
+        <span class="nextcase__arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .hero{padding-top:clamp(48px,7vw,96px);padding-bottom:36px;max-width:1100px;margin-left:auto;margin-right:auto}
+  .hero .h-1{margin:18px 0 22px}
+  .hero .lead{max-width:62ch}
+  .hero__meta{list-style:none;padding:0;margin:26px 0 0;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;font-size:14px}
+  .hero__note{margin:16px 0 0;color:var(--ink-faint);font-size:14.5px;max-width:70ch}
+  .summary{max-width:1100px;margin:0 auto}
+  .summary__panel{border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:clamp(20px,3vw,32px)}
+  .summary__panel > .label{margin:0 0 18px}
+  .summary__dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px 28px;margin:0}
+  .summary__dl .span2{grid-column:1/-1}
+  .summary__dl dt{font:500 12px var(--mono);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-faint)}
+  .summary__dl dd{margin:6px 0 0;color:var(--ink-2);font-size:15.5px}
+  .summary__dl .span2 dd{font-size:17.5px;color:var(--ink);max-width:80ch}
+  .summary__mets{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:24px 0 0;padding-top:22px;border-top:1px solid var(--line)}
+  .summary__mets dt{font-size:clamp(30px,3vw,40px);font-weight:600;letter-spacing:-.03em;color:var(--live);line-height:1.05}
+  .summary__mets dd{margin:6px 0 0;color:var(--ink-2);font-size:15px}
+  .summary__mets small{display:block;margin-top:4px;color:var(--ink-faint);font:12px/1.45 var(--mono)}
+  .summary__foot{margin:18px 0 0;color:var(--ink-faint);font:12.5px/1.5 var(--mono)}
+  @media (max-width:860px){.summary__dl{grid-template-columns:1fr 1fr}}
+  @media (max-width:520px){.summary__dl{grid-template-columns:1fr}}
+  .cover{margin-top:40px}
+  .cover__img{border:1px solid var(--line);border-radius:18px;overflow:hidden;max-height:min(80vh,900px);background:#fff}
+  .cover__img :global(img){width:100%}
+  .cover__phones{display:grid;grid-template-columns:repeat(3,minmax(0,340px));justify-content:center;gap:clamp(12px,3vw,40px);padding:clamp(24px,4vw,56px);border:1px solid var(--line);border-radius:18px;background:radial-gradient(120% 90% at 50% 0%,#1b2333,var(--bg-deep))}
+  .cover__phone{border-radius:clamp(16px,2.6vw,36px);overflow:hidden;border:1px solid var(--line-strong);box-shadow:0 30px 70px rgba(0,0,0,.45)}
+  .cover__phone:nth-child(2){transform:translateY(clamp(12px,3vw,40px))}
+  .legend{display:flex;align-items:center;gap:14px;margin-top:22px;color:var(--ink-faint);font-size:14.5px}
+  .legend p{margin:0}
+  .marker-demo{flex:none;width:24px;height:24px;border-radius:50%;background:var(--ai);color:#0B0E14;font:600 12px/24px var(--mono);text-align:center;box-shadow:0 0 0 4px rgba(138,156,255,.25)}
+  .case__body{padding-bottom:24px}
+  .nextcase{margin-top:96px}
+  .nextcase a{display:grid;gap:8px;text-decoration:none;border:1px solid var(--line);border-radius:18px;padding:clamp(24px,3vw,40px);background:var(--panel-2);position:relative;transition:border-color .15s}
+  .nextcase a:hover{border-color:var(--ink-faint)}
+  .nextcase__arrow{position:absolute;right:clamp(24px,3vw,40px);top:50%;transform:translateY(-50%);font-size:32px;color:var(--ai)}
+  .nextcase .dim{max-width:60ch;padding-right:48px}
+</style>

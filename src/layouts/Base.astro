@@ -1,0 +1,130 @@
+---
+import '../styles/global.css';
+import { ui, home, altPath, CV, EMAIL, LINKEDIN, WEBTOON, SITE, patternsUrl, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang; title: string; description: string; ogImage?: string; jsonLd?: object;
+  variant?: 'home' | 'case' | 'page'; crumbs?: { label: string; href?: string }[]; noindex?: boolean; noAlt?: boolean;
+}
+const { lang, title, description, ogImage = '/og/home.png', jsonLd, variant = 'page', crumbs, noindex = false, noAlt = false } = Astro.props;
+const t = ui[lang];
+const path = Astro.url.pathname;
+const canonical = new URL(path, SITE).href;
+const enUrl = new URL(altPath(path, 'en'), SITE).href;
+const esUrl = new URL(altPath(path, 'es'), SITE).href;
+const h = home(lang);
+const anchor = (id: string) => (variant === 'home' ? `#${id}` : `${h}#${id}`);
+---
+<!doctype html>
+<html lang={lang} data-depth="standard" data-why="on">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
+  <link rel="canonical" href={canonical} />
+  {!noAlt && <link rel="alternate" hreflang="en" href={enUrl} />}
+  {!noAlt && <link rel="alternate" hreflang="es" href={esUrl} />}
+  {!noAlt && <link rel="alternate" hreflang="x-default" href={enUrl} />}
+  <meta property="og:type" content={variant === 'case' ? 'article' : 'website'} />
+  <meta property="og:site_name" content="Aranza Isea" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={new URL(ogImage, SITE).href} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_AR'} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0F131B" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="preload" href="/fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/geist-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  <script is:inline>
+    (function(){var d=document.documentElement,v;try{var q=new URLSearchParams(location.search).get('depth');
+      v=(q&&/^(skim|standard|deep)$/.test(q))?q:localStorage.getItem('depth');}catch(e){}
+      if(v&&/^(skim|standard|deep)$/.test(v))d.dataset.depth=v;
+      try{var w=localStorage.getItem('why');if(w==='off')d.dataset.why='off';}catch(e){}})();
+  </script>
+</head>
+<body class={`v-${variant}`}>
+  <a class="skip" href="#main">{t.skip}</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href={h}><span class="brand-dot" aria-hidden="true"></span>Aranza Isea</a>
+      {variant === 'case' && crumbs ? (
+        <>
+          <nav class="crumbs" aria-label="Breadcrumb">
+            {crumbs.map((c, i) => (
+              <>{i > 0 && <span aria-hidden="true">/</span>}{c.href ? <a href={c.href}>{c.label}</a> : <span>{c.label}</span>}</>
+            ))}
+          </nav>
+          <div class="header-tools"><slot name="tools" /></div>
+        </>
+      ) : (
+        <>
+          <button class="menu-btn" aria-expanded="false" aria-controls="nav" data-menu>
+            <span class="sr-only">{t.menu}</span>
+            <svg width="18" height="12" viewBox="0 0 18 12" aria-hidden="true"><path d="M0 1h18M0 6h18M0 11h18" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+          <nav class="nav" id="nav" data-open="false" aria-label="Main">
+            <a href={anchor('work')}>{t.nav.work}</a>
+            <a href={anchor('approach')}>{t.nav.approach}</a>
+            <a href={patternsUrl(lang)} aria-current={path.includes('/patterns') ? 'page' : undefined}>{t.nav.patterns}</a>
+            <a href={anchor('experience')}>{t.nav.experience}</a>
+            <a href={anchor('about')}>{t.nav.about}</a>
+            {!noAlt && (
+              <div class="lang">
+                <a href={altPath(path, 'en')} hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+                <a href={altPath(path, 'es')} hreflang="es" lang="es" aria-current={lang === 'es' ? 'true' : undefined}>ES</a>
+              </div>
+            )}
+            <a class="btn btn--ghost btn--sm" href={CV[lang]} download>{t.nav.resume} ↓</a>
+          </nav>
+        </>
+      )}
+    </div>
+  </header>
+  <main id="main"><slot /></main>
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 Aranza Isea · {t.footer}</span>
+      <nav aria-label="Footer">
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <a href={LINKEDIN} rel="me noopener" target="_blank">LinkedIn ↗</a>
+        <a href={CV[lang]} download>{t.nav.resume} ↓</a>
+        <a href={WEBTOON} rel="noopener" target="_blank">Webcomic ↗</a>
+        {variant === 'case' && !noAlt && <a href={altPath(path, lang === 'en' ? 'es' : 'en')}>{lang === 'en' ? 'Leer en español' : 'Read in English'}</a>}
+      </nav>
+    </div>
+  </footer>
+  <script>
+    const btn = document.querySelector<HTMLButtonElement>('[data-menu]');
+    const nav = document.getElementById('nav');
+    btn?.addEventListener('click', () => {
+      const open = nav?.dataset.open !== 'true';
+      if (nav) nav.dataset.open = String(open);
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    nav?.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a') && nav) { nav.dataset.open = 'false'; btn?.setAttribute('aria-expanded', 'false'); }
+    });
+    const root = document.documentElement;
+    const sync = () => {
+      document.querySelectorAll<HTMLButtonElement>('[data-set-depth]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.setDepth === root.dataset.depth)));
+      document.querySelectorAll<HTMLButtonElement>('[data-toggle-why]').forEach((b) => b.setAttribute('aria-pressed', String(root.dataset.why !== 'off')));
+    };
+    document.addEventListener('click', (e) => {
+      const d = (e.target as HTMLElement).closest<HTMLElement>('[data-set-depth]');
+      if (d) { root.dataset.depth = d.dataset.setDepth!; try { localStorage.setItem('depth', d.dataset.setDepth!); } catch {} sync(); }
+      const w = (e.target as HTMLElement).closest('[data-toggle-why]');
+      if (w) { root.dataset.why = root.dataset.why === 'off' ? 'on' : 'off'; try { localStorage.setItem('why', root.dataset.why); } catch {} sync(); }
+    });
+    sync();
+  </script>
+</body>
+</html>
