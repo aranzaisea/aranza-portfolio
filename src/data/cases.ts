@@ -7,10 +7,10 @@ export interface CaseMeta {
   statusLabel: L; sentence: L; chips: Record<Lang, string[]>;
   role: L; year: string; where: L;
   cover: string; pageCover?: string; coverAlt: L; coverFit?: 'cover' | 'phones'; coverPhones?: string[];
-  seoTitle: L; seoDesc: L; ai: boolean;
+  seoTitle: L; seoDesc: L; ai: boolean; hidden?: boolean;
 }
 
-export const CASES: CaseMeta[] = [
+const ALL_CASES: CaseMeta[] = [
   {
     slug: 'claimpro', no: '01', name: 'ClaimPro', ai: true,
     tag: { en: 'AI claims copilot · Insurance', es: 'Copiloto de IA para reclamos · Seguros' },
@@ -88,7 +88,7 @@ export const CASES: CaseMeta[] = [
     },
   },
   {
-    slug: 'relay', no: '05', name: 'Relay', ai: true,
+    slug: 'relay', no: '—', name: 'Relay', ai: true, hidden: true,
     tag: { en: 'Workplace AI agent · Enterprise SaaS', es: 'Agente de IA para equipos · SaaS empresarial' },
     status: 'launched', statusLabel: { en: 'Launched', es: 'Lanzado' },
     sentence: {
@@ -107,7 +107,7 @@ export const CASES: CaseMeta[] = [
     },
   },
   {
-    slug: 'numi', no: '06', name: 'Numi', ai: true,
+    slug: 'numi', no: '05', name: 'Numi', ai: true,
     tag: { en: 'AI meal planner · Consumer · iOS', es: 'Planificador de comidas con IA · Consumo · iOS' },
     status: 'concept', statusLabel: { en: 'Independent concept', es: 'Concepto independiente' },
     sentence: {
@@ -127,6 +127,8 @@ export const CASES: CaseMeta[] = [
   },
 ];
 
+/** Cases shown on the site. Relay is hidden (kept in the repo, not published). */
+export const CASES = ALL_CASES.filter((c) => !c.hidden);
 export const bySlug = (s: string) => CASES.find((c) => c.slug === s)!;
 export const nextCase = (s: string) => {
   const i = CASES.findIndex((c) => c.slug === s);
