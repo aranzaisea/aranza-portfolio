@@ -3,82 +3,72 @@ case: relay
 lang: es
 titleA: Un agente de IA para toda la empresa,
 titleB: con reglas que cualquiera puede leer.
-lead: Relay trabaja con las herramientas de la empresa — Slack, Google Drive, Jira, Salesforce, Zendesk, GitHub — para redactar, enviar y automatizar en nombre de las personas. Lo difícil no era lo que podía hacer, sino que cada equipo supiera qué tenía permitido hacer, y pudiera ver lo que hizo.
-statusNote: Lanzado. No hay métricas disponibles para este caso, así que se centra en el diseño de la autonomía, las aprobaciones y la transparencia.
+lead: Relay trabaja con las herramientas de la empresa — Slack, Google Drive, Jira, Salesforce, Zendesk, GitHub — para redactar, enviar y automatizar en nombre de las personas. Lo difícil no es lo que puede hacer, sino que cada equipo sepa qué tiene permitido hacer, y pueda ver lo que hizo.
+statusNote: Concepto independiente, rediseñado en 2026. No hay una empresa ni datos de usuarios reales detrás, así que no hay resultados para reportar. Northwind, Meridian y todas las personas y cifras de las pantallas son ficticias.
 summary:
-  problem: Un agente con acceso al correo, al código y al CRM puede ahorrar horas por semana, o mandarle el mensaje equivocado a un cliente. Los admins necesitaban control por tipo de acción, las personas necesitaban saber qué podía hacer el agente en su nombre, y cada acción necesitaba un registro.
-  role: Product Designer.
-  client: SaaS empresarial · agente de IA para equipos. Empresas y personas de las pantallas son ficticias.
+  problem: Un agente con acceso al correo, al código y al CRM puede ahorrar horas por semana, o mandarle el mensaje equivocado a un cliente. Los admins necesitan control por tipo de acción, las personas necesitan saber qué puede hacer el agente en su nombre, y cada acción necesita un registro.
+  role: Product Designer · concepto de punta a punta.
+  client: Concepto · agente de IA empresarial para equipos. Empresas y personas de las pantallas son ficticias.
 metrics: []
 ---
 
 <Section n="01" id="problem" label="El problema" title="La autonomía no es un solo interruptor.">
 <div class="prose">
 
-Mandar un resumen a un canal de Slack y cambiar la etapa de una oportunidad en el CRM son “acciones”, pero tienen riesgos muy distintos. El diseño de Relay parte de ahí: **la autonomía se define por categoría de acción**, es visible para todos los que afecta y el agente siempre planifica antes de actuar.
+Mandar un resumen a un canal de Slack y cambiar la etapa de una oportunidad en el CRM son “acciones”, pero tienen riesgos muy distintos. Relay parte de ahí: **la autonomía se define por categoría de acción**, es visible para todos los que afecta y el agente siempre muestra su plan antes de actuar.
+
+Seguí un pedido a lo largo de todo el producto — Priya, gerenta de operaciones, le pide a Relay el borrador del update del Q3 para dirección y que lo publique — más una automatización que choca con un límite. Cada pantalla de abajo pertenece a una de esas dos historias.
 
 </div>
-<Steps items={[["Definir la política","El admin elige por categoría: solo borrador, enviar con revisión o autonomía total."],["Planificar","Para cada pedido, Relay propone sus pasos y marca los que quedan fuera de la política."],["Aprobar y ejecutar","La persona aprueba; la ejecución es en vivo y los pasos reversibles están marcados."],["Auditar","Cada acción, bloqueada o hecha, queda registrada con la política que la permitió."]]} />
+<Steps items={[["Definir la política","El admin elige por categoría: solo borrador, enviar con revisión o autonomía total, con límites."],["Planificar","Para cada pedido, Relay lista sus pasos, las herramientas que toca y los que quedan fuera de la política."],["Ejecutar a la vista","La ejecución es en vivo, cada paso queda registrado y la persona puede frenar y deshacer en cualquier momento."],["Auditar y explicar","Cada acción, hecha o bloqueada, queda registrada con la regla que la permitió o la frenó."]]} />
 </Section>
 
-<Section n="02" id="setup" label="Configuración del admin" title="Nada viene activado por defecto.">
-<Shot src="relay/a2-autonomy-policy.png" title="Configuración 2 de 4 · política de autonomía" alt="Política de autonomía con cuatro categorías y tres niveles: solo borrador, enviar con revisión, autonomía total" m={[[21,19.7,"<strong>Activación explícita.</strong> Nada viene activado y la política se puede cambiar en cualquier momento."],[81,30.9,"<strong>Tres niveles nombrados por su resultado:</strong> solo borrador, enviar con revisión, autonomía total."],[73,64.7,"<strong>El riesgo define el punto de partida.</strong> Código y finanzas empiezan en solo borrador."]]} />
-<Grid cols={2} d="standard">
-<Shot src="relay/a1-connect-integrations.png" title="Configuración 1 de 4 · conectar herramientas" alt="Conexión con Slack, Jira, Google Drive, Salesforce, GitHub y Zendesk" />
-<Shot src="relay/a3-roles-teams.png" title="Configuración 3 de 4 · roles" alt="Roles de admin, manager, colaborador y lector con lo que puede hacer cada uno" />
-</Grid>
+<Section n="02" id="home" label="Inicio" title="Un solo lugar para lo que hizo Relay y lo que te espera.">
+<Shot src="relay/home.png" title="Inicio · Priya, Ops Manager" alt="Inicio de Relay con acciones de la semana, aprobaciones ordenadas por riesgo, tareas en curso, resumen de autonomía y acciones frenadas por la política" m={[[27.8,21,"<strong>Cinco números que responden “¿puedo confiar?”</strong> Lo que hizo solo, lo que aprobaron personas, lo que frenó la política y lo que se deshizo."],[52,31.4,"<strong>Aprobaciones ordenadas por riesgo</strong>, cada una con la categoría y el motivo por el que necesita a una persona."],[86,40,"<strong>La política está en el inicio</strong>, no escondida en la configuración."],[86,60.9,"<strong>Las acciones frenadas se muestran, no se esconden</strong>, con el límite que las frenó."]]} />
 </Section>
 
 <Section n="03" id="tasks" label="Uso diario" title="Primero el plan, después el trabajo.">
-<Shot src="relay/b3-plan-proposal.png" title="Propuesta de plan" alt="Plan de cuatro pasos con tres reversibles y uno que necesita aprobación" m={[[21,12.7,"<strong>Nada se ejecuta hasta que aprobás</strong>, y Relay dice cuántos pasos quedan fuera de su política de aprobación automática."],[92,22.5,"<strong>Los pasos reversibles están marcados</strong>, para saber dónde un error sale barato."],[90,52,"<strong>El paso riesgoso te espera:</strong> enviar a 12 directivos necesita aprobación explícita."],[31.5,63,"<strong>Se puede editar antes de aprobar.</strong> El plan es un borrador, no un ultimátum."]]} />
-<Grid cols={2} d="standard">
-<Shot src="relay/b4-live-execution.png" title="Ejecución en vivo" alt="Relay ejecutando el plan paso a paso" />
-<Shot src="relay/b5-task-summary.png" title="Resumen de la tarea" alt="Resumen de la tarea completada con pasos, aprobaciones y tiempo ahorrado" />
-</Grid>
-<Grid cols={2} d="deep">
-<Shot src="relay/b1-home.png" title="Inicio · requiere tu atención" alt="Inicio con pendientes y actividad reciente" />
-<Shot src="relay/b2-conversation.png" title="Conversación" alt="Conversación con Relay antes de proponer un plan" />
-</Grid>
+<Shot src="relay/plan.png" title="Conversación · plan propuesto" alt="Conversación con Relay y un plan de cinco pasos donde el último, publicar para 12 personas, necesita aprobación" m={[[90,17.5,"<strong>El alcance antes que los pasos:</strong> qué lee, qué escribe, en nombre de quién actúa y si algo sale de la empresa."],[85,52.5,"<strong>El paso fuera de la política se marca antes de ejecutar nada</strong>, con la regla que lo frena."],[72,65.5,"<strong>Cómo deshacer y qué datos usa se dicen de entrada</strong>, para que aprobar sea una decisión informada."],[52,25,"<strong>Relay solo pregunta lo que cambia el plan</strong> y aclara qué va a usar si no le decís otra cosa."]]} />
+<Shot src="relay/live-run.png" title="Ejecución en vivo" alt="Relay ejecutando el plan con un seguimiento de pasos, un registro en vivo, el borrador que se está escribiendo y lo que se desharía al frenar" m={[[80.5,11.5,"<strong>Frenar está siempre a un clic</strong>, al lado de pausar."],[48,40,"<strong>El registro en vivo es el registro de auditoría</strong>: mismas líneas, mismas herramientas, escritas mientras pasa."],[40,71.5,"<strong>Antes de frenar ves qué se deshace</strong>, y dónde no hay nada que deshacer."],[90,56.5,"<strong>El paso que va a esperar se anuncia antes</strong>, así el pedido de aprobación no sorprende."]]} />
 </Section>
 
-<Section n="04" id="automations" label="Automatizaciones" title="Probar con datos reales antes de activar.">
-<Grid cols={2}>
-<Shot src="relay/c1-workflow-canvas.png" title="Describir el flujo" alt="Nueva automatización descrita en palabras y convertida en pasos" />
-<Shot src="relay/c3-test-run.png" title="Prueba con un registro real" alt="Prueba simulada sobre un registro real, sin enviar nada" />
-</Grid>
-<Grid cols={2} d="standard">
-<Shot src="relay/c4-active-automations.png" title="Automatizaciones activas" alt="Lista de automatizaciones activas con una en pausa para revisión" />
-<Shot src="relay/c5-automation-paused.png" title="Automatización en pausa" alt="Automatización en pausa porque un recordatorio superaría el umbral de envío automático" />
-</Grid>
+<Section n="04" id="blocked" label="Cuando la política dice que no" title="El agente frena, explica por qué y deja la decisión en manos de una persona.">
+<Shot src="relay/blocked-action.png" title="Aprobaciones · acción bloqueada" alt="Recordatorio por email a Meridian Logistics frenado porque $54.000 superan el límite de envío automático de $25.000, con el borrador, el contexto y cuatro opciones" m={[[79,19,"<strong>La regla, el límite y el monto real en una sola frase.</strong>"],[61,72.5,"<strong>Relay muestra lo que una persona querría saber</strong> — una oportunidad abierta de $184.000 con esa cuenta — pero no decide."],[95,56.3,"<strong>Cuatro salidas.</strong> Aprobar una vez y cambiar la regla son decisiones separadas, y solo un admin puede cambiar la regla."],[40,30,"<strong>Se muestra el email exacto</strong>, con el destinatario externo marcado."]]} />
 </Section>
 
-<Section n="05" id="governance" label="Gobierno" title="Cuando la política dice que no, el agente se detiene, y dice por qué.">
-<Shot src="relay/d4-flagged-action.png" title="Registro · acción bloqueada" alt="Recordatorio por correo bloqueado por superar el umbral de envío automático de $25.000, con referencia a la política y opciones" m={[[22.5,27.4,"<strong>Se detuvo antes de llegar a Gmail</strong>, con la regla que rompió en una línea."],[34,59,"<strong>Se cita la política</strong>, y la pantalla dice quién más puede ver este evento."],[51,75.2,"<strong>Dos opciones honestas:</strong> aprobar esta vez, o cambiar la regla para todos."]]} />
-<Grid cols={2} d="standard">
-<Shot src="relay/d1-permission-matrix.png" title="Matriz de rol × capacidad" alt="Matriz de lo que puede hacer cada rol" />
-<Shot src="relay/d3-audit-log.png" title="Registro de auditoría" alt="Registro de acciones autónomas de todos los equipos" />
-</Grid>
-<Grid cols={2} d="deep">
-<Shot src="relay/d2-team-autonomy.png" title="Excepciones por equipo" alt="Excepciones de la política de autonomía por equipo" />
-<Shot src="relay/d5-integrations-api.png" title="Integraciones y acceso a la API" alt="Integraciones y claves de API con sus alcances" />
-</Grid>
+<Section n="05" id="admin" label="Controles del admin" title="Una política escrita en las categorías en las que la gente ya piensa.">
+<Shot src="relay/autonomy-policy.png" title="Política de autonomía · v14" alt="Política de autonomía con cuatro categorías, tres niveles, límites, excepciones por equipo, una simulación de 30 días y acciones que siempre necesitan a una persona" m={[[61.5,22.5,"<strong>Tres niveles nombrados por su resultado</strong>, por categoría de acción, no por herramienta."],[57.5,53.1,"<strong>Cambiar un límite muestra qué habría pasado en los últimos 30 días</strong> antes de guardarlo."],[81.8,48.4,"<strong>Una lista corta que ningún nivel puede automatizar</strong>, y que ningún equipo puede pisar."],[66.5,9.5,"<strong>La política tiene versiones</strong>, con quién la cambió y cuándo."]]} />
+<Shot src="relay/permissions.png" title="Roles y permisos" alt="Matriz de capacidades por rol con un estado parcial, un cambio pendiente que necesita a un segundo admin, el mapeo de grupos de Okta y cambios recientes" m={[[36.5,37.3,"<strong>Los permisos no son binarios.</strong> El estado ámbar significa “solo dentro de su equipo y sus límites”."],[96,35,"<strong>Cambiar permisos requiere un segundo admin</strong>, y primero muestra a quién afecta."],[86,61,"<strong>Los roles salen de los grupos que la empresa ya tiene</strong>, así IT no mantiene una segunda lista."]]} />
 </Section>
 
-<Section n="06" id="trust" label="Transparencia para todos" title="Cada persona puede ver qué puede hacer Relay por ella.">
-<Shot src="relay/e1-trust-center.png" title="Centro de confianza" alt="Resumen en lenguaje claro de lo que Relay puede hacer por la persona, por categoría" />
-<Grid cols={2} d="standard">
-<Shot src="relay/e2-my-activity.png" title="Mi actividad" alt="Todo lo que Relay hizo por esta persona y por qué" />
-<Shot src="relay/e3-notification-panel.png" title="Notificaciones" alt="Notificaciones con opción de deshacer acciones recientes" />
-</Grid>
+<Section n="06" id="trust" label="Auditoría y transparencia" title="Un registro para seguridad, una explicación para todos los demás.">
+<Shot src="relay/audit-log.png" title="Registro de auditoría" alt="Registro de auditoría con actor, acción, herramienta, política, resultado y reversión de cada evento, y el detalle de un evento bloqueado" m={[[65.5,50,"<strong>Cada evento lleva la política que lo permitió o lo frenó</strong>, y si todavía se puede deshacer."],[95.5,66.5,"<strong>Un registro legible por máquinas</strong> para seguridad: versión de política, regla, actor y en nombre de quién."],[31,22.8,"<strong>Personas y Relay comparten un mismo registro</strong>, así una aprobación humana es tan rastreable como una acción autónoma."]]} />
+<Shot src="relay/trust-center.png" title="Centro de confianza · qué puede hacer Relay por vos" alt="Resumen en lenguaje simple de lo que Relay puede hacer por esta persona, lo que nunca hace, lo que hizo hoy y los accesos que usa" m={[[40,17.6,"<strong>La misma política, reescrita para la persona en cuyo nombre actúa.</strong>"],[84,12.5,"<strong>Cualquiera puede pausar Relay para sí</strong>, sin pedírselo a un admin."],[40,50.4,"<strong>Lo que nunca hace</strong>, para nadie, en palabras simples."],[83,72,"<strong>Los accesos que usa en tu nombre</strong>, herramienta por herramienta."]]} />
 </Section>
 
-<Section n="07" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
+<Section n="07" id="tradeoffs" label="Decisiones clave" title="Las tensiones detrás del diseño.">
 <Decisions>
-<Decision n="01" title="Política por categoría de acción, no por herramienta" tradeoff="Configurar por herramienta coincide con cómo piensa IT. Configurar por categoría coincide con el riesgo, que es como razonan los admins y las personas.">
-“Comunicaciones” incluye correo, Slack y mensajes directos por igual, porque el riesgo es el mismo: sale un mensaje en nombre de alguien.
+<Decision n="01" title="Política por categoría de acción, no por herramienta" tradeoff="La configuración por herramienta se parece a cómo piensa IT. La configuración por categoría se parece al riesgo, que es lo que admins y personas evalúan de verdad.">
+“Comunicaciones” cubre email, Slack y mensajes directos por igual, porque el riesgo es el mismo: sale un mensaje en nombre de alguien.
 </Decision>
-<Decision n="02" title="Las acciones bloqueadas ofrecen aprobar una vez y cambiar la política, por separado" tradeoff="Un solo botón sería más simple. Separarlos evita que una excepción afloje la regla para todos sin que nadie lo note.">
-El admin puede aprobar este correo o subir el umbral, pero tiene que elegir cuál.
+<Decision n="02" title="Aprobar una vez y cambiar la regla son decisiones separadas" tradeoff="Un solo botón sería más simple. Separarlas evita que una excepción afloje en silencio la regla para todos.">
+La persona puede aprobar este email; subir el límite es una acción de admin con su propia simulación de impacto.
+</Decision>
+<Decision n="03" title="Mostrar lo que se frenó, no solo lo que se hizo" tradeoff="Esconder las acciones bloqueadas hace que el producto parezca más fluido. Mostrarlas es lo que permite creer que los límites son reales.">
+Las acciones bloqueadas aparecen en el inicio, en el registro de auditoría y en el centro de confianza de cada persona.
+</Decision>
+<Decision n="04" title="Simular el impacto de un cambio de política antes de guardarlo" tradeoff="Suma un paso para el admin. También convierte “subir el límite” de una apuesta en una decisión con nombres y montos.">
+La simulación repasa los últimos 30 días y marca las cuentas con oportunidades abiertas.
 </Decision>
 </Decisions>
+</Section>
+
+<Section n="08" id="next" label="Qué validaría" title="Es un concepto. Esto es lo que habría que probar.">
+<Note title="Preguntas abiertas">
+
+- Si los admins pueden definir una primera política razonable sin ayuda, o necesitan configuraciones recomendadas según el tamaño de la empresa.
+- Si las personas leen el plan antes de aprobarlo, o aprueban por costumbre una vez que se acostumbran.
+- Si el centro de confianza cambia cuánto delegan las personas en Relay, que es la medida real de la confianza.
+
+</Note>
 </Section>

@@ -88,18 +88,18 @@ const ALL_CASES: CaseMeta[] = [
     },
   },
   {
-    slug: 'relay', no: '—', name: 'Relay', ai: true, hidden: true,
+    slug: 'relay', no: '05', name: 'Relay', ai: true,
     tag: { en: 'Workplace AI agent · Enterprise SaaS', es: 'Agente de IA para equipos · SaaS empresarial' },
-    status: 'launched', statusLabel: { en: 'Launched', es: 'Lanzado' },
+    status: 'concept', statusLabel: { en: 'Independent concept', es: 'Concepto independiente' },
     sentence: {
       en: 'An AI agent that works across a company’s tools, with an autonomy policy the admin sets and everyone can read.',
       es: 'Un agente de IA que trabaja con las herramientas de la empresa, con una política de autonomía que define el admin y todos pueden leer.',
     },
     chips: { en: ['Autonomy policy', 'Plan → approve → run'], es: ['Política de autonomía', 'Plan → aprobar → ejecutar'] },
-    role: { en: 'Product Designer', es: 'Product Designer' }, year: '',
+    role: { en: 'Product Designer', es: 'Product Designer' }, year: '2026',
     where: { en: '', es: '' },
-    cover: 'cases/relay/b3-plan-proposal.png', pageCover: 'cases/relay/c2-review-workflow.png',
-    coverAlt: { en: 'Relay plan proposal: four steps, one waiting for the user’s approval', es: 'Propuesta de plan en Relay: cuatro pasos, uno esperando la aprobación del usuario' },
+    cover: 'cases/relay/plan.png', pageCover: 'cases/relay/blocked-action.png',
+    coverAlt: { en: 'Relay plan proposal: five steps, the last one waiting for the user’s approval', es: 'Propuesta de plan en Relay: cinco pasos, el último esperando la aprobación del usuario' },
     seoTitle: { en: 'Relay — Workplace AI agent case study', es: 'Relay — Caso de estudio: agente de IA para equipos' },
     seoDesc: {
       en: 'An enterprise AI agent with a readable autonomy policy: plans before acting, approvals per category, a full audit log and a trust center for every employee.',
@@ -107,7 +107,7 @@ const ALL_CASES: CaseMeta[] = [
     },
   },
   {
-    slug: 'numi', no: '05', name: 'Numi', ai: true,
+    slug: 'numi', no: '06', name: 'Numi', ai: true,
     tag: { en: 'AI meal planner · Consumer · iOS', es: 'Planificador de comidas con IA · Consumo · iOS' },
     status: 'concept', statusLabel: { en: 'Independent concept', es: 'Concepto independiente' },
     sentence: {

@@ -10,5 +10,3 @@
 /es/case-numi.html          /es/work/numi/      301
 /img/*                      /                   301
 /sitemap.xml                /sitemap-index.xml  301
-/work/relay/*    /#work    302
-/es/work/relay/*  /es/#work  302
