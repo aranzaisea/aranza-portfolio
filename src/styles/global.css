@@ -123,3 +123,13 @@ html[data-why=off] .marker,html[data-why=off] .notes{display:none!important}
 /* images */
 .img-zoom{display:block;cursor:zoom-in}
 .img-missing{background:repeating-linear-gradient(45deg,var(--panel),var(--panel) 10px,var(--panel-2) 10px,var(--panel-2) 20px);border:1px dashed var(--line-strong);border-radius:10px;display:grid;place-items:center;color:var(--ink-faint);font:12px var(--mono)}
+
+/* compact case header on small screens so nothing overflows */
+@media (max-width:520px){
+  .site-header .wrap{gap:10px}
+  .v-case .brand{font-size:0;gap:0}
+  .v-case .brand .brand-dot{font-size:initial}
+  .v-case .crumbs{display:none}
+  .dial button{padding:7px 8px;font-size:12px}
+  .why-btn{padding:8px 10px}
+}

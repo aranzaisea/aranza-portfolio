@@ -30,7 +30,8 @@ const { src, alt, title, caption, badge, badgeKind = 'ext', m = [], d, narrow = 
   {caption && <p class="shot__cap">{caption}</p>}
 </figure>
 <style>
-  .shot{margin:0}
+  .shot{margin:0;min-width:0}
+  .shot__bar .badge{flex:none;white-space:nowrap}
   .shot--narrow{max-width:880px}
   .shot__bar{display:flex;align-items:center;gap:12px;padding:10px 14px;border:1px solid var(--line);border-bottom:0;border-radius:var(--r) var(--r) 0 0;background:var(--panel-2);font:500 13px var(--mono);color:var(--ink-soft)}
   .shot__bar + .shot__frame{border-radius:0 0 var(--r) var(--r)}

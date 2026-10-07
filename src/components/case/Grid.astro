@@ -5,5 +5,5 @@ const { cols = 2, d } = Astro.props;
 <div class="g" style={`--c:${cols}`} data-d={d}><slot /></div>
 <style>
   .g{display:grid;grid-template-columns:repeat(var(--c),minmax(0,1fr));gap:clamp(40px,4vw,56px) clamp(16px,2.4vw,32px);align-items:start}
-  @media (max-width:860px){.g{grid-template-columns:1fr}}
+  @media (max-width:860px){.g{grid-template-columns:minmax(0,1fr)}}
 </style>

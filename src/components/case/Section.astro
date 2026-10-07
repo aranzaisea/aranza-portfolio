@@ -12,13 +12,27 @@ const { n, id, label, title, d, tag } = Astro.props;
   </div>
 </section>
 <style>
-  .cs-sec{padding:72px 0 8px}
-  .cs-sec__head{max-width:880px;margin-bottom:28px}
-  .cs-sec__head .label{display:flex;align-items:center;gap:12px;margin:0 0 14px}
+  /* Spacing system for case sections (8-pt based):
+     section → section 120 · title → content 40 · text → text 24
+     anything → visual 64 · visual → visual 96 · visual → text 64 */
+  .cs-sec{padding:clamp(88px,9vw,128px) 0 0}
+  .cs-sec__head{max-width:880px;margin-bottom:40px}
+  .cs-sec__head .label{display:flex;align-items:center;gap:12px;margin:0 0 16px}
   .cs-sec__n{color:var(--ai);margin-right:2px}
   .cs-sec__tag{margin-left:4px}
   .cs-sec__body > :global(.prose){max-width:68ch}
-  .cs-sec__body > :global(* + *){margin-top:28px}
-  .cs-sec__body > :global(figure + figure),.cs-sec__body > :global(figure + .g),.cs-sec__body > :global(.g + figure),.cs-sec__body > :global(.g + .g),.cs-sec__body > :global(.prose + figure),.cs-sec__body > :global(.prose + .g){margin-top:clamp(56px,7vw,104px)!important}
   .cs-sec__body > :global(p){margin:0}
+  .cs-sec__body > :global(*){margin-top:0;margin-bottom:0}
+  /* default: text after text */
+  .cs-sec__body > :global(:not(script):not(style) ~ :not(script):not(style)){margin-top:24px}
+  /* any visual block after something */
+  .cs-sec__body > :global(:not(script):not(style) ~ :is(figure,.g,.insights,.decs,.mets,.steps,.note,.qt)){margin-top:64px}
+  /* a screen after a screen */
+  .cs-sec__body > :global(:is(figure,.g) + :is(figure,.g)),.cs-sec__body > :global(:is(figure,.g) + script + :is(figure,.g)){margin-top:clamp(72px,7vw,96px)}
+  /* text after a screen */
+  .cs-sec__body > :global(:is(figure,.g) + :is(.prose,p,.only)),.cs-sec__body > :global(:is(figure,.g) + script + :is(.prose,p,.only)){margin-top:64px}
+  /* text after numbers or cards */
+  .cs-sec__body > :global(:is(.mets,.insights,.decs,.steps) + .prose){margin-top:40px}
+  /* small caption lines that follow a block keep their own inline spacing */
+  .cs-sec__body > :global(p.dim){margin-top:16px}
 </style>
