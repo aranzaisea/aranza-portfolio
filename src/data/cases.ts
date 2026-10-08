@@ -27,7 +27,7 @@ const ALL_CASES: CaseMeta[] = [
     seoTitle: { en: 'ClaimPro — AI claims copilot case study', es: 'ClaimPro — Caso de estudio: copiloto de IA para reclamos' },
     seoDesc: {
       en: 'How I designed an AI copilot for ~500 insurance adjusters: confidence thresholds, human hand-off and an audit trail. −68% resolution time (client-reported).',
-      es: 'Cómo diseñé un copiloto de IA para ~500 agentes de seguros: umbrales de confianza, derivación a humanos y trazabilidad. −68% en tiempo de resolución (dato del cliente).',
+      es: 'Cómo diseñé un copiloto de IA para ~500 ajustadores de seguros: umbrales de confianza, derivación a humanos y trazabilidad. −68% en tiempo de resolución (dato del cliente).',
     },
   },
   {
