@@ -1,0 +1,44 @@
+---
+// Impact × effort (or any 2×2). Quadrants in reading order: top-left, top-right, bottom-left, bottom-right.
+interface Q { t: string; n?: string; items: string[]; tone?: 'go' | 'later' | 'cut' | 'none' }
+interface Props { x: [string, string]; y: [string, string]; quads: [Q, Q, Q, Q]; caption?: string; d?: 'standard' | 'deep' }
+const { x, y, quads, caption, d } = Astro.props;
+---
+<figure class="mx" data-d={d}>
+  <div class="mx__wrap">
+    <p class="mx__y"><span>{y[0]}</span><span>{y[1]}</span></p>
+    <div class="mx__grid">
+      {quads.map((q) => (
+        <section class={`mx__q mx__q--${q.tone ?? 'none'}`}>
+          <p class="mx__t">{q.t}</p>
+          {q.n && <p class="mx__n">{q.n}</p>}
+          {q.items.length > 0 && <ul>{q.items.map((it) => <li>{it}</li>)}</ul>}
+        </section>
+      ))}
+    </div>
+    <p class="mx__x"><span>{x[0]}</span><span>{x[1]}</span></p>
+  </div>
+  {caption && <figcaption class="mx__cap">{caption}</figcaption>}
+</figure>
+<style>
+  .mx{margin:0;border:1px solid var(--line);border-radius:18px;background:var(--bg-deep);padding:clamp(18px,2.4vw,32px);min-width:0}
+  .mx__wrap{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;gap:10px}
+  .mx__y{grid-row:1;grid-column:1;margin:0;writing-mode:vertical-rl;transform:rotate(180deg);display:flex;justify-content:space-between;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .mx__grid{grid-row:1;grid-column:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .mx__x{grid-row:2;grid-column:2;margin:0;display:flex;justify-content:space-between;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .mx__q{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel-2);min-width:0}
+  .mx__q--go{border-color:#2f5a3e;background:var(--live-bg)}
+  .mx__q--later{border-color:#33407a;background:var(--ai-bg)}
+  .mx__q--cut{opacity:.85}
+  .mx__t{margin:0;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
+  .mx__q--go .mx__t{color:var(--live)} .mx__q--later .mx__t{color:var(--ai)}
+  .mx__n{margin:6px 0 0;font-size:13.5px;line-height:1.45;color:var(--ink-soft)}
+  .mx__q ul{margin:10px 0 0;padding-left:18px;color:var(--ink);font-size:15px;line-height:1.5}
+  .mx__cap{margin:16px 0 0;font-size:14px;color:var(--ink-faint)}
+  @media (max-width:640px){
+    .mx__wrap{grid-template-columns:minmax(0,1fr)}
+    .mx__y{display:none}
+    .mx__grid{grid-column:1;grid-template-columns:minmax(0,1fr)}
+    .mx__x{grid-column:1;display:none}
+  }
+</style>

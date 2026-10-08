@@ -4,14 +4,14 @@ lang: es
 titleA: Un planificador de comidas que parte de tu heladera,
 titleB: y te avisa cuando está suponiendo.
 lead: Numi planifica qué comer según lo que ya compraste, tu agenda y tus objetivos. Es un concepto independiente que diseñé de punta a punta para iOS, con una regla en todo el recorrido — la IA dice qué vio, qué supuso y qué no va a adivinar.
-statusNote: Concepto independiente, diseñado sola en 2026. No es un producto lanzado.
+statusNote: Concepto independiente, diseñado sola en 2026. No es un producto lanzado y todavía no se probó con usuarios.
 summary:
   problem: Las apps de planificación asumen que vas a comprar para su plan. La mayoría hace lo contrario — compra y después piensa qué cocinar. Y una app que adivina en silencio qué hay en tu heladera arma planes en los que no se puede confiar.
-  role: Product Designer, sola — research, flujos, comportamiento de la IA, UI y prototipo.
+  role: Product Designer, sola — research, estrategia, flujos, comportamiento de la IA, UI, prototipo y evaluación.
   client: Consumo · iOS · concepto independiente
   timeline: "2026"
 metrics: []
-footnote: Todos los nombres y datos de las pantallas son ficticios.
+footnote: "Investigación de campo: cuestionario online con 13 participantes de 24 a 37 años (6 preguntas abiertas y 6 cerradas, julio de 2026). Es una muestra chica: los porcentajes son orientativos, y la codificación de las respuestas abiertas se hizo con ayuda de IA y se revisó a mano. Todos los nombres y datos de las pantallas son ficticios."
 ---
 
 <Section n="01" id="idea" label="La idea" title="Planificar desde lo que ya hay.">
@@ -29,11 +29,51 @@ El riesgo de esa idea es evidente. Leer un ticket arrugado o la foto de un estan
 ]} />
 </Section>
 
-<Section n="02" id="flow" label="El flujo" title="Qué lee Numi, qué supone y qué no adivina.">
+<Section n="02" id="research" label="Investigación" title="Trece personas, un patrón: lo difícil es decidir.">
+<div class="prose">
+
+Empecé con desk research sobre por qué cuesta sostener una alimentación saludable, un benchmark de tres apps de planificación y un cuestionario de campo con 13 personas de 24 a 37 años y distintos trabajos. La pregunta no era “¿qué quiere comer la gente?” sino **cómo decide**, y dónde se rompe esa decisión.
+
+</div>
+<Metrics items={[{"v": "12 de 13", "l": "quieren dedicar menos tiempo a decidir qué cocinar"}, {"v": "12 de 13", "l": "nunca usaron una app para planificar comidas"}, {"v": "12 de 13", "l": "planifican sus comidas solo a veces o nunca"}, {"v": "~69%", "l": "nombran el cansancio, la falta de tiempo o de energía como principal barrera", "note": "codificado de respuestas abiertas"}]} />
+<Quote by="Participante, investigación de campo">Reviso qué tengo en la heladera y preparo lo más fácil.</Quote>
+<Clusters groups={[{"t": "Necesidades", "tone": "need", "items": ["Decidir más rápido", "Comer más sano", "Pensarlo menos"]}, {"t": "Frustraciones", "tone": "pain", "items": ["No sé qué cocinar", "Llego cansada", "Las apps piden demasiado esfuerzo"]}, {"t": "Comportamientos", "tone": "do", "items": ["Reviso la heladera", "Improviso", "Cambio el plan", "Pido delivery"]}, {"t": "Barreras", "tone": "bar", "items": ["Falta de tiempo", "Falta de energía", "Desorganización", "Pocas ideas"]}, {"t": "Oportunidades", "tone": "opp", "items": ["Sacarle decisiones a la persona", "Usar lo que ya hay en casa", "Explicar cada sugerencia"]}]} insight={{"t": "Insight central", "b": "Lo difícil no es saber qué comer. Es el esfuerzo mental de decidirlo todos los días."}} caption="Mapa de afinidad de las respuestas abiertas. Cerca del 62% dijo que cambia lo que pensaba comer por cansancio o practicidad; 6 de 13 deciden mirando lo que hay en la heladera." />
+<Table head={["App", "Qué hace bien", "Dónde se queda corta", "Oportunidad para Numi"]} rows={[["Mealime", "Onboarding simple, recetas fáciles, lista de compras automática", "Igual hay que elegir cada receta a mano", "Menos decisiones, no más recetas"], ["Eat This Much", "Genera planes y calcula la nutrición sola", "Muchas configuraciones antes de recibir algo útil", "Configuración mínima, personalización progresiva"], ["Lifesum", "Seguimiento nutricional y objetivos personales", "Pensada para registrar, no para decidir", "Explicar por qué una comida es buena opción en vez de pedir datos"]]} caption="Benchmark. Ninguna de las tres parte de lo que ya tenés en casa." />
+</Section>
+
+<Section n="03" id="definition" label="Definición" title="La gente no necesita más recetas. Necesita menos decisiones.">
+<Persona tag="Persona compuesta · armada con 4 participantes con el mismo patrón" name="Valentina Ruiz" meta="32 años · jornada completa · cocina de forma irregular y decide sobre la marcha" quote="Llego cansada y termino pidiendo delivery." blocks={[{"t": "Objetivos", "items": ["Comer más sano sin dedicarle mucho tiempo ni energía", "Sentirse organizada sin planificar todo a mano"]}, {"t": "Necesidades", "items": ["Sugerencias rápidas según lo que hay en casa", "Entender por qué una comida es buena opción"]}, {"t": "Dolores", "items": ["La carga mental de decidir qué comer cada día", "A la noche, cansada, elige lo práctico y no lo más sano", "Se le echan a perder frutas y verduras porque compra sin plan"]}, {"t": "Contexto de uso", "items": ["Al final del día, cansada, decidiendo la cena", "La compra grande de la semana"]}]} />
+<div class="prose">
+
+**Punto de vista.** Valentina, y los adultos que trabajan o estudian como ella, necesitan tomar menos decisiones sobre la comida, porque decidir qué comer todos los días los agota y los empuja a lo más rápido en lugar de a lo que de verdad buscan: comer bien.
+
+</div>
+<Steps items={[["Decidir sin esfuerzo", "¿Cómo podríamos ayudar a Valentina a decidir qué comer sin que sienta que está “trabajando” para planificarse?"], ["Partir de casa", "¿Cómo podríamos usar lo que ya tiene para sugerir comidas, en vez de pedirle que cargue recetas?"], ["Menos decisiones, mismo control", "¿Cómo podríamos reducir las decisiones diarias sin quitarle el control sobre lo que come?"], ["Explicar la elección", "¿Cómo podríamos explicarle por qué una comida es buena opción, para que gane confianza sin saber de nutrición?"], ["Cambio de opinión", "¿Cómo podríamos ofrecerle una alternativa rápida cuando cambia de opinión, sin rehacer todo el plan?"]]} />
+<Matrix y={["Menor impacto", "Alto impacto"]} x={["Esfuerzo bajo o medio", "Esfuerzo alto"]} quads={[{"t": "Primero", "tone": "go", "items": ["Sugerencia según lo que hay en casa", "Un motivo breve para cada sugerencia", "Onboarding mínimo: objetivo y restricciones"]}, {"t": "Alto impacto, alto esfuerzo", "n": "Nada en esta ronda: primero validar el núcleo antes de invertir en funciones caras.", "items": []}, {"t": "Victoria rápida", "tone": "go", "n": "El 62% cambia lo que pensaba comer.", "items": ["Cambiar una comida en el lugar"]}, {"t": "Fuera del MVP", "tone": "cut", "items": ["Cantidades para comprar", "Seguimiento nutricional a largo plazo", "Integración con supermercados y delivery"]}]} caption="Impacto vs. esfuerzo. El MVP sugiere, explica y deja cambiar de opinión, sin configuración ni carga manual de datos." />
+</Section>
+
+<Section n="04" id="flow" label="El flujo" title="Qué lee Numi, qué supone y qué no adivina.">
 <Flow stages={[{"a": "hu", "t": "Cargás comida", "n": "Escaneás un ticket, sacás una foto de un estante o decís qué compraste."}, {"a": "ai", "t": "Numi lo lee", "n": "Muestra cada ítem que leyó."}, {"k": "branch", "q": "¿Se lee con claridad?", "paths": [{"l": "Sí", "a": "ai", "t": "Entra a tu heladera", "n": "Lo que dedujo queda marcado como “supuesto”."}, {"l": "No", "a": "ai", "t": "No adivina", "n": "Te pide otra foto o que lo escribas."}]}, {"a": "ai", "t": "Planifica según tu día", "n": "Una reunión tarde significa una cena más corta."}, {"a": "hu", "t": "Corregís con un toque", "n": "Los supuestos se editan ahí mismo donde aparecen."}]} />
 </Section>
 
-<Section n="03" id="input" label="Cargar la comida" title="Mostrar qué leyó. Marcar qué supuso.">
+<Section n="05" id="ideation" label="Ideación" title="Ocho bocetos, tres layouts, un Hoy.">
+<div class="prose">
+
+Dibujé en papel ocho versiones de la pantalla principal, llevé la tercera a wireframes de baja fidelidad de las secciones principales y después a media fidelidad con contenido real. Trabajar con contenido real cambió la estructura: Receta y Chat se usaban tanto como Hoy, así que la barra de pestañas pasó de tres accesos a cinco.
+
+</div>
+<Shot src="numi/process/crazy8s.jpg" title="Crazy 8s · pantalla Hoy" alt="Ocho bocetos a mano de la pantalla principal en una hoja de papel" />
+<Phones items={[{"src": "numi/process/low-today.jpg", "alt": "Wireframe de baja fidelidad de Hoy", "label": "Low-fi · Hoy"}, {"src": "numi/process/low-fridge.jpg", "alt": "Wireframe de baja fidelidad de la Heladera", "label": "Low-fi · Heladera"}, {"src": "numi/process/low-plan.jpg", "alt": "Wireframe de baja fidelidad del Plan", "label": "Low-fi · Plan"}, {"src": "numi/process/low-chat.jpg", "alt": "Wireframe de baja fidelidad del Chat", "label": "Low-fi · Chat"}]} />
+<Phones d="standard" items={[{"src": "numi/process/mid-fridge.png", "alt": "Heladera en media fidelidad agrupada por categoría con etiquetas de usado hoy y agregado hoy", "label": "Mid-fi · Heladera"}, {"src": "numi/process/mid-plan.png", "alt": "Plan semanal en media fidelidad con selector horizontal de días", "label": "Mid-fi · Plan"}, {"src": "numi/process/mid-chat.png", "alt": "Chat en media fidelidad con respuestas sugeridas", "label": "Mid-fi · Chat"}]} />
+<div class="prose">
+
+**Tres layouts de Hoy, generados con IA y evaluados a mano.** Usé IA en Figma para probar otras jerarquías con el mismo contenido. La línea de tiempo (V2) obligaba a leer un eje temporal, un esfuerzo extra justo para la persona cansada que describía la investigación. El carrusel (V3) achicaba las comidas secundarias y les sacaba el botón de cambio, cuando el 62% cambia de comida seguido. Me quedé con V1, una tarjeta principal con secciones, y tomé la mejor idea de la línea de tiempo: anclar cada comida a un momento del día, como “Al llegar a tu casa”.
+
+</div>
+<Phones items={[{"src": "numi/process/home-v1.jpg", "alt": "Variante 1: tarjeta principal con secciones Ahora y Mañana", "label": "V1 · Tarjeta + secciones", "badge": "Elegida"}, {"src": "numi/process/home-v2.jpg", "alt": "Variante 2: línea de tiempo vertical", "label": "V2 · Línea de tiempo"}, {"src": "numi/process/home-v3.jpg", "alt": "Variante 3: tarjeta principal con carrusel horizontal", "label": "V3 · Tarjeta + carrusel"}]} />
+</Section>
+
+<Section n="06" id="input" label="Cargar la comida" title="Mostrar qué leyó. Marcar qué supuso.">
 <Phones items={[
   {src:"numi/receipt-review.png",alt:"Revisión de 8 productos leídos del ticket",label:"Revisar el ticket"},
   {src:"numi/voice-summary.png",alt:"Resumen de lo que Numi entendió con el horario marcado como supuesto",label:"Lo que entendí",m:[[94,49.5,"<strong>“Supuesto” es una etiqueta,</strong> no un valor por defecto escondido."],[4,62,"<strong>Numi dice por qué lo supuso</strong>, y que cualquier dato se corrige con un toque."]]},
@@ -47,10 +87,46 @@ El riesgo de esa idea es evidente. Leer un ticket arrugado o la foto de un estan
 ]} />
 </Section>
 
-<Section n="04" id="process" label="Proceso" title="De Crazy 8s a un prototipo auditado." d="standard">
+<Section n="07" id="evaluation" label="Evaluación" title="Audité mi propio prototipo antes que nadie.">
 <div class="prose">
 
-Empecé con el encuadre del problema y Crazy 8s, pasé a flujos de baja fidelidad y comparé tres variantes de layout para la pantalla Hoy antes de ir a alta fidelidad. Con el prototipo funcionando, audité cada momento de IA contra las **pautas de interacción humano-IA de Microsoft (HAX)** y rediseñé las pantallas que no las cumplían, con explicaciones más claras y formas más simples de corregir a la IA.
+Con el flujo de primer uso funcionando de punta a punta (14 pantallas más la rama de error), hice una evaluación heurística con las 10 heurísticas de Nielsen y cinco leyes de UX. **24 observaciones: 13 cumplen y 11 no.** Ninguna es catastrófica; dos son mayores, y las dos tocan datos sensibles.
+
+</div>
+<Table head={["Hallazgo", "Heurística", "Severidad", "Cambio"]} rows={[["La revisión del ticket era todo o nada", "Control y libertad", "<span class=\"sev sev--3\">Mayor</span>", "Una revisión editable: corregir un producto sin rechazar todo el ticket"], ["“Ninguna” se podía marcar junto con alergias", "Prevención de errores", "<span class=\"sev sev--3\">Mayor</span>", "Restricciones en dos grupos, con “No tengo” y “Como de todo” excluyentes"], ["La cámara no decía si había que tocar o esperar", "Visibilidad del estado del sistema", "<span class=\"sev sev--2\">Menor · muy frecuente</span>", "Captura automática con cuenta regresiva"], ["El onboarding pedía detalles de rutina y “Saltar” no se explicaba", "Diseño estético y minimalista", "<span class=\"sev sev--2\">Menor</span>", "Un paso de rutina más liviano y un “Lo hago después” claro"]]} caption="Las tres correcciones principales quedaron diseñadas antes del testing. Fortalezas: se siente nativa de iOS, el sistema hace el trabajo (una foto del ticket carga la heladera) y cada paso tiene salida." />
+<div class="prose">
+
+**Después, la IA misma.** Audité cada momento de IA con las pautas de interacción humano-IA de Microsoft (HAX), usando las 12 de 18 que aplican a Numi: **5 se cumplían, 6 a medias y 1 no** (G18, avisar de los cambios). La auditoría encontró cosas que una revisión de usabilidad no ve: el chat se presentaba como “asistente nutricional” cuando Numi evita a propósito el seguimiento nutricional; un mensaje mencionaba “tu reunión tarde” de un calendario que nunca se conectó; el aprendizaje era invisible y no se podía borrar; y cambiar la cena usaba en silencio el pollo reservado para el almuerzo de mañana.
+
+</div>
+<Steps items={[["Percibe", "Numi lee el ticket, la foto o la voz, y muestra lo que vio."], ["Propone", "Sugiere una comida o un cambio. Nunca lo aplica en silencio."], ["Explica", "Una línea con el motivo y qué datos usó."], ["La persona decide", "Aceptar, cambiar o corregir. Decir que no cuesta lo mismo que decir que sí."], ["Aprende", "Solo después de tres señales iguales, y visible en “Lo que Numi sabe”, donde se puede olvidar."]]} />
+<div class="prose">
+
+Ese ciclo se convirtió en una tabla de 10 reglas de comportamiento para el handoff, con cuatro niveles de autonomía: cuanto más difícil de deshacer o más sensible es algo, menos hace Numi sola. El feedback explícito se aplica enseguida; un permiso rechazado no se vuelve a pedir por 30 días. Es una auditoría experta, todavía sin validar con usuarios.
+
+</div>
+</Section>
+
+<Section n="08" id="access" label="Accesibilidad y ética" title="A quién deja afuera, y qué empuja sin querer.">
+<div class="prose">
+
+Revisé tres pantallas clave en modo claro y oscuro: medí 62 pares de texto y fondo con la fórmula de WCAG, controlé cada área táctil contra los 44 pt y recorrí Dynamic Type, VoiceOver y Reducir transparencia. Los colores fijos ya cumplían. Los problemas estaban en lo que una lista de colores no mide.
+
+</div>
+<Table head={["Problema", "Antes", "Después"]} rows={[["La barra de pestañas pierde contraste cuando pasa contenido por debajo", "3,53:1 sobre una foto", "6,76:1, y barra sólida con Reducir transparencia activado"], ["“No es así” era la única forma de corregir un dato deducido", "Un enlace de 63 × 17 pt", "Un botón secundario de 44 pt"], ["Etiquetas de horario en mayúsculas de 11 pt", "4,66:1, cumpliendo por 0,16", "13 pt, en minúsculas, 5,97:1"], ["El botón de cambiar era solo un ícono", "VoiceOver: “Cambiar, botón”, tres veces", "“Cambiar la cena: sopa de zapallo”"], ["Las tarjetas se rompen con letra grande", "Títulos cortados", "Las tarjetas se apilan en tamaños de accesibilidad"]]} />
+<div class="prose">
+
+También crucé la persona con limitaciones permanentes, temporales y situacionales: una mano enyesada, las manos mojadas cocinando, el sol en la verdulería, el ruido del súper, una mujer de 65 años que cocina para su familia. De ahí salió un modo cocina: pantalla siempre encendida, un paso por vez y “Siguiente” por voz.
+
+**Sin patrones oscuros, pero con presiones que no había visto.** Un mensaje justificaba una cena más liviana “para que no te sientas pesada”, lo que une comida con culpa. Ahora dice “para que comas antes y te quede más tiempo para descansar”. El objetivo “Comer más sano” prometía no contar calorías, pero cada tarjeta mostraba kcal; ahora vienen apagadas por defecto. La racha ya se había convertido en “días activos este mes”, que nunca se reinicia.
+
+</div>
+</Section>
+
+<Section n="09" id="screens" label="El resto de la app" title="Del primer uso al plan semanal." d="standard">
+<div class="prose">
+
+Inicio de sesión, un perfil de dos preguntas, el plan semanal y un perfil donde cada preferencia que alimenta las sugerencias se edita por separado.
 
 </div>
 <Phones items={[
@@ -61,7 +137,7 @@ Empecé con el encuadre del problema y Crazy 8s, pasé a flujos de baja fidelida
 ]} />
 </Section>
 
-<Section n="05" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
+<Section n="10" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
 <Decisions>
 <Decision n="01" title="No leer un ticket malo en lugar de devolver una lectura parcial" ev="hypothesis" tradeoff="Es un paso más para la persona. Un producto equivocado en la heladera arruina en silencio una semana de planes.">
 Debajo de cierto nivel de confianza, Numi pide otra foto u otro método y explica por qué.
@@ -69,5 +145,15 @@ Debajo de cierto nivel de confianza, Numi pide otra foto u otro método y explic
 <Decision n="02" title="Marcar los supuestos en el lugar, no en una página de ajustes" ev="hypothesis" tradeoff="Las etiquetas suman ruido a una pantalla de resumen. También son la única forma de notar un valor equivocado antes de que defina el plan.">
 Cuando la persona no menciona algo — como su horario — Numi completa un valor razonable y lo marca como “supuesto” ahí mismo.
 </Decision>
+<Decision n="03" title="Días activos en lugar de una racha" ev="hypothesis" tradeoff="Una racha engancha más al hábito. También castiga justo los días cansados que Numi existe para acompañar.">
+“Días activos este mes” nunca se reinicia y no se usa en notificaciones.
+</Decision>
+<Decision n="04" title="Calorías ocultas por defecto" ev="hypothesis" tradeoff="Hay quien quiere ver el número. Mostrárselo a todos contradice la promesa de comer mejor sin contar.">
+Las calorías se activan en Perfil para quien las quiera.
+</Decision>
 </Decisions>
+</Section>
+
+<Section n="11" id="next" label="Próximos pasos" title="Todavía no se probó con usuarios. Así lo probaría.">
+<Steps items={[["Cargar un ticket y corregir una cantidad", "Pone a prueba la revisión editable, el problema más grande de la evaluación."], ["Completar el perfil con una alergia", "Comprueba que las alergias no se puedan mezclar con “Ninguna”."], ["“¿Por qué creés que Numi te sugirió esta cena?”", "Una pregunta de comprensión para ver si los motivos breves se entienden."], ["Sugerencias aceptadas sin cambios", "Qué parte la gente conserva sin editar, como primera señal de confianza."]]} />
 </Section>

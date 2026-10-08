@@ -1,0 +1,39 @@
+---
+interface Props { name: string; meta: string; tag?: string; quote?: string; blocks: { t: string; items: string[] }[]; caption?: string; d?: 'standard' | 'deep' }
+const { name, meta, tag, quote, blocks, caption, d } = Astro.props;
+const initials = name.split(' ').map((w) => w[0]).join('').slice(0, 2);
+---
+<figure class="ps" data-d={d}>
+  <header class="ps__h">
+    <span class="ps__av" aria-hidden="true">{initials}</span>
+    <div>
+      {tag && <p class="ps__tag">{tag}</p>}
+      <p class="ps__name">{name}</p>
+      <p class="ps__meta">{meta}</p>
+    </div>
+  </header>
+  {quote && <p class="ps__q">“{quote}”</p>}
+  <div class="ps__grid">
+    {blocks.map((b) => (
+      <section>
+        <p class="ps__t">{b.t}</p>
+        <ul>{b.items.map((i) => <li>{i}</li>)}</ul>
+      </section>
+    ))}
+  </div>
+  {caption && <figcaption class="ps__cap">{caption}</figcaption>}
+</figure>
+<style>
+  .ps{margin:0;border:1px solid var(--line);border-radius:18px;background:var(--panel-2);padding:clamp(20px,2.6vw,34px);min-width:0}
+  .ps__h{display:flex;gap:16px;align-items:center}
+  .ps__av{flex:none;width:56px;height:56px;border-radius:50%;background:#2a3a2f;color:var(--live);display:grid;place-items:center;font:600 18px var(--sans)}
+  .ps__tag{margin:0 0 4px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .ps__name{margin:0;font-size:22px;font-weight:600;letter-spacing:-.01em}
+  .ps__meta{margin:2px 0 0;color:var(--ink-soft);font-size:15px}
+  .ps__q{margin:20px 0 0;padding-left:14px;border-left:3px solid var(--human);font-size:18px;line-height:1.45;color:var(--ink)}
+  .ps__grid{margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px 28px}
+  .ps__t{margin:0 0 8px;font:500 11.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ai)}
+  .ps ul{margin:0;padding-left:18px;color:var(--ink-2);font-size:15px;line-height:1.5}
+  .ps li+li{margin-top:4px}
+  .ps__cap{margin:18px 0 0;font-size:14px;color:var(--ink-faint)}
+</style>

@@ -1,0 +1,41 @@
+---
+// Affinity map: groups of sticky notes, with the insight they converge on.
+type Tone = 'need' | 'pain' | 'do' | 'bar' | 'opp';
+interface Props { groups: { t: string; tone: Tone; items: string[] }[]; insight?: { t: string; b: string }; caption?: string; d?: 'standard' | 'deep' }
+const { groups, insight, caption, d } = Astro.props;
+---
+<figure class="cl" data-d={d}>
+  <div class="cl__grid">
+    {groups.map((g) => (
+      <section class={`cl__g cl__g--${g.tone}`}>
+        <p class="cl__t"><i></i>{g.t}</p>
+        <ul>{g.items.map((it) => <li>{it}</li>)}</ul>
+      </section>
+    ))}
+  </div>
+  {insight && (
+    <div class="cl__in">
+      <p class="cl__inl">{insight.t}</p>
+      <p class="cl__inb">{insight.b}</p>
+    </div>
+  )}
+  {caption && <figcaption class="cl__cap">{caption}</figcaption>}
+</figure>
+<style>
+  .cl{margin:0;border:1px solid var(--line);border-radius:18px;background:var(--bg-deep);padding:clamp(18px,2.4vw,32px);min-width:0}
+  .cl__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+  .cl__g{min-width:0}
+  .cl__t{display:flex;align-items:center;gap:8px;margin:0 0 10px;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+  .cl__t i{width:10px;height:10px;border-radius:3px;display:block}
+  .cl__g ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+  .cl__g li{padding:10px 12px;border-radius:8px;font-size:14.5px;line-height:1.4;color:#14161c;font-weight:500;overflow-wrap:anywhere}
+  .cl__g--need i,.cl__g--need li{background:#F3D98B}
+  .cl__g--pain i,.cl__g--pain li{background:#F2A99B}
+  .cl__g--do i,.cl__g--do li{background:#A9DDB5}
+  .cl__g--bar i,.cl__g--bar li{background:#A9C4F2}
+  .cl__g--opp i,.cl__g--opp li{background:#CDB8F2}
+  .cl__in{margin-top:18px;padding:16px 18px;border-radius:12px;border:1px solid #5a4826;background:var(--human-bg)}
+  .cl__inl{margin:0 0 6px;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--human)}
+  .cl__inb{margin:0;font-size:clamp(17px,1.6vw,20px);line-height:1.4;color:var(--ink);font-weight:500}
+  .cl__cap{margin:16px 0 0;font-size:14px;color:var(--ink-faint)}
+</style>

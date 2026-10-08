@@ -4,14 +4,14 @@ lang: en
 titleA: A meal planner that starts from your fridge,
 titleB: and tells you when it's guessing.
 lead: Numi plans what to eat around what you already bought, your schedule and your goals. It's an independent concept I designed end to end for iOS, with one rule throughout — the AI says what it saw, what it assumed and what it won't guess.
-statusNote: Independent concept, designed solo in 2026. Not a shipped product.
+statusNote: Independent concept, designed solo in 2026. Not a shipped product, and not yet tested with users.
 summary:
   problem: Meal-planning apps assume you'll shop for their plan. Most people do the opposite — they buy groceries, then wonder what to cook. And an app that silently guesses what's in your fridge produces plans you can't trust.
-  role: Product Designer, solo — research, flows, AI behaviour, UI and prototype.
+  role: Product Designer, solo — research, strategy, flows, AI behaviour, UI, prototype and evaluation.
   client: Consumer · iOS · independent concept
   timeline: "2026"
 metrics: []
-footnote: All names and data in the screens are fictional.
+footnote: "Field research: online questionnaire with 13 participants aged 24–37 (6 open and 6 closed questions, July 2026). A small sample: percentages are directional, and the coding of open answers was AI-assisted and checked by hand. Quotes translated from Spanish. All names and data in the screens are fictional."
 ---
 
 <Section n="01" id="idea" label="The idea" title="Plan from what's already there.">
@@ -29,11 +29,51 @@ The risk in that idea is obvious. Reading a crumpled receipt or a photo of a she
 ]} />
 </Section>
 
-<Section n="02" id="flow" label="The flow" title="What Numi reads, what it assumes, and what it won’t guess.">
+<Section n="02" id="research" label="Research" title="Thirteen people, one pattern: deciding is the hard part.">
+<div class="prose">
+
+I started with desk research on why healthy eating is hard to sustain, a benchmark of three meal-planning apps, and a field questionnaire with 13 people aged 24–37 in different jobs. The question wasn't “what do people want to eat?” but **how they decide**, and where that decision breaks.
+
+</div>
+<Metrics items={[{"v": "12 of 13", "l": "want to spend less time deciding what to cook"}, {"v": "12 of 13", "l": "have never used a meal-planning app"}, {"v": "12 of 13", "l": "plan their meals only sometimes or never"}, {"v": "~69%", "l": "name tiredness, lack of time or energy as the main barrier", "note": "coded from open answers"}]} />
+<Quote by="Participant, field research">I check what's in the fridge and make whatever's easiest.</Quote>
+<Clusters groups={[{"t": "Needs", "tone": "need", "items": ["Decide faster", "Eat healthier", "Spend less time thinking about it"]}, {"t": "Frustrations", "tone": "pain", "items": ["I don't know what to cook", "I get home tired", "Apps ask for too much effort"]}, {"t": "Behaviours", "tone": "do", "items": ["Check the fridge first", "Improvise", "Change the plan", "Order delivery"]}, {"t": "Barriers", "tone": "bar", "items": ["Lack of time", "Lack of energy", "Disorganisation", "Few ideas"]}, {"t": "Opportunities", "tone": "opp", "items": ["Take decisions off people's plate", "Use what's already at home", "Explain each suggestion"]}]} insight={{"t": "Central insight", "b": "The hard part isn't knowing what to eat. It's the mental effort of deciding it every single day."}} caption="Affinity map of the open answers. About 62% said they change what they planned to eat because of tiredness or convenience; 6 of 13 decide by looking at what's in the fridge." />
+<Table head={["App", "Does well", "Where it falls short", "Opportunity for Numi"]} rows={[["Mealime", "Simple onboarding, easy recipes, automatic shopping list", "You still pick every recipe by hand", "Fewer decisions, not more recipes"], ["Eat This Much", "Generates plans and calculates nutrition automatically", "Lots of settings before you get any value", "Minimal setup, personalise over time"], ["Lifesum", "Nutrition tracking and personal goals", "Built around logging, not deciding", "Explain why a meal is a good choice instead of asking for data"]]} caption="Benchmark. None of the three starts from what you already have at home." />
+</Section>
+
+<Section n="03" id="definition" label="Definition" title="People don't need more recipes. They need fewer decisions.">
+<Persona tag="Composite persona · built from 4 participants with the same pattern" name="Valentina Ruiz" meta="32 · full-time job · cooks irregularly, decides on the go" quote="I get home tired and end up ordering delivery." blocks={[{"t": "Goals", "items": ["Eat healthier without spending much time or energy", "Feel organised without planning everything by hand"]}, {"t": "Needs", "items": ["Quick suggestions based on what's at home", "Understand why a meal is a good choice"]}, {"t": "Pain points", "items": ["The daily mental load of deciding what to eat", "Tired at night, she picks what's practical, not what's healthy", "Fruit and vegetables go off because she buys without a plan"]}, {"t": "Context of use", "items": ["End of the day, tired, deciding dinner", "The big weekly shop"]}]} />
+<div class="prose">
+
+**Point of view.** Valentina, and adults who work or study like her, need to make fewer decisions about food, because deciding what to eat every day wears them out and pushes them toward whatever is fastest instead of what they actually want: to eat well.
+
+</div>
+<Steps items={[["Decide without effort", "How might we help Valentina decide what to eat without feeling she's “working” to plan?"], ["Start from home", "How might we use what she already has to suggest meals, instead of asking her to enter recipes?"], ["Fewer decisions, same control", "How might we cut daily decisions without taking away her control over what she eats?"], ["Explain the choice", "How might we explain why a meal is a good option, so she gains confidence without knowing nutrition?"], ["Change of mind", "How might we offer a quick alternative when she changes her mind, without redoing the whole plan?"]]} />
+<Matrix y={["Lower impact", "High impact"]} x={["Low–medium effort", "High effort"]} quads={[{"t": "Build first", "tone": "go", "items": ["Suggestion based on what's at home", "One-line reason for each suggestion", "Minimal onboarding: goal and restrictions"]}, {"t": "High impact, high effort", "n": "Nothing this round: validate the core before investing in expensive features.", "items": []}, {"t": "Quick win", "tone": "go", "n": "62% change what they planned to eat.", "items": ["Swap a meal in place"]}, {"t": "Out of the MVP", "tone": "cut", "items": ["Shopping quantities", "Long-term nutrition tracking", "Supermarket and delivery integrations"]}]} caption="Impact vs effort. The MVP suggests, explains and lets you change your mind, without setup or manual data entry." />
+</Section>
+
+<Section n="04" id="flow" label="The flow" title="What Numi reads, what it assumes, and what it won’t guess.">
 <Flow stages={[{"a": "hu", "t": "You add food", "n": "Scan a receipt, photograph a shelf or say what you bought."}, {"a": "ai", "t": "Numi reads it", "n": "Shows every item it read."}, {"k": "branch", "q": "Can it read it clearly?", "paths": [{"l": "Yes", "a": "ai", "t": "Added to your fridge", "n": "Anything it inferred is marked “assumed”."}, {"l": "No", "a": "ai", "t": "It refuses to guess", "n": "Asks you to retake the photo or type it."}]}, {"a": "ai", "t": "It plans around your day", "n": "A late meeting means a shorter dinner."}, {"a": "hu", "t": "You correct in one tap", "n": "Assumptions stay editable right where they appear."}]} />
 </Section>
 
-<Section n="03" id="input" label="Getting food in" title="Show what you read. Mark what you assumed.">
+<Section n="05" id="ideation" label="Ideation" title="Eight sketches, three layouts, one Home.">
+<div class="prose">
+
+I sketched eight versions of the Home screen on paper, then took the third into low-fidelity wireframes for the main sections and into mid-fidelity with real content. Building with real content changed the structure: Recipe and Chat were used as often as Today, so the tab bar grew from three items to five.
+
+</div>
+<Shot src="numi/process/crazy8s.jpg" title="Crazy 8s · Home" alt="Eight hand-drawn sketches of the Home screen on a sheet of paper" />
+<Phones items={[{"src": "numi/process/low-today.jpg", "alt": "Low-fidelity wireframe of Today", "label": "Low-fi · Today"}, {"src": "numi/process/low-fridge.jpg", "alt": "Low-fidelity wireframe of the Fridge", "label": "Low-fi · Fridge"}, {"src": "numi/process/low-plan.jpg", "alt": "Low-fidelity wireframe of the Plan", "label": "Low-fi · Plan"}, {"src": "numi/process/low-chat.jpg", "alt": "Low-fidelity wireframe of the Chat", "label": "Low-fi · Chat"}]} />
+<Phones d="standard" items={[{"src": "numi/process/mid-fridge.png", "alt": "Mid-fidelity Fridge grouped by pantry category with used today and added today tags", "label": "Mid-fi · Fridge"}, {"src": "numi/process/mid-plan.png", "alt": "Mid-fidelity weekly Plan with a horizontal day selector", "label": "Mid-fi · Plan"}, {"src": "numi/process/mid-chat.png", "alt": "Mid-fidelity Chat with suggested replies", "label": "Mid-fi · Chat"}]} />
+<div class="prose">
+
+**Three Home layouts, generated with AI and judged by hand.** I used AI in Figma to try other hierarchies on the same content. The timeline (V2) made people read a time axis, which adds effort for exactly the tired user the research described. The carousel (V3) shrank the secondary meals and dropped their swap button, when 62% change meals often. I kept V1, a hero card with sections, and borrowed the timeline's best idea: anchoring each meal to a moment of the day, like “When you get home”.
+
+</div>
+<Phones items={[{"src": "numi/process/home-v1.jpg", "alt": "Home variant 1: hero card with Now and Tomorrow sections", "label": "V1 · Hero + sections", "badge": "Chosen"}, {"src": "numi/process/home-v2.jpg", "alt": "Home variant 2: vertical timeline", "label": "V2 · Timeline"}, {"src": "numi/process/home-v3.jpg", "alt": "Home variant 3: hero card with a horizontal carousel", "label": "V3 · Hero + carousel"}]} />
+</Section>
+
+<Section n="06" id="input" label="Getting food in" title="Show what you read. Mark what you assumed.">
 <Phones items={[
   {src:"numi/receipt-review.png",alt:"Review of 8 items read from the receipt",label:"Receipt review"},
   {src:"numi/voice-summary.png",alt:"Summary of what Numi understood with the schedule marked as assumed",label:"What I understood",m:[[94,49.5,"<strong>“Assumed” is a label,</strong> not a hidden default."],[4,62,"<strong>Numi says why it assumed it</strong>, and that any item can be corrected with a tap."]]},
@@ -47,10 +87,46 @@ The risk in that idea is obvious. Reading a crumpled receipt or a photo of a she
 ]} />
 </Section>
 
-<Section n="04" id="process" label="Process" title="From Crazy 8s to an audited prototype." d="standard">
+<Section n="07" id="evaluation" label="Evaluation" title="I audited my own prototype before anyone else did.">
 <div class="prose">
 
-I started with problem framing and Crazy 8s, moved to low-fidelity flows and compared three layout variants for the Today screen before going to high fidelity. With a working prototype, I audited every AI moment against Microsoft's **Human-AI interaction guidelines (HAX)** and redesigned the screens that fell short, with clearer explanations and easier ways to correct the AI.
+With the first-use flow working end to end (14 screens plus the error branch), I ran a heuristic evaluation against Nielsen's 10 heuristics and five UX laws. **24 observations: 13 meet the heuristic, 11 don't.** None is catastrophic; two are major, and both touch sensitive data.
+
+</div>
+<Table head={["Finding", "Heuristic", "Severity", "Change"]} rows={[["The receipt review was all or nothing", "Control and freedom", "<span class=\"sev sev--3\">Major</span>", "An editable review: fix one item without rejecting the whole receipt"], ["“None” could be selected together with allergies", "Error prevention", "<span class=\"sev sev--3\">Major</span>", "Restrictions in two groups, with exclusive “I don't have any” and “I eat everything”"], ["The camera didn't say whether to tap or wait", "Visibility of system status", "<span class=\"sev sev--2\">Minor · very frequent</span>", "Automatic capture with a countdown"], ["Onboarding asked for routine details, and “Skip” had no explanation", "Aesthetic and minimalist design", "<span class=\"sev sev--2\">Minor</span>", "A lighter routine step and a clear “Do it later”"]]} caption="The top three fixes were mocked up before testing. Strengths: it feels native to iOS, the system does the work (one receipt photo fills the fridge), and every step has a way out." />
+<div class="prose">
+
+**Then the AI itself.** I audited every AI moment against Microsoft's Human-AI interaction guidelines (HAX), using the 12 of 18 that apply to Numi: **5 met, 6 partially, 1 didn't** (G18, notify users about changes). The audit found things a usability review misses: the chat called itself a “nutrition assistant” when Numi deliberately avoids nutrition tracking; a message mentioned “your late meeting” from a calendar that was never connected; learning was invisible and impossible to reset; and swapping dinner silently used the chicken reserved for tomorrow's lunch.
+
+</div>
+<Steps items={[["Perceive", "Numi reads the receipt, photo or voice, and shows what it saw."], ["Propose", "It suggests a meal or a change. It never applies it silently."], ["Explain", "One line on why, and which data it used."], ["The person decides", "Accept, change or correct. Saying no costs the same as saying yes."], ["Learn", "Only after three matching signals, and visible in “What Numi knows”, where it can be forgotten."]]} />
+<div class="prose">
+
+That loop became a table of 10 behaviour rules for handoff, with four autonomy levels: the harder something is to undo, or the more sensitive, the less Numi does alone. Explicit feedback applies immediately; a declined permission isn't asked again for 30 days. It's an expert audit, not yet validated with users.
+
+</div>
+</Section>
+
+<Section n="08" id="access" label="Accessibility and ethics" title="Who gets left out, and what pushes without meaning to.">
+<div class="prose">
+
+I reviewed three key screens in light and dark mode: I measured 62 text and background pairs with the WCAG formula, checked every touch target against 44 pt, and walked through Dynamic Type, VoiceOver and Reduce Transparency. The fixed colours already passed. The problems were in what a colour list doesn't measure.
+
+</div>
+<Table head={["Problem", "Before", "After"]} rows={[["The tab bar loses contrast when content scrolls under it", "3.53:1 over a photo", "6.76:1, and a solid bar when Reduce Transparency is on"], ["“That's not right” was the only way to correct an inferred fact", "A 63 × 17 pt text link", "A 44 pt secondary button"], ["Time-of-day labels in 11 pt capitals", "4.66:1, passing by 0.16", "13 pt, sentence case, 5.97:1"], ["The swap button was only an icon", "VoiceOver: “Change, button”, three times", "“Change dinner: pumpkin soup”"], ["Meal cards break with large text", "Titles cut off", "Cards stack at accessibility sizes"]]} />
+<div class="prose">
+
+I also crossed the persona with permanent, temporary and situational limits: one hand in a cast, wet hands while cooking, glare in the greengrocer's, a noisy supermarket, a 65-year-old cooking for her family. That's where a cooking mode came from: screen always on, one step at a time, “Next” by voice.
+
+**No dark patterns, but pressure I hadn't noticed.** A message justified a lighter dinner “so you don't feel heavy”, which ties food to guilt. It now says “so you eat earlier and have more time to rest”. The goal “Eat healthier” promised no calorie counting, yet every card showed kcal; calories are now off by default. The streak had already become “active days this month”, which never resets.
+
+</div>
+</Section>
+
+<Section n="09" id="screens" label="The rest of the app" title="From first use to the weekly plan." d="standard">
+<div class="prose">
+
+Sign-in, a two-question profile, the weekly plan and a profile where every preference that feeds the suggestions can be edited on its own.
 
 </div>
 <Phones items={[
@@ -61,7 +137,7 @@ I started with problem framing and Crazy 8s, moved to low-fidelity flows and com
 ]} />
 </Section>
 
-<Section n="05" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Section n="10" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
 <Decisions>
 <Decision n="01" title="Refuse to read a bad receipt instead of returning a partial guess" ev="hypothesis" tradeoff="It's one more step for the user. A wrong item in the fridge silently ruins a week of plans.">
 Below a confidence bar, Numi asks for another photo or method and explains why.
@@ -69,5 +145,15 @@ Below a confidence bar, Numi asks for another photo or method and explains why.
 <Decision n="02" title="Label assumptions in place, not in a settings page" ev="hypothesis" tradeoff="Labels add noise to a summary screen. They're also the only way the user notices a wrong default before it shapes the plan.">
 When the user doesn't mention something — like their schedule — Numi fills a sensible default and marks it “assumed” right there.
 </Decision>
+<Decision n="03" title="Active days instead of a streak" ev="hypothesis" tradeoff="A streak is a stronger habit hook. It also punishes exactly the tired days Numi exists to help with.">
+“Active days this month” never resets, and it's never used in notifications.
+</Decision>
+<Decision n="04" title="Calories hidden by default" ev="hypothesis" tradeoff="Some people want the number. Showing it to everyone contradicts the promise of eating better without counting.">
+Calories can be turned on in Profile for whoever wants them.
+</Decision>
 </Decisions>
+</Section>
+
+<Section n="11" id="next" label="What's next" title="Not yet tested with users. Here's how I'd test it.">
+<Steps items={[["Load a receipt and fix a quantity", "Checks the editable review, the biggest problem the evaluation found."], ["Set up a profile with an allergy", "Checks that allergies can't be mixed with “None”."], ["“Why do you think Numi suggested this dinner?”", "A comprehension question to see if the one-line reasons actually land."], ["Suggestions accepted unchanged", "The share that people keep without editing, as a first signal of trust."]]} />
 </Section>
