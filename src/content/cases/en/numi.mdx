@@ -29,7 +29,11 @@ The risk in that idea is obvious. Reading a crumpled receipt or a photo of a she
 ]} />
 </Section>
 
-<Section n="02" id="input" label="Getting food in" title="Show what you read. Mark what you assumed.">
+<Section n="02" id="flow" label="The flow" title="What Numi reads, what it assumes, and what it won’t guess.">
+<Flow stages={[{"a": "hu", "t": "You add food", "n": "Scan a receipt, photograph a shelf or say what you bought."}, {"a": "ai", "t": "Numi reads it", "n": "Shows every item it read."}, {"k": "branch", "q": "Can it read it clearly?", "paths": [{"l": "Yes", "a": "ai", "t": "Added to your fridge", "n": "Anything it inferred is marked “assumed”."}, {"l": "No", "a": "ai", "t": "It refuses to guess", "n": "Asks you to retake the photo or type it."}]}, {"a": "ai", "t": "It plans around your day", "n": "A late meeting means a shorter dinner."}, {"a": "hu", "t": "You correct in one tap", "n": "Assumptions stay editable right where they appear."}]} />
+</Section>
+
+<Section n="03" id="input" label="Getting food in" title="Show what you read. Mark what you assumed.">
 <Phones items={[
   {src:"numi/receipt-review.png",alt:"Review of 8 items read from the receipt",label:"Receipt review"},
   {src:"numi/voice-summary.png",alt:"Summary of what Numi understood with the schedule marked as assumed",label:"What I understood",m:[[94,49.5,"<strong>“Assumed” is a label,</strong> not a hidden default."],[4,62,"<strong>Numi says why it assumed it</strong>, and that any item can be corrected with a tap."]]},
@@ -43,7 +47,7 @@ The risk in that idea is obvious. Reading a crumpled receipt or a photo of a she
 ]} />
 </Section>
 
-<Section n="03" id="process" label="Process" title="From Crazy 8s to an audited prototype." d="standard">
+<Section n="04" id="process" label="Process" title="From Crazy 8s to an audited prototype." d="standard">
 <div class="prose">
 
 I started with problem framing and Crazy 8s, moved to low-fidelity flows and compared three layout variants for the Today screen before going to high fidelity. With a working prototype, I audited every AI moment against Microsoft's **Human-AI interaction guidelines (HAX)** and redesigned the screens that fell short, with clearer explanations and easier ways to correct the AI.
@@ -57,7 +61,7 @@ I started with problem framing and Crazy 8s, moved to low-fidelity flows and com
 ]} />
 </Section>
 
-<Section n="04" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Section n="05" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
 <Decisions>
 <Decision n="01" title="Refuse to read a bad receipt instead of returning a partial guess" ev="hypothesis" tradeoff="It's one more step for the user. A wrong item in the fridge silently ruins a week of plans.">
 Below a confidence bar, Numi asks for another photo or method and explains why.

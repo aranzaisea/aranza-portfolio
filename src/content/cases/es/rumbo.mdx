@@ -50,7 +50,11 @@ Hice 20 entrevistas a conductores — las que permitía el plazo — además de 
 </Insights>
 </Section>
 
-<Section n="03" id="home" label="Home" title="Tus puntos, traducidos en cosas.">
+<Section n="03" id="flow" label="El flujo" title="Un solo circuito en la app: sumar con un escaneo, canjear en el catálogo.">
+<Flow stages={[{"a": "hu", "t": "El conductor paga", "n": "En el surtidor o dentro de la tienda."}, {"a": "hu", "t": "Un escaneo", "n": "En el surtidor o en el ticket. Sin depender del playero."}, {"a": "sys", "t": "Llegan los puntos", "n": "Traducidos a cosas: alcanza para un lavado y 4 cafés."}, {"a": "hu", "t": "Elige un premio", "n": "Del catálogo en la app."}, {"a": "sys", "t": "Un código en el mostrador", "n": "El playero lo escanea y se descuentan los puntos."}]} loop="Cada premio muestra cuánto falta para el próximo, así cada visita vuelve a empezar el circuito." caption="Antes del MVP, sumar dependía del playero y canjear pasaba fuera de la app, con un catálogo en PDF y validación en persona." />
+</Section>
+
+<Section n="04" id="home" label="Home" title="Tus puntos, traducidos en cosas.">
 <Phones items={[
   {src:"rumbo/s05.png",alt:"Home con 51.034 puntos, para qué alcanzan, tres acciones y puntos por vencer",label:"Home",m:[[94,28,"<strong>Puntos como cosas,</strong> no solo un número: alcanzan para un lavado completo y 4 cafés."],[6,41,"<strong>Las tres tareas, a un toque:</strong> pagar, cargar un ticket, canjear."],[4,52,"<strong>Los puntos por vencer aparecen</strong> en el Home, con en qué podrías usarlos."],[88,92.5,"<strong>Un solo botón de escaneo para todo,</strong> surtidor o ticket."]]},
   {src:"rumbo/s05b.png",alt:"Home de primera visita con regalo de bienvenida y cómo sumar puntos",label:"Primera visita"},
@@ -58,7 +62,7 @@ Hice 20 entrevistas a conductores — las que permitía el plazo — además de 
 ]} />
 </Section>
 
-<Section n="04" id="earn" label="Sumar" title="Un escaneo, pagues en el surtidor o adentro.">
+<Section n="05" id="earn" label="Sumar" title="Un escaneo, pagues en el surtidor o adentro.">
 <Phones items={[
   {src:"rumbo/s10.png",alt:"Escaneo del QR del surtidor",label:"Escanear QR"},
   {src:"rumbo/s11.png",alt:"Confirmar surtidor y monto con los puntos a sumar",label:"Confirmar y pagar"},
@@ -72,7 +76,7 @@ Hice 20 entrevistas a conductores — las que permitía el plazo — además de 
 ]} />
 </Section>
 
-<Section n="05" id="redeem" label="Canjear" title="Un catálogo en la app y un código que escanea el playero.">
+<Section n="06" id="redeem" label="Canjear" title="Un catálogo en la app y un código que escanea el playero.">
 <Phones items={[
   {src:"rumbo/s20.png",alt:"Catálogo de recompensas con saldo, filtros y lo que podés canjear ya",label:"Catálogo"},
   {src:"rumbo/s22b.png",alt:"Detalle de recompensa con puntos faltantes, progreso y guardar como meta",label:"No alcanzan los puntos",m:[[94,54,"<strong>Cuánto te falta,</strong> en puntos y porcentaje."],[4,60,"<strong>La distancia en la vida real:</strong> unas 6 cargas de tanque lleno."],[94,85,"<strong>Guardar como meta</strong> convierte un no en un motivo para volver."]]},
@@ -97,7 +101,7 @@ Hice 20 entrevistas a conductores — las que permitía el plazo — además de 
 ]} />
 </Section>
 
-<Section n="06" id="more" label="Actividad y perfil" title="Cada punto, a la vista." d="deep">
+<Section n="07" id="more" label="Actividad y perfil" title="Cada punto, a la vista." d="deep">
 <Phones items={[
   {src:"rumbo/s30.png",alt:"Actividad con movimientos sumados y canjeados",label:"Actividad"},
   {src:"rumbo/s30b.png",alt:"Actividad vacía",label:"Estado vacío"},
@@ -106,7 +110,7 @@ Hice 20 entrevistas a conductores — las que permitía el plazo — además de 
 ]} />
 </Section>
 
-<Section n="07" id="visual" label="Diseño visual" title="Tres direcciones, un sistema, dos plataformas." d="standard">
+<Section n="08" id="visual" label="Diseño visual" title="Tres direcciones, un sistema, dos plataformas." d="standard">
 <div class="prose">
 
 Exploramos tres direcciones visuales y elegimos una. Para este portafolio reconstruí la UI sobre **iOS 27 (Liquid Glass) y Android 17 (Material 3 Expressive)** con una base de variables: primitivos, temas semánticos claro y oscuro, tokens por plataforma y espaciado, más un UI kit con versión iOS y Android de cada componente. La paleta es nueva para que la marca original no se reconozca.
@@ -114,7 +118,7 @@ Exploramos tres direcciones visuales y elegimos una. Para este portafolio recons
 </div>
 </Section>
 
-<Section n="08" id="results" label="Resultado" title="Lanzado, sin números para mostrar.">
+<Section n="09" id="results" label="Resultado" title="Lanzado, sin números para mostrar.">
 <div class="prose">
 
 El MVP se lanzó en 2023. No tengo métricas del cliente, así que no las invento. Estos son los números que miraría: **proporción de cargas asociadas a una cuenta**, **proporción de socios que canjean al menos una vez**, **tiempo entre la primera suma y el primer canje** y **consultas a soporte sobre puntos**.
@@ -122,7 +126,7 @@ El MVP se lanzó en 2023. No tengo métricas del cliente, así que no las invent
 </div>
 </Section>
 
-<Section n="09" id="ai" label="Anexo · exploración personal" title="Una capa de IA que exploré, y por qué no se incluyó." d="standard">
+<Section n="10" id="ai" label="Anexo · exploración personal" title="Una capa de IA que exploré, y por qué no se incluyó." d="standard">
 <Note kind="ai" title="No es parte del producto">
 
 Por mi cuenta exploré búsqueda en lenguaje natural (“algo para los chicos por menos de 500 puntos”) y contenido que se adapta a los hábitos de cada conductor. Lo dejé afuera: en un MVP de un mes, para un programa que la gente todavía no entendía, la prioridad era hacer visible el ciclo básico. La búsqueda, los filtros y las recomendaciones por reglas cubrían la necesidad con menos riesgo.

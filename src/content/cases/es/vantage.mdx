@@ -30,11 +30,15 @@ El problema de diseño era el resto. En compliance, **un control faltante que pa
 </Insights>
 </Section>
 
-<Section n="02" id="inbox" label="Triage" title="Una bandeja que muestra qué hizo cada agente.">
+<Section n="02" id="flow" label="El flujo" title="Agentes en un orden fijo. Un analista con nombre al final.">
+<Flow stages={[{"a": "sys", "t": "Llega una alerta", "n": "Actividad marcada para revisar, con un SLA."}, {"a": "ai", "t": "Agente de Contexto", "n": "Trae transacciones y datos del cliente del core bancario."}, {"k": "branch", "q": "¿Contexto terminó?", "paths": [{"l": "Sí", "a": "ai", "t": "Corren Riesgo y Regulatorio", "n": "Riesgo puntúa el caso; Regulatorio revisa listas de sanciones y PEP."}, {"l": "No", "a": "hu", "t": "El caso se frena y explica por qué", "n": "Los demás agentes esperan. El analista lo destraba o lo trabaja a mano."}]}, {"a": "ai", "t": "Agente de Redacción", "n": "Escribe la recomendación. Hace una pregunta si una coincidencia de entidad no es clara."}, {"k": "branch", "q": "¿Qué tan riesgoso es?", "paths": [{"l": "Estándar", "a": "hu", "t": "El analista revisa y firma", "n": "Cada decisión lleva un nombre."}, {"l": "Bajo", "a": "hu", "t": "Firma en lote", "n": "Solo después de revisar una muestra al azar. Una marca pausa el lote."}]}]} />
+</Section>
+
+<Section n="03" id="inbox" label="Triage" title="Una bandeja que muestra qué hizo cada agente.">
 <Shot src="vantage/inbox.jpg" title="Bandeja · triage L1" alt="Bandeja de alertas con progreso por agente, severidad, SLA y un aviso de casos pre-aprobados" m={[[13,10.5,"<strong>La próxima acción, en una línea:</strong> hay 62 casos pre-aprobados listos, pero primero el caso Crítico."],[52,31,"<strong>Cuatro puntos, cuatro agentes.</strong> El orden es siempre Contexto → Riesgo → Regulatorio → Redacción, así se ve de un vistazo dónde está trabado un caso."],[59,65,"<strong>Las fallas se destacan</strong> en la lista, antes de abrir el caso."],[26,98,"<strong>La regla está en el pie:</strong> los agentes reúnen y verifican, nunca cierran, reportan ni firman."]]} />
 </Section>
 
-<Section n="03" id="case" label="Detalle del caso" title="Cuando un agente falla, el caso lo dice y se detiene.">
+<Section n="04" id="case" label="Detalle del caso" title="Cuando un agente falla, el caso lo dice y se detiene.">
 <Shot src="vantage/case-context-failed.jpg" title="Detalle · falló Contexto" alt="Caso donde el agente de Contexto no pudo conectarse al core bancario; los demás esperan y la decisión está bloqueada" m={[[5,26,"<strong>La ejecución como mapa.</strong> Contexto falló con 0 de 5 fuentes, y los agentes que dependen de él esperan a la vista."],[70.6,30,"<strong>Qué falló, en palabras simples,</strong> con cada intento y su tiempo de espera."],[70.6,42,"<strong>Sin puntaje parcial.</strong> Un agente que falla no devuelve nada, así nada se confunde con un “sin hallazgos”."],[70.6,52,"<strong>Dos caminos:</strong> reintentar, o cargar las transacciones a mano y destrabar al resto."],[74,87.5,"<strong>La decisión queda bloqueada</strong> hasta que terminan los cuatro agentes, y dice quién aprueba los casos Críticos."]]} />
 <Grid cols={2} d="standard">
 <Shot src="vantage/case-partial.jpg" title="Regulatorio parcial" alt="Caso donde el agente Regulatorio revisó solo algunas listas" />
@@ -42,7 +46,7 @@ El problema de diseño era el resto. En compliance, **un control faltante que pa
 </Grid>
 </Section>
 
-<Section n="04" id="batch" label="Firma por lote" title="Firmar 62 casos de una vez, después de revisar tres.">
+<Section n="05" id="batch" label="Firma por lote" title="Firmar 62 casos de una vez, después de revisar tres.">
 <div class="prose">
 
 La mayoría de las alertas son de bajo riesgo y una regla las pre-aprueba. Firmarlas de a una desperdicia la atención de la analista; firmarlas a ciegas no tiene sentido. El flujo de lote pide revisar primero una muestra al azar. Si una muestra se ve mal, se detiene todo el lote.
@@ -59,7 +63,7 @@ La mayoría de las alertas son de bajo riesgo y una regla las pre-aprueba. Firma
 </Grid>
 </Section>
 
-<Section n="05" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
+<Section n="06" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
 <Decisions>
 <Decision n="01" title="Orden fijo de agentes en lugar de ejecuciones en paralelo" tradeoff="Correr todo en paralelo sería más rápido en los días buenos. Un orden fijo hace que todos los casos se lean igual y deja claro por qué un agente está esperando.">
 Riesgo y Regulatorio arrancan solo cuando Contexto tiene las transacciones. Si Contexto falla, esperan en lugar de dar resultados con datos incompletos.
@@ -73,7 +77,7 @@ La analista elige qué sigue, y el motivo le llega a quien mantiene la regla com
 </Decisions>
 </Section>
 
-<Section n="06" id="results" label="Resultado" title="Lanzado, sin números para mostrar.">
+<Section n="07" id="results" label="Resultado" title="Lanzado, sin números para mostrar.">
 <div class="prose">
 
 Vantage se lanzó en 2025. No tengo métricas del cliente, así que no las invento. Si lo midiera, seguiría **el tiempo de la alerta a la decisión**, **la proporción de casos resueltos por lote**, **cada cuánto se marcan muestras** (una señal de que una regla necesita ajustes) y **la tasa de falla de los agentes por fuente**.

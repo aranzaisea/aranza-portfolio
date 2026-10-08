@@ -20,7 +20,7 @@ Mandar un resumen a un canal de Slack y cambiar la etapa de una oportunidad en e
 Seguí un pedido a lo largo de todo el producto — Priya, gerenta de operaciones, le pide a Relay el borrador del update del Q3 para dirección y que lo publique — más una automatización que choca con un límite. Cada pantalla de abajo pertenece a una de esas dos historias.
 
 </div>
-<Steps items={[["Definir la política","El admin elige por categoría: solo borrador, enviar con revisión o autonomía total, con límites."],["Planificar","Para cada pedido, Relay lista sus pasos, las herramientas que toca y los que quedan fuera de la política."],["Ejecutar a la vista","La ejecución es en vivo, cada paso queda registrado y la persona puede frenar y deshacer en cualquier momento."],["Auditar y explicar","Cada acción, hecha o bloqueada, queda registrada con la regla que la permitió o la frenó."]]} />
+<Flow stages={[{"a": "hu", "t": "Una persona pide algo", "n": "O se dispara una automatización."}, {"a": "ai", "t": "Relay propone un plan", "n": "Qué herramientas lee y escribe, en nombre de quién actúa, qué pasos quedan fuera de la política."}, {"a": "hu", "t": "La persona aprueba el plan", "n": "Nada se ejecuta antes."}, {"k": "branch", "q": "¿El paso está dentro de la política?", "paths": [{"l": "Sí", "a": "ai", "t": "Se ejecuta y se registra", "n": "Frenar y deshacer quedan a un clic."}, {"l": "No", "a": "hu", "t": "Se frena y pide a una persona", "n": "Aprobar una vez, editar, derivar o, como admin, cambiar la regla."}]}, {"a": "sys", "t": "Registro y centro de confianza", "n": "Cada acción, hecha o bloqueada, con la regla detrás."}]} />
 </Section>
 
 <Section n="02" id="home" label="Inicio" title="Un solo lugar para lo que hizo Relay y lo que te espera.">

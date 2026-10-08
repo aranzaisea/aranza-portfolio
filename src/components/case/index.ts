@@ -12,3 +12,4 @@ export { default as Steps } from './Steps.astro';
 export { default as Metrics } from './Metrics.astro';
 export { default as Grid } from './Grid.astro';
 export { default as Video } from './Video.astro';
+export { default as Flow } from './Flow.astro';

@@ -29,7 +29,11 @@ El riesgo de esa idea es evidente. Leer un ticket arrugado o la foto de un estan
 ]} />
 </Section>
 
-<Section n="02" id="input" label="Cargar la comida" title="Mostrar qué leyó. Marcar qué supuso.">
+<Section n="02" id="flow" label="El flujo" title="Qué lee Numi, qué supone y qué no adivina.">
+<Flow stages={[{"a": "hu", "t": "Cargás comida", "n": "Escaneás un ticket, sacás una foto de un estante o decís qué compraste."}, {"a": "ai", "t": "Numi lo lee", "n": "Muestra cada ítem que leyó."}, {"k": "branch", "q": "¿Se lee con claridad?", "paths": [{"l": "Sí", "a": "ai", "t": "Entra a tu heladera", "n": "Lo que dedujo queda marcado como “supuesto”."}, {"l": "No", "a": "ai", "t": "No adivina", "n": "Te pide otra foto o que lo escribas."}]}, {"a": "ai", "t": "Planifica según tu día", "n": "Una reunión tarde significa una cena más corta."}, {"a": "hu", "t": "Corregís con un toque", "n": "Los supuestos se editan ahí mismo donde aparecen."}]} />
+</Section>
+
+<Section n="03" id="input" label="Cargar la comida" title="Mostrar qué leyó. Marcar qué supuso.">
 <Phones items={[
   {src:"numi/receipt-review.png",alt:"Revisión de 8 productos leídos del ticket",label:"Revisar el ticket"},
   {src:"numi/voice-summary.png",alt:"Resumen de lo que Numi entendió con el horario marcado como supuesto",label:"Lo que entendí",m:[[94,49.5,"<strong>“Supuesto” es una etiqueta,</strong> no un valor por defecto escondido."],[4,62,"<strong>Numi dice por qué lo supuso</strong>, y que cualquier dato se corrige con un toque."]]},
@@ -43,7 +47,7 @@ El riesgo de esa idea es evidente. Leer un ticket arrugado o la foto de un estan
 ]} />
 </Section>
 
-<Section n="03" id="process" label="Proceso" title="De Crazy 8s a un prototipo auditado." d="standard">
+<Section n="04" id="process" label="Proceso" title="De Crazy 8s a un prototipo auditado." d="standard">
 <div class="prose">
 
 Empecé con el encuadre del problema y Crazy 8s, pasé a flujos de baja fidelidad y comparé tres variantes de layout para la pantalla Hoy antes de ir a alta fidelidad. Con el prototipo funcionando, audité cada momento de IA contra las **pautas de interacción humano-IA de Microsoft (HAX)** y rediseñé las pantallas que no las cumplían, con explicaciones más claras y formas más simples de corregir a la IA.
@@ -57,7 +61,7 @@ Empecé con el encuadre del problema y Crazy 8s, pasé a flujos de baja fidelida
 ]} />
 </Section>
 
-<Section n="04" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
+<Section n="05" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
 <Decisions>
 <Decision n="01" title="No leer un ticket malo en lugar de devolver una lectura parcial" ev="hypothesis" tradeoff="Es un paso más para la persona. Un producto equivocado en la heladera arruina en silencio una semana de planes.">
 Debajo de cierto nivel de confianza, Numi pide otra foto u otro método y explica por qué.

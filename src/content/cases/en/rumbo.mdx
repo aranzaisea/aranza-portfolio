@@ -50,7 +50,11 @@ I ran 20 interviews with drivers — as many as the timeline allowed — plus wo
 </Insights>
 </Section>
 
-<Section n="03" id="home" label="Home" title="Your points, translated into things.">
+<Section n="03" id="flow" label="The flow" title="One loop inside the app: earn in one scan, redeem in the catalog.">
+<Flow stages={[{"a": "hu", "t": "The driver pays", "n": "At the pump or inside the store."}, {"a": "hu", "t": "One scan", "n": "At the pump or on the receipt. No attendant needed."}, {"a": "sys", "t": "Points land", "n": "Translated into things: enough for a car wash and 4 coffees."}, {"a": "hu", "t": "Picks a reward", "n": "From the catalog in the app."}, {"a": "sys", "t": "A code at the counter", "n": "The attendant scans it and the points are deducted."}]} loop="Every reward shows how far you are from the next one, so each visit starts the loop again." caption="Before the MVP, earning depended on the attendant and redeeming happened outside the app, with a PDF catalog and in-person validation." />
+</Section>
+
+<Section n="04" id="home" label="Home" title="Your points, translated into things.">
 <Phones items={[
   {src:"rumbo/s05.png",alt:"Home with 51,034 points, what they're enough for, three actions and expiring points",label:"Home",m:[[94,28,"<strong>Points as things,</strong> not just a number: enough for a full car wash and 4 coffees."],[6,41,"<strong>The three jobs, one tap away:</strong> pay, add a receipt, redeem."],[4,52,"<strong>Expiring points surface</strong> on Home, with what you could use them on."],[88,92.5,"<strong>One scan button for everything,</strong> pump or receipt."]]},
   {src:"rumbo/s05b.png",alt:"First visit home with a welcome gift and how to earn points",label:"First visit"},
@@ -58,7 +62,7 @@ I ran 20 interviews with drivers — as many as the timeline allowed — plus wo
 ]} />
 </Section>
 
-<Section n="04" id="earn" label="Earn" title="One scan, whether you pay at the pump or inside.">
+<Section n="05" id="earn" label="Earn" title="One scan, whether you pay at the pump or inside.">
 <Phones items={[
   {src:"rumbo/s10.png",alt:"Scanning the pump's QR code",label:"Scan pump QR"},
   {src:"rumbo/s11.png",alt:"Confirm pump and amount with points to earn",label:"Confirm & pay"},
@@ -72,7 +76,7 @@ I ran 20 interviews with drivers — as many as the timeline allowed — plus wo
 ]} />
 </Section>
 
-<Section n="05" id="redeem" label="Redeem" title="A catalog in the app, and a code the attendant scans.">
+<Section n="06" id="redeem" label="Redeem" title="A catalog in the app, and a code the attendant scans.">
 <Phones items={[
   {src:"rumbo/s20.png",alt:"Rewards catalog with balance, filters and rewards you can redeem now",label:"Catalog"},
   {src:"rumbo/s22b.png",alt:"Reward detail showing points to go, progress and save as goal",label:"Not enough points",m:[[94,54,"<strong>How far you are,</strong> in points and percent."],[4,60,"<strong>Distance in real life:</strong> about 6 full-tank fill-ups."],[94,85,"<strong>Save as goal</strong> turns a no into a reason to come back."]]},
@@ -97,7 +101,7 @@ I ran 20 interviews with drivers — as many as the timeline allowed — plus wo
 ]} />
 </Section>
 
-<Section n="06" id="more" label="Activity and profile" title="Every point accounted for." d="deep">
+<Section n="07" id="more" label="Activity and profile" title="Every point accounted for." d="deep">
 <Phones items={[
   {src:"rumbo/s30.png",alt:"Activity with earned and redeemed movements",label:"Activity"},
   {src:"rumbo/s30b.png",alt:"Empty activity state",label:"Empty state"},
@@ -106,7 +110,7 @@ I ran 20 interviews with drivers — as many as the timeline allowed — plus wo
 ]} />
 </Section>
 
-<Section n="07" id="visual" label="Visual design" title="Three directions, one system, two platforms." d="standard">
+<Section n="08" id="visual" label="Visual design" title="Three directions, one system, two platforms." d="standard">
 <div class="prose">
 
 We explored three visual directions and chose one. For this portfolio I rebuilt the UI on **iOS 27 (Liquid Glass) and Android 17 (Material 3 Expressive)** with a variable-based foundation: primitives, semantic light and dark themes, platform tokens and spacing, plus a UI kit with iOS and Android versions of each component. The palette is new so the original brand isn't recognizable.
@@ -114,7 +118,7 @@ We explored three visual directions and chose one. For this portfolio I rebuilt 
 </div>
 </Section>
 
-<Section n="08" id="results" label="Outcome" title="Launched, without numbers to show.">
+<Section n="09" id="results" label="Outcome" title="Launched, without numbers to show.">
 <div class="prose">
 
 The MVP launched in 2023. I don't have metrics from the client, so I won't invent them. These are the numbers I'd watch: **share of fill-ups linked to an account**, **share of members who redeem at least once**, **time from first earn to first redeem**, and **support requests about points**.
@@ -122,7 +126,7 @@ The MVP launched in 2023. I don't have metrics from the client, so I won't inven
 </div>
 </Section>
 
-<Section n="09" id="ai" label="Appendix · personal exploration" title="An AI layer I explored, and why it didn't ship." d="standard">
+<Section n="10" id="ai" label="Appendix · personal exploration" title="An AI layer I explored, and why it didn't ship." d="standard">
 <Note kind="ai" title="Not part of the product">
 
 On my own, I explored natural-language search ("something for the kids under 500 points") and content that adapts to each driver's habits. I left it out: in a one-month MVP for a program people didn't understand yet, the priority was making the basic loop visible. Search, filters and rule-based recommendations covered the need with less risk.

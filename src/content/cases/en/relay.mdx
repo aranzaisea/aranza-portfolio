@@ -20,7 +20,7 @@ Sending a summary to a Slack channel and updating a deal stage in the CRM are bo
 I followed one request through the whole product — Priya, an ops manager, asks Relay to draft the Q3 update for the exec team and post it — plus one automation that hits a limit. Every screen below belongs to one of those two stories.
 
 </div>
-<Steps items={[["Set the policy","Admins choose per category: draft only, send with review, or full autonomy, with limits."],["Plan","For each request, Relay lists its steps, the tools it touches and the ones outside the policy."],["Run, visibly","Execution is live, each step is logged and the person can stop and undo at any point."],["Audit and explain","Every action, done or blocked, is logged with the rule that allowed or stopped it."]]} />
+<Flow stages={[{"a": "hu", "t": "A person asks", "n": "Or an automation triggers."}, {"a": "ai", "t": "Relay proposes a plan", "n": "Tools it reads and writes, whose name it acts in, steps outside the policy."}, {"a": "hu", "t": "The person approves the plan", "n": "Nothing runs before this."}, {"k": "branch", "q": "Is the step inside the policy?", "paths": [{"l": "Yes", "a": "ai", "t": "It runs, logged live", "n": "Stop and undo stay one click away."}, {"l": "No", "a": "hu", "t": "It stops and asks a person", "n": "Approve once, edit, hand off or, as an admin, change the rule."}]}, {"a": "sys", "t": "Audit log and trust center", "n": "Every action, done or blocked, with the rule behind it."}]} />
 </Section>
 
 <Section n="02" id="home" label="Home" title="One place for what Relay did, and what's waiting for you.">

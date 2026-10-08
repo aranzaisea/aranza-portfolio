@@ -39,7 +39,11 @@ The goal was to remove that dependency: **a self-service Business platform with 
 </Insights>
 </Section>
 
-<Section n="03" id="requester" label="Requester · catalog and cart" title="Recommendations that show their reason.">
+<Section n="03" id="flow" label="The flow" title="The AI recommends and checks. People buy and approve.">
+<Flow stages={[{"a": "hu", "t": "The requester builds a cart", "n": "From the catalog, saved lists or recurring orders."}, {"a": "ai", "t": "The AI optimizes the cart", "n": "Suggests swaps and savings with the math. Never swaps silently."}, {"a": "ai", "t": "The AI prepares a verdict", "n": "A recommendation with confidence, budget impact and policy checks."}, {"k": "branch", "q": "The approver decides", "paths": [{"l": "Approve", "a": "hu", "t": "The order is placed", "n": "In one click, with the evidence in front of them."}, {"l": "With changes", "a": "hu", "t": "Edits, then approves", "n": "Approve with changes is a first-class option."}, {"l": "Reject", "a": "hu", "t": "Back to the requester", "n": "With a reason, under “Needs changes”."}]}, {"a": "sys", "t": "Logged and reported", "n": "Every decision feeds the audit log and spend analytics."}]} />
+</Section>
+
+<Section n="04" id="requester" label="Requester · catalog and cart" title="Recommendations that show their reason.">
 <Shot src="offdep/plp.jpg" title="Catalog · recommended for Marketing" alt="Product listing with a restock alert, live budget bar, AI filters and labelled AI picks" m={[[20,13.5,"<strong>A heads-up, not an auto-order.</strong> The AI flags items likely to run out, based on the team's ordering pattern, and the buyer decides."],[30,19,"<strong>Budget above the fold</strong>, so every price is read against what's left."],[58,46,"<strong>Each AI pick says why:</strong> ordered every month, best price, low stock."]]} />
 <Shot src="offdep/smart-cart.jpg" title="Smart cart optimization" alt="Cart with three savings suggestions, the math behind each one, budget and policy check" m={[[20.5,16,"<strong>Nothing changes until you apply it.</strong> The banner sums up the savings; each suggestion can be applied or skipped."],[22,74,"<strong>The math is on the card:</strong> 10 × $79.90 → 12 × $72.50, so the buyer can check it in a second."],[74,43,"<strong>Budget after this order</strong>, not just before."],[74,51,"<strong>Policy check before submitting</strong>, including what will need approval and why."]]} />
 <Grid cols={2} d="standard">
@@ -52,7 +56,7 @@ The goal was to remove that dependency: **a self-service Business platform with 
 </Grid>
 </Section>
 
-<Section n="04" id="approver" label="Approver · AI-assisted approvals" title="One click, with the evidence in front of you.">
+<Section n="05" id="approver" label="Approver · AI-assisted approvals" title="One click, with the evidence in front of you.">
 <div class="prose">
 
 Each order arrives with a recommendation, its confidence and the three checks an approver cares about: budget, price and compliance.
@@ -65,12 +69,12 @@ Each order arrives with a recommendation, its confidence and the three checks an
 </Grid>
 </Section>
 
-<Section n="05" id="copilot" label="AI purchase assistant" title="A copilot that knows what it can't see.">
+<Section n="06" id="copilot" label="AI purchase assistant" title="A copilot that knows what it can't see.">
 <Shot src="offdep/copilot.jpg" title="AI purchase assistant" alt="Assistant panel suggesting approved alternatives and drafting a recurring order" m={[[76,12.5,"<strong>Only approved alternatives</strong>, with the saving and the quality standard they meet."],[76,41,"<strong>Every answer cites its data:</strong> catalog plus the team's last six paper orders."],[80,75,"<strong>It prepares, the buyer creates.</strong> A recurring order is a proposal with Edit items next to it."]]} />
 <Shot src="offdep/low-confidence.jpg" title="Low confidence and no access" alt="Assistant refusing to show another department's spend and declining to recommend a supplier at 41% confidence" m={[[73.4,29,"<strong>Permissions are part of the answer.</strong> The assistant says what the role can see and offers to request access."],[95,54,"<strong>41% is said out loud.</strong> Below the bar, it explains why and doesn't recommend."],[86,72,"<strong>What it can do instead</strong>, as concrete next steps."],[83,86.5,"<strong>Nothing was ordered or changed</strong>, stated after every non-action."]]} />
 </Section>
 
-<Section n="06" id="admin" label="Admin and analytics" title="Visibility for procurement leaders.">
+<Section n="07" id="admin" label="Admin and analytics" title="Visibility for procurement leaders.">
 <Shot src="offdep/spend-analytics.jpg" title="Spend analytics" alt="Spend analytics with AI insights, anomaly detection and a quarterly forecast" />
 <Grid cols={2} d="standard">
 <Shot src="offdep/budgets.jpg" title="Budgets and policies" alt="Admin page for budgets and purchasing policies" />
@@ -82,7 +86,7 @@ Each order arrives with a recommendation, its confidence and the three checks an
 </Grid>
 </Section>
 
-<Section n="07" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Section n="08" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
 <Decisions>
 <Decision n="01" title="Keep the classic e-commerce flow and add AI inside it" ev="shipped" tradeoff="A chat-first experience would have been more novel. Buyers already knew how to shop; we put the AI where they were already looking.">
 Catalog, cart and checkout work exactly as people expect. The AI shows up as labelled picks, savings cards and a verdict, never as a gate.
@@ -96,7 +100,7 @@ Approvers can accept the AI's substitution, approve the original, or reject with
 </Decisions>
 </Section>
 
-<Section n="08" id="results" label="Results" title="Business accounts became a growth channel.">
+<Section n="09" id="results" label="Results" title="Business accounts became a growth channel.">
 <Metrics items={[{v:"+65%",l:"Business accounts created"},{v:"+56%",l:"B2B sales growth"},{v:"+47%",l:"account retention"}]} />
 <div class="prose">
 

@@ -1,0 +1,84 @@
+---
+// User flow drawn in HTML/CSS so text wraps in any language and never overflows.
+// Desktop (≥ 1180px, ≥ 1300px for 6+ stages): stages in a row with → arrows. Below: a vertical list with ↓ arrows.
+type Actor = 'ai' | 'hu' | 'sys';
+type Node = { a: Actor; t: string; n?: string };
+type Path = Node & { l: string };
+type Stage = (Node & { k?: 'step' }) | { k: 'branch'; q: string; paths: Path[] };
+interface Props { stages: Stage[]; loop?: string; caption?: string; d?: 'standard' | 'deep' }
+const { stages, loop, caption, d } = Astro.props;
+const es = Astro.url.pathname.startsWith('/es/');
+const NAMES: Record<Actor, string> = es ? { ai: 'IA', hu: 'Persona', sys: 'Sistema' } : { ai: 'AI', hu: 'Person', sys: 'System' };
+const used = new Set<Actor>();
+for (const s of stages) { if ('paths' in s) s.paths.forEach((p) => used.add(p.a)); else used.add(s.a); }
+const order: Actor[] = ['ai', 'hu', 'sys'];
+---
+<figure class:list={["flow", { "flow--long": stages.length >= 6 }]} data-d={d} style={`--cols:${stages.length}`}>
+  <p class="flow__legend">
+    {order.filter((a) => used.has(a)).map((a) => <span class={`flow__key flow__key--${a}`}><i></i>{NAMES[a]}</span>)}
+  </p>
+  <ol class="flow__row">
+    {stages.map((s, i) => (
+      <li class="flow__st">
+        {'paths' in s ? (
+          <div class="flow__br">
+            <p class="flow__q"><span class="flow__dia" aria-hidden="true"></span>{s.q}</p>
+            {s.paths.map((p) => (
+              <div class={`flow__node flow__node--${p.a}`}>
+                <span class="flow__l">{p.l}</span>
+                <span class="flow__a">{NAMES[p.a]}</span>
+                <strong class="flow__t">{p.t}</strong>
+                {p.n && <span class="flow__n">{p.n}</span>}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div class={`flow__node flow__node--${s.a}`}>
+            <span class="flow__i mono">{String(i + 1).padStart(2, '0')}</span>
+            <span class="flow__a">{NAMES[s.a]}</span>
+            <strong class="flow__t">{s.t}</strong>
+            {s.n && <span class="flow__n">{s.n}</span>}
+          </div>
+        )}
+      </li>
+    ))}
+  </ol>
+  {loop && <p class="flow__loop"><span aria-hidden="true">↺</span> {loop}</p>}
+  {caption && <figcaption class="flow__cap">{caption}</figcaption>}
+</figure>
+<style>
+  .flow{margin:0;border:1px solid var(--line);border-radius:18px;background:var(--bg-deep);padding:clamp(18px,2.4vw,32px);min-width:0}
+  .flow__legend{display:flex;flex-wrap:wrap;gap:16px;margin:0 0 22px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .flow__key{display:inline-flex;align-items:center;gap:7px}
+  .flow__key i{width:10px;height:10px;border-radius:3px;display:block}
+  .flow__key--ai i{background:var(--ai)} .flow__key--hu i{background:var(--human)} .flow__key--sys i{background:var(--ink-faint)}
+  .flow__row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:30px;align-items:center}
+  .flow__st{position:relative;min-width:0}
+  .flow__st:not(:last-child)::after{content:"→";position:absolute;right:-23px;top:50%;transform:translateY(-50%);color:var(--ink-faint);font-size:16px;line-height:1}
+  .flow__node{position:relative;display:flex;flex-direction:column;gap:5px;padding:13px 14px 14px;border:1px solid var(--line);border-left-width:3px;border-radius:10px;background:var(--panel-2);min-width:0}
+  .flow__node--ai{border-left-color:var(--ai)} .flow__node--hu{border-left-color:var(--human)} .flow__node--sys{border-left-color:var(--ink-faint)}
+  .flow__i{position:absolute;top:12px;right:12px;font-size:11px;color:var(--ink-faint)}
+  .flow__a{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500}
+  .flow__node--ai .flow__a{color:var(--ai)} .flow__node--hu .flow__a{color:var(--human)} .flow__node--sys .flow__a{color:var(--ink-faint)}
+  .flow__t{font-size:15px;line-height:1.3;font-weight:600;color:var(--ink);overflow-wrap:anywhere}
+  .flow__n{font-size:13px;line-height:1.45;color:var(--ink-soft);overflow-wrap:anywhere}
+  .flow__br{display:flex;flex-direction:column;gap:10px}
+  .flow__q{display:flex;align-items:center;gap:8px;margin:0;font-family:var(--mono);font-size:12px;line-height:1.35;color:var(--ink-2)}
+  .flow__dia{flex:none;width:9px;height:9px;transform:rotate(45deg);border:1.5px solid var(--ink-soft)}
+  .flow__l{align-self:flex-start;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px;border:1px solid var(--line-strong);color:var(--ink-2)}
+  .flow__loop{margin:22px 0 0;font-size:14px;color:var(--ink-soft)}
+  .flow__loop span{color:var(--ai);margin-right:4px}
+  .flow__cap{margin:18px 0 0;font-size:14px;color:var(--ink-faint);max-width:80ch}
+  @media (max-width:1179px){
+    .flow__row{grid-template-columns:minmax(0,1fr);gap:30px;max-width:560px}
+    .flow__st:not(:last-child)::after{content:"↓";right:auto;left:22px;top:auto;bottom:-23px;transform:none}
+    .flow__br{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+    .flow__q{grid-column:1/-1}
+  }
+  @media (max-width:1299px){
+    .flow--long .flow__row{grid-template-columns:minmax(0,1fr);gap:30px;max-width:560px}
+    .flow--long .flow__st:not(:last-child)::after{content:"↓";right:auto;left:22px;top:auto;bottom:-23px;transform:none}
+    .flow--long .flow__br{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+    .flow--long .flow__q{grid-column:1/-1}
+  }
+</style>

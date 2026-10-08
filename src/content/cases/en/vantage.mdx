@@ -30,11 +30,15 @@ The design problem was the rest. In compliance, **a missing check that looks lik
 </Insights>
 </Section>
 
-<Section n="02" id="inbox" label="Triage" title="An inbox that shows what each agent has done.">
+<Section n="02" id="flow" label="The flow" title="Agents in a fixed order. A named analyst at the end.">
+<Flow stages={[{"a": "sys", "t": "An alert arrives", "n": "Activity flagged for review, with an SLA."}, {"a": "ai", "t": "Context agent", "n": "Pulls transactions and customer data from core banking."}, {"k": "branch", "q": "Did Context finish?", "paths": [{"l": "Yes", "a": "ai", "t": "Risk and Regulatory run", "n": "Risk scores the case; Regulatory checks sanctions and PEP lists."}, {"l": "No", "a": "hu", "t": "The case stops and says why", "n": "The other agents wait. The analyst unblocks it or works it manually."}]}, {"a": "ai", "t": "Drafting agent", "n": "Writes the recommendation. Asks one question if an entity match is unclear."}, {"k": "branch", "q": "How risky is it?", "paths": [{"l": "Standard", "a": "hu", "t": "The analyst reviews and signs", "n": "Every decision carries a name."}, {"l": "Low", "a": "hu", "t": "Batch sign-off", "n": "Only after a random sample is reviewed. One flag pauses the batch."}]}]} />
+</Section>
+
+<Section n="03" id="inbox" label="Triage" title="An inbox that shows what each agent has done.">
 <Shot src="vantage/inbox.jpg" title="Inbox · L1 triage" alt="Inbox of AML alerts with per-agent progress, severity, SLA and a banner for a batch of pre-cleared cases" m={[[13,10.5,"<strong>The next best action, in one line:</strong> 62 pre-cleared cases are ready, but handle the Critical case first."],[52,31,"<strong>Four dots, four agents.</strong> The run order is always Context → Risk → Regulatory → Drafting, so a glance tells you where a case is stuck."],[59,65,"<strong>Failures stand out</strong> in the list, before anyone opens the case."],[26,98,"<strong>The rule is in the footer:</strong> agents gather and check, they never close, file or sign a case."]]} />
 </Section>
 
-<Section n="03" id="case" label="Case detail" title="When an agent fails, the case says so, and stops.">
+<Section n="04" id="case" label="Case detail" title="When an agent fails, the case says so, and stops.">
 <Shot src="vantage/case-context-failed.jpg" title="Case detail · Context failed" alt="Case where the Context agent failed to reach core banking; the other agents wait and the decision is locked" m={[[5,26,"<strong>The run as a map.</strong> Context failed with 0 of 5 sources, and the agents that depend on it visibly wait."],[70.6,30,"<strong>What failed, in plain words,</strong> with each attempt and its time-out."],[70.6,42,"<strong>No partial score.</strong> A failed agent returns nothing, so nothing can be mistaken for a clear."],[70.6,52,"<strong>Two ways forward:</strong> retry, or load the transactions manually and unblock the rest."],[74,87.5,"<strong>The decision stays locked</strong> until all four agents finish, and says who approves Critical cases."]]} />
 <Grid cols={2} d="standard">
 <Shot src="vantage/case-partial.jpg" title="Regulatory partial" alt="Case where the Regulatory agent checked only some lists" />
@@ -42,7 +46,7 @@ The design problem was the rest. In compliance, **a missing check that looks lik
 </Grid>
 </Section>
 
-<Section n="04" id="batch" label="Batch sign-off" title="Sign 62 cases at once, after checking three.">
+<Section n="05" id="batch" label="Batch sign-off" title="Sign 62 cases at once, after checking three.">
 <div class="prose">
 
 Most alerts are low risk and pre-cleared by a rule. Signing them one by one wastes the analyst's attention; signing them blind defeats the point. The batch flow asks the analyst to review a random sample first. If one sample looks wrong, the whole batch stops.
@@ -59,7 +63,7 @@ Most alerts are low risk and pre-cleared by a rule. Signing them one by one wast
 </Grid>
 </Section>
 
-<Section n="05" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
+<Section n="06" id="tradeoffs" label="Key trade-offs" title="The tensions behind the design.">
 <Decisions>
 <Decision n="01" title="Fixed agent order instead of parallel runs" tradeoff="Running everything in parallel would be faster on good days. A fixed order makes every case read the same way and makes it obvious why an agent is waiting.">
 Risk and Regulatory start only when Context has the transactions. If Context fails, they wait instead of producing results on incomplete data.
@@ -73,7 +77,7 @@ The analyst chooses what happens next, and the reason goes to the rule owner as 
 </Decisions>
 </Section>
 
-<Section n="06" id="results" label="Outcome" title="Launched, without numbers to show.">
+<Section n="07" id="results" label="Outcome" title="Launched, without numbers to show.">
 <div class="prose">
 
 Vantage launched in 2025. I don't have metrics from the client, so I won't invent them. If I were measuring it, I'd track **time from alert to decision**, **share of cases cleared by batch**, **how often samples are flagged** (a signal that a rule needs work) and **agent failure rate by source**.
