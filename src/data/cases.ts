@@ -23,7 +23,7 @@ const ALL_CASES: CaseMeta[] = [
     role: { en: 'Product Designer', es: 'Product Designer' }, year: '2024–25',
     where: { en: 'at Perficient', es: 'en Perficient' },
     cover: 'cases/claimpro/command-center.jpg', pageCover: 'cases/claimpro/workflow.jpg',
-    coverAlt: { en: 'ClaimPro Command Center: claims ranked by the AI with confidence and reasons', es: 'Command Center de ClaimPro: reclamos priorizados por la IA con confianza y motivos' },
+    coverAlt: { en: 'ClaimPro Workspace: claims ranked by the AI with confidence and reasons', es: 'Workspace de ClaimPro: reclamos priorizados por la IA con confianza y motivos' },
     seoTitle: { en: 'ClaimPro — AI claims copilot case study', es: 'ClaimPro — Caso de estudio: copiloto de IA para reclamos' },
     seoDesc: {
       en: 'How I designed an AI copilot for ~500 insurance adjusters: confidence thresholds, human hand-off and an audit trail. −68% resolution time (client-reported).',
