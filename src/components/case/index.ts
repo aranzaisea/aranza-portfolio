@@ -17,3 +17,4 @@ export { default as Clusters } from './Clusters.astro';
 export { default as Matrix } from './Matrix.astro';
 export { default as Table } from './Table.astro';
 export { default as Persona } from './Persona.astro';
+export { default as Blueprint } from './Blueprint.astro';

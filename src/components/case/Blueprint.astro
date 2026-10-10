@@ -1,0 +1,69 @@
+---
+// Service blueprint: stages across, lanes down. On narrow screens each stage becomes a card.
+type Tone = 'hu' | 'ext' | 'sys' | 'ai' | 'pain';
+interface Lane { name: string; tone: Tone; cells: (string | null)[] }
+interface Props { stages: string[]; lanes: Lane[]; caption?: string; d?: 'standard' | 'deep' }
+const { stages, lanes, caption, d } = Astro.props;
+---
+<figure class="bp" data-d={d} style={`--n:${stages.length}`}>
+  <div class="bp__scroll">
+    <div class="bp__grid" role="table" aria-label={caption ?? 'Service blueprint'}>
+      <div class="bp__row bp__row--head" role="row">
+        <span class="bp__corner" role="columnheader"></span>
+        {stages.map((s, i) => <span class="bp__stage" role="columnheader"><b class="mono">{String(i + 1).padStart(2, '0')}</b>{s}</span>)}
+      </div>
+      {lanes.map((l) => (
+        <div class={`bp__row bp__row--${l.tone}`} role="row">
+          <span class="bp__lane" role="rowheader"><i></i>{l.name}</span>
+          {stages.map((_, i) => <span class:list={['bp__cell', { 'bp__cell--empty': !l.cells[i] }]} role="cell">{l.cells[i] ?? ''}</span>)}
+        </div>
+      ))}
+    </div>
+  </div>
+  <ol class="bp__cards">
+    {stages.map((s, i) => (
+      <li class="bp__card">
+        <p class="bp__ch"><b class="mono">{String(i + 1).padStart(2, '0')}</b>{s}</p>
+        <dl>
+          {lanes.filter((l) => l.cells[i]).map((l) => (
+            <div class={`bp__it bp__it--${l.tone}`}><dt><i></i>{l.name}</dt><dd>{l.cells[i]}</dd></div>
+          ))}
+        </dl>
+      </li>
+    ))}
+  </ol>
+  {caption && <figcaption class="bp__cap">{caption}</figcaption>}
+</figure>
+<style>
+  .bp{margin:0;border:1px solid var(--line);border-radius:18px;background:var(--bg-deep);padding:clamp(18px,2.4vw,32px);min-width:0}
+  .bp__grid{display:grid;gap:8px}
+  .bp__row{display:grid;grid-template-columns:132px repeat(var(--n),minmax(0,1fr));gap:8px;align-items:stretch}
+  .bp__corner{display:block}
+  .bp__stage{font-size:14px;font-weight:600;color:var(--ink);line-height:1.3;padding:0 4px 6px;border-bottom:1px solid var(--line)}
+  .bp__stage b,.bp__ch b{display:block;font-size:11px;font-weight:500;color:var(--ink-faint);margin-bottom:4px}
+  .bp__lane{display:flex;align-items:center;gap:8px;font:500 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)}
+  .bp__lane i,.bp__it i{flex:none;width:9px;height:9px;border-radius:3px;display:inline-block}
+  .bp__cell{font-size:13px;line-height:1.45;color:var(--ink-2);padding:10px 11px;border-radius:9px;background:var(--panel-2);border:1px solid var(--line-soft);overflow-wrap:anywhere}
+  .bp__cell--empty{background:transparent;border-color:transparent}
+  .bp__row--hu i,.bp__it--hu i{background:var(--human)}
+  .bp__row--ext i,.bp__it--ext i{background:#7FB6D6}
+  .bp__row--sys i,.bp__it--sys i{background:var(--ink-faint)}
+  .bp__row--ai i,.bp__it--ai i{background:var(--ai)}
+  .bp__row--pain i,.bp__it--pain i{background:#F2A99B}
+  .bp__row--pain .bp__cell:not(.bp__cell--empty){background:#2a1a1a;border-color:#5a2f2a;color:#F4C7BE}
+  .bp__row--ai .bp__cell:not(.bp__cell--empty){background:var(--ai-bg);border-color:#33407a;color:var(--ink)}
+  .bp__row--ai{margin-top:10px}
+  .bp__cards{display:none;list-style:none;margin:0;padding:0}
+  .bp__cap{margin:18px 0 0;font-size:14px;color:var(--ink-faint);max-width:80ch}
+  @media (max-width:1099px){
+    .bp__scroll{display:none}
+    .bp__cards{display:flex;flex-direction:column;gap:12px}
+    .bp__card{border:1px solid var(--line);border-radius:12px;background:var(--panel-2);padding:14px 16px}
+    .bp__ch{margin:0 0 10px;font-size:16px;font-weight:600;color:var(--ink)}
+    .bp__card dl{margin:0;display:flex;flex-direction:column;gap:10px}
+    .bp__it dt{display:flex;align-items:center;gap:8px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+    .bp__it dd{margin:3px 0 0 17px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+    .bp__it--pain dd{color:#F4C7BE}
+    .bp__it--ai dd{color:var(--ink)}
+  }
+</style>

@@ -32,25 +32,57 @@ El cliente quería IA en el flujo. El riesgo quedó claro desde las primeras ent
 </div>
 </Section>
 
-<Section n="02" id="research" label="Research" title="20 entrevistas entre todos los roles del sistema.">
+<Section n="02" id="research" label="Research" title="20 entrevistas con quienes usaban la herramienta vieja todos los días.">
 <div class="prose">
 
-Lideré 20 entrevistas entre los distintos roles del sistema, además de evaluaciones heurísticas, desk research y un benchmark. Después probé los prototipos con usuarios antes del handoff. Resumí lo aprendido en cuatro preguntas que el producto tenía que responder en cada pantalla:
+Entrevisté a unos 15 ajustadores y 5 supervisores, las personas que trabajaban todos los días en la herramienta de reclamos anterior, e hice una evaluación heurística de esa herramienta, desk research y un benchmark. Los ajustadores eran los que más sufrían. Su trabajo no era procesar reclamos; era buscar qué los estaba trabando.
+
+</div>
+<Metrics items={[{"v": "~15", "l": "ajustadores entrevistados"}, {"v": "5", "l": "supervisores entrevistados", "note": "los usuarios diarios de la herramienta anterior"}, {"v": "10 + 5", "l": "ajustadores y supervisores probaron el prototipo"}, {"v": "Horas a días", "l": "para encontrar por qué un caso devuelto estaba trabado"}]} />
+<Quote by="Entrevistas a ajustadores · se repetía, parafraseado">Encontrar el problema de un caso es buscar una aguja en un pajar.</Quote>
+<Clusters groups={[{"t": "Encontrar el problema", "tone": "pain", "items": ["Encontrar qué falla en un caso es buscar una aguja en un pajar", "La herramienta no te guía para nada", "Un caso puede quedar abierto por un solo dato que nadie encuentra"]}, {"t": "Sin trazabilidad", "tone": "bar", "items": ["Un caso devuelto no dice por qué", "Ves quién lo tocó último, no qué cambió", "Los casos con más de un problema tardan muchísimo más"]}, {"t": "Cambiar de canal", "tone": "do", "items": ["Saltar del caso al mail", "Después a una llamada", "Después a buscar el contacto correcto"]}, {"t": "Priorizar", "tone": "need", "items": ["¿Qué casos son críticos?", "¿Cuáles están cerca de cerrarse?", "¿Cuáles son más fáciles de cerrar?"]}, {"t": "Oportunidades", "tone": "opp", "items": ["Ordenarles el trabajo", "Señalar qué traba cada caso", "Mantener el seguimiento dentro del caso"]}]} insight={{"t": "Insight central", "b": "El trabajo no era procesar reclamos. Era buscar qué los trababa."}} caption={"Frases que se repetían una y otra vez en las entrevistas, parafraseadas. De ahí salieron cinco patrones: un sistema fragmentado, ninguna forma de priorizar, mucha carga cognitiva, una estructura que no reflejaba el proceso real y falta de trazabilidad."} />
+<div class="prose">
+
+Resumí lo aprendido, entre la investigación y las pruebas, en cuatro preguntas que el producto tenía que responder en cada pantalla:
 
 </div>
 <Insights>
 <Insight n="P1" title="¿Qué atiendo primero?">Los ajustadores arrancaban el día armando su propia lista de prioridades. → Una cola ordenada por la IA, con el motivo de cada posición.</Insight>
 <Insight n="P2" title="¿Puedo confiar en lo que completó?">Nadie iba a aceptar campos autocompletados sin poder verificarlos. → Confianza y documento fuente en cada valor.</Insight>
 <Insight n="P3" title="¿Qué pasa cuando no está segura?">Que la IA adivine era el miedo principal. → Debajo de un umbral, deja el campo vacío y pregunta.</Insight>
-<Insight n="P4" title="¿Quién decidió y por qué?">Supervisores y auditores necesitaban trazabilidad. → Cada acción de la IA y cada corrección humana queda registrada con su motivo.</Insight>
+<Insight n="P4" title="¿Quién decidió y por qué?">Ajustadores y supervisores necesitaban trazabilidad. → Cada acción de la IA y cada corrección humana queda registrada con su motivo.</Insight>
 </Insights>
 </Section>
 
-<Section n="03" id="flow" label="El flujo" title="Dónde actúa la IA y dónde decide una persona.">
+<Section n="03" id="before" label="Antes" title="Un reclamo antes de ClaimPro: un circuito sin feedback.">
+<div class="prose">
+
+Un supervisor abría cada caso y lo asignaba a un ajustador, que manejaba una cartera de casos agrupados por aseguradora y prefería trabajarlos por lotes. A partir de ahí, casi todo era manual.
+
+</div>
+<Blueprint stages={["Abrir y asignar", "Planificar el día", "Revisar el expediente", "Buscar lo que falta", "Enviar a la aseguradora", "Devuelto", "Destrabar y cerrar"]} lanes={[{"name": "Supervisor", "tone": "hu", "cells": ["Carga los datos del caso y lo asigna", null, null, null, null, null, "Interviene cuando un caso no se puede destrabar"]}, {"name": "Ajustador", "tone": "hu", "cells": ["Lo recibe en una cartera agrupada por aseguradora", "Arma un plan a mano: qué atiende primero", "Revisa cada expediente buscando documentos, fotos y pólizas faltantes", "Pide lo que falta por teléfono y mail, y espera", "Envía el caso a evaluar", "Averigua por qué, muchas veces sin feedback, y vuelve a empezar", "Repite el circuito con cada caso"]}, {"name": "Aseguradora", "tone": "ext", "cells": [null, null, null, "Responde, en algún momento", "Evalúa el caso", "Lo devuelve por datos faltantes, cambios o errores", "Aprueba el pago"]}, {"name": "Herramientas", "tone": "sys", "cells": ["Un dashboard genérico que funcionaba como un archivero", "Una línea de tiempo con todos los casos, filtrada a mano", "Los mismos formularios para todo tipo de reclamo", "Mail, teléfono, un CRM desactualizado, archivos locales", null, "Una tabla de historial: quién lo tocó y cuándo, no por qué", null]}, {"name": "Dolor", "tone": "pain", "cells": [null, "Ninguna señal de urgencia, facilidad o cercanía al cierre", "Solo el 10–15% de los formularios aplica a cada reclamo", "Tiempo muerto mientras el caso espera respuestas", null, "Horas, a veces días, para encontrar qué trababa un caso", "Cada caso devuelto reinicia el circuito"]}, {"name": "Con ClaimPro", "tone": "ai", "cells": [null, "El Workspace ordena la cola por SLA, exposición y cercanía al cierre", "La IA arma el borrador y marca lo que falta", "Pedidos redactados por la IA; lo pendiente queda en el caso", "Un paquete de aprobación con la evidencia adjunta", "El plan de ejecución lista los bloqueos y el próximo paso", "El supervisor firma con todo en un lugar; cada acción queda registrada"]}]} caption={"Service blueprint del proceso de reclamos antes de ClaimPro, reconstruido a partir de la investigación. La última fila muestra dónde entra ClaimPro."} />
+<Table head={["Problema en la herramienta anterior", "Heurística", "Qué causaba", "En ClaimPro"]} rows={[["El dashboard no daba contexto de urgencia, facilidad o cierre; todos los casos entraban en una línea de tiempo", "Flexibilidad y eficiencia de uso", "Los ajustadores filtraban y ordenaban su cartera a mano", "Un Command Center ordenado por la IA que explica cada posición"], ["Cada reclamo mostraba todos los formularios de todos los tipos de reclamo", "Diseño estético y minimalista", "Aplicaba solo el 10–15%; encontrar un problema era cruzar un mar de pestañas", "Campos agrupados por tipo de reclamo y según cómo trabaja el ajustador"], ["Los campos hacían poco y no tenían estados de error; nada guiaba al ajustador", "Prevención de errores", "Los errores de datos no se detectaban en el formulario", "Confianza y fuente en cada campo; bloqueos listados de entrada"], ["El historial mostraba quién tocó un caso y cuándo, nunca por qué", "Visibilidad del estado del sistema", "Diagnosticar un caso devuelto llevaba horas o días", "Un registro de actividad con el motivo de cada acción de la IA y cada cambio humano"], ["Los formularios se agrupaban con la lógica del sistema, no con el proceso del ajustador", "Relación entre el sistema y el mundo real", "Idas y vueltas constantes entre pestañas", "Pasos en el orden en que de verdad sucede el trabajo"]]} caption={"Evaluación heurística de la herramienta anterior, hallazgos principales."} />
+</Section>
+
+<Section n="04" id="flow" label="El flujo" title="Dónde actúa la IA y dónde decide una persona.">
 <Flow stages={[{"a": "sys", "t": "Llega un siniestro", "n": "Se suben la denuncia policial, las fotos y el presupuesto de reparación."}, {"a": "ai", "t": "La IA arma el borrador", "n": "Lee cada documento y completa cada campo con su fuente."}, {"k": "branch", "q": "¿Confianza del campo ≥ 85%?", "paths": [{"l": "Sí", "a": "ai", "t": "Completado, con la fuente", "n": "El ajustador puede abrir la página de donde salió."}, {"l": "No", "a": "hu", "t": "Vacío para el ajustador", "n": "Con el motivo y las alternativas que encontró la IA."}]}, {"a": "hu", "t": "El ajustador revisa", "n": "Confirma o corrige. Cada corrección pide un motivo."}, {"a": "ai", "t": "La IA planifica los pasos", "n": "Bloqueos, seguimientos y un paquete de aprobación con la evidencia."}, {"a": "hu", "t": "Un supervisor aprueba", "n": "Cada acción de la IA y cada decisión humana quedan registradas."}]} caption="Las fuentes que no coinciden, los documentos ilegibles y el copiloto caído tienen su propio camino, en Estados de falla." />
 </Section>
 
-<Section n="04" id="command-center" label="Lanzado · Command Center" title="Una cola que explica su propio orden.">
+<Section n="05" id="testing" label="Qué cambió con las pruebas" title="La primera IA era demasiado tímida.">
+<div class="prose">
+
+La IA estaba en el alcance desde el primer día. Probamos la segunda iteración con 10 ajustadores y 5 supervisores: el dashboard era más claro y el detalle del caso estaba mejor organizado, pero la IA solo hacía la información más fácil de leer. No ahorraba mucho tiempo. Así que cambiamos el concepto, no las pantallas.
+
+</div>
+<Steps items={[["De dashboard a Workspace", "Un lugar para trabajar, no para consultar."], ["Un copiloto que encuentra los problemas", "Revisa cada caso y nombra qué lo traba, en vez de esperar a que le pregunten."], ["Prioridades armadas", "La cola se ordena por SLA, exposición y cercanía al cierre, así nadie planifica su día a mano."], ["El control, en el Portafolio", "Para quien quiere seguir priorizando y decidiendo por su cuenta, el Portafolio mantiene ese control."]]} />
+<div class="prose">
+
+Eso convirtió a ClaimPro de un dashboard mejorado en una herramienta agéntica: más capaz, más rápida y más útil. Las animaciones de evolución de abajo muestran la iteración 2, la que probamos, junto a lo que se lanzó.
+
+</div>
+</Section>
+
+<Section n="06" id="command-center" label="Lanzado · Command Center" title="Una cola que explica su propio orden.">
 <div class="prose">
 
 El Command Center reemplazó la priorización manual del inicio del día. La IA ordena los reclamos por riesgo de SLA, exposición financiera y señales de fraude, pero nunca esconde el porqué: cada tarjeta dice qué bloquea el reclamo y cuánto debería llevar el próximo paso.
@@ -60,7 +92,7 @@ El Command Center reemplazó la priorización manual del inicio del día. La IA 
 <Shot src="claimpro/command-center.jpg" title="Command Center · espacio del ajustador" alt="Command Center de ClaimPro con reclamos ordenados por puntaje de prioridad, bloqueos y esfuerzo estimado" m={[[17.6,22.5,"<strong>Un puntaje con motivo.</strong> 98 solo no dice nada; la frase de al lado explica qué evita resolverlo hoy."],[52,51.5,"<strong>La IA deriva, no decide.</strong> Un posible fraude va a revisión manual y la tarjeta lo aclara: la IA no rechaza ni demora el pago."],[90,9,"<strong>Los pronósticos se presentan como pronósticos.</strong> Los cuellos de botella previstos muestran su base (72 h, historial de la aseguradora) y una acción concreta."],[30,80,"<strong>Automatización que arranca la persona.</strong> Los seguimientos de bajo riesgo corren solo cuando el ajustador toca Run, con 10 minutos para deshacer."]]} />
 </Section>
 
-<Section n="05" id="intake" label="Lanzado · carga con IA" title="La IA lee los documentos. El ajustador revisa su trabajo.">
+<Section n="07" id="intake" label="Lanzado · carga con IA" title="La IA lee los documentos. El ajustador revisa su trabajo.">
 <div class="prose">
 
 El ajustador suelta la póliza, la denuncia policial y las fotos en el reclamo. El copiloto extrae los campos y muestra su progreso en vivo, así la persona sigue trabajando en lugar de mirar un spinner.
@@ -71,7 +103,7 @@ El ajustador suelta la póliza, la denuncia policial y las fotos en el reclamo. 
 <Shot d="standard" src="claimpro/handoff.jpg" title="Borrador completo · responsable y pendientes" alt="Borrador completo con responsable recomendado por la IA, pendientes y recomendaciones" m={[[19,35,"<strong>Recomendado, no asignado.</strong> La IA sugiere un responsable según carga y especialidad; el ajustador confirma."],[74,57.5,"<strong>Los pendientes siguen a la vista</strong> después del borrador, con qué o quién está esperando cada uno."],[82,17,"<strong>Cada recomendación muestra su base</strong>, como la estimación de reparación hecha con reclamos similares de Camry 2021."]]} />
 </Section>
 
-<Section n="06" id="uncertainty" label="Cuando la IA no está segura" title="Debajo del 85%, la IA deja de adivinar.">
+<Section n="08" id="uncertainty" label="Cuando la IA no está segura" title="Debajo del 85%, la IA deja de adivinar.">
 <div class="prose">
 
 Esta regla salió al mercado: las acciones con menos de 85% de confianza pasan a una persona. Para el portafolio la extendí a los estados que el alcance original no llegó a cubrir, para mostrar cómo cambia la interfaz cuando se cruza el umbral.
@@ -81,7 +113,7 @@ Esta regla salió al mercado: las acciones con menos de 85% de confianza pasan a
 <Shot d="standard" src="claimpro/low-confidence.jpg" title="Revisión de baja confianza" badge="✦ Extensión" alt="Pantalla de revisión que compara la foto del odómetro con la renovación de la póliza y valores candidatos" m={[[63,33,"<strong>La evidencia, no solo la respuesta.</strong> El recorte exacto que leyó la IA, con los dígitos dudosos marcados."],[88,34,"<strong>Una segunda fuente</strong> que respalda o contradice la lectura."],[52,53,"<strong>Alternativas ordenadas</strong> por probabilidad, para elegir en lugar de tipear desde cero."],[38,40,"<strong>La regla está en pantalla:</strong> debajo del 85% decide una persona, y la decisión queda registrada con su motivo."]]} />
 </Section>
 
-<Section n="07" id="failure" label="Estados de falla" title="Primero se diseñan los caminos infelices.">
+<Section n="09" id="failure" label="Estados de falla" title="Primero se diseñan los caminos infelices.">
 <div class="prose">
 
 Las personas confían más en una IA cuando ya vieron cómo falla. Diseñé cada falla para que el reclamo siga avanzando con la IA a un costado.
@@ -98,7 +130,7 @@ Las personas confían más en una IA cuando ya vieron cómo falla. Diseñé cada
 </Grid>
 </Section>
 
-<Section n="08" id="autonomy" label="La autonomía como ajuste" title="Cuánto hace sola la IA es una decisión del cliente, y se puede deshacer.">
+<Section n="10" id="autonomy" label="La autonomía como ajuste" title="Cuánto hace sola la IA es una decisión del cliente, y se puede deshacer.">
 <div class="prose">
 
 El copiloto salió en modo **Borrador para aprobación**: la IA prepara cada acción y nada corre hasta que una persona aprueba. En lugar de dejar eso fijo, diseñé la autonomía como un ajuste con cuatro niveles, un umbral de confianza bloqueado y una lista de decisiones que ningún nivel puede automatizar.
@@ -108,7 +140,7 @@ El copiloto salió en modo **Borrador para aprobación**: la IA prepara cada acc
 <Shot d="standard" src="claimpro/impact-sim.jpg" title="Vista previa del impacto antes de guardar" badge="✦ Extensión" alt="Vista previa de cómo un cambio de configuración afectaría la cola actual" m={[[64.5,3.5,"<strong>Simulado sobre la cola real</strong> antes de cambiar nada, y etiquetado como simulación."],[95,20,"<strong>El cambio en números:</strong> cuántos reclamos cambian de carril y cuántas acciones pasan a ser automáticas."],[70,48,"<strong>Los límites que no se mueven</strong> quedan listados, para ver qué no puede tocar el cambio."]]} />
 </Section>
 
-<Section n="09" id="supervisor" label="Aprobación del supervisor" title="Aprobaciones con la evidencia adjunta.">
+<Section n="11" id="supervisor" label="Aprobación del supervisor" title="Aprobaciones con la evidencia adjunta.">
 <div class="prose">
 
 Una aprobación vale lo que vale la evidencia que la persona tiene delante. El paquete de aprobación reúne el resumen de la IA, la nota del ajustador y la evidencia en un solo panel, y exige un motivo para cada decisión.
@@ -122,7 +154,7 @@ Una aprobación vale lo que vale la evidencia que la persona tiene delante. El p
 <Shot d="deep" src="claimpro/portfolio.jpg" title="Portfolio del supervisor" alt="Vista del supervisor con reclamos por riesgo y SLA" />
 </Section>
 
-<Section n="10" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
+<Section n="12" id="tradeoffs" label="Tensiones de diseño" title="Las decisiones detrás del diseño.">
 <Decisions>
 <Decision n="01" title="Dejar campos vacíos en lugar de precompletar la mejor apuesta" ev="hypothesis" tradeoff="Suma clics en los reclamos difíciles, pero encontrar un valor precompletado erróneo cuesta más que completar uno vacío. Es parte de la extensión de la regla del 85% que salió al mercado.">
 Un valor precompletado parece terminado y la gente lo pasa por alto. Debajo del umbral el campo queda vacío y el reclamo no avanza, así la incertidumbre no se puede ignorar.
@@ -139,7 +171,7 @@ Subir la autonomía es el cambio más riesgoso que puede hacer un admin. Ver su 
 </Decisions>
 </Section>
 
-<Section n="11" id="results" label="Resultados" title="De semanas a días.">
+<Section n="13" id="results" label="Resultados" title="De semanas a días.">
 <Metrics items={[{v:"−68%",l:"tiempo de resolución de reclamos",note:"Dato del cliente, medido en 3 meses. Reclamos que tardaban semanas se resuelven en días, algunos en horas."},{v:"90%+",l:"de adopción entre ~500 ajustadores",note:"Reemplazó a la herramienta anterior. El resto seguía en capacitación a los 2 meses."}]} />
 <div class="prose" data-d="standard">
 
