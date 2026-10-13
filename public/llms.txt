@@ -1,0 +1,28 @@
+# Aranza Isea — Senior Product Designer · AI Products
+
+> Senior Product Designer with 10+ years in product design, UX/UI design and user research, specialized in AI products: generative AI copilots, AI agents and human-in-the-loop workflows for enterprise B2B SaaS (insurance, fintech, B2B e-commerce). Based in Buenos Aires, Argentina; works remotely (GMT-3). Spanish native, English C1. Available to start immediately.
+
+Contact: aranzaisea@gmail.com · https://www.linkedin.com/in/aranzaisea
+
+## Resume
+- [Resume (English, PDF)](https://aranzaisea.netlify.app/cv/Aranza_Isea_Resume_EN.pdf)
+- [CV (Spanish, PDF)](https://aranzaisea.netlify.app/cv/Aranza_Isea_CV_ES.pdf)
+
+## Experience
+- Career break (sabbatical), 2025 – present: portfolio case studies, two independent AI concepts, IBM Generative AI certifications.
+- Product Designer, AI Products — Perficient, 2024 – 2025: owned ClaimPro end to end (generative AI claims copilot, ~500 insurance adjusters, −68% claim resolution time client-reported over 3 months, 90%+ adoption); designed Vantage (multi-agent AI for AML compliance at a neobank).
+- Senior UX/UI Designer — Perficient, 2022 – 2024: Off Dep Business (AI-assisted B2B purchasing; +65% Business accounts, +56% B2B sales, +47% retention), Club Rumbo (loyalty app MVP, iOS and Android, one month).
+- Senior Visual Designer — Perficient, 2019 – 2022: built and scaled Perficient's Advanced Design System.
+- Product Designer — Distrito Moda, 2017 – 2019. UX Designer — Tsserapp, 2015 – 2017.
+
+## Case studies
+- [ClaimPro — AI claims copilot (launched)](https://aranzaisea.netlify.app/work/claimpro/)
+- [Off Dep Business — AI-assisted B2B purchasing (launched)](https://aranzaisea.netlify.app/work/offdep/)
+- [Club Rumbo — loyalty app MVP (launched)](https://aranzaisea.netlify.app/work/rumbo/)
+- [Vantage — multi-agent AI for AML compliance (launched)](https://aranzaisea.netlify.app/work/vantage/)
+- [Relay — enterprise AI agent copilot (independent concept, 2026)](https://aranzaisea.netlify.app/work/relay/)
+- [Numi — AI meal planner for iOS (independent concept, 2026)](https://aranzaisea.netlify.app/work/numi/)
+- [AI design patterns](https://aranzaisea.netlify.app/patterns/)
+
+## Skills
+AI product design, generative AI, LLM-powered products, AI agents, human-in-the-loop design, autonomy levels, confidence and uncertainty UX, AI failure states, audit trails, user research, usability testing, heuristic evaluation, service blueprints, interaction design, information architecture, prototyping, design systems, Figma, FigJam.
