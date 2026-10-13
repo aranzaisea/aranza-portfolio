@@ -90,13 +90,13 @@ const ALL_CASES: CaseMeta[] = [
   {
     slug: 'relay', no: '05', name: 'Relay', ai: true,
     tag: { en: 'Workplace AI agent · Enterprise SaaS', es: 'Agente de IA para equipos · SaaS empresarial' },
-    status: 'concept', statusLabel: { en: 'Independent concept', es: 'Concepto independiente' },
+    status: 'launched', statusLabel: { en: 'Launched', es: 'Lanzado' },
     sentence: {
       en: 'An AI agent that works across a company’s tools, with an autonomy policy the admin sets and everyone can read.',
       es: 'Un agente de IA que trabaja con las herramientas de la empresa, con una política de autonomía que define el admin y todos pueden leer.',
     },
     chips: { en: ['Autonomy policy', 'Plan → approve → run'], es: ['Política de autonomía', 'Plan → aprobar → ejecutar'] },
-    role: { en: 'Product Designer', es: 'Product Designer' }, year: '2026',
+    role: { en: 'Product Designer', es: 'Product Designer' }, year: '',
     where: { en: '', es: '' },
     cover: 'cases/relay/plan.png', pageCover: 'cases/relay/blocked-action.png',
     coverAlt: { en: 'Relay plan proposal: five steps, the last one waiting for the user’s approval', es: 'Propuesta de plan en Relay: cinco pasos, el último esperando la aprobación del usuario' },
