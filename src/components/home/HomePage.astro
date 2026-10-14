@@ -44,7 +44,7 @@ const c = en ? {
   ctEyebrow: 'Open to senior roles · remote or hybrid from Buenos Aires (GMT-3)',
   ctH: 'Hiring for an AI product team?', available: 'Available now', copy: 'copy', copied: 'copied', selected: 'selected',
   portraitAlt: 'Portrait of Aranza Isea',
-  labels: { names: ['name', 'signal', 'structure', 'human core'], noise: 'noise', play: 'play motion', pause: 'pause motion', playAnim: '▶  Play animation', replay: '↻  Replay' },
+  labels: { names: ['name', 'signal', 'structure', 'brain'], cre: 'creativity', rea: 'reasoning', noise: 'noise', play: 'play motion', pause: 'pause motion', playAnim: '▶  Play animation', replay: '↻  Replay' },
   signal: 'signal', field: 'Particle field',
 } : {
   title: 'Aranza Isea — Product Designer Senior · Productos con IA',
@@ -81,7 +81,7 @@ const c = en ? {
   ctEyebrow: 'Abierta a roles senior · remoto o híbrido desde Buenos Aires (GMT-3)',
   ctH: '¿Buscás diseño para un equipo de producto con IA?', available: 'Disponible ya', copy: 'copiar', copied: 'copiado', selected: 'seleccionado',
   portraitAlt: 'Retrato de Aranza Isea',
-  labels: { names: ['nombre', 'señal', 'estructura', 'núcleo humano'], noise: 'ruido', play: 'reanudar', pause: 'pausar movimiento', playAnim: '▶  Reproducir animación', replay: '↻  Repetir' },
+  labels: { names: ['nombre', 'señal', 'estructura', 'cerebro'], cre: 'creatividad', rea: 'razonamiento', noise: 'ruido', play: 'reanudar', pause: 'pausar movimiento', playAnim: '▶  Reproducir animación', replay: '↻  Repetir' },
   signal: 'señal', field: 'Campo de partículas',
 };
 
@@ -100,6 +100,8 @@ const jsonLd = {
 <Base lang={lang} title={c.title} description={c.desc} jsonLd={jsonLd} variant="home">
   <canvas id="field" aria-hidden="true" data-labels={JSON.stringify(c.labels)}></canvas>
   <div class="scrim" aria-hidden="true"></div>
+  <span class="lobe lobe--cre" id="lobeCre" aria-hidden="true"></span>
+  <span class="lobe lobe--rea" id="lobeRea" aria-hidden="true"></span>
 
   <div class="lp">
     <section class="hero wrap" data-stage="0">
@@ -322,6 +324,12 @@ const jsonLd = {
   .lp .contact .cta{margin-top:20px}
   @media (max-width:760px){.lp .contact{grid-template-columns:1fr}.lp .portrait{width:180px}}
 
+  /* lobe tags that follow the lit region of the brain */
+  .lobe{position:fixed;left:0;top:0;z-index:1;pointer-events:none;opacity:0;font:500 11.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px;border-radius:999px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.9);border:1px solid var(--line);box-shadow:0 8px 20px -12px rgba(20,26,38,.4)}
+  .lobe::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+  .lobe--cre{color:var(--human)} .lobe--rea{color:var(--ai)}
+  .no-gl .lobe{display:none}
+  @media (max-width:820px){.lobe{display:none}}
   /* HUD */
   .hud{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-faint);background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:10px;padding:8px 8px 8px 12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
   .hud .read{display:flex;align-items:center;gap:12px;min-width:250px}
