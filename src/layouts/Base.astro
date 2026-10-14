@@ -13,6 +13,9 @@ const canonical = new URL(path, SITE).href;
 const enUrl = new URL(altPath(path, 'en'), SITE).href;
 const esUrl = new URL(altPath(path, 'es'), SITE).href;
 const h = home(lang);
+// Date this version of the site went live, and the build date as last update
+const PUBLISHED = '2026-10-13T00:00:00-03:00';
+const MODIFIED = new Date().toISOString();
 const anchor = (id: string) => (variant === 'home' ? `#${id}` : `${h}#${id}`);
 ---
 <!doctype html>
@@ -33,8 +36,14 @@ const anchor = (id: string) => (variant === 'home' ? `#${id}` : `${h}#${id}`);
   <meta property="og:description" content={description} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={new URL(ogImage, SITE).href} />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
+  <meta property="og:image:width" content="2400" />
+  <meta property="og:image:height" content="1260" />
+  <meta property="og:image:alt" content={title} />
+  <meta name="author" content="Aranza Isea" />
+  <meta property="article:author" content="Aranza Isea" />
+  <meta property="article:published_time" content={PUBLISHED} />
+  <meta property="article:modified_time" content={MODIFIED} />
+  <meta name="publish_date" property="og:publish_date" content={PUBLISHED} />
   <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_AR'} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#F4F5F8" />
