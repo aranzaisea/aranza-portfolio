@@ -1,0 +1,115 @@
+<header class="case">
+    <span class="mono">{{no}} · Vantage · AI agents for anti-money-laundering · Launched</span>
+    <h1>A team of AI agents for anti-money-laundering, and <em>a named analyst behind every decision.</em></h1>
+    <p class="lede">Vantage helps a neobank's AML analysts clear alerts faster. Four AI agents gather context, score risk, check sanctions lists and draft the recommendation; the analyst sees each one working, unblocks the ones that fail and signs every decision.</p>
+    <dl class="meta detail">
+      <div><dt class="mono">Role</dt><dd>Senior Product Designer. Flows, agent states, interaction design and UI.</dd></div>
+      <div><dt class="mono">Team</dt><dd>Perficient product and engineering team, with the client's compliance stakeholders.</dd></div>
+      <div><dt class="mono">Timeline</dt><dd>2025, at Perficient.</dd></div>
+      <div><dt class="mono">Context</dt><dd>AML operations for a neobank.</dd></div>
+    </dl>
+    <div class="chips"><span>4 agents, fixed order</span><span>Failed agents return nothing</span><span>Batch sign-off by sample</span></div>
+  </header>
+
+  <section class="beat" id="problem">
+    <div class="rail"><span class="n">01</span><span class="l mono">The problem</span></div>
+    <div class="body">
+      <h2>Agents can gather the evidence. They can't own the decision.</h2>
+      <p class="detail">An AML alert is a question: is this activity suspicious? Answering it means pulling transactions from core banking, checking sanctions and PEP lists, reading adverse media and writing it up. Most of that is collection, and collection is what agents are good at. The rest is a regulatory problem: an agent that quietly fails, or a batch signed without looking.</p>
+      <figure class="detail">
+        <div class="shot"><img src="{{inbox}}" alt="Vantage inbox for an L1 analyst: 41 alerts with a four-dot agent run per case, severity and SLA, and a banner saying 62 pre-cleared cases are ready but to handle the Critical case first." width="1440" height="900"></div>
+        <figcaption>The triage inbox: four dots, four agents, so a glance shows where each case is stuck. The rule sits in the footer: agents gather and check, they never close, file or sign.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="beat" id="found">
+    <div class="rail"><span class="n">02</span><span class="l mono">The rules</span></div>
+    <div class="body">
+      <h2>In compliance, a missing check that looks like a clear is worse than a slow one.</h2>
+      <p class="insight">A regulator will always ask who decided.</p>
+      <p class="detail">Three rules framed every screen after that.</p>
+      <div class="qs three detail">
+        <div class="q"><b>Agents gather and check; they never close, file or sign.</b><span>The line is written on the inbox itself, so nobody has to remember it.</span></div>
+        <div class="q"><b>A failed agent shows no result at all.</b><span>Never a partial score that could be read as an answer.</span></div>
+        <div class="q"><b>Speed comes from batching, not from skipping.</b><span>Low-risk cases are signed together, only after reviewing a random sample.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="decision">
+    <div class="rail"><span class="n">03</span><span class="l mono">The key decision</span></div>
+    <div class="body">
+      <h2>When an agent fails, the case says so, and stops.</h2>
+      <p class="detail">Risk and Regulatory start only when Context has the transactions. If Context fails, they wait instead of producing results on incomplete data, and the decision stays locked until all four agents finish.</p>
+      <div class="choice detail">
+        <div class="col kept">
+          <span class="mono">What I chose</span>
+          <ul>
+            <li><b>A fixed agent order: Context → Risk → Regulatory → Drafting.</b>Every case reads the same way, and it's obvious why an agent is waiting.</li>
+            <li><b>Ask one question instead of guessing an entity match.</b>One more step for the analyst; a wrong “same entity” would change the outcome.</li>
+            <li><b>A flagged sample pauses the whole batch.</b>A rule that let one bad case through might be letting others through too.</li>
+          </ul>
+        </div>
+        <div class="col dropped">
+          <span class="mono">What I discarded</span>
+          <ul>
+            <li><b>Running all agents in parallel</b>Faster on good days, and results built on incomplete data on bad ones.</li>
+            <li><b>A partial score when a source times out</b>It reads like a clear. Nothing at all is safer.</li>
+            <li><b>Signing pre-cleared cases in bulk, unseen</b>Fast, and it defeats the point of a person signing.</li>
+          </ul>
+        </div>
+      </div>
+      <figure>
+        <div class="shot"><img src="{{failed}}" alt="Case detail for a Critical case: the Context agent failed after two core-banking timeouts, Risk, Regulatory and Drafting wait, and the decision panel is locked. Retry Context and Load transactions manually are offered." width="1440" height="900"></div>
+        <figcaption>Context failed with 0 of 5 sources. The run map shows who waits, the panel says what failed in plain words, and two ways forward unblock the rest.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="beat" id="built">
+    <div class="rail"><span class="n">04</span><span class="l mono">What I built</span></div>
+    <div class="body">
+      <h2>Sign 62 cases at once, after checking three.</h2>
+      <p class="detail">Most alerts are low risk and pre-cleared by a rule. Signing them one by one wastes the analyst's attention; signing them blind defeats the point. The batch flow asks for a random sample first, and one bad sample stops everything.</p>
+      <div class="gallery detail">
+        <figure>
+          <div class="shot"><img src="{{input}}" alt="Regulatory agent paused with one question: is Delfín Holdings Corp. the same entity as the counterparty Delfin Holdings, with the evidence and three answers: same entity, different entity, not sure." width="1440" height="900"></div>
+          <figcaption><strong>One question before the recommendation.</strong> The agent won't decide an entity match alone, and the answer is saved for future runs.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{ready}}" alt="Pre-cleared batch of 62 cases ready to sign: three samples reviewed, the pre-clear rule and lists screened, an attestation checkbox and Sign 62 cases." width="1440" height="900"></div>
+          <figcaption><strong>Ready to sign.</strong> Three random samples reviewed, the rule behind the batch in view, and one signature stored on every case.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{paused}}" alt="Batch paused because the analyst flagged sample 2, with structured reasons and three ways forward: pull the case and re-sample, keep the batch with a reason, or cancel it." width="1440" height="900"></div>
+          <figcaption><strong>A flag pauses the batch.</strong> The other 61 stay unsigned, the reason goes to the rule owner as data, and it's logged as an exception.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="result">
+    <div class="rail"><span class="n">05</span><span class="l mono">What happened</span></div>
+    <div class="body">
+      <h2>It launched in 2025. I don't have the numbers, so I won't invent them.</h2>
+      <div class="result">
+        <div><b class="word">Launched</b><span>In production for the neobank's AML team in 2025.</span></div>
+        <div><b class="word">4 agents</b><span>Each visible, each able to fail safely, none able to sign.</span></div>
+        <div><b class="word">No metrics</b><span>The client didn't share results. Below is how I'd measure it.</span></div>
+      </div>
+      <div class="learn detail">
+        <span class="mono">What I'd measure</span>
+        <p>Time from alert to decision, the share of cases cleared by batch, how often samples get flagged (a sign that a rule needs work) and the agent failure rate by source.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="next">
+    <div class="deep">
+      <span class="mono">Want the full process?</span>
+      <p>Both flows end to end, every agent state, the decision log, the AI principles and the four visual directions.</p>
+      <a class="btn-primary" href="/work/vantage/deep/">Read the deep dive <span aria-hidden="true">→</span></a>
+    </div>
+    {{next}}
+  </footer>

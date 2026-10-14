@@ -1,0 +1,121 @@
+<header class="case">
+    <span class="mono">{{no}} · ClaimPro · AI claims copilot · Launched</span>
+    <h1>An AI copilot that hands the <em>hard calls</em> back to people.</h1>
+    <p class="lede">Insurance adjusters spent their days searching for what blocked each claim. I designed a copilot that finds those blockers, fills in what it can prove, and stops when it isn't sure.</p>
+    <dl class="meta detail">
+      <div><dt class="mono">Role</dt><dd>Senior Product Designer. Owned research, flows, AI behaviour, prototypes and handoff.</dd></div>
+      <div><dt class="mono">Team</dt><dd>PM, BA, 4 devs, QA, 2 visual designers, client stakeholders.</dd></div>
+      <div><dt class="mono">Timeline</dt><dd>About 6 months, 2024–25, at Perficient.</dd></div>
+      <div><dt class="mono">Context</dt><dd>Auto claims for a US administrator, shown as Harborline Insurance.</dd></div>
+    </dl>
+    <div class="stats">
+      <div class="stat"><b>−68%</b><span>claim resolution time</span></div>
+      <div class="stat"><b>90%+</b><span>adoption</span></div>
+      <div class="stat"><b>~500</b><span>adjusters</span></div>
+    </div>
+  </header>
+
+  <section class="beat" id="problem">
+    <div class="rail"><span class="n">01</span><span class="l mono">The problem</span></div>
+    <div class="body">
+      <h2>Claims sat for weeks while people searched for what was blocking them.</h2>
+      <p class="detail">Adjusters started every day building their own priority list, retyping data from PDFs into forms, and jumping between email, phone and the case. When a claim came back, nothing said why. Supervisors approved without the evidence in one place.</p>
+      <figure class="detail">
+        <div class="shot"><img src="{{ad2}}" alt="ClaimPro Workspace: a ranked queue of claims grouped into Needs your decision, Quick wins and Ready to run, each with its blockers listed." width="1015" height="930"></div>
+        <figcaption>The Workspace that replaced it: claims ranked by SLA, financial exposure and closeness to closing, with the blockers named on each card. <span class="tag ship">Shipped</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="beat" id="found">
+    <div class="rail"><span class="n">02</span><span class="l mono">What I found</span></div>
+    <div class="body">
+      <h2>Speed wasn't the bottleneck. Trust was.</h2>
+      <p class="detail">I interviewed about 15 adjusters and 5 supervisors, ran a heuristic evaluation of the legacy tool, and benchmarked other claims platforms.</p>
+      <p class="insight">The job wasn't processing claims. It was searching for what blocked them.</p>
+      <p class="detail">The client wanted AI in the workflow, and the interviews made the risk clear: an AI that fills in a claim wrongly is worse than no AI. Four questions shaped everything after that.</p>
+      <div class="qs detail">
+        <div class="q"><b>What should I work on first?</b><span>A queue ranked by the AI that shows the reason for each rank.</span></div>
+        <div class="q"><b>Can I trust what it filled in?</b><span>Confidence and source on every value.</span></div>
+        <div class="q"><b>What happens when it isn't sure?</b><span>It leaves the field empty and asks.</span></div>
+        <div class="q"><b>Who decided, and why?</b><span>Every AI action and human override is logged with a reason.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="decision">
+    <div class="rail"><span class="n">03</span><span class="l mono">The key decision</span></div>
+    <div class="body">
+      <h2>Below 85% confidence, the AI stops guessing and a person decides.</h2>
+      <p class="detail">Our first version only made information easier to read, and testing with 10 adjusters and 5 supervisors showed it saved little time. So the concept changed: from a dashboard to a workspace, with a copilot that finds problems on its own, and one rule everyone could repeat in a sentence.</p>
+      <div class="choice detail">
+        <div class="col kept">
+          <span class="mono">What I chose</span>
+          <ul>
+            <li><b>One visible threshold: 85%, and 95% for money.</b>People can state the rule in one sentence. <span><span class="tag ship">Shipped</span></span></li>
+            <li><b>Leave uncertain fields empty, with a one-line reason.</b>A blank gets checked; fixing a wrong value costs more than filling a blank. <span><span class="tag hyp">Hypothesis</span></span></li>
+            <li><b>Automation the adjuster starts, with a 10-minute undo.</b>Nothing reaches a claimant without a person reading it. <span><span class="tag ship">Shipped</span></span></li>
+          </ul>
+        </div>
+        <div class="col dropped">
+          <span class="mono">What I discarded</span>
+          <ul>
+            <li><b>Pre-filled best guesses</b>They look finished, so people skim past them.</li>
+            <li><b>Per-field tuned models</b>More accurate on paper, and no one could explain them.</li>
+            <li><b>Fully automatic follow-ups</b>Faster, and one wrong message to a claimant costs the trust we were building.</li>
+          </ul>
+        </div>
+      </div>
+      <figure>
+        <div class="shot"><img src="{{ad12}}" alt="Claim draft where Mileage (72%) and rear damage area (64%) are left empty and marked Needs review, each with a one-line reason." width="1440" height="1024"></div>
+        <figcaption>Two fields under 85% stay empty, each with its reason: glare on the odometer photo, a partly hidden rear side. <span class="tag ext">✦ Extension</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="beat" id="built">
+    <div class="rail"><span class="n">04</span><span class="l mono">What I built</span></div>
+    <div class="body">
+      <h2>Every AI suggestion arrives with its evidence.</h2>
+      <p class="detail">The shipped rules, carried through the moments where they matter most. These screens extend the original product to show how each rule behaves in more states.</p>
+      <div class="gallery detail">
+        <figure>
+          <div class="shot"><img src="{{ad13}}" alt="Low-confidence review: the AI's reading of the odometer, the source photo and policy document side by side, and three ranked values to choose from." width="1440" height="1024"></div>
+          <figcaption><strong>Reviewing a low-confidence field.</strong> The source next to the reading, ranked alternatives, and a decision that gets logged. <span class="tag ext">✦ Extension</span></figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{su6}}" alt="AI Copilot settings with an impact preview: turning on auto-request documentation would move the Ready to run lane from 4 to 16 claims, with guardrails that don't change." width="1440" height="1024"></div>
+          <figcaption><strong>Autonomy as a setting.</strong> Before saving, admins see how a change would affect today's queue and which guardrails stay locked. <span class="tag ext">✦ Extension</span> <span class="tag hyp">Hypothesis</span></figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{ad24}}" alt="Approval package for a supervisor: overage explained, similar-claims match, evidence documents and the adjuster's note, prepared by AI for review before sending." width="1440" height="1024"></div>
+          <figcaption><strong>Approvals with the evidence attached.</strong> The AI prepares the package; the adjuster reviews it, adds a note and sends it. <span class="tag ext">✦ Extension</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="result">
+    <div class="rail"><span class="n">05</span><span class="l mono">What happened</span></div>
+    <div class="body">
+      <h2>Weeks became days, and the old tool was retired.</h2>
+      <div class="result">
+        <div><b>−68%</b><span>claim resolution time, client-reported over 3 months. Some claims now close in hours.</span></div>
+        <div><b>90%+</b><span>adoption among ~500 adjusters. The rest were still in training at 2 months.</span></div>
+        <div><b>1</b><span>tool across the company. ClaimPro replaced the previous one.</span></div>
+      </div>
+      <div class="learn detail">
+        <span class="mono">What I'd do differently</span>
+        <p>Track overrides from day one: how often adjusters correct the AI, and why. That data shows where autonomy can safely grow next.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="next">
+    <div class="deep">
+      <span class="mono">Want the full process?</span>
+      <p>Research artifacts, the service blueprint, every failure state, all four trade-offs and the design system behind ClaimPro.</p>
+      <a class="btn-primary" href="/work/claimpro/deep/">Read the deep dive <span aria-hidden="true">→</span></a>
+    </div>
+    {{next}}
+  </footer>

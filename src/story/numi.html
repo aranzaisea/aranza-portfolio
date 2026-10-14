@@ -1,0 +1,129 @@
+<header class="case">
+    <span class="mono">{{no}} · Numi · AI meal planner · iOS concept</span>
+    <h1>A meal planner that starts from your fridge, and <em>tells you when it's guessing.</em></h1>
+    <p class="lede">Numi plans what to eat around what you already bought, your schedule and your goals. I designed it end to end with one rule throughout: the AI says what it saw, what it assumed and what it won't guess.</p>
+    <dl class="meta detail">
+      <div><dt class="mono">Role</dt><dd>Product Designer, solo. Problem framing, flows, AI behaviour, UI and prototype.</dd></div>
+      <div><dt class="mono">Team</dt><dd>Just me.</dd></div>
+      <div><dt class="mono">Timeline</dt><dd>2026.</dd></div>
+      <div><dt class="mono">Context</dt><dd>Consumer app for iOS. An independent concept, not a shipped product.</dd></div>
+    </dl>
+    <div class="chips"><span>Visible uncertainty</span><span>Receipt, photo and voice input</span><span>Audited against HAX</span></div>
+  </header>
+
+  <section class="beat" id="problem">
+    <div class="rail"><span class="n">01</span><span class="l mono">The problem</span></div>
+    <div class="body">
+      <h2>Meal planners assume you'll shop for their plan. Most people do it the other way round.</h2>
+      <p class="detail">People buy groceries first and then wonder what to cook. Numi flips the usual order: you scan your receipt or tell it what you bought, it keeps a picture of your fridge, and it plans around that and around your day. A late meeting means a shorter dinner.</p>
+      <div class="phones detail">
+        <figure>
+          <div class="shot"><img src="{{today}}" alt="Today screen: Numi noticed a late meeting in the calendar and made dinner shorter and lighter, with a That's not right button." width="402" height="874"></div>
+          <figcaption><strong>Today.</strong> Numi says what it changed and why, with a way to say it got it wrong.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{recipe}}" alt="Recipe for teriyaki chicken with vegetables, with a Why Numi picked this note: it uses the broccoli and chicken in your fridge." width="402" height="874"></div>
+          <figcaption><strong>Recipe.</strong> Why this one, in a line: what's in your fridge and the time you have.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{chat}}" alt="Chat: the user asks for something quicker and Numi offers a 10-minute ham and cheese toastie from the fridge, with Use this one and Another idea buttons." width="402" height="874"></div>
+          <figcaption><strong>Chat.</strong> Answers turn into actions: use this one, or ask for another idea.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="found">
+    <div class="rail"><span class="n">02</span><span class="l mono">What I found</span></div>
+    <div class="body">
+      <h2>A plan built on a wrong fridge is useless.</h2>
+      <p class="detail">Reading a crumpled receipt or a photo of a shelf is error-prone. If Numi silently guesses what you bought, every plan after that is built on something you never had. That turned the core design problem from convenience into trust.</p>
+      <p class="insight">Numi shows what it read, marks what it assumed and refuses to guess when it can't see.</p>
+      <p class="detail">I framed the problem, sketched with Crazy 8s, mapped low-fidelity flows and compared three layouts for the Today screen before going to high fidelity. Every way of getting food in had to answer the same three questions.</p>
+      <div class="phones detail">
+        <figure>
+          <div class="shot"><img src="{{review}}" alt="Review your receipt: eight items read from a Neighborhood Market receipt, each with a quantity and editable, and an Add to fridge button." width="402" height="874"></div>
+          <figcaption><strong>What did it read?</strong> Every item from the receipt, checked and editable before it reaches the fridge.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{understood}}" alt="Here's what I understood: goal, restrictions, time, people, schedule marked Assumed, and budget, each tappable to correct." width="402" height="874"></div>
+          <figcaption><strong>What did it assume?</strong> The schedule wasn't mentioned, so it's labelled “assumed” right there.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{noread}}" alt="I couldn't read your receipt: Numi explains the photo is blurry and too dark and it would rather not guess, with Take another photo and Choose another method." width="402" height="874"></div>
+          <figcaption><strong>What won't it guess?</strong> A blurry receipt gets refused, with the reason and two ways forward.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="decision">
+    <div class="rail"><span class="n">03</span><span class="l mono">The key decision</span></div>
+    <div class="body">
+      <h2>Refuse a bad receipt instead of returning a partial guess.</h2>
+      <p class="detail">Below a confidence bar, Numi asks for another photo or another method and explains why. It's one more step for the user. A wrong item in the fridge silently ruins a week of plans.</p>
+      <div class="choice detail">
+        <div class="col kept">
+          <span class="mono">What I chose</span>
+          <ul>
+            <li><b>Refuse below a confidence bar, and say why.</b>One more step now beats a week of plans built on food you never bought. <span><span class="tag hyp">Hypothesis</span></span></li>
+            <li><b>Label assumptions in place.</b>Labels add some noise to a summary, and they're the only way to notice a wrong default before it shapes the plan. <span><span class="tag hyp">Hypothesis</span></span></li>
+          </ul>
+        </div>
+        <div class="col dropped">
+          <span class="mono">What I discarded</span>
+          <ul>
+            <li><b>A partial guess from a bad photo</b>It looks helpful and quietly fills the fridge with mistakes.</li>
+            <li><b>Defaults hidden in a settings page</b>Cleaner screens, and nobody finds the assumption until dinner is wrong.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="built">
+    <div class="rail"><span class="n">04</span><span class="l mono">What I built</span></div>
+    <div class="body">
+      <h2>An assistant you can correct, at every step.</h2>
+      <p class="detail">With a working prototype, I audited every AI moment against Microsoft's Human-AI interaction guidelines (HAX) and redesigned the screens that fell short, with clearer explanations and easier ways to correct the AI.</p>
+      <div class="phones detail">
+        <figure>
+          <div class="shot"><img src="{{fridge}}" alt="Your fridge: 18 items updated today, grouped into produce and protein, with Used today and Added today labels." width="402" height="874"></div>
+          <figcaption><strong>The fridge keeps itself.</strong> It adds what you buy, subtracts what you cook and labels each change.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{swap}}" alt="Swap dinner sheet: three options from the fridge and a This changes tomorrow note explaining the knock-on effect on tomorrow's lunch." width="402" height="874"></div>
+          <figcaption><strong>Swaps show the knock-on effect.</strong> Picking the stir-fry changes tomorrow's lunch, and Numi says so first.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{knows}}" alt="What Numi knows: what it has learned, each with its source and a Forget button, plus toggles for the sources it uses." width="402" height="874"></div>
+          <figcaption><strong>What Numi knows, and how to make it forget.</strong> Each thing it learned shows its source.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="result">
+    <div class="rail"><span class="n">05</span><span class="l mono">Where it stands</span></div>
+    <div class="body">
+      <h2>A complete, audited prototype. Not yet tested with users.</h2>
+      <div class="result">
+        <div><b>End to end</b><span>From the first receipt to tonight's dinner, designed as one flow for iOS.</span></div>
+        <div><b>HAX</b><span>Every AI moment checked against Microsoft's Human-AI guidelines, and the weak screens redesigned.</span></div>
+        <div><b>Concept</b><span>No metrics to report. The trade-offs above are hypotheses to test.</span></div>
+      </div>
+      <div class="learn detail">
+        <span class="mono">What I'd test next</span>
+        <p>Whether people notice the “assumed” label before it shapes their week, and whether refusing a blurry receipt feels honest or just slow.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="next">
+    <div class="deep">
+      <span class="mono">Want the full process?</span>
+      <p>Every input method, the error states, the process from Crazy 8s to the audit, and both trade-offs in detail.</p>
+      <a class="btn-primary" href="/work/numi/deep/">Read the deep dive <span aria-hidden="true">→</span></a>
+    </div>
+    {{next}}
+  </footer>

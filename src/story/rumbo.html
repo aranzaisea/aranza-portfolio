@@ -1,0 +1,164 @@
+<header class="case">
+    <span class="mono">{{no}} · Club Rumbo · Loyalty app · Launched MVP</span>
+    <h1>A rewards program people had, and <em>finally started using.</em></h1>
+    <p class="lede">A fuel-station chain had a points program almost nobody understood. In one month, I led the design of an MVP that closes the loop inside the app: one scan to earn, a catalog to redeem, on iOS and Android.</p>
+    <dl class="meta detail">
+      <div><dt class="mono">Role</dt><dd>Lead Product Designer. Set the scope, ran the interviews, synthesized the findings and defined the flows.</dd></div>
+      <div><dt class="mono">Team</dt><dd>Me as lead, one supporting product designer, client stakeholders. Visual design and final UI shared between us.</dd></div>
+      <div><dt class="mono">Timeline</dt><dd>One-month MVP, 2023, at Perficient.</dd></div>
+      <div><dt class="mono">Context</dt><dd>Loyalty app for a fuel-station chain, shown as Club Rumbo.</dd></div>
+    </dl>
+    <div class="stats">
+      <div class="stat"><b>1 month</b><span>from scope to MVP design</span></div>
+      <div class="stat"><b>20</b><span>user interviews</span></div>
+      <div class="stat"><b>2</b><span>platforms, iOS and Android</span></div>
+    </div>
+  </header>
+
+  <section class="beat" id="problem">
+    <div class="rail"><span class="n">01</span><span class="l mono">The problem</span></div>
+    <div class="body">
+      <h2>The points program existed. Almost nobody used it.</h2>
+      <p class="detail">The business goal was loyalty, using a points system the company already had. Earning depended on how you paid and whether the attendant remembered. Redeeming happened somewhere else, with a PDF catalog and a validation at the counter.</p>
+      <div class="qs three">
+        <div class="q quote"><b>“No entiendo dónde canjear mis puntos.”</b><span>I don't understand where to redeem my points.</span></div>
+        <div class="q quote"><b>“¿Cómo acumulo puntos?”</b><span>How do I earn points?</span></div>
+        <div class="q quote"><b>“No veo mis puntos.”</b><span>I can't see my points.</span></div>
+      </div>
+      <p class="detail" style="font-size:14px;color:var(--ink-3)">Real quotes from the interviews, in Spanish.</p>
+    </div>
+  </section>
+
+  <section class="beat" id="found">
+    <div class="rail"><span class="n">02</span><span class="l mono">What I found</span></div>
+    <div class="body">
+      <h2>People couldn't see the loop from earning to spending.</h2>
+      <p class="detail">I ran 20 interviews with drivers, as many as the timeline allowed, plus workshops with stakeholders, a pain-point map per journey and a heuristic evaluation of the existing app. The findings pointed to five problems: friction to earn, dependence on third parties, no earn-to-redeem loop, invisible benefits and low understanding of the system.</p>
+      <p class="insight">A number of points means nothing until it turns into something you can get.</p>
+      <div class="qs three detail">
+        <div class="q"><b>User autonomy</b><span>Earning shouldn't depend on the attendant. One scan at the pump or on a receipt.</span></div>
+        <div class="q"><b>A complete loop</b><span>Every earn screen points to what you can redeem; every reward shows how far you are.</span></div>
+        <div class="q"><b>A system people understand</b><span>Points translated into things: “enough for a full car wash + 4 coffees”.</span></div>
+      </div>
+      <div class="phones bare detail">
+        <figure>
+          <div class="shot"><img src="{{home}}" alt="Home on iOS: 51,034 points, enough for a full car wash and 4 coffees, with Pay, Add receipt and Redeem, expiring points and rewards you can redeem now." width="402" height="874"></div>
+          <figcaption><strong>Home, iOS.</strong> Points as things, the three jobs one tap away, and expiring points with what to use them on.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{homeA}}" alt="The same Home on Android with Material 3 components and a floating scan button." width="402" height="874"></div>
+          <figcaption><strong>Home, Android.</strong> Same structure, native components on each platform.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{dark}}" alt="Home on iOS in dark mode." width="402" height="874"></div>
+          <figcaption><strong>Dark mode.</strong> Built on semantic light and dark themes.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="decision">
+    <div class="rail"><span class="n">03</span><span class="l mono">The key decision</span></div>
+    <div class="body">
+      <h2>Cut what didn't serve the loop, and make earning one scan.</h2>
+      <p class="detail">The original brief included ordering gas cylinders. It was the least-used feature, because people bought them directly at the station, so I took it out of the MVP. That left one month for the two things the interviews asked for: earning and redeeming points.</p>
+      <div class="choice detail">
+        <div class="col kept">
+          <span class="mono">What I chose</span>
+          <ul>
+            <li><b>One scan to earn, at the pump or on a receipt.</b>Points no longer depend on how you pay or on the attendant. <span><span class="tag ship">MVP</span></span></li>
+            <li><b>A catalog inside the app, and a code the attendant scans.</b>Validation stays where it already happens, at the station. <span><span class="tag ship">MVP</span></span></li>
+            <li><b>Two redeem flows for two kinds of reward.</b>A coffee is a code on the spot; a product ships to a station, with tracking. <span><span class="tag ship">MVP</span></span></li>
+          </ul>
+        </div>
+        <div class="col dropped">
+          <span class="mono">What I discarded</span>
+          <ul>
+            <li><b>Ordering gas cylinders</b>In the brief, and the least-used feature. People bought them at the station.</li>
+            <li><b>The PDF catalog and counter validation</b>The reason people didn't know where to spend their points.</li>
+            <li><b>An AI layer I explored on my own</b>Natural-language search and adaptive content. Search, filters and rule-based picks covered the need with less risk.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="phones bare">
+        <figure>
+          <div class="shot"><img src="{{scan}}" alt="Scan the pump's QR code, with Pay at pump and Add receipt in one scanner and an Enter pump number fallback." width="402" height="874"></div>
+          <figcaption><strong>One scanner.</strong> Pay at the pump or add a receipt, from the same screen.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{confirm}}" alt="Confirm fill-up: station and pump, amount, and You'll earn +200 pts with this fill-up before paying." width="402" height="874"></div>
+          <figcaption><strong>Points before you pay.</strong> The fill-up shows what it will earn.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{earned}}" alt="Payment complete: +200 points, new balance, distance to a saved goal and a See what I can redeem button." width="402" height="874"></div>
+          <figcaption><strong>From earning to redeeming.</strong> The confirmation ends on what you can get.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="built">
+    <div class="rail"><span class="n">04</span><span class="l mono">What I built</span></div>
+    <div class="body">
+      <h2>A catalog in the app, and a code that works with bad signal.</h2>
+      <p class="detail">The flows come from the 2023 MVP. For this portfolio I rebuilt the UI on iOS 27 and Android 17 with a variable-based foundation and a UI kit with both platform versions of each component. The palette is new, so the original brand isn't recognizable.</p>
+      <div class="phones bare detail">
+        <figure>
+          <div class="shot"><img src="{{catalog}}" alt="Rewards catalog: balance, category filters and rewards you can redeem now." width="402" height="874"></div>
+          <figcaption><strong>Catalog.</strong> What you can redeem now comes first, next to your balance.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{goal}}" alt="Reward detail with not enough points: 8,966 pts to go, 85%, about 6 full-tank fill-ups, and Save as goal." width="402" height="874"></div>
+          <figcaption><strong>A no becomes a goal.</strong> How far you are, in points and in fill-ups.</figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{code}}" alt="Your reward: a QR code with brightness turned up, works offline, and Add to Apple Wallet." width="402" height="874"></div>
+          <figcaption><strong>The attendant scans it.</strong> Works offline, and the Wallet pass was part of the MVP.</figcaption>
+        </figure>
+      </div>
+      <span class="mono subhead detail">When things go wrong</span>
+      <div class="phones bare detail">
+        <figure>
+          <div class="shot"><img src="{{noqr}}" alt="QR not readable: red corners and a message to add more light or enter the pump number." width="402" height="874"></div>
+          <figcaption><strong>QR not readable.</strong> The fallback is right there: more light, or type the pump number. <span class="tag res">Edge case</span></figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{noconn}}" alt="No connection dialog: the redemption didn't go through and no points were deducted, with Try again." width="402" height="874"></div>
+          <figcaption><strong>No connection.</strong> It says first that no points were deducted. <span class="tag res">Edge case</span></figcaption>
+        </figure>
+        <figure>
+          <div class="shot"><img src="{{delay}}" alt="Order delayed by 2 days with the reason, new pickup date and Cancel and refund 4,500 pts." width="402" height="874"></div>
+          <figcaption><strong>Order delayed.</strong> A reason, a new date and an instant refund. <span class="tag res">Edge case</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="beat" id="result">
+    <div class="rail"><span class="n">05</span><span class="l mono">What happened</span></div>
+    <div class="body">
+      <h2>It launched in 2023. I don't have the numbers, so I won't invent them.</h2>
+      <div class="result">
+        <div><b class="word">Launched</b><span>The MVP went live on iOS and Android in 2023.</span></div>
+        <div><b class="word">1 loop</b><span>Earning and redeeming in one app, with no PDF catalog and no counter paperwork.</span></div>
+        <div><b class="word">No metrics</b><span>The client didn't share results. Below is how I'd measure it.</span></div>
+      </div>
+      <div class="learn detail">
+        <span class="mono">What I'd measure</span>
+        <p>The share of fill-ups linked to an account, the share of members who redeem at least once, the time from first earn to first redeem, and support requests about points.</p>
+      </div>
+      <div class="note-ai detail">
+        <span class="mono" style="color:var(--ai)">Appendix · personal exploration, not in the product</span>
+        <p>On my own, I explored natural-language search (“something for the kids under 500 points”) and content that adapts to each driver's habits. In a one-month MVP for a program people didn't understand yet, making the basic loop visible came first.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="next">
+    <div class="deep">
+      <span class="mono">Want the full process?</span>
+      <p>Every flow with its edge cases, the three visual directions, the iOS and Android foundations, and the AI exploration in detail.</p>
+      <a class="btn-primary" href="/work/rumbo/deep/">Read the deep dive <span aria-hidden="true">→</span></a>
+    </div>
+    {{next}}
+  </footer>

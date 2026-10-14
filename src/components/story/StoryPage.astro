@@ -1,0 +1,28 @@
+---
+import Base from '../../layouts/Base.astro';
+import Dial from '../Dial.astro';
+import { ui, home, caseUrl, SITE } from '../../i18n/ui';
+import { bySlug, nextCase } from '../../data/cases';
+import './story.css';
+
+const { slug, html } = Astro.props as { slug: string; html: string };
+const lang = 'en';
+const t = ui[lang];
+const meta = bySlug(slug);
+const nx = nextCase(slug);
+const next = `<a class="nx" href="${caseUrl(lang, nx.slug)}"><span class="mono">${t.next} · ${nx.no}</span><b>${nx.name} →</b></a>`;
+const body = html
+  .replaceAll('{{no}}', `case_${meta.no}`)
+  .replaceAll('{{next}}', next)
+  .replace(/\{\{(\w+)\}\}/g, (_, k) => `/story/${slug}/${k}.webp`);
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'CreativeWork', name: meta.seoTitle[lang], description: meta.seoDesc[lang],
+  url: new URL(caseUrl(lang, meta.slug), SITE).href, inLanguage: lang, image: new URL(`/og/${meta.slug}.png`, SITE).href,
+  author: { '@type': 'Person', name: 'Aranza Isea', url: SITE + '/' },
+};
+---
+<Base lang={lang} title={`${meta.seoTitle[lang]} | Aranza Isea`} description={meta.seoDesc[lang]} ogImage={`/og/${meta.slug}.png`} jsonLd={jsonLd} variant="case"
+  crumbs={[{ label: t.allWork, href: home(lang) + '#work' }, { label: meta.name }]}>
+  <Fragment slot="tools"><Dial lang={lang} why={false} /></Fragment>
+  <article class="story wrap" set:html={body} />
+</Base>
