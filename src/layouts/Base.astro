@@ -37,7 +37,7 @@ const anchor = (id: string) => (variant === 'home' ? `#${id}` : `${h}#${id}`);
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_AR'} />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#0F131B" />
+  <meta name="theme-color" content="#F4F5F8" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preload" href="/fonts/geist-400.woff2" as="font" type="font/woff2" crossorigin />
@@ -76,7 +76,7 @@ const anchor = (id: string) => (variant === 'home' ? `#${id}` : `${h}#${id}`);
             <a href={anchor('approach')}>{t.nav.approach}</a>
             <a href={patternsUrl(lang)} aria-current={path.includes('/patterns') ? 'page' : undefined}>{t.nav.patterns}</a>
             <a href={anchor('experience')}>{t.nav.experience}</a>
-            <a href={anchor('about')}>{t.nav.about}</a>
+            <a href={anchor('contact')}>{t.nav.about}</a>
             {!noAlt && (
               <div class="lang">
                 <a href={altPath(path, 'en')} hreflang="en" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>

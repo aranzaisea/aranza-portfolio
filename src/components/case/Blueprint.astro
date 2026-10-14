@@ -50,8 +50,8 @@ const { stages, lanes, caption, d } = Astro.props;
   .bp__row--sys i,.bp__it--sys i{background:var(--ink-faint)}
   .bp__row--ai i,.bp__it--ai i{background:var(--ai)}
   .bp__row--pain i,.bp__it--pain i{background:#F2A99B}
-  .bp__row--pain .bp__cell:not(.bp__cell--empty){background:#2a1a1a;border-color:#5a2f2a;color:#F4C7BE}
-  .bp__row--ai .bp__cell:not(.bp__cell--empty){background:var(--ai-bg);border-color:#33407a;color:var(--ink)}
+  .bp__row--pain .bp__cell:not(.bp__cell--empty){background:var(--risk-bg);border-color:var(--risk-line);color:var(--risk)}
+  .bp__row--ai .bp__cell:not(.bp__cell--empty){background:var(--ai-bg);border-color:var(--ai-line);color:var(--ink)}
   .bp__row--ai{margin-top:10px}
   .bp__cards{display:none;list-style:none;margin:0;padding:0}
   .bp__cap{margin:18px 0 0;font-size:14px;color:var(--ink-faint);max-width:80ch}
@@ -63,7 +63,7 @@ const { stages, lanes, caption, d } = Astro.props;
     .bp__card dl{margin:0;display:flex;flex-direction:column;gap:10px}
     .bp__it dt{display:flex;align-items:center;gap:8px;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
     .bp__it dd{margin:3px 0 0 17px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
-    .bp__it--pain dd{color:#F4C7BE}
+    .bp__it--pain dd{color:var(--risk)}
     .bp__it--ai dd{color:var(--ink)}
   }
 </style>

@@ -1,9 +1,9 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Img from '../Img.astro';
-import CaseCard from './CaseCard.astro';
 import { CASES } from '../../data/cases';
-import { CV, EMAIL, LINKEDIN, WEBTOON, SITE, caseUrl, patternsUrl, type Lang } from '../../i18n/ui';
+import { CV, EMAIL, LINKEDIN, SITE, caseUrl, patternsUrl, type Lang } from '../../i18n/ui';
+import engine from './particles.js?raw';
 
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -12,22 +12,26 @@ const en = lang === 'en';
 const c = en ? {
   title: 'Aranza Isea — Senior Product Designer · AI products',
   desc: 'Senior Product Designer with 10+ years. I design AI copilots and agent workflows where decisions carry real risk: autonomy, confidence, failure states and audit trails, so people stay in control.',
-  eyebrow: 'Senior Product Designer · AI products',
-  h1a: 'I design AI that knows', h1b: 'when to hand the decision back.',
+  role: 'Senior Product Designer · AI products · Buenos Aires',
+  thesis: ['I design ', 'AI', ' that knows when to ', 'hand the decision back.'],
   lead: 'Copilots and agent workflows for work where a wrong answer costs money or trust. I design the AI’s behaviour as carefully as the screens: how much it can do alone, how sure it is, what happens when it fails, and who signed what.',
   ctaWork: 'See the work', ctaCv: 'Download resume',
-  trace: 'Illustrative trace · ClaimPro hand-off rule',
-  stats: [['10+', 'years in product, UX, UI and research'], ['~500', 'adjusters using the ClaimPro copilot'], ['−68%', 'claim resolution time with ClaimPro', 'client-reported, 3 months'], ['+65%', 'Business accounts after Off Dep launched']],
-  workEyebrow: 'Selected work', workH: 'Some things I’ve designed.',
+  switchLabel: 'Ver en español', switchHref: '/es/', switchLang: 'es',
+  reduced: 'Your device asks for reduced motion, so the background starts still.',
+  sigEyebrow: 'Signal', sigH: 'Results, each with its source.',
+  sigLead: 'Every number below comes with who measured it and over what period. If a case has no metrics yet, it says so.',
+  stats: [['10+', 'years in product, UX, UI and research', '2015 → 2026'], ['~500', 'adjusters using the ClaimPro copilot', '90%+ adoption · 2 months'], ['−68%', 'claim resolution time with ClaimPro', 'client-reported · 3 months'], ['+65%', 'Business accounts after Off Dep launched', 'Off Dep Business']],
+  workEyebrow: 'Selected work · 6 cases', workH: 'Some things I’ve designed.',
   workLead: 'Every case opens with a 30-second summary. Use the reading dial inside to go deeper.',
-  apEyebrow: 'Approach', apH: 'Three rules I design AI by.',
+  read: 'Read →', concept: 'Independent concept',
+  apEyebrow: 'Approach · the person stays at the centre', apH: 'Three rules I design AI by.',
   principles: [
     ['Autonomy is a setting, not a launch decision', 'The AI drafts and a person approves by default. Teams earn more autonomy per task, with thresholds an admin can see, simulate and undo.'],
     ['Confidence has to change the interface', 'A number nobody acts on is decoration. Below the threshold, the screen changes: fields are flagged, sources are shown and the case goes to a person.'],
     ['Design the failure first', 'Unreadable documents, sources that disagree, the model being down. If the unhappy path isn’t designed, people stop trusting the happy one.'],
   ],
-  patternsCta: 'See the AI patterns behind these cases →',
-  exEyebrow: 'Experience', exH: '10+ years, from visual systems to AI products.',
+  patternsCta: '→ See the AI patterns behind these cases',
+  exEyebrow: 'Experience log', exH: '10+ years, from visual systems to AI products.',
   jobs: [
     ['2025 – now', 'Career break', 'Sabbatical', 'Case studies, an independent AI concept (Numi) and AI certifications from IBM and Coderhouse. Available to start immediately.'],
     ['2024 – 2025', 'Senior Product Designer · AI products', 'Perficient', 'Owned ClaimPro end to end and designed Vantage, a multi-agent compliance platform.'],
@@ -36,33 +40,34 @@ const c = en ? {
     ['2017 – 2019', 'Product Designer', 'Distrito Moda', 'Multi-sided fashion e-commerce for retail and wholesale buyers, from research to handoff.'],
     ['2015 – 2017', 'Junior UX/UI Designer', 'Tsserapp', 'Moved from graphic design into UX/UI design: user flows, interface design and usability.'],
   ],
-  edu: 'Diploma in Product Design, Coderhouse · Specialization in User Experience, Universidad Rafael Belloso Chacín · Bachelor’s Degree in Graphic Design, Universidad Rafael Belloso Chacín · AI certifications from IBM and Coderhouse',
-  abEyebrow: 'About', abH: 'Hi, I’m Aranza.',
-  about: [
-    'I’m a product designer in Buenos Aires, working remotely (GMT-3). I don’t run the same playbook twice: every project starts with a diagnostic of the goal, the scope and what we already know, and the method follows from there.',
-    'Spanish is my first language and I work in English every day (C1).',
-    'Outside work I write and draw a webcomic, Delirium.',
-  ],
-  comic: 'Read Delirium on Webtoon ↗',
-  ctH: 'Hiring for an AI product team?', ctLead: 'I’m open to senior product design roles, remote or hybrid from Buenos Aires.',
+  edu: 'Diploma in Product Design, Coderhouse · Specialization in User Experience and Bachelor’s in Graphic Design, Universidad Rafael Belloso Chacín · AI certifications from IBM and Coderhouse',
+  ctEyebrow: 'Open to senior roles · remote or hybrid from Buenos Aires (GMT-3)',
+  ctH: 'Hiring for an AI product team?', available: 'Available now', copy: 'copy', copied: 'copied', selected: 'selected',
+  portraitAlt: 'Portrait of Aranza Isea',
+  labels: { names: ['name', 'signal', 'structure', 'human core'], noise: 'noise', play: 'play motion', pause: 'pause motion', playAnim: '▶  Play animation', replay: '↻  Replay' },
+  signal: 'signal', field: 'Particle field',
 } : {
   title: 'Aranza Isea — Product Designer Senior · Productos con IA',
   desc: 'Product Designer Senior con más de 10 años. Diseño copilotos de IA y flujos con agentes donde las decisiones tienen riesgo real: autonomía, confianza, estados de falla y trazabilidad, para que las personas mantengan el control.',
-  eyebrow: 'Product Designer Senior · Productos con IA',
-  h1a: 'Diseño IA que sabe', h1b: 'cuándo devolver la decisión.',
+  role: 'Senior Product Designer · Productos con IA · Buenos Aires',
+  thesis: ['Diseño ', 'IA', ' que sabe cuándo ', 'devolver la decisión.'],
   lead: 'Copilotos y flujos con agentes para trabajos donde una respuesta equivocada cuesta dinero o confianza. Diseño el comportamiento de la IA con el mismo cuidado que las pantallas: cuánto puede hacer sola, qué tan segura está, qué pasa cuando falla y quién firmó qué.',
   ctaWork: 'Ver proyectos', ctaCv: 'Descargar CV',
-  trace: 'Traza ilustrativa · regla de derivación de ClaimPro',
-  stats: [['10+', 'años en producto, UX, UI e investigación'], ['~500', 'ajustadores usan el copiloto de ClaimPro'], ['−68%', 'tiempo de resolución de siniestros con ClaimPro', 'dato del cliente, 3 meses'], ['+65%', 'cuentas Business tras el lanzamiento de Off Dep']],
-  workEyebrow: 'Proyectos', workH: 'Algunas cosas que diseñé.',
+  switchLabel: 'Read in English', switchHref: '/', switchLang: 'en',
+  reduced: 'Tu dispositivo pide reducir el movimiento, así que el fondo empieza quieto.',
+  sigEyebrow: 'Señal', sigH: 'Resultados, cada uno con su fuente.',
+  sigLead: 'Cada número indica quién lo midió y en qué período. Si un caso todavía no tiene métricas, lo dice.',
+  stats: [['10+', 'años en producto, UX, UI e investigación', '2015 → 2026'], ['~500', 'ajustadores usan el copiloto de ClaimPro', '90%+ de adopción · 2 meses'], ['−68%', 'tiempo de resolución de siniestros con ClaimPro', 'dato del cliente · 3 meses'], ['+65%', 'cuentas Business tras el lanzamiento de Off Dep', 'Off Dep Business']],
+  workEyebrow: 'Proyectos · 6 casos', workH: 'Algunas cosas que diseñé.',
   workLead: 'Cada caso abre con un resumen de 30 segundos. Con el dial de lectura podés profundizar.',
-  apEyebrow: 'Enfoque', apH: 'Tres reglas con las que diseño IA.',
+  read: 'Ver →', concept: 'Concepto independiente',
+  apEyebrow: 'Enfoque · la persona queda en el centro', apH: 'Tres reglas con las que diseño IA.',
   principles: [
     ['La autonomía es un ajuste, no una decisión de lanzamiento', 'Por defecto la IA prepara y una persona aprueba. Cada equipo gana más autonomía por tarea, con umbrales que un admin puede ver, simular y deshacer.'],
     ['La confianza tiene que cambiar la interfaz', 'Un número sobre el que nadie actúa es decoración. Debajo del umbral la pantalla cambia: se marcan campos, se muestran las fuentes y el caso pasa a una persona.'],
     ['Primero se diseña la falla', 'Documentos ilegibles, fuentes que no coinciden, el modelo caído. Si el camino infeliz no está diseñado, la gente deja de confiar en el feliz.'],
   ],
-  patternsCta: 'Ver los patrones de IA detrás de estos casos →',
+  patternsCta: '→ Ver los patrones de IA detrás de estos casos',
   exEyebrow: 'Trayectoria', exH: 'Más de 10 años, de sistemas visuales a productos con IA.',
   jobs: [
     ['2025 – hoy', 'Pausa profesional', 'Año sabático', 'Casos de estudio, un concepto independiente con IA (Numi) y certificaciones de IA de IBM y Coderhouse. Disponible para empezar de inmediato.'],
@@ -72,15 +77,12 @@ const c = en ? {
     ['2017 – 2019', 'Product Designer', 'Distrito Moda', 'E-commerce de moda multilado para compradores minoristas y mayoristas, del research al handoff.'],
     ['2015 – 2017', 'Junior UX/UI Designer', 'Tsserapp', 'Pasé del diseño gráfico al diseño UX/UI: flujos de usuario, diseño de interfaces y usabilidad.'],
   ],
-  edu: 'Diplomatura en Product Design, Coderhouse · Especialización en Experiencia de Usuario, Universidad Rafael Belloso Chacín · Licenciatura en Diseño Gráfico, Universidad Rafael Belloso Chacín · Certificaciones de IA de IBM y Coderhouse',
-  abEyebrow: 'Sobre mí', abH: 'Hola, soy Aranza.',
-  about: [
-    'Soy product designer en Buenos Aires y trabajo de forma remota (GMT-3). No repito la misma receta: cada proyecto empieza con un diagnóstico del objetivo, el alcance y lo que ya sabemos, y el método sale de ahí.',
-    'El español es mi lengua materna y trabajo en inglés todos los días (C1).',
-    'Fuera del trabajo escribo y dibujo un webcomic, Delirium.',
-  ],
-  comic: 'Leer Delirium en Webtoon ↗',
-  ctH: '¿Buscás diseño para un equipo de producto con IA?', ctLead: 'Estoy abierta a roles senior de diseño de producto, remotos o híbridos desde Buenos Aires.',
+  edu: 'Diplomatura en Product Design, Coderhouse · Especialización en Experiencia de Usuario y Licenciatura en Diseño Gráfico, Universidad Rafael Belloso Chacín · Certificaciones de IA de IBM y Coderhouse',
+  ctEyebrow: 'Abierta a roles senior · remoto o híbrido desde Buenos Aires (GMT-3)',
+  ctH: '¿Buscás diseño para un equipo de producto con IA?', available: 'Disponible ya', copy: 'copiar', copied: 'copiado', selected: 'seleccionado',
+  portraitAlt: 'Retrato de Aranza Isea',
+  labels: { names: ['nombre', 'señal', 'estructura', 'núcleo humano'], noise: 'ruido', play: 'reanudar', pause: 'pausar movimiento', playAnim: '▶  Reproducir animación', replay: '↻  Repetir' },
+  signal: 'señal', field: 'Campo de partículas',
 };
 
 const jsonLd = {
@@ -94,144 +96,241 @@ const jsonLd = {
     skills: 'AI product design, human-in-the-loop design, user research, interaction design, prototyping, design systems, Figma' },
   subjectOf: { '@type': 'DigitalDocument', name: en ? 'Resume' : 'CV', encodingFormat: 'application/pdf', url: SITE + CV[lang] },
 };
-const [first, ...rest] = CASES;
 ---
 <Base lang={lang} title={c.title} description={c.desc} jsonLd={jsonLd} variant="home">
-  <section class="hero wrap">
-    <div class="hero__text">
-      <p class="eyebrow">{c.eyebrow}</p>
-      <h1 class="h-display">{c.h1a} <span class="hero__b">{c.h1b}</span></h1>
-      <p class="lead">{c.lead}</p>
-      <div class="hero__cta">
-        <a class="btn btn--primary" href="#work">{c.ctaWork}</a>
-        <a class="btn btn--ghost" href={CV[lang]} download>{c.ctaCv} ↓</a>
+  <canvas id="field" aria-hidden="true" data-labels={JSON.stringify(c.labels)}></canvas>
+  <div class="scrim" aria-hidden="true"></div>
+
+  <div class="lp">
+    <section class="hero wrap" data-stage="0">
+      <div class="idblock">
+        <h1 class="name">Aranza Isea</h1>
+        <p class="role mono">{c.role}</p>
       </div>
-    </div>
-    <aside class="trace" aria-label={c.trace}>
-      <p class="trace__h"><span class="label">{c.trace}</span></p>
-      <ol class="trace__log mono">
-        <li><span class="k">intake</span> police_report.pdf <span class="ok">read ✓</span></li>
-        <li><span class="k">draft</span> 14 fields filled · sources linked</li>
-        <li><span class="k">field</span> liability <span class="warn">confidence 82%</span></li>
-        <li><span class="k">rule</span> &lt; 85% → <span class="hu">human review</span></li>
-        <li><span class="k">handoff</span> adjuster · reason: sources disagree</li>
-        <li><span class="k">adjuster</span> corrected · reason saved <span class="ok">logged</span></li>
-      </ol>
-      <p class="trace__f"><span class="badge badge--ai">AI drafts</span><span class="badge badge--human">{en ? 'Person decides' : 'La persona decide'}</span></p>
-    </aside>
-  </section>
+      <div class="hero__text">
+        <p class="thesis">{c.thesis[0]}<span class="t-ai">{c.thesis[1]}</span>{c.thesis[2]}<span class="t-hu">{c.thesis[3]}</span></p>
+        <p class="lead">{c.lead}</p>
+        <div class="cta">
+          <a class="btn btn--primary" href="#work">{c.ctaWork}</a>
+          <a class="btn btn--ghost" href={CV[lang]} download>{c.ctaCv} ↓</a>
+          <button type="button" class="btn play" id="heroPlay" aria-pressed="false">{c.labels.replay}</button>
+          <a class="btn btn--ghost lang-cta" href={c.switchHref} hreflang={c.switchLang} lang={c.switchLang}>
+            <span class:list={['seg', { on: !en }]} aria-hidden="true">EN</span><span class:list={['seg', { on: en }]} aria-hidden="true">ES</span>{c.switchLabel}
+          </a>
+        </div>
+        <p class="note mono" id="heroNote" hidden>{c.reduced}</p>
+      </div>
+    </section>
 
-  <section class="wrap stats" aria-label={en ? 'Highlights' : 'Destacados'}>
-    {c.stats.map(([v, l, n]) => <div><p class="stats__v">{v}</p><p class="stats__l">{l}{n && <small>{n}</small>}</p></div>)}
-  </section>
+    <section class="sec wrap" data-stage="1" aria-labelledby="signal-h">
+      <p class="eyebrow">{c.sigEyebrow}</p>
+      <h2 id="signal-h" class="h2">{c.sigH}</h2>
+      <p class="lead sub">{c.sigLead}</p>
+      <div class="metrics">
+        {c.stats.map(([v, l, s]) => <div class="metric"><span class="n">{v}</span><span class="d">{l}</span><span class="s mono">{s}</span></div>)}
+      </div>
+    </section>
 
-  <section id="work" class="wrap block">
-    <header class="block__h">
-      <p class="eyebrow">{c.workEyebrow}</p>
-      <h2 class="h-1">{c.workH}</h2>
-      <p class="lead">{c.workLead}</p>
-    </header>
-    <div class="grid-work">
-      <CaseCard c={first} lang={lang} big />
-      {rest.map((x, i) => <CaseCard c={x} lang={lang} big={i === rest.length - 1 && rest.length % 2 === 1} />)}
-    </div>
-  </section>
+    <section class="sec wrap" id="work" data-stage="2" aria-labelledby="work-h">
+      <div class="head-row">
+        <div>
+          <p class="eyebrow">{c.workEyebrow}</p>
+          <h2 id="work-h" class="h2">{c.workH}</h2>
+        </div>
+        <p>{c.workLead}</p>
+      </div>
+      <ul class="cases">
+        {CASES.map((x) => (
+          <li class="case">
+            <div class="bar mono">
+              <span class="id">case_{x.no}</span>
+              {x.ai && <span class="ai-chip">AI</span>}
+              <span class:list={['st', x.status === 'concept' ? 'c' : 'l']}><i class:list={['dot', x.status === 'concept' ? 'a' : 'l']}></i>{x.statusLabel[lang]}</span>
+            </div>
+            <div class="shot"><Img src={`cards/${x.slug}.jpg`} alt={x.coverAlt[lang]} widths={[640, 960, 1200]} sizes="(min-width: 1100px) 420px, (min-width: 640px) 46vw, 92vw" /></div>
+            <div class="body">
+              <span class="dom mono">{x.tag[lang]}</span>
+              <h3>{x.name}</h3>
+              <p class="line">{x.sentence[lang]}</p>
+              <ul class="kpis">{x.chips[lang].map((ch) => <li class="mono">{ch}</li>)}</ul>
+              <div class="foot"><span>{x.role[lang]}{x.where[lang] && ` · ${x.where[lang].replace(/^(at|en) /, '')}`}{x.year && ` · ${x.year}`}</span><a class="more" href={caseUrl(lang, x.slug)}>{c.read}<span class="sr-only"> {x.name}</span></a></div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
 
-  <section id="approach" class="wrap block">
-    <header class="block__h">
+    <section class="sec wrap" id="approach" data-stage="3" aria-labelledby="approach-h">
       <p class="eyebrow">{c.apEyebrow}</p>
-      <h2 class="h-1">{c.apH}</h2>
-    </header>
-    <ol class="principles">
-      {c.principles.map(([h, b], i) => <li><span class="mono pn">0{i + 1}</span><h3 class="h-3">{h}</h3><p>{b}</p></li>)}
-    </ol>
-    <p class="more"><a href={patternsUrl(lang)}>{c.patternsCta}</a></p>
-  </section>
+      <h2 id="approach-h" class="h2">{c.apH}</h2>
+      <ol class="rules">
+        {c.principles.map(([h, b], i) => <li class="rule"><span class="k mono">rule_0{i + 1}</span><div><h3>{h}</h3><p>{b}</p></div></li>)}
+      </ol>
+      <a class="patterns mono" href={patternsUrl(lang)}>{c.patternsCta}</a>
+    </section>
 
-  <section id="experience" class="wrap block">
-    <header class="block__h">
+    <section class="sec wrap" id="experience" data-stage="3" aria-labelledby="exp-h">
       <p class="eyebrow">{c.exEyebrow}</p>
-      <h2 class="h-1">{c.exH}</h2>
-    </header>
-    <ol class="log">
-      {c.jobs.map(([y, r, co, d]) => <li><span class="mono dim">{y}</span><div><p class="log__r"><strong>{r}</strong> · {co}</p>{d && <p class="log__d">{d}</p>}</div></li>)}
-    </ol>
-    <p class="edu mono dim">{c.edu}</p>
-  </section>
+      <h2 id="exp-h" class="h2">{c.exH}</h2>
+      <ol class="log">
+        {c.jobs.map(([y, r, co, d], i) => <li class:list={['row', { now: i === 0 }]}><span class="yr mono">{y}</span><div><p class="r">{r} <span>· {co}</span></p><p>{d}</p></div></li>)}
+      </ol>
+      <p class="edu">{c.edu}</p>
+    </section>
 
-  <section id="about" class="wrap block about">
-    <div class="about__img"><Img src="site/hero-portrait.webp" alt="Aranza Isea" widths={[398]} sizes="320px" /></div>
-    <div>
-      <p class="eyebrow">{c.abEyebrow}</p>
-      <h2 class="h-1">{c.abH}</h2>
-      <div class="prose about__p">{c.about.map((p) => <p>{p}</p>)}</div>
-      <a class="comic" href={WEBTOON} target="_blank" rel="noopener">
-        <Img src="site/delirium-art.webp" alt="Delirium webcomic artwork" widths={[160]} sizes="80px" />
-        <span>{c.comic}</span>
-      </a>
-    </div>
-  </section>
+    <section class="sec wrap contact" id="contact" data-stage="3" aria-labelledby="contact-h">
+      <figure class="portrait">
+        <Img src="site/hero-portrait.webp" alt={c.portraitAlt} widths={[398]} sizes="260px" ratio="398/524" />
+        <figcaption class="mono"><span class="avail"><i class="dot l"></i>{c.available}</span><span>GMT-3</span></figcaption>
+      </figure>
+      <div>
+        <p class="eyebrow">{c.ctEyebrow}</p>
+        <h2 id="contact-h" class="h2">{c.ctH}</h2>
+        <div class="cmd mono"><span class="p" aria-hidden="true">&gt;</span><span class="em" id="email">{EMAIL}</span><button type="button" id="copy" data-copied={c.copied} data-selected={c.selected}>{c.copy}</button></div>
+        <div class="cta">
+          <a class="btn btn--primary" href={LINKEDIN} target="_blank" rel="me noopener">LinkedIn ↗</a>
+          <a class="btn btn--ghost" href={CV[lang]} download>{c.ctaCv} ↓</a>
+        </div>
+      </div>
+    </section>
+  </div>
 
-  <section id="contact" class="wrap block contact">
-    <h2 class="h-1">{c.ctH}</h2>
-    <p class="lead">{c.ctLead}</p>
-    <div class="hero__cta">
-      <a class="btn btn--primary" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-      <a class="btn btn--ghost" href={LINKEDIN} target="_blank" rel="me noopener">LinkedIn ↗</a>
-      <a class="btn btn--ghost" href={CV[lang]} download>{c.ctaCv} ↓</a>
-    </div>
-  </section>
+  <div class="hud" aria-label={c.field}>
+    <div class="read" aria-hidden="true"><span class="stage" id="hudStage">{c.labels.names[0]}</span><span class="meter"><i id="hudBar"></i></span><span class="val">{c.signal} <span id="hudVal">0.00</span></span></div>
+    <button type="button" id="pause" aria-pressed="false">{c.labels.pause}</button>
+  </div>
 </Base>
 
-<style>
-  .hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center;padding-top:clamp(56px,9vw,128px);padding-bottom:56px}
-  .hero .h-display{margin:22px 0 26px}
-  .hero__b{color:var(--ink-faint)}
-  .hero .lead{max-width:60ch}
-  .hero__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-  .trace{border:1px solid var(--line);border-radius:18px;background:var(--bg-deep);padding:22px;box-shadow:0 30px 80px rgba(0,0,0,.35)}
-  .trace__h{margin:0 0 14px}
-  .trace__log{list-style:none;margin:0;padding:0;font-size:13.5px;line-height:1.5;color:var(--ink-2)}
-  .trace__log li{padding:9px 0;border-top:1px solid var(--line-soft)}
-  .trace__log li:first-child{border-top:0}
-  .k{display:inline-block;min-width:76px;color:var(--ai)}
-  .ok{color:var(--live)} .warn{color:var(--human)} .hu{color:var(--human);font-weight:600}
-  .trace__f{display:flex;gap:8px;margin:16px 0 0}
-  @media (max-width:980px){.hero{grid-template-columns:1fr}}
-  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-  .stats div{padding:28px 20px 28px 0}
-  .stats div + div{padding-left:24px;border-left:1px solid var(--line)}
-  .stats__v{margin:0;font-size:clamp(32px,3.6vw,48px);font-weight:600;letter-spacing:-.03em;line-height:1}
-  .stats__l{margin:10px 0 0;color:var(--ink-soft);font-size:15px}
-  .stats small{display:block;color:var(--ink-faint);font:12px var(--mono);margin-top:4px}
-  @media (max-width:860px){.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(3){padding-left:0;border-left:0}.stats div:nth-child(n+3){border-top:1px solid var(--line)}}
-  .block{padding-top:clamp(80px,10vw,140px)}
-  .block__h{max-width:860px;margin-bottom:40px}
-  .block__h .h-1{margin:16px 0 14px}
-  .grid-work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-  .grid-work > :global(.card--big){grid-column:1/-1}
-  @media (max-width:860px){.grid-work{grid-template-columns:1fr}}
-  .principles{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-  .principles li{border:1px solid var(--line);border-radius:18px;padding:26px;background:var(--panel-2)}
-  .principles p{color:var(--ink-2);margin:10px 0 0}
-  .pn{color:var(--ai);font-size:13px;display:block;margin-bottom:12px}
-  @media (max-width:980px){.principles{grid-template-columns:1fr}}
-  .more{margin:24px 0 0}
-  .more a{color:var(--ai);text-decoration:none;font-weight:500}
-  .log{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-  .log li{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
-  .log p{margin:0}
-  .log__r strong{font-weight:600}
-  .log__d{color:var(--ink-soft);margin-top:4px!important;max-width:70ch}
-  @media (max-width:640px){.log li{grid-template-columns:1fr;gap:4px}}
-  .edu{margin:22px 0 0;font-size:13.5px}
-  .about{display:grid;grid-template-columns:300px 1fr;gap:clamp(28px,5vw,64px);align-items:start}
-  .about__img{border-radius:18px;overflow:hidden;border:1px solid var(--line)}
-  .about .h-1{margin:16px 0 20px}
-  .comic{display:inline-flex;align-items:center;gap:14px;margin-top:10px;text-decoration:none;border:1px solid var(--line);border-radius:14px;padding:8px 16px 8px 8px;color:var(--ink-2)}
-  .comic:hover{border-color:var(--ink-faint)}
-  .comic :global(img){width:56px;height:56px;border-radius:8px;object-fit:cover}
-  @media (max-width:760px){.about{grid-template-columns:1fr}.about__img{max-width:240px}}
-  .contact{text-align:left;max-width:var(--maxw)}
-  .contact .h-1{max-width:18ch;margin-bottom:16px}
+<script is:inline>
+  (function(){
+    var copy=document.getElementById('copy');if(!copy)return;var base=copy.textContent;
+    copy.addEventListener('click',function(){
+      var el=document.getElementById('email');
+      function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);copy.textContent=copy.dataset.selected}
+      try{navigator.clipboard.writeText(el.textContent).then(function(){copy.textContent=copy.dataset.copied;setTimeout(function(){copy.textContent=base},1600)},sel)}catch(e){sel()}
+    });
+  })();
+</script>
+<script is:inline set:html={`(function(){${engine}})();`}></script>
+
+<style is:global>
+  /* Home only: particle field behind the page, content above it */
+  .v-home{--panel-glass:rgba(255,255,255,.84);--scrim-a:rgba(244,245,248,.45);--scrim-b:rgba(244,245,248,.2);--scrim-c:rgba(244,245,248,0)}
+  .v-home .lp,.v-home .site-footer{position:relative;z-index:2}
+  .v-home .site-footer{margin-top:0;background:rgba(244,245,248,.8)}
+  #field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block}
+  .no-gl #field,.no-gl .hud,.no-gl #heroPlay{display:none}
+  .no-gl .v-home{background:radial-gradient(60% 50% at 75% 40%,rgba(71,87,207,.16),transparent 70%),radial-gradient(20% 20% at 72% 45%,rgba(214,140,30,.16),transparent 70%),var(--bg) fixed}
+  .scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--scrim-a) 0%,var(--scrim-b) 38%,var(--scrim-c) 62%)}
+  @media (max-width:820px){.scrim{background:linear-gradient(180deg,var(--scrim-b),var(--scrim-a))}}
+
+  .lp .h2{font-size:clamp(30px,4vw,52px);line-height:1.06;letter-spacing:-.04em;font-weight:600;max-width:18ch;margin:18px 0 0;text-wrap:balance}
+  .lp .lead{font-size:clamp(17px,1.5vw,19px);color:var(--ink-soft);max-width:56ch}
+  .lp .sub{margin-top:24px}
+  .lp .sec{padding-top:clamp(96px,16vh,180px);padding-bottom:0}
+  .lp .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .lp .dot.a{background:var(--ai)} .lp .dot.l{background:var(--live)}
+
+  /* hero */
+  .lp .hero{min-height:calc(100svh - var(--header-h));display:grid;align-content:center;gap:40px;padding-top:72px;padding-bottom:96px}
+  .lp .idblock{padding-bottom:8px;border-bottom:1px solid var(--line)}
+  .lp .name{font-size:clamp(52px,14.5vw,156px);line-height:.92;letter-spacing:-.055em;font-weight:600;margin:0;white-space:nowrap}
+  .gl-name .lp .name{color:transparent}
+  .gl-name .lp .name::selection{color:var(--ink);background:var(--ai-bg)}
+  .lp .role{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);display:flex;align-items:center;gap:10px;margin:22px 0 28px}
+  .lp .role::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ai);flex:none}
+  .lp .thesis{font-size:clamp(26px,2.9vw,40px);line-height:1.12;letter-spacing:-.035em;font-weight:600;max-width:20ch;margin:0;text-wrap:balance}
+  .lp .t-ai{color:var(--ai)} .lp .t-hu{color:var(--human)}
+  .lp .hero .lead{margin-top:18px;max-width:52ch}
+  .lp .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+  .lp .btn.play{border:1px solid var(--ai);color:var(--ai);background:var(--ai-bg);font-family:var(--mono);font-size:13px}
+  .lp .lang-cta{gap:10px;padding-left:8px}
+  .lp .lang-cta .seg{font-family:var(--mono);font-size:11px;padding:5px 7px;border-radius:999px;color:var(--ink-faint)}
+  .lp .lang-cta .seg.on{background:var(--ink);color:var(--on-accent)}
+  .lp .lang-cta .seg+.seg{margin-left:-8px}
+  .lp .note{font-size:12px;color:var(--ink-faint);margin:12px 0 0}
+
+  /* metrics */
+  .lp .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:56px;max-width:980px}
+  .lp .metric{background:var(--panel-glass);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:28px 24px;display:flex;flex-direction:column;gap:10px;min-width:0}
+  .lp .metric .n{font-size:clamp(36px,4vw,52px);font-weight:600;letter-spacing:-.05em;line-height:1;font-variant-numeric:tabular-nums}
+  .lp .metric .d{color:var(--ink-soft);font-size:14.5px;line-height:1.45}
+  .lp .metric .s{font-size:11px;color:var(--ink-faint);letter-spacing:.03em;margin-top:auto}
+  @media (max-width:860px){.lp .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:420px){.lp .metrics{grid-template-columns:1fr}}
+
+  /* work */
+  .lp .head-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px}
+  .lp .head-row>p{color:var(--ink-soft);max-width:42ch;margin:0}
+  .lp .cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:56px 0 0;list-style:none;padding:0}
+  .lp .case{position:relative;background:var(--panel-glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;min-width:0;overflow:hidden;transition:border-color .25s,transform .25s,box-shadow .25s}
+  .lp .case:hover,.lp .case:focus-within{border-color:var(--line-strong);transform:translateY(-3px);box-shadow:0 12px 32px -18px rgba(20,26,38,.35)}
+  .lp .case .bar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:11.5px;color:var(--ink-faint)}
+  .lp .case .bar .id{color:var(--ink-soft)}
+  .lp .case .bar .st{margin-left:auto;display:flex;align-items:center}
+  .lp .case .bar .st.l{color:var(--live)} .lp .case .bar .st.c{color:var(--ink-soft)}
+  .lp .case .ai-chip{color:var(--ai);background:var(--ai-bg);padding:1px 6px;border-radius:4px}
+  .lp .case .shot{aspect-ratio:1200/750;overflow:hidden;background:#0E1320;border-bottom:1px solid var(--line)}
+  .lp .case .shot picture,.lp .case .shot img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .lp .case:hover .shot img,.lp .case:focus-within .shot img{transform:scale(1.03)}
+  .lp .case .body{padding:22px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+  .lp .case .dom{font-size:11.5px;color:var(--ink-faint);letter-spacing:.02em}
+  .lp .case h3{font-size:20px;letter-spacing:-.02em;line-height:1.2;margin:0}
+  .lp .case .line{color:var(--ink-soft);font-size:15px;line-height:1.5;margin:0}
+  .lp .case .kpis{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 0;padding:0;list-style:none}
+  .lp .case .kpis li{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:4px 10px;color:var(--ink)}
+  .lp .case .foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:14px;border-top:1px dashed var(--line);font-size:13px;color:var(--ink-faint)}
+  .lp .case .more{color:var(--ink);text-decoration:none;font-weight:500;white-space:nowrap}
+  .lp .case .more::after{content:"";position:absolute;inset:0;border-radius:14px}
+  .lp .case .more:hover{color:var(--ai)}
+  @media (max-width:1000px){.lp .cases{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:640px){.lp .cases{grid-template-columns:1fr}}
+
+  /* approach */
+  .lp .rules{list-style:none;padding:0;margin:56px 0 0;max-width:620px;display:grid;gap:12px}
+  .lp .rule{display:grid;grid-template-columns:56px 1fr;gap:16px;padding:24px;background:var(--panel-glass);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px}
+  .lp .rule .k{font-size:12px;color:var(--human);padding-top:4px}
+  .lp .rule h3{font-size:20px;letter-spacing:-.02em;line-height:1.2;margin:0}
+  .lp .rule p{color:var(--ink-soft);margin:8px 0 0;font-size:15.5px}
+  .lp .patterns{display:inline-block;margin-top:24px;font-size:13px;color:var(--ai);text-decoration:none}
+  .lp .patterns:hover{text-decoration:underline}
+
+  /* experience */
+  .lp .log{list-style:none;margin:48px 0 0;padding:0;max-width:760px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel-glass);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .lp .log .row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;padding:18px 22px;border-top:1px solid var(--line)}
+  .lp .log .row:first-child{border-top:0}
+  .lp .log .yr{font-size:12.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums;padding-top:2px}
+  .lp .log .row.now .yr{color:var(--human)}
+  .lp .log p{margin:0;color:var(--ink-soft);font-size:14.5px}
+  .lp .log p.r{font-weight:500;color:var(--ink);font-size:16px;margin-bottom:4px}
+  .lp .log p.r span{color:var(--ink-faint);font-weight:400}
+  .lp .edu{margin-top:20px;max-width:760px;color:var(--ink-faint);font-size:14px}
+  @media (max-width:560px){.lp .log .row{grid-template-columns:1fr;gap:4px}}
+
+  /* contact */
+  .lp .contact{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(28px,4vw,56px);align-items:center;padding-bottom:clamp(96px,14vh,160px)}
+  .lp .contact .h2{max-width:14ch}
+  .lp .portrait{margin:0;width:clamp(180px,20vw,260px);background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 24px 48px -32px rgba(20,26,38,.45)}
+  .lp .portrait img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%;filter:grayscale(1) contrast(1.02)}
+  .lp .portrait figcaption{display:flex;justify-content:space-between;gap:12px;padding:10px 14px;font-size:11px;color:var(--ink-faint);border-top:1px solid var(--line);white-space:nowrap}
+  .lp .portrait .avail{color:var(--live);display:flex;align-items:center}
+  .lp .cmd{margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:clamp(15px,2vw,20px);background:var(--panel-glass);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:12px;padding:16px 18px;max-width:640px}
+  .lp .cmd .p{color:var(--human)}
+  .lp .cmd .em{user-select:all;min-width:0;overflow-wrap:anywhere}
+  .lp .cmd button{margin-left:auto;font:500 12px/1 var(--mono);color:var(--ink-soft);background:transparent;border:1px solid var(--line);border-radius:6px;padding:8px 10px;cursor:pointer}
+  .lp .cmd button:hover{color:var(--ink);border-color:var(--line-strong)}
+  .lp .contact .cta{margin-top:20px}
+  @media (max-width:760px){.lp .contact{grid-template-columns:1fr}.lp .portrait{width:180px}}
+
+  /* HUD */
+  .hud{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;display:flex;align-items:center;gap:14px;font-family:var(--mono);font-size:11px;color:var(--ink-faint);background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:10px;padding:8px 8px 8px 12px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .hud .read{display:flex;align-items:center;gap:12px;min-width:250px}
+  .hud .meter{width:84px;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
+  .hud .meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ai),var(--human))}
+  .hud .stage{color:var(--ink);letter-spacing:.06em;text-transform:uppercase;min-width:92px}
+  .hud .val{font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+  .hud button{font:500 11px/1 var(--mono);color:var(--ink-soft);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:7px 9px;cursor:pointer}
+  .hud button:hover{color:var(--ink)}
+  @media (max-width:760px){.hud .read{display:none}.hud{left:auto;right:12px;padding:4px;border-radius:8px}.hud button{padding:6px 8px;font-size:10px}}
+  @media (prefers-reduced-motion:reduce){.lp .case:hover,.lp .case:focus-within{transform:none}.lp .case:hover .shot img{transform:none}}
 </style>

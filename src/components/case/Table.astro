@@ -23,7 +23,7 @@ const { head, rows, caption, first = true, d } = Astro.props;
   tbody th{color:var(--ink);font-weight:600}
   td :global(strong){color:var(--ink);font-weight:600}
   td :global(.sev){display:inline-block;font:500 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px;border:1px solid var(--line-strong);white-space:nowrap}
-  td :global(.sev--3){color:#F2A99B;border-color:#6a3329} td :global(.sev--2){color:var(--human);border-color:#5a4826} td :global(.sev--ok){color:var(--live);border-color:#2f5a3e}
+  td :global(.sev--3){color:var(--risk);border-color:var(--risk-line)} td :global(.sev--2){color:var(--human);border-color:var(--human-line)} td :global(.sev--ok){color:var(--live);border-color:var(--live-line)}
   .tb__cap{margin:14px 0 0;font-size:14px;color:var(--ink-faint)}
   @media (max-width:760px){
     table,thead,tbody,tr,th,td{display:block}

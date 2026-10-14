@@ -16,7 +16,7 @@ export function altPath(path: string, to: Lang) {
 
 export const ui = {
   en: {
-    nav: { work: 'Work', approach: 'Approach', patterns: 'Patterns', experience: 'Experience', about: 'About', resume: 'Resume' },
+    nav: { work: 'Work', approach: 'Approach', patterns: 'Patterns', experience: 'Experience', about: 'Contact', resume: 'Resume' },
     menu: 'Menu',
     skip: 'Skip to content',
     depth: { label: 'Reading depth', skim: 'Skim', standard: 'Standard', deep: 'Deep', tSkim: '30s', tStandard: '3m', tDeep: '10m' },
@@ -34,7 +34,7 @@ export const ui = {
     zoom: 'Open full size',
   },
   es: {
-    nav: { work: 'Proyectos', approach: 'Enfoque', patterns: 'Patrones', experience: 'Trayectoria', about: 'Sobre mí', resume: 'CV' },
+    nav: { work: 'Proyectos', approach: 'Enfoque', patterns: 'Patrones', experience: 'Trayectoria', about: 'Contacto', resume: 'CV' },
     menu: 'Menú',
     skip: 'Ir al contenido',
     depth: { label: 'Profundidad de lectura', skim: 'Rápido', standard: 'Estándar', deep: 'Completo', tSkim: '30s', tStandard: '3m', tDeep: '10m' },
