@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import { ui, home, altPath, CV, EMAIL, LINKEDIN, WEBTOON, SITE, patternsUrl, type Lang } from '../i18n/ui';
+import { STORIES } from '../story';
+const storySlugs = Object.keys(STORIES);
 
 interface Props {
   lang: Lang; title: string; description: string; ogImage?: string; jsonLd?: object;
@@ -53,10 +55,14 @@ const anchor = (id: string) => (variant === 'home' ? `#${id}` : `${h}#${id}`);
   <link rel="preload" href="/fonts/geist-600.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="sitemap" href="/sitemap-index.xml" />
   {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
-  <script is:inline>
+  <script is:inline define:vars={{ storySlugs }}>
+    window.__STORIES__=storySlugs;
     (function(){var d=document.documentElement,v;try{var q=new URLSearchParams(location.search).get('depth');
       v=(q&&/^(skim|standard|deep)$/.test(q))?q:localStorage.getItem('depth');}catch(e){}
       if(v&&/^(skim|standard|deep)$/.test(v))d.dataset.depth=v;
+      // Story cases: the story page shows Skim/Standard, the full case lives at /deep/.
+      var m=location.pathname.match(/^\/work\/([^\/]+)\/(deep\/)?$/),S=window.__STORIES__||[];
+      if(m&&S.indexOf(m[1])>-1){d.dataset.story=m[2]?'deep':'story';if(m[2])d.dataset.depth='deep';else if(d.dataset.depth==='deep')d.dataset.depth='standard';}
       try{var w=localStorage.getItem('why');if(w==='off')d.dataset.why='off';}catch(e){}})();
   </script>
 </head>
@@ -129,7 +135,14 @@ const anchor = (id: string) => (variant === 'home' ? `#${id}` : `${h}#${id}`);
     };
     document.addEventListener('click', (e) => {
       const d = (e.target as HTMLElement).closest<HTMLElement>('[data-set-depth]');
-      if (d) { root.dataset.depth = d.dataset.setDepth!; try { localStorage.setItem('depth', d.dataset.setDepth!); } catch {} sync(); }
+      if (d) {
+        const k = d.dataset.setDepth!;
+        try { localStorage.setItem('depth', k); } catch {}
+        const base = location.pathname.replace(/deep\/$/, '');
+        if (root.dataset.story === 'story' && k === 'deep') { location.href = base + 'deep/'; return; }
+        if (root.dataset.story === 'deep' && k !== 'deep') { location.href = base + '?depth=' + k; return; }
+        root.dataset.depth = k; sync();
+      }
       const w = (e.target as HTMLElement).closest('[data-toggle-why]');
       if (w) { root.dataset.why = root.dataset.why === 'off' ? 'on' : 'off'; try { localStorage.setItem('why', root.dataset.why); } catch {} sync(); }
     });

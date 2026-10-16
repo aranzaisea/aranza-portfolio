@@ -109,3 +109,6 @@
   .story .phones figure { max-width: 300px; justify-self: center; width: 100%; }
   .story .phones figcaption { font-size: 14px; }
 }
+
+/* Skim: only headlines, the insight, key images and results */
+html[data-depth=skim] .story .detail { display: none !important; }
