@@ -1,7 +1,7 @@
 export type Lang = 'en' | 'es';
 export const SITE = 'https://aranzaisea.netlify.app';
 export const EMAIL = 'aranzaisea@gmail.com';
-export const LINKEDIN = 'https://www.linkedin.com/in/aranzaisea';
+export const LINKEDIN = 'https://www.linkedin.com/in/aranzaiseaux';
 export const WEBTOON = 'https://www.webtoons.com/en/canvas/delirium-gl/list?title_no=1017409';
 export const CV = { en: '/cv/Aranza_Isea_Resume_EN.pdf', es: '/cv/Aranza_Isea_CV_ES.pdf' } as const;
 
@@ -30,7 +30,7 @@ export const ui = {
     noPage: 'Case study in progress',
     ev: { validated: 'Validated with users', measured: 'Measured', shipped: 'Shipped', hypothesis: 'Hypothesis' },
     tradeoff: 'Trade-off',
-    footer: 'Senior Product Designer · AI products · Buenos Aires',
+    footer: 'Senior Product Designer · Product, UX/UI & AI · Buenos Aires',
     zoom: 'Open full size',
   },
   es: {
@@ -48,7 +48,7 @@ export const ui = {
     noPage: 'Caso en preparación',
     ev: { validated: 'Validado con usuarios', measured: 'Medido', shipped: 'Lanzado', hypothesis: 'Hipótesis' },
     tradeoff: 'Tensión',
-    footer: 'Senior Product Designer · Productos con IA · Buenos Aires',
+    footer: 'Product Designer Senior · Producto, UX/UI e IA · Buenos Aires',
     zoom: 'Ver en tamaño completo',
   },
 } as const;

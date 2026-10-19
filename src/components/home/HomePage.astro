@@ -10,76 +10,96 @@ const { lang } = Astro.props;
 const en = lang === 'en';
 
 const c = en ? {
-  title: 'Aranza Isea — Senior Product Designer · AI products',
-  desc: 'Senior Product Designer with 10+ years. I design AI copilots and agent workflows where decisions carry real risk: autonomy, confidence, failure states and audit trails, so people stay in control.',
-  role: 'Senior Product Designer · AI products · Buenos Aires',
-  thesis: ['I design ', 'AI', ' that knows when to ', 'hand the decision back.'],
-  lead: 'Copilots and agent workflows for work where a wrong answer costs money or trust. I design the AI’s behaviour as carefully as the screens: how much it can do alone, how sure it is, what happens when it fails, and who signed what.',
+  title: 'Aranza Isea — Senior Product Designer · Product, UX/UI & AI',
+  desc: 'Senior Product Designer and UX/UI Designer with 10+ years in product design, user research and design systems: B2B e-commerce, loyalty and mobile apps, enterprise SaaS and AI products such as copilots and agents. Based in Buenos Aires, working remotely.',
+  role: 'Senior Product Designer · Product · UX/UI · AI · Buenos Aires',
+  thesis: ['I design clear products for ', 'complex work', ', ', 'with or without AI.'],
+  lead: '10+ years across product, UX/UI and research: B2B e-commerce, loyalty apps, design systems, enterprise SaaS and, lately, AI copilots and agents for insurance and compliance. I take products from research to handoff, and when there’s AI inside, I design its behaviour as carefully as the screens.',
   ctaWork: 'See the work', ctaCv: 'Download resume',
   switchLabel: 'Ver en español', switchHref: '/es/', switchLang: 'es',
   reduced: 'Your device asks for reduced motion, so the background starts still.',
   sigEyebrow: 'Signal', sigH: 'Results, each with its source.',
   sigLead: 'Every number below comes with who measured it and over what period. If a case has no metrics yet, it says so.',
+  statsAlso: 'Also experienced in design systems, loyalty and mobile apps, B2B e-commerce and enterprise SaaS.',
+  skEyebrow: 'Skills', skH: 'What I bring to a product team.',
+  skills: [
+    ['Product & UX/UI design', ['Product design', 'UX/UI design', 'UI design', 'Visual design', 'Interaction design', 'Information architecture', 'User flows', 'Wireframing', 'Prototyping', 'Design systems', 'Responsive design', 'Mobile design (iOS, Android)', 'Accessibility (WCAG)', 'Developer handoff']],
+    ['Research & strategy', ['User research', 'User interviews', 'Usability testing', 'A/B testing', 'Heuristic evaluation', 'Journey mapping', 'Service blueprints', 'Personas', 'Competitive analysis', 'Stakeholder workshops', 'Design thinking']],
+    ['AI products', ['Generative AI', 'AI copilots', 'AI agents', 'Multi-agent workflows', 'Human-in-the-loop design', 'Confidence & explainability', 'AI failure states', 'Audit trails', 'Prompt engineering']],
+    ['Ways of working', ['Agile & Scrum', 'Cross-functional teams', 'Stakeholder alignment', 'End-to-end ownership', 'Remote collaboration', 'Spanish (native)', 'English (C1)']],
+    ['Tools', ['Figma', 'Figma Make', 'FigJam', 'Miro', 'Jira', 'Adobe Photoshop', 'Adobe Illustrator', 'Hotjar', 'Notion', 'Claude', 'Claude Code', 'ChatGPT', 'Cursor', 'n8n']],
+    ['Industries', ['B2B e-commerce', 'Enterprise SaaS', 'Loyalty & mobile apps', 'Fashion e-commerce', 'Insurance', 'Fintech & compliance']],
+  ],
   stats: [['10+', 'years in product, UX, UI and research', '2015 → 2026'], ['~500', 'adjusters using the ClaimPro copilot', '90%+ adoption · 2 months'], ['−68%', 'claim resolution time with ClaimPro', 'client-reported · 3 months'], ['+65%', 'Business accounts after Off Dep launched', 'Off Dep Business']],
   workEyebrow: 'Selected work · 6 cases', workH: 'Some things I’ve designed.',
-  workLead: 'Every case opens with a 30-second summary. Use the reading dial inside to go deeper.',
+  workLead: 'From a loyalty app and B2B e-commerce to AI copilots. Every case opens with a 30-second summary; use the reading dial inside to go deeper.',
   read: 'Read →', concept: 'Independent concept',
-  apEyebrow: 'Approach · the person stays at the centre', apH: 'Three rules I design AI by.',
+  apEyebrow: 'Approach · the person stays at the centre', apH: 'How I work.', apIntro: 'These come from years of product work and from designing AI systems, and they apply to any product where trust and clarity matter.',
   principles: [
-    ['Autonomy is a setting, not a launch decision', 'The AI drafts and a person approves by default. Teams earn more autonomy per task, with thresholds an admin can see, simulate and undo.'],
-    ['Confidence has to change the interface', 'A number nobody acts on is decoration. Below the threshold, the screen changes: fields are flagged, sources are shown and the case goes to a person.'],
-    ['Design the failure first', 'Unreadable documents, sources that disagree, the model being down. If the unhappy path isn’t designed, people stop trusting the happy one.'],
+    ['A diagnostic before a playbook', 'Every project starts with the goal, the scope and what we already know. The research methods and the process follow from that, not from a template.'],
+    ['Design the failure first', 'Empty states, errors, data that doesn’t match, a system that’s down. If the unhappy path isn’t designed, people stop trusting the happy one.'],
+    ['With AI, autonomy is a setting', 'The AI drafts and a person approves by default. Teams earn more autonomy per task, with thresholds an admin can see, simulate and undo.'],
   ],
   patternsCta: '→ See the AI patterns behind these cases',
-  exEyebrow: 'Experience log', exH: '10+ years, from visual systems to AI products.',
+  exEyebrow: 'Experience log', exH: '10+ years designing products, from design systems to AI.',
   jobs: [
-    ['2025 – now', 'Career break', 'Sabbatical', 'Case studies, an independent AI concept (Numi) and AI certifications from IBM and Coderhouse. Available to start immediately.'],
+    ['2025 – now', 'Planned sabbatical', 'Independent', 'Completed a Diploma in Product Design (Coderhouse), earned AI certifications from IBM and Coderhouse, designed Numi, an independent iOS product, and rebuilt this portfolio. Available immediately.'],
     ['2024 – 2025', 'Senior Product Designer · AI products', 'Perficient', 'Owned ClaimPro end to end and designed Vantage, a multi-agent compliance platform.'],
-    ['2022 – 2024', 'Senior Product Designer', 'Perficient', 'Off Dep Business (B2B self-service with AI), Club Rumbo (loyalty MVP), enterprise SaaS and admin systems.'],
-    ['2019 – 2022', 'Senior Visual Designer', 'Perficient', 'Built and scaled Perficient’s Advanced Design System.'],
+    ['2022 – 2024', 'Senior UX/UI Designer', 'Perficient', 'Off Dep Business (B2B e-commerce with AI), Club Rumbo (loyalty app MVP for iOS and Android), enterprise SaaS and admin systems.'],
+    ['2019 – 2022', 'Senior Visual Designer', 'Perficient', 'Led visual design and built the Advanced Design System: visual standards, UI components and documentation adopted across product teams.'],
     ['2017 – 2019', 'Product Designer', 'Distrito Moda', 'Multi-sided fashion e-commerce for retail and wholesale buyers, from research to handoff.'],
     ['2015 – 2017', 'Junior UX/UI Designer', 'Tsserapp', 'Moved from graphic design into UX/UI design: user flows, interface design and usability.'],
   ],
   edu: 'Diploma in Product Design, Coderhouse · Specialization in User Experience and Bachelor’s in Graphic Design, Universidad Rafael Belloso Chacín · AI certifications from IBM and Coderhouse',
   ctEyebrow: 'Open to senior roles · remote or hybrid from Buenos Aires (GMT-3)',
-  ctH: 'Hiring for an AI product team?', available: 'Available now', copy: 'copy', copied: 'copied', selected: 'selected',
+  ctH: 'Hiring for a product or AI product team?', available: 'Available now', copy: 'copy', copied: 'copied', selected: 'selected',
   portraitAlt: 'Portrait of Aranza Isea',
   labels: { names: ['name', 'signal', 'structure', 'brain'], cre: 'creativity', rea: 'reasoning', noise: 'noise', play: 'play motion', pause: 'pause motion', playAnim: '▶  Play animation', replay: '↻  Replay' },
   signal: 'signal', field: 'Particle field',
 } : {
-  title: 'Aranza Isea — Product Designer Senior · Productos con IA',
-  desc: 'Product Designer Senior con más de 10 años. Diseño copilotos de IA y flujos con agentes donde las decisiones tienen riesgo real: autonomía, confianza, estados de falla y trazabilidad, para que las personas mantengan el control.',
-  role: 'Senior Product Designer · Productos con IA · Buenos Aires',
-  thesis: ['Diseño ', 'IA', ' que sabe cuándo ', 'devolver la decisión.'],
-  lead: 'Copilotos y flujos con agentes para trabajos donde una respuesta equivocada cuesta dinero o confianza. Diseño el comportamiento de la IA con el mismo cuidado que las pantallas: cuánto puede hacer sola, qué tan segura está, qué pasa cuando falla y quién firmó qué.',
+  title: 'Aranza Isea — Product Designer Senior · Producto, UX/UI e IA',
+  desc: 'Product Designer Senior y diseñadora UX/UI con más de 10 años en diseño de producto, investigación de usuarios y design systems: e-commerce B2B, apps de fidelización y móviles, SaaS empresarial y productos con IA como copilotos y agentes. Desde Buenos Aires, trabajo remoto.',
+  role: 'Product Designer Senior · Producto · UX/UI · IA · Buenos Aires',
+  thesis: ['Diseño productos claros para ', 'trabajos complejos', ', ', 'con o sin IA.'],
+  lead: 'Más de 10 años en producto, UX/UI e investigación: e-commerce B2B, apps de fidelización, design systems, SaaS empresarial y, en los últimos años, copilotos y agentes de IA para seguros y compliance. Llevo productos del research al handoff, y cuando hay IA adentro, diseño su comportamiento con el mismo cuidado que las pantallas.',
   ctaWork: 'Ver proyectos', ctaCv: 'Descargar CV',
   switchLabel: 'Read in English', switchHref: '/', switchLang: 'en',
   reduced: 'Tu dispositivo pide reducir el movimiento, así que el fondo empieza quieto.',
   sigEyebrow: 'Señal', sigH: 'Resultados, cada uno con su fuente.',
   sigLead: 'Cada número indica quién lo midió y en qué período. Si un caso todavía no tiene métricas, lo dice.',
+  statsAlso: 'También con experiencia en design systems, apps de fidelización y móviles, e-commerce B2B y SaaS empresarial.',
+  skEyebrow: 'Habilidades', skH: 'Lo que sumo a un equipo de producto.',
+  skills: [
+    ['Diseño de producto y UX/UI', ['Diseño de producto', 'Diseño UX/UI', 'Diseño de UI', 'Diseño visual', 'Diseño de interacción', 'Arquitectura de información', 'User flows', 'Wireframes', 'Prototipado', 'Design systems', 'Diseño responsive', 'Diseño mobile (iOS, Android)', 'Accesibilidad (WCAG)', 'Handoff a desarrollo']],
+    ['Investigación y estrategia', ['Investigación de usuarios', 'Entrevistas', 'Testing de usabilidad', 'A/B testing', 'Evaluación heurística', 'Journey map', 'Service blueprint', 'Personas', 'Análisis competitivo', 'Talleres con stakeholders', 'Design thinking']],
+    ['Productos con IA', ['IA generativa', 'Copilotos de IA', 'Agentes de IA', 'Flujos multiagente', 'Diseño human-in-the-loop', 'Confianza y explicabilidad', 'Estados de falla de la IA', 'Registros de auditoría', 'Prompt engineering']],
+    ['Forma de trabajo', ['Agile y Scrum', 'Equipos multidisciplinarios', 'Alineación con stakeholders', 'Responsabilidad de punta a punta', 'Trabajo remoto', 'Español (nativo)', 'Inglés (C1)']],
+    ['Herramientas', ['Figma', 'Figma Make', 'FigJam', 'Miro', 'Jira', 'Adobe Photoshop', 'Adobe Illustrator', 'Hotjar', 'Notion', 'Claude', 'Claude Code', 'ChatGPT', 'Cursor', 'n8n']],
+    ['Industrias', ['E-commerce B2B', 'SaaS empresarial', 'Apps de fidelización y móviles', 'E-commerce de moda', 'Seguros', 'Fintech y compliance']],
+  ],
   stats: [['10+', 'años en producto, UX, UI e investigación', '2015 → 2026'], ['~500', 'ajustadores usan el copiloto de ClaimPro', '90%+ de adopción · 2 meses'], ['−68%', 'tiempo de resolución de siniestros con ClaimPro', 'dato del cliente · 3 meses'], ['+65%', 'cuentas Business tras el lanzamiento de Off Dep', 'Off Dep Business']],
   workEyebrow: 'Proyectos · 6 casos', workH: 'Algunas cosas que diseñé.',
-  workLead: 'Cada caso abre con un resumen de 30 segundos. Con el dial de lectura podés profundizar.',
+  workLead: 'De una app de fidelización y e-commerce B2B a copilotos de IA. Cada caso abre con un resumen de 30 segundos; con el dial de lectura podés profundizar.',
   read: 'Ver →', concept: 'Concepto independiente',
-  apEyebrow: 'Enfoque · la persona queda en el centro', apH: 'Tres reglas con las que diseño IA.',
+  apEyebrow: 'Enfoque · la persona queda en el centro', apH: 'Cómo trabajo.', apIntro: 'Salen de años de trabajo en producto y de diseñar sistemas con IA, y aplican a cualquier producto donde la confianza y la claridad importan.',
   principles: [
-    ['La autonomía es un ajuste, no una decisión de lanzamiento', 'Por defecto la IA prepara y una persona aprueba. Cada equipo gana más autonomía por tarea, con umbrales que un admin puede ver, simular y deshacer.'],
-    ['La confianza tiene que cambiar la interfaz', 'Un número sobre el que nadie actúa es decoración. Debajo del umbral la pantalla cambia: se marcan campos, se muestran las fuentes y el caso pasa a una persona.'],
-    ['Primero se diseña la falla', 'Documentos ilegibles, fuentes que no coinciden, el modelo caído. Si el camino infeliz no está diseñado, la gente deja de confiar en el feliz.'],
+    ['Un diagnóstico antes que una receta', 'Cada proyecto arranca por el objetivo, el alcance y lo que ya sabemos. Los métodos de investigación y el proceso salen de ahí, no de una plantilla.'],
+    ['Primero se diseña la falla', 'Estados vacíos, errores, datos que no coinciden, un sistema caído. Si el camino infeliz no está diseñado, la gente deja de confiar en el feliz.'],
+    ['Con IA, la autonomía es un ajuste', 'Por defecto la IA prepara y una persona aprueba. Cada equipo gana más autonomía por tarea, con umbrales que un admin puede ver, simular y deshacer.'],
   ],
   patternsCta: '→ Ver los patrones de IA detrás de estos casos',
-  exEyebrow: 'Trayectoria', exH: 'Más de 10 años, de sistemas visuales a productos con IA.',
+  exEyebrow: 'Trayectoria', exH: 'Más de 10 años diseñando productos, de design systems a IA.',
   jobs: [
-    ['2025 – hoy', 'Pausa profesional', 'Año sabático', 'Casos de estudio, un concepto independiente con IA (Numi) y certificaciones de IA de IBM y Coderhouse. Disponible para empezar de inmediato.'],
+    ['2025 – hoy', 'Año sabático planificado', 'Independiente', 'Terminé la Diplomatura en Product Design (Coderhouse), obtuve certificaciones de IA de IBM y Coderhouse, diseñé Numi, un producto independiente para iOS, y rehice este portafolio. Disponible de inmediato.'],
     ['2024 – 2025', 'Senior Product Designer · Productos con IA', 'Perficient', 'Dueña de ClaimPro de punta a punta y diseño de Vantage, una plataforma de compliance multiagente.'],
-    ['2022 – 2024', 'Senior Product Designer', 'Perficient', 'Off Dep Business (B2B autoservicio con IA), Club Rumbo (MVP de fidelización), SaaS empresarial y sistemas de administración.'],
-    ['2019 – 2022', 'Senior Visual Designer', 'Perficient', 'Construí y escalé el Advanced Design System de Perficient.'],
+    ['2022 – 2024', 'Senior UX/UI Designer', 'Perficient', 'Off Dep Business (e-commerce B2B con IA), Club Rumbo (MVP de app de fidelización para iOS y Android), SaaS empresarial y sistemas de administración.'],
+    ['2019 – 2022', 'Senior Visual Designer', 'Perficient', 'Lideré el diseño visual y construí el Advanced Design System: estándares visuales, componentes de UI y documentación adoptados por varios equipos de producto.'],
     ['2017 – 2019', 'Product Designer', 'Distrito Moda', 'E-commerce de moda multilado para compradores minoristas y mayoristas, del research al handoff.'],
     ['2015 – 2017', 'Junior UX/UI Designer', 'Tsserapp', 'Pasé del diseño gráfico al diseño UX/UI: flujos de usuario, diseño de interfaces y usabilidad.'],
   ],
   edu: 'Diplomatura en Product Design, Coderhouse · Especialización en Experiencia de Usuario y Licenciatura en Diseño Gráfico, Universidad Rafael Belloso Chacín · Certificaciones de IA de IBM y Coderhouse',
   ctEyebrow: 'Abierta a roles senior · remoto o híbrido desde Buenos Aires (GMT-3)',
-  ctH: '¿Buscás diseño para un equipo de producto con IA?', available: 'Disponible ya', copy: 'copiar', copied: 'copiado', selected: 'seleccionado',
+  ctH: '¿Buscás diseño para un equipo de producto o de producto con IA?', available: 'Disponible ya', copy: 'copiar', copied: 'copiado', selected: 'seleccionado',
   portraitAlt: 'Retrato de Aranza Isea',
   labels: { names: ['nombre', 'señal', 'estructura', 'cerebro'], cre: 'creatividad', rea: 'razonamiento', noise: 'ruido', play: 'reanudar', pause: 'pausar movimiento', playAnim: '▶  Reproducir animación', replay: '↻  Repetir' },
   signal: 'señal', field: 'Campo de partículas',
@@ -89,11 +109,11 @@ const jsonLd = {
   '@context': 'https://schema.org', '@type': 'Person', name: 'Aranza Isea', jobTitle: 'Senior Product Designer', url: SITE + '/',
   email: `mailto:${EMAIL}`, sameAs: [LINKEDIN], address: { '@type': 'PostalAddress', addressLocality: 'Buenos Aires', addressCountry: 'AR' },
   description: c.desc,
-  knowsAbout: ['AI product design', 'Generative AI', 'AI agents', 'Multi-agent workflows', 'AI copilots', 'Human-in-the-loop design', 'Product design', 'UX/UI design', 'Interaction design', 'User research', 'Usability testing', 'Design systems', 'Prototyping', 'Figma', 'Enterprise B2B SaaS', 'Insurtech', 'Fintech'],
+  knowsAbout: ['Product design', 'UX/UI design', 'UI design', 'Visual design', 'Interaction design', 'Information architecture', 'User research', 'Usability testing', 'A/B testing', 'Design systems', 'Prototyping', 'Accessibility (WCAG)', 'Agile and Scrum', 'Figma', 'B2B e-commerce', 'Enterprise SaaS', 'Mobile apps', 'AI product design', 'Generative AI', 'AI agents', 'AI copilots', 'Human-in-the-loop design', 'Insurance', 'Fintech'],
   knowsLanguage: ['es', 'en'],
   alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'Universidad Rafael Belloso Chacín' }, { '@type': 'EducationalOrganization', name: 'Coderhouse' }],
   hasOccupation: { '@type': 'Occupation', name: 'Senior Product Designer', occupationLocation: { '@type': 'City', name: 'Buenos Aires' },
-    skills: 'AI product design, human-in-the-loop design, user research, interaction design, prototyping, design systems, Figma' },
+    skills: 'Product design, UX/UI design, user research, usability testing, interaction design, prototyping, design systems, accessibility, AI product design, Figma' },
   subjectOf: { '@type': 'DigitalDocument', name: en ? 'Resume' : 'CV', encodingFormat: 'application/pdf', url: SITE + CV[lang] },
 };
 ---
@@ -131,6 +151,7 @@ const jsonLd = {
       <div class="metrics">
         {c.stats.map(([v, l, s]) => <div class="metric"><span class="n">{v}</span><span class="d">{l}</span><span class="s mono">{s}</span></div>)}
       </div>
+      <p class="also">{c.statsAlso}</p>
     </section>
 
     <section class="sec wrap" id="work" data-stage="2" aria-labelledby="work-h">
@@ -165,6 +186,7 @@ const jsonLd = {
     <section class="sec wrap" id="approach" data-stage="3" aria-labelledby="approach-h">
       <p class="eyebrow">{c.apEyebrow}</p>
       <h2 id="approach-h" class="h2">{c.apH}</h2>
+      <p class="lead sub">{c.apIntro}</p>
       <ol class="rules">
         {c.principles.map(([h, b], i) => <li class="rule"><span class="k mono">rule_0{i + 1}</span><div><h3>{h}</h3><p>{b}</p></div></li>)}
       </ol>
@@ -178,6 +200,19 @@ const jsonLd = {
         {c.jobs.map(([y, r, co, d], i) => <li class:list={['row', { now: i === 0 }]}><span class="yr mono">{y}</span><div><p class="r">{r} <span>· {co}</span></p><p>{d}</p></div></li>)}
       </ol>
       <p class="edu">{c.edu}</p>
+    </section>
+
+    <section class="sec wrap" id="skills" data-stage="3" aria-labelledby="skills-h">
+      <p class="eyebrow">{c.skEyebrow}</p>
+      <h2 id="skills-h" class="h2">{c.skH}</h2>
+      <div class="skills">
+        {c.skills.map(([h, items]) => (
+          <section class="sk">
+            <h3 class="mono">{h}</h3>
+            <ul>{items.map((i) => <li>{i}</li>)}</ul>
+          </section>
+        ))}
+      </div>
     </section>
 
     <section class="sec wrap contact" id="contact" data-stage="3" aria-labelledby="contact-h">
@@ -307,6 +342,15 @@ const jsonLd = {
   .lp .log p.r{font-weight:500;color:var(--ink);font-size:16px;margin-bottom:4px}
   .lp .log p.r span{color:var(--ink-faint);font-weight:400}
   .lp .edu{margin-top:20px;max-width:760px;color:var(--ink-faint);font-size:14px}
+  .lp #approach .sub{max-width:640px}
+  .lp .also{margin:20px 0 0;max-width:980px;color:var(--ink-soft);font-size:15px}
+  .lp .skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:48px}
+  .lp .sk{border:1px solid var(--line);border-radius:14px;padding:22px;background:var(--panel);min-width:0}
+  .lp .sk h3{margin:0 0 14px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ai)}
+  .lp .sk ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .lp .sk li{font-size:14px;line-height:1.3;color:var(--ink-2);border:1px solid var(--line);border-radius:999px;padding:6px 12px;background:var(--bg)}
+  @media (max-width:980px){.lp .skills{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:640px){.lp .skills{grid-template-columns:1fr}}
   @media (max-width:560px){.lp .log .row{grid-template-columns:1fr;gap:4px}}
 
   /* contact */
