@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import Img from './Img.astro';
+import scenes from './patterns/scenes.js?raw';
+import './patterns/scenes.css';
 import { caseUrl, type Lang } from '../i18n/ui';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -21,9 +22,8 @@ const P: P[] = en ? [
   { n: '05', t: 'Falla parcial, no un spinner', why: 'Con varios agentes, “algo salió mal” no sirve. La persona necesita saber qué parte falló y qué sigue en pie.', how: 'Cada agente tiene su estado, los reintentos y tiempos de espera se ven, y la persona puede seguir con lo que terminó o destrabar el resto a mano.', img: 'cases/vantage/case-context-failed.jpg', alt: 'Caso de Vantage donde falló el agente de Contexto', cases: [['vantage', 'Vantage']] },
   { n: '06', t: 'Decir qué se supuso', why: 'Las suposiciones silenciosas son donde se rompe la confianza: el plan parece correcto hasta que no lo es.', how: 'Cuando la IA completa algo que la persona no dijo, el valor queda marcado como “supuesto” y se corrige con un toque.', img: 'cases/numi/voice-summary.png', alt: 'Resumen de Numi con el horario marcado como supuesto', cases: [['numi', 'Numi']] },
 ];
-// Custom pattern art (designed by Aranza) wins when present: src/assets/patterns/p01..p06.(png|jpg|webp)
-const custom = import.meta.glob('/src/assets/patterns/*.{png,jpg,jpeg,webp}');
-const art = (n: string) => { const k = Object.keys(custom).find((x) => x.split('/').pop()!.startsWith('p' + n + '.')); return k ? k.replace('/src/assets/', '') : null; };
+const ANIM = {"en": [["The AI fills a claim; the liability field comes in at 72%, below the 85% threshold, so it is flagged with its source and the claim is blocked; an adjuster checks the source and confirms; the claim is sent.", [["AI DRAFTS", "Fills every field and scores it", "--ai"], ["BELOW 85%", "Flagged, source one click away", "--human"], ["PERSON REVIEWS", "Checks the source, confirms", "--human"], ["UNBLOCKED", "Only then can it move on", "--live"]], "Sent to carrier · reviewed by Lucy"], ["The AI answers who is liable and links the line in the police report it read; a second document says the opposite, so the answer splits into both readings side by side; the adjuster picks one and the other stays on file.", [["AI ANSWERS", "A value, not a verdict", "--ai"], ["CITES THE LINE", "Page and line it read from", "--ai"], ["SOURCES DISAGREE", "Both shown, never averaged", "--human"], ["PERSON DECIDES", "The other stays on file", "--live"]], "Liability set by Lucy · statement kept on file"], ["An admin moves the copilot through three named autonomy levels and the list of tasks updates to show who acts; the confidence threshold is locked by policy and the riskiest decisions stay with a person at every level.", [["SUGGEST ONLY", "AI suggests, people act", "--ai"], ["DRAFT FOR APPROVAL", "AI drafts, people approve", "--ai"], ["AUTO, GUARDED", "AI acts within rules", "--ai"], ["NEVER AUTOMATED", "Locked by policy", "--human"]], "Policy saved · risky decisions always human"], ["A batch of 62 low-risk cases waits for signature; three are picked at random for review; the analyst flags the second sample, the whole batch pauses, and the reason is sent to the owner of the screening rule.", [["BATCH READY", "62 low-risk cases", "--ai"], ["RANDOM SAMPLE", "3 picked for review", "--human"], ["ONE FLAG", "The whole batch pauses", "--risk"], ["REASON ROUTED", "Back to the rule owner", "--human"]], "Batch paused · reason sent to rule owner"], ["Four AI agents work a case; the Context agent times out after three visible retries while Risk and Sanctions finish; the analyst adds the missing context by hand and the Drafting agent completes the recommendation.", [["AGENTS RUN", "Each with its own state", "--ai"], ["ONE FAILS", "Retries and time-out visible", "--risk"], ["WHAT HOLDS", "3 of 4 results kept", "--live"], ["PERSON UNBLOCKS", "Fills the gap by hand", "--human"]], "Recommendation ready · 1 input from Lucy"], ["A person asks Numi to plan dinner without saying a time; Numi builds the plan and marks the cooking time as assumed from their usual dinner hour; one tap shows quick options and the person sets 7:30.", [["YOU ASK", "No time mentioned", "--ink"], ["AI PLANS", "Fills what you left out", "--ai"], ["SAYS SO", "“Assumed” · from your habits", "--human"], ["ONE TAP", "Corrected in place", "--live"]], "Plan updated · 7:30 pm, set by you"]], "es": [["La IA completa un reclamo; el campo de responsabilidad sale con 72%, por debajo del umbral de 85%, así que se marca con su fuente y el reclamo queda bloqueado; una ajustadora revisa la fuente y confirma; el reclamo se envía.", [["LA IA PREPARA", "Completa cada campo y lo puntúa", "--ai"], ["MENOS DE 85%", "Se marca, la fuente a un clic", "--human"], ["REVISA UNA PERSONA", "Mira la fuente y confirma", "--human"], ["DESBLOQUEADO", "Recién ahí puede avanzar", "--live"]], "Enviado a la aseguradora · revisado por Lucy"], ["La IA responde quién es responsable y enlaza la línea del informe policial que leyó; un segundo documento dice lo contrario, así que la respuesta se divide en las dos lecturas lado a lado; la ajustadora elige una y la otra queda archivada.", [["LA IA RESPONDE", "Un valor, no un veredicto", "--ai"], ["CITA LA LÍNEA", "Página y línea de donde lo leyó", "--ai"], ["FUENTES EN DESACUERDO", "Ambas visibles, nunca promediadas", "--human"], ["DECIDE UNA PERSONA", "La otra queda archivada", "--live"]], "Responsabilidad definida por Lucy · declaración archivada"], ["Un admin pasa el copiloto por tres niveles de autonomía con nombre y la lista de tareas muestra quién actúa en cada uno; el umbral de confianza está bloqueado por política y las decisiones de más riesgo quedan siempre en manos de una persona.", [["SOLO SUGERIR", "La IA sugiere, la gente actúa", "--ai"], ["BORRADOR PARA APROBAR", "La IA prepara, la gente aprueba", "--ai"], ["AUTOMÁTICO CON LÍMITES", "La IA actúa dentro de reglas", "--ai"], ["NUNCA AUTOMÁTICO", "Bloqueado por política", "--human"]], "Política guardada · decisiones de riesgo siempre humanas"], ["Un lote de 62 casos de bajo riesgo espera la firma; se eligen tres al azar para revisar; la analista marca la segunda muestra, todo el lote se pausa y el motivo llega a quien mantiene la regla de control.", [["LOTE LISTO", "62 casos de bajo riesgo", "--ai"], ["MUESTRA AL AZAR", "3 elegidos para revisar", "--human"], ["UNA ALERTA", "Se pausa todo el lote", "--risk"], ["MOTIVO DERIVADO", "Vuelve a quien mantiene la regla", "--human"]], "Lote en pausa · motivo enviado al responsable"], ["Cuatro agentes de IA trabajan un caso; el agente de Contexto agota el tiempo tras tres reintentos visibles mientras Riesgo y Sanciones terminan; la analista agrega el contexto a mano y el agente de Redacción completa la recomendación.", [["CORREN LOS AGENTES", "Cada uno con su estado", "--ai"], ["UNO FALLA", "Reintentos y espera visibles", "--risk"], ["LO QUE SE SOSTIENE", "Se guardan 3 de 4 resultados", "--live"], ["UNA PERSONA DESTRABA", "Completa lo que falta a mano", "--human"]], "Recomendación lista · 1 dato de Lucy"], ["Alguien le pide a Numi que planifique la cena sin decir la hora; Numi arma el plan y marca la hora como supuesta según su horario habitual; un toque muestra opciones y la persona elige 19:30.", [["PEDÍS ALGO", "Sin decir la hora", "--ink"], ["LA IA PLANIFICA", "Completa lo que no dijiste", "--ai"], ["LO DICE", "“Supuesto” · según tus hábitos", "--human"], ["UN TOQUE", "Se corrige en el lugar", "--live"]], "Plan actualizado · 19:30, elegido por vos"]]}[lang] as [string, [string, string, string][], string][];
+const CUR = '<svg viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#141A26" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>';
 const title = en ? 'AI design patterns | Aranza Isea' : 'Patrones de diseño de IA | Aranza Isea';
 const desc = en ? 'Six patterns for designing AI products people can trust, each taken from a shipped or prototyped case.' : 'Seis patrones para diseñar productos con IA en los que la gente pueda confiar, cada uno tomado de un caso real o prototipado.';
 ---
@@ -34,7 +34,7 @@ const desc = en ? 'Six patterns for designing AI products people can trust, each
     <p class="lead">{en ? 'Each one comes from a real screen in my work. They’re not rules for every product; they’re the decisions that made people trust the AI in these ones.' : 'Cada uno sale de una pantalla real de mi trabajo. No son reglas para cualquier producto; son las decisiones que hicieron que la gente confiara en la IA en estos.'}</p>
   </header>
   <div class="wrap pl">
-    {P.map((p) => (
+    {P.map((p, i) => (
       <article class="pat" id={`p${p.n}`}>
         <div class="pat__t">
           <span class="mono pn">{p.n}</span>
@@ -43,11 +43,22 @@ const desc = en ? 'Six patterns for designing AI products people can trust, each
           <p class="pat__how">{p.how}</p>
           <p class="pat__cases">{p.cases.map(([s, n]) => <a class="chip" href={caseUrl(lang, s)}>{n} →</a>)}</p>
         </div>
-        <div class:list={['pat__img', { 'pat__img--art': art(p.n) }]}><Img src={art(p.n) ?? p.img} alt={p.alt} zoom lang={lang} sizes="(min-width: 1100px) 760px, 92vw" /></div>
+        <div class="pstage" data-i={i} data-pause={en ? 'Pause' : 'Pausar'} data-play={en ? 'Play' : 'Reproducir'}>
+          <p class="sr-only">{(en ? 'Animation: ' : 'Animación: ') + ANIM[i][0]}</p>
+          <button class="ctl" type="button" aria-pressed="false">{en ? 'Pause' : 'Pausar'}</button>
+          <div class="scene" aria-hidden="true">
+            <div class="cursor" set:html={CUR}></div><div class="ripple"></div>
+            <div class:list={['toast', { hu: i === 3 }]}><i>✓</i>{ANIM[i][2]}</div>
+          </div>
+          <div class="beats" aria-hidden="true">
+            {ANIM[i][1].map(([k, d, c], j) => <div class="beat" style={`--c:var(${c})`}><span class="bar"><i></i></span><b>{`0${j + 1} · ${k}`}</b>{d}</div>)}
+          </div>
+        </div>
       </article>
     ))}
   </div>
 </Base>
+<script is:inline set:html={`(function(){${scenes}})();`}></script>
 <style>
   .ph{padding-top:clamp(56px,8vw,112px);max-width:980px}
   .ph .h-1{margin:18px 0}
@@ -59,9 +70,7 @@ const desc = en ? 'Six patterns for designing AI products people can trust, each
   .pat__how{color:var(--ink-2);margin:0}
   .pat__cases{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
   .pat__cases a{text-decoration:none}
-  .pat__img{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#fff;aspect-ratio:16/10}
-  .pat__img :global(img){height:100%;object-fit:cover;object-position:top left}
-  .pat__img--art{background:var(--bg-deep)}
-  .pat__img :global(img){width:100%}
-  @media (max-width:900px){.pat{grid-template-columns:1fr}}
+  .pat:nth-child(even){grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr)}
+  .pat:nth-child(even) .pat__t{order:2}
+  @media (max-width:900px){.pat,.pat:nth-child(even){grid-template-columns:1fr}.pat:nth-child(even) .pat__t{order:0}}
 </style>
