@@ -148,8 +148,8 @@
   /* mount: inject each scene, then play it while on screen (or show its last step when motion is reduced) */
   var stages=[].slice.call(document.querySelectorAll('.pstage'));if(!stages.length)return;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  stages.forEach(function(st){st.querySelector('.scene').insertAdjacentHTML('afterbegin',M[+st.dataset.i])});
-  var S=stages.map(function(st){var c=Ctx(st);return{st:st,c:c,run:SC[+st.dataset.i](c),on:false,vis:false,play:!reduce,shown:false}});
+  stages.forEach(function(st){st.classList.add('force-motion');st.querySelector('.scene').insertAdjacentHTML('afterbegin',M[+st.dataset.i])});
+  var S=stages.map(function(st){var c=Ctx(st);return{st:st,c:c,run:SC[+st.dataset.i](c),on:false,vis:false,play:true,shown:false}});
   function still(s){var c=s.c;c.clear();c.jump=true;c.q=[];s.run();c.q.sort(function(a,b){return a[0]-b[0]}).forEach(function(x){x[1]()});c.jump=false;c.q=[];s.st.classList.remove('end');c.hide();c.beat(4,0);s.shown=true}
   function loop(s){if(!s.vis||!s.play){s.on=false;return}s.on=true;var L=s.run();s.c.at(L,function(){s.on=false;loop(s)})}
   function label(s){var b=s.st.querySelector('.ctl');b.textContent=s.play?s.st.dataset.pause:'▶ '+s.st.dataset.play;b.setAttribute('aria-pressed',String(!s.play))}
