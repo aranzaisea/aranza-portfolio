@@ -1,0 +1,594 @@
+---
+import Base from '../../layouts/Base.astro';
+const title = 'Signal — Design system | Aranza Isea';
+const description = 'Signal, the design system behind Aranza Isea’s portfolio: colour roles for AI and human actions, type, components, interactive AI patterns, motion and accessibility.';
+---
+<Base lang="en" title={title} description={description} variant="page" noAlt>
+<div class="ds">
+<div class="shell">
+  <aside aria-label="Design system index">
+    <a class="brand" href="#ds-top"><i aria-hidden="true"></i><b>Signal</b></a>
+    <p class="lab">Design system · v2.0</p>
+    <ul class="toc" id="toc">
+      <li><a href="#foundations"><span>01</span>Foundations</a><ul>
+        <li><a href="#color">Color roles</a></li><li><a href="#ink">Ink &amp; neutrals</a></li><li><a href="#type">Type scale</a></li><li><a href="#space">Space &amp; shape</a></li></ul></li>
+      <li><a href="#components"><span>02</span>Components</a><ul>
+        <li><a href="#buttons">Buttons</a></li><li><a href="#status">Status &amp; evidence</a></li><li><a href="#dial">Reading dial</a></li><li><a href="#card">Case card</a></li><li><a href="#cmd">Command line</a></li></ul></li>
+      <li><a href="#ai"><span>03</span>AI patterns</a><ul>
+        <li><a href="#confidence">Confidence field</a></li><li><a href="#autonomy">Autonomy setting</a></li><li><a href="#trace">Decision trace</a></li><li><a href="#failure">Failure states</a></li></ul></li>
+      <li><a href="#motion"><span>04</span>Motion</a><ul>
+        <li><a href="#easing">Easing &amp; timing</a></li><li><a href="#field">Signal field</a></li></ul></li>
+      <li><a href="#a11y"><span>05</span>Accessibility</a><ul>
+        <li><a href="#contrast">Contrast</a></li><li><a href="#reduced">Motion &amp; focus</a></li></ul></li>
+    </ul>
+    <p class="foot">Built and documented by Aranza Isea. Every value on this page is the one the live site uses.</p>
+  </aside>
+
+  <div class="ds-main" id="ds-top">
+    <header class="intro">
+      <p class="lab">Signal 2.0 · the system behind this site</p>
+      <h1>A design system for interfaces where <span>AI</span> and people share the work.</h1>
+      <p>Signal turns one idea into rules: colour says who is acting. Blue is what the AI does, amber is what a person decides, green is what shipped. Every component, from a badge to a decision trace, keeps that promise, so a reader never has to guess who did what.</p>
+      <div class="facts" role="list">
+        <div role="listitem"><b>24</b><span class="lab">Colour tokens</span></div>
+        <div role="listitem"><b>7</b><span class="lab">Components</span></div>
+        <div role="listitem"><b>4</b><span class="lab">AI patterns</span></div>
+        <div role="listitem"><b>AA</b><span class="lab">Contrast on all text</span></div>
+      </div>
+    </header>
+
+    <!-- ===================== 01 FOUNDATIONS ===================== -->
+    <section class="part" id="foundations">
+      <header><p class="lab">01 · Foundations</p><h2>Foundations</h2><p>The ground every piece stands on: four colour roles, one ink at set strengths, two typefaces and a short list of spaces and radii.</p></header>
+
+      <div class="item" id="color">
+        <div class="d"><p class="lab">01 / 04</p><h3>Color roles</h3><p>Colour is never decoration. Each hue is a role, and each role has three tokens: the colour itself for text and marks, a tint for surfaces, and a line for borders.</p>
+          <ol class="rules"><li>Never use blue for something a person did, or amber for something the AI did.</li><li>Green only for what is real: shipped, validated, measured.</li><li>Red only for risk and errors, always with words, never colour alone.</li></ol></div>
+        <div class="demo">
+          <div class="roles">
+            <div class="role"><div class="sw" style="background:var(--ai)">#4757CF</div><div class="tint"><span style="background:var(--ai-bg)"></span><span style="background:var(--ai-line)"></span></div><div class="t"><b>AI · blue</b><p>What the model drafted, ranked, suggested or ran.</p></div></div>
+            <div class="role"><div class="sw" style="background:var(--human)">#9A5900</div><div class="tint"><span style="background:var(--human-bg)"></span><span style="background:var(--human-line)"></span></div><div class="t"><b>Human · amber</b><p>Decisions, sign-offs, hand-offs to a person.</p></div></div>
+            <div class="role"><div class="sw" style="background:var(--live)">#1B7A4B</div><div class="tint"><span style="background:var(--live-bg)"></span><span style="background:var(--live-line)"></span></div><div class="t"><b>Live · green</b><p>Launched products, validated and measured results.</p></div></div>
+            <div class="role"><div class="sw" style="background:var(--risk)">#B23A26</div><div class="tint"><span style="background:var(--risk-bg)"></span><span style="background:var(--risk-line)"></span></div><div class="t"><b>Risk · red</b><p>Errors, blocked actions, severity.</p></div></div>
+          </div>
+          <div class="spec-wrap"><table class="spec" style="margin-top:14px"><thead><tr><th>Role</th><th>Mark</th><th>Surface</th><th>Line</th></tr></thead><tbody>
+            <tr><td>AI</td><td><code>--ai</code></td><td><code>--ai-bg #ECEEFB</code></td><td><code>--ai-line #C3C9F2</code></td></tr>
+            <tr><td>Human</td><td><code>--human</code></td><td><code>--human-bg #FBF1E1</code></td><td><code>--human-line #ECCF9E</code></td></tr>
+            <tr><td>Live</td><td><code>--live</code></td><td><code>--live-bg #E6F4EC</code></td><td><code>--live-line #B3DCC5</code></td></tr>
+            <tr><td>Risk</td><td><code>--risk</code></td><td><code>--risk-bg #FCEDEA</code></td><td><code>--risk-line #F0C3BA</code></td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <div class="item" id="ink">
+        <div class="d"><p class="lab">02 / 04</p><h3>Ink &amp; neutrals</h3><p>Text uses one ink at four strengths. Quieter means further from the eye, not a different hue. Neutrals lean slightly toward the AI blue so greys never look unconsidered.</p></div>
+        <div class="demo">
+          <div class="canvas">
+            <div class="inks" id="inks"></div>
+            <div class="neutrals" id="neutrals"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item" id="type">
+        <div class="d"><p class="lab">03 / 04</p><h3>Type scale</h3><p>Two voices. Geist for everything people read. Geist Mono for everything the system labels: indices, IDs, metrics and traces, so data always looks like data.</p>
+          <ol class="rules"><li>Titles tighten as they grow: −0.01em at 20px, −0.035em at display.</li><li>Mono is always uppercase with +0.08em tracking when it labels.</li><li>Reading text stays under 68 characters per line.</li></ol></div>
+        <div class="demo"><div class="canvas">
+          <div class="type-row"><span class="meta">DISPLAY<br>Geist 600 · 40–84 · 1.02</span><span class="t-display">Aranza Isea</span></div>
+          <div class="type-row"><span class="meta">H1<br>Geist 600 · 34–60 · 1.05</span><span class="t-h1">Some things I’ve designed.</span></div>
+          <div class="type-row"><span class="meta">H2<br>Geist 600 · 26–38 · 1.12</span><span class="t-h2">Confidence has to change the interface</span></div>
+          <div class="type-row"><span class="meta">H3<br>Geist 600 · 20 · 1.3</span><span class="t-h3">Design the failure first</span></div>
+          <div class="type-row"><span class="meta">LEAD<br>Geist 400 · 18–21 · 1.55</span><span class="t-lead">Copilots and agent workflows for work where a wrong answer costs money or trust.</span></div>
+          <div class="type-row"><span class="meta">BODY<br>Geist 400 · 17 · 1.6</span><span class="t-body">Below the threshold, the screen changes: fields are flagged, sources are shown and the case goes to a person.</span></div>
+          <div class="type-row"><span class="meta">EYEBROW<br>Mono 500 · 12.5 · +.08em</span><span class="t-eyebrow">Selected work · 6 cases</span></div>
+          <div class="type-row"><span class="meta">DATA<br>Mono 500 · 13 · tabular</span><span class="t-data">case_01 · −68% · confidence 82%</span></div>
+        </div></div>
+      </div>
+
+      <div class="item" id="space">
+        <div class="d"><p class="lab">04 / 04</p><h3>Space &amp; shape</h3><p>An 8-point rhythm with a fluid gutter. Radius signals what kind of thing an element is: pills act, cards hold, tags label.</p></div>
+        <div class="demo"><div class="canvas">
+          <div class="space" id="spaces"></div>
+          <div class="radii">
+            <div><span style="border-radius:999px"></span>999 · action</div>
+            <div><span style="border-radius:18px"></span>18 · section card</div>
+            <div><span style="border-radius:14px"></span>14 · card</div>
+            <div><span style="border-radius:10px"></span>10 · input</div>
+            <div><span style="border-radius:6px"></span>6 · tag</div>
+          </div>
+          <div class="spec-wrap"><table class="spec" style="margin-top:20px"><thead><tr><th>Layout token</th><th>Value</th></tr></thead><tbody>
+            <tr><td>Gutter</td><td><code>clamp(16px, 4vw, 56px)</code></td></tr>
+            <tr><td>Max width</td><td><code>1440px</code></td></tr>
+            <tr><td>Header</td><td><code>64px</code>, sticky, frosted</td></tr>
+            <tr><td>Section gap</td><td><code>clamp(96px, 16vh, 180px)</code></td></tr>
+          </tbody></table></div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===================== 02 COMPONENTS ===================== -->
+    <section class="part" id="components">
+      <header><p class="lab">02 · Components</p><h2>Components</h2><p>The pieces every page is built from, rendered live with the same CSS as the site.</p></header>
+
+      <div class="item" id="buttons">
+        <div class="d"><p class="lab">01 / 05</p><h3>Buttons</h3><p>One primary action per view. Labels say exactly what happens: “Download resume”, not “Learn more”.</p></div>
+        <div class="demo"><div class="canvas grid">
+          <div class="row"><button class="btn btn--primary" type="button">See the work</button><button class="btn btn--ghost" type="button">Download resume ↓</button><button class="btn btn--play" type="button">↻ Replay</button><button class="btn btn--ghost btn--sm" type="button">Resume ↓</button></div>
+          <div class="states">
+            <figure><button class="btn btn--primary" type="button" tabindex="-1">Default</button><figcaption>Rest</figcaption></figure>
+            <figure><button class="btn btn--primary force-hover" type="button" tabindex="-1">Hover</button><figcaption>Hover · #000</figcaption></figure>
+            <figure><button class="btn btn--primary force-focus" type="button" tabindex="-1">Focus</button><figcaption>Focus · 2px AI ring</figcaption></figure>
+            <figure><button class="btn btn--primary" type="button" disabled tabindex="-1">Disabled</button><figcaption>Disabled · 45%</figcaption></figure>
+          </div>
+        </div>
+        <div class="spec-wrap"><table class="spec" style="margin-top:14px"><thead><tr><th>Variant</th><th>Fill</th><th>Size</th><th>Use</th></tr></thead><tbody>
+          <tr><td>Primary</td><td><code>--ink</code> / white</td><td><code>44 · pill</code></td><td>The one action that matters on the view</td></tr>
+          <tr><td>Ghost</td><td><code>--line-strong</code> border</td><td><code>44 · pill</code></td><td>Secondary actions, downloads</td></tr>
+          <tr><td>Motion</td><td><code>--ai-bg</code> + <code>--ai</code></td><td><code>44 · mono</code></td><td>Controls for the particle field only</td></tr>
+          <tr><td>Small</td><td>Ghost</td><td><code>36 · pill</code></td><td>Header</td></tr>
+        </tbody></table></div></div>
+      </div>
+
+      <div class="item" id="status">
+        <div class="d"><p class="lab">02 / 05</p><h3>Status &amp; evidence</h3><p>Badges say what state a thing is in. Evidence labels say how much to trust a claim. A portfolio claim without one is not allowed.</p>
+          <ol class="rules"><li>Measured beats validated beats shipped beats hypothesis.</li><li>A metric always carries who measured it and over what period.</li></ol></div>
+        <div class="demo"><div class="canvas grid">
+          <p class="lab" style="margin:0 0 10px">Status badge</p>
+          <div class="row"><span class="badge badge--live">Launched</span><span class="badge badge--ai">AI</span><span class="badge badge--human">Needs your review</span><span class="badge badge--risk">Blocked</span><span class="badge badge--neutral">Concept</span></div>
+          <p class="lab" style="margin:22px 0 10px">Evidence label</p>
+          <div class="row"><span class="ev ev--measured">Measured</span><span class="ev ev--validated">Validated with users</span><span class="ev ev--shipped">Shipped</span><span class="ev ev--hypothesis">Hypothesis</span></div>
+          <p class="lab" style="margin:22px 0 10px">Metric chip</p>
+          <div class="row"><span class="chip">−68% resolution time</span><span class="chip">90%+ adoption</span><span class="chip">20 interviews</span></div>
+        </div></div>
+      </div>
+
+      <div class="item" id="dial">
+        <div class="d"><p class="lab">03 / 05</p><h3>Reading dial</h3><p>Every case study can be read in 30 seconds, 3 minutes or 10. The dial hides depth instead of cutting it, so a recruiter and a design lead read the same page.</p></div>
+        <div class="demo"><div class="canvas grid depth">
+          <div class="dial" role="group" aria-label="Reading depth"><button type="button" data-set="skim" aria-pressed="false">Skim<span class="t">· 30s</span></button><button type="button" data-set="standard" aria-pressed="true">Standard<span class="t">· 3m</span></button><button type="button" data-set="deep" aria-pressed="false">Deep<span class="t">· 10m</span></button></div>
+          <p data-d="skim"><b>Problem.</b> Adjusters lost days re-typing documents and chasing approvals.</p>
+          <p data-d="standard">I ran 20 interviews across every role in the claims flow, then designed the copilot’s behaviour: what it fills, how sure it is and when it hands a claim back.</p>
+          <p data-d="deep">The full rationale: research, alternatives considered, the hand-off rule, failure states and results. ~500 adjusters use it, and resolution time fell 68% over three months (client-reported).</p>
+        </div></div>
+      </div>
+
+      <div class="item" id="card">
+        <div class="d"><p class="lab">04 / 05</p><h3>Case card</h3><p>A window into one case: an ID, a state, a cover, one sentence and the proof. The whole card is the link; hover lifts it 3px and zooms the cover.</p></div>
+        <div class="demo"><div class="canvas grid">
+          <a class="card" href="#card" style="display:block;text-decoration:none;color:inherit">
+            <div class="bar"><span>case_01</span><span class="ai">AI</span><span class="st">● Launched</span></div>
+            <div class="shot">cover · 1200 × 750</div>
+            <div class="body"><span class="lab" style="text-transform:none;letter-spacing:.02em">AI claims copilot · Insurance</span><h4>ClaimPro</h4><p style="margin:0;color:var(--ink-soft);font-size:15px">An AI copilot that drafts insurance claims and knows when to hand them back to a person.</p><div class="row"><span class="chip">−68% resolution time</span></div><div class="foot"><span>Senior Product Designer · 2024–25</span><b style="color:var(--ink)">Read →</b></div></div>
+          </a>
+        </div></div>
+      </div>
+
+      <div class="item" id="cmd">
+        <div class="d"><p class="lab">05 / 05</p><h3>Command line</h3><p>Contact as a prompt. The address is selectable text, and the copy button falls back to selecting it when the clipboard is blocked.</p></div>
+        <div class="demo"><div class="canvas grid"><div class="cmd"><span class="p" aria-hidden="true">&gt;</span><span id="email" style="user-select:all">aranzaisea@gmail.com</span><button type="button" id="copy">copy</button></div></div></div>
+      </div>
+    </section>
+
+    <!-- ===================== 03 AI PATTERNS ===================== -->
+    <section class="part" id="ai">
+      <header><p class="lab">03 · AI patterns</p><h2>AI patterns</h2><p>Where Signal earns its name. These patterns come from ClaimPro, Vantage and Relay, and each one answers a question users ask of an AI: how sure is it, how much can it do alone, what did it do, and what happens when it fails. The values in these demos are illustrative.</p></header>
+
+      <div class="item" id="confidence">
+        <div class="d"><p class="lab">01 / 04</p><h3>Confidence field</h3><p>A confidence score only matters if it changes what the person does next. Above the threshold the AI’s work stays quiet. Below it, the field turns amber, shows its source and blocks the claim until someone reviews it.</p>
+          <ol class="rules"><li>The threshold is visible and set by an admin, never hidden.</li><li>Low confidence explains why in plain words.</li><li>The person’s correction is logged with a reason.</li></ol>
+          <p class="lab" style="margin-top:18px">Try it: drag the confidence</p></div>
+        <div class="demo"><div class="canvas grid">
+          <div class="field" id="cf">
+            <div class="top"><span class="lab">Liability</span><span class="badge badge--ai" id="cfBadge">AI · filled</span></div>
+            <div class="val">Third party · 100%</div>
+            <div class="conf"><span class="mono" style="font-size:12px;color:var(--ink-faint)">confidence</span><span class="meter"><i id="cfBar"></i><b></b></span><span class="mono" id="cfVal" style="font-size:13px;font-variant-numeric:tabular-nums">92%</span></div>
+            <p class="src">Why: the police report and the driver statement disagree on who braked first. <a href="#confidence" style="color:var(--ai)">Open both sources →</a></p>
+          </div>
+          <div class="slider"><label class="lab" for="cfRange">Model confidence</label><input type="range" id="cfRange" min="40" max="100" value="92"></div>
+          <div class="outcome"><span id="cfOut">Above 85%: the draft can go to the carrier.</span><button class="btn btn--primary btn--sm" id="cfBtn" type="button">Send to carrier</button></div>
+        </div></div>
+      </div>
+
+      <div class="item" id="autonomy">
+        <div class="d"><p class="lab">02 / 04</p><h3>Autonomy setting</h3><p>Autonomy is a setting, not a launch decision. Teams earn more per task, and every level says who acts and who signs.</p></div>
+        <div class="demo"><div class="canvas grid">
+          <div class="seg" role="group" aria-label="Autonomy level"><button type="button" data-a="0" aria-pressed="false">Suggest</button><button type="button" data-a="1" aria-pressed="true">Draft &amp; approve</button><button type="button" data-a="2" aria-pressed="false">Act &amp; report</button></div>
+          <div class="lanes">
+            <div class="lane ai"><span class="lab" style="color:var(--ai)">AI does</span><span id="aAI"></span></div>
+            <div class="lane hu"><span class="lab" style="color:var(--human)">Person does</span><span id="aHU"></span></div>
+            <div class="lane"><span class="lab">Undo</span><span id="aUN"></span></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="item" id="trace">
+        <div class="d"><p class="lab">03 / 04</p><h3>Decision trace</h3><p>Every case keeps a readable log of who did what. AI steps are blue, people are amber, rules are neutral, and the hand-off is the one highlighted row.</p></div>
+        <div class="demo"><div class="trace" aria-label="Example decision trace">
+          <header><span>trace · CLM-1832</span><span>illustrative</span></header>
+          <ol>
+            <li><span>00:01</span><span class="tag a">intake</span><span>police_report.pdf read ✓</span></li>
+            <li><span>00:04</span><span class="tag a">draft</span><span>14 fields filled · sources linked</span></li>
+            <li><span>00:04</span><span class="tag a">field</span><span>liability · confidence 82%</span></li>
+            <li><span>00:04</span><span class="tag r">rule</span><span>&lt; 85% → human review</span></li>
+            <li class="key"><span>00:05</span><span class="tag h">handoff</span><span>adjuster · sources disagree</span></li>
+            <li><span>03:12</span><span class="tag h">adjuster</span><span>corrected · reason saved, logged</span></li>
+          </ol>
+          <footer><span style="color:var(--ai)">● AI drafts</span><span style="color:var(--human)">● Person decides</span></footer>
+        </div></div>
+      </div>
+
+      <div class="item" id="failure">
+        <div class="d"><p class="lab">04 / 04</p><h3>Failure states</h3><p>If the unhappy path isn’t designed, people stop trusting the happy one. Each failure says what happened, what was kept and what to do now.</p></div>
+        <div class="demo"><div class="canvas grid">
+          <div class="tabs" role="tablist" aria-label="Failure examples"><button role="tab" type="button" aria-selected="true" data-f="0">Unreadable document</button><button role="tab" type="button" aria-selected="false" data-f="1">Sources disagree</button><button role="tab" type="button" aria-selected="false" data-f="2">Model unavailable</button></div>
+          <div class="fail" id="fail" role="tabpanel"></div>
+        </div></div>
+      </div>
+    </section>
+
+    <!-- ===================== 04 MOTION ===================== -->
+    <section class="part" id="motion">
+      <header><p class="lab">04 · Motion</p><h2>Motion</h2><p>Motion explains state, never decorates it. Interface motion is short; the signal field is the one place the system is allowed to take its time.</p></header>
+
+      <div class="item" id="easing">
+        <div class="d"><p class="lab">01 / 02</p><h3>Easing &amp; timing</h3><p>Three curves and three durations, so related motion always moves alike.</p></div>
+        <div class="demo">
+          <div class="curves" id="curves"></div>
+          <button class="btn btn--ghost btn--sm replay" type="button" id="playCurves">▶ Play</button>
+          <div class="spec-wrap"><table class="spec" style="margin-top:14px"><thead><tr><th>Token</th><th>Value</th><th>Used for</th></tr></thead><tbody>
+            <tr><td>fast</td><td><code>150ms</code></td><td>Button fills, borders</td></tr>
+            <tr><td>base</td><td><code>250ms</code></td><td>Card lift, focus</td></tr>
+            <tr><td>slow</td><td><code>500ms</code></td><td>Cover zoom, section reveal</td></tr>
+            <tr><td>field · intro</td><td><code>3s</code></td><td>Particles writing the name</td></tr>
+            <tr><td>field · lobes</td><td><code>8s loop</code></td><td>Creativity → reasoning</td></tr>
+          </tbody></table></div>
+        </div>
+      </div>
+
+      <div class="item" id="field">
+        <div class="d"><p class="lab">02 / 02</p><h3>Signal field</h3><p>The home page tells the system’s story in particles. Scroll moves it from noise to a name, to signal, to structure, and finally to a brain where creativity (amber) and reasoning (blue) light up in turn.</p></div>
+        <div class="demo"><div class="stages" id="stages"></div></div>
+      </div>
+    </section>
+
+    <!-- ===================== 05 ACCESSIBILITY ===================== -->
+    <section class="part" id="a11y">
+      <header><p class="lab">05 · Accessibility</p><h2>Accessibility</h2><p>Accessibility is a token decision, not an audit at the end. These numbers are computed live from the tokens on this page.</p></header>
+
+      <div class="item" id="contrast">
+        <div class="d"><p class="lab">01 / 02</p><h3>Contrast</h3><p>Every text pairing in the system passes WCAG 2.2 AA (4.5:1 for body text). Role colours were darkened from the original dark-mode palette to hold AA on light surfaces.</p>
+          <div class="fail warn" style="margin-top:18px"><h5>Fixed in 2.0</h5><p>Auditing the tokens for this page showed two badge pairings below AA on the live site. Both colours were darkened one step; the hue and role stay the same.</p>
+          <div class="spec-wrap"><table class="spec" style="margin-top:10px"><thead><tr><th>Token</th><th>Before</th><th>After</th></tr></thead><tbody>
+          <tr><td><code>--human</code></td><td class="mono">#A35F00 · 4.48:1</td><td class="mono">#9A5900 · 4.94:1</td></tr>
+          <tr><td><code>--live</code></td><td class="mono">#1E8452 · 4.14:1</td><td class="mono">#1B7A4B · 4.71:1</td></tr></tbody></table></div></div></div>
+        <div class="demo"><div class="spec-wrap"><table class="spec"><thead><tr><th>Text</th><th>On</th><th>Ratio</th><th>AA</th></tr></thead><tbody id="contrastRows"></tbody></table></div></div>
+      </div>
+
+      <div class="item" id="reduced">
+        <div class="d"><p class="lab">02 / 02</p><h3>Motion &amp; focus</h3><p>Nothing moves unless the person allows it, and everything can be reached from the keyboard.</p></div>
+        <div class="demo"><div class="canvas">
+          <ol class="rules" style="margin:0">
+            <li>With reduced motion on, the particle field starts still, and a Play button offers the animation instead of forcing it.</li>
+            <li>A pause control is always on screen while the field moves.</li>
+            <li>Focus is a 2px AI-blue ring with a 3px offset, on every interactive element.</li>
+            <li>The name drawn in particles is real text underneath, so screen readers and search engines read it.</li>
+            <li>Status never relies on colour alone: every badge has a word and every risk has a sentence.</li>
+          </ol>
+        </div></div>
+      </div>
+    </section>
+  </div>
+</div>
+</div>
+</Base>
+
+<script is:inline>
+(function(){
+  var probe=document.createElement('span');probe.style.display='none';document.body.appendChild(probe);
+  // resolve a token to #RRGGBB, whatever form the minifier left it in
+  var tok=function(n){probe.style.color='var('+n+')';var m=getComputedStyle(probe).color.match(/\d+/g);return'#'+m.slice(0,3).map(function(v){return(+v).toString(16).padStart(2,'0')}).join('').toUpperCase()};
+
+  /* ink + neutrals */
+  var inks=[['Ink','--ink','Titles, active labels'],['Ink 2','--ink-2','Reading text'],['Soft','--ink-soft','Secondary text'],['Faint','--ink-faint','Labels, meta, indices']];
+  document.getElementById('inks').innerHTML=inks.map(function(r){return'<div><b style="font-weight:500">'+r[0]+'</b><code class="mono" style="font-size:12px;color:var(--ink-faint)">'+tok(r[1])+'</code><span style="display:flex;align-items:center;gap:12px"><i style="flex:1;background:var('+r[1]+')"></i><span style="color:var('+r[1]+');min-width:150px">'+r[2]+'</span></span></div>'}).join('');
+  var neu=[['bg','--bg'],['bg-deep','--bg-deep'],['panel','--panel'],['line','--line'],['line-strong','--line-strong']];
+  document.getElementById('neutrals').innerHTML=neu.map(function(n){return'<div><span style="background:var('+n[1]+')"></span><p><b style="font-weight:500">'+n[0]+'</b><br><span class="mono" style="color:var(--ink-faint)">'+tok(n[1])+'</span></p></div>'}).join('');
+
+  /* spaces */
+  document.getElementById('spaces').innerHTML=[4,8,12,16,24,32,48,64,96].map(function(v,i){return'<div><span class="mono" style="color:var(--ink-faint)">space-'+(i+1)+'</span><span class="mono">'+v+'px</span><i style="width:'+v*2+'px;max-width:100%"></i></div>'}).join('');
+
+  /* contrast, computed from the tokens */
+  function hex(h){h=h.replace('#','');return[0,2,4].map(function(i){return parseInt(h.substr(i,2),16)/255})}
+  function lum(c){return c.map(function(v){return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce(function(a,v,i){return a+v*[.2126,.7152,.0722][i]},0)}
+  function ratio(a,b){var A=lum(hex(a)),B=lum(hex(b));return(Math.max(A,B)+.05)/(Math.min(A,B)+.05)}
+  var pairs=[['--ink','--bg'],['--ink-soft','--bg'],['--ink-faint','--bg'],['--ink-faint','--panel'],['--ai','--panel'],['--ai','--ai-bg'],['--human','--panel'],['--human','--human-bg'],['--live','--panel'],['--live','--live-bg'],['--risk','--risk-bg'],['--on-accent','--ink']];
+  document.getElementById('contrastRows').innerHTML=pairs.map(function(p){var r=ratio(tok(p[0]),tok(p[1])),ok=r>=4.5;return'<tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:var('+p[0]+');border:1px solid var(--line);margin-right:8px"></span><code>'+p[0]+'</code></td><td><code>'+p[1]+'</code></td><td class="mono" style="font-variant-numeric:tabular-nums">'+r.toFixed(2)+':1</td><td><span class="ratio '+(ok?'aa':'no')+'">'+(ok?'Pass':'Fail')+'</span></td></tr>'}).join('');
+
+  /* reading dial */
+  var dialBtns=document.querySelectorAll('.dial button'),order={skim:0,standard:1,deep:2};
+  function setDepth(d){dialBtns.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.set===d))});document.querySelectorAll('.depth [data-d]').forEach(function(p){p.hidden=order[p.dataset.d]>order[d]})}
+  dialBtns.forEach(function(b){b.addEventListener('click',function(){setDepth(b.dataset.set)})});setDepth('standard');
+
+  /* copy */
+  var copy=document.getElementById('copy');
+  copy.addEventListener('click',function(){var el=document.getElementById('email');function sel(){var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);copy.textContent='selected'}
+    try{navigator.clipboard.writeText(el.textContent).then(function(){copy.textContent='copied';setTimeout(function(){copy.textContent='copy'},1500)},sel)}catch(e){sel()}});
+
+  /* confidence field */
+  var cf=document.getElementById('cf'),range=document.getElementById('cfRange'),bar=document.getElementById('cfBar'),val=document.getElementById('cfVal'),badge=document.getElementById('cfBadge'),out=document.getElementById('cfOut'),btn=document.getElementById('cfBtn');
+  function conf(){var v=+range.value,low=v<85;cf.classList.toggle('low',low);bar.style.width=v+'%';bar.style.background=low?'var(--human)':'var(--ai)';val.textContent=v+'%';
+    badge.className='badge '+(low?'badge--human':'badge--ai');badge.textContent=low?'Needs your review':'AI · filled';
+    out.textContent=low?'Below 85%: the claim waits for an adjuster.':'Above 85%: the draft can go to the carrier.';btn.disabled=low;btn.textContent=low?'Sent to adjuster':'Send to carrier'}
+  range.addEventListener('input',conf);conf();
+
+  /* autonomy */
+  var A=[['Suggests a next step and links its sources.','Decides and does the work.','Nothing to undo: the AI changed nothing.'],
+         ['Drafts the whole claim and flags weak fields.','Reviews, edits and signs every draft.','Any draft can be discarded before sign-off.'],
+         ['Sends routine claims under $2,000 on its own.','Reviews a daily sample and every flagged case.','10-minute undo window, then a reversal flow.']];
+  var segs=document.querySelectorAll('.seg button');
+  function aut(i){segs.forEach(function(b){b.setAttribute('aria-pressed',String(+b.dataset.a===i))});document.getElementById('aAI').textContent=A[i][0];document.getElementById('aHU').textContent=A[i][1];document.getElementById('aUN').textContent=A[i][2]}
+  segs.forEach(function(b){b.addEventListener('click',function(){aut(+b.dataset.a)})});aut(1);
+
+  /* failure states */
+  var F=[['warn','We couldn’t read page 3 of the police report.','The photo is too dark to extract text. The other 14 fields are filled and kept.',['Upload a clearer copy','Fill page 3 by hand']],
+         ['warn','Two sources disagree on liability.','The police report and the driver statement name different drivers. The AI didn’t choose; the field waits for you.',['Compare both sources','Mark one as correct']],
+         ['','The assistant is unavailable right now.','Your claim and every edit are saved. You can keep working by hand; drafts will resume when it’s back.',['Continue manually','Retry in 1 min']]];
+  var tabs=document.querySelectorAll('.tabs button'),fail=document.getElementById('fail');
+  function f(i){tabs.forEach(function(t){t.setAttribute('aria-selected',String(+t.dataset.f===i))});var x=F[i];fail.className='fail '+x[0];fail.innerHTML='<h5>'+x[1]+'</h5><p>'+x[2]+'</p><div class="row"><button class="btn btn--primary btn--sm" type="button">'+x[3][0]+'</button><button class="btn btn--ghost btn--sm" type="button">'+x[3][1]+'</button></div>'}
+  tabs.forEach(function(t){t.addEventListener('click',function(){f(+t.dataset.f)})});f(0);
+
+  /* easing curves */
+  var C=[['standard','cubic-bezier(.2,.7,.1,1)',[.2,.7,.1,1],'Cards, sections, covers'],['in-out','cubic-bezier(.65,0,.35,1)',[.65,0,.35,1],'Stage changes in the field'],['linear','linear',[0,0,1,1],'Progress and loaders only']];
+  var cv=document.getElementById('curves');
+  cv.innerHTML=C.map(function(c,i){var p=c[2];return'<div class="curve"><span class="lab">'+c[0]+'</span><svg viewBox="-4 -4 108 108" aria-hidden="true"><line x1="0" y1="100" x2="100" y2="100"/><line x1="0" y1="0" x2="0" y2="100"/><path d="M0 100 C'+p[0]*100+' '+(100-p[1]*100)+' '+p[2]*100+' '+(100-p[3]*100)+' 100 0"/></svg><code class="mono" style="font-size:11.5px;color:var(--ink-2)">'+c[1]+'</code><div class="track"><i id="dot'+i+'"></i></div><p>'+c[3]+'</p></div>'}).join('');
+  function playCurves(){C.forEach(function(c,i){var d=document.getElementById('dot'+i);d.style.transition='none';d.style.left='0';void d.offsetWidth;d.style.transition='left 1.2s '+c[1];d.style.left='calc(100% - 14px)'})}
+  document.getElementById('playCurves').addEventListener('click',playCurves);
+
+  /* signal field stages, drawn small */
+  var S=[['Noise','00 · load'],['Name','01 · hero'],['Signal','02 · results'],['Structure','03 · work'],['Brain','04 · approach']];
+  var st=document.getElementById('stages');
+  st.innerHTML=S.map(function(s,i){return'<div><canvas width="240" height="240" id="st'+i+'" aria-hidden="true"></canvas><b>'+s[0]+'</b><span>'+s[1]+'</span></div>'}).join('');
+  function rnd(seed){return function(){seed=(seed*16807)%2147483647;return seed/2147483647}}
+  var AI='71,87,207',HU='214,140,30',GR='30,132,82',INK='20,26,38';
+  function dot(x,c,y,col,a,r){x.fillStyle='rgba('+col+','+a+')';x.beginPath();x.arc(c,y,r||1.3,0,7);x.fill()}
+  (function(){var R=rnd(3),x=document.getElementById('st0').getContext('2d');for(var i=0;i<900;i++)dot(x,R()*240,R()*240,[AI,HU,INK,INK][Math.floor(R()*4)],.55,1+R()*1.6)})();
+  (function(){var x=document.getElementById('st1').getContext('2d'),t=document.createElement('canvas');t.width=240;t.height=240;var g=t.getContext('2d');g.font='600 72px Geist, sans-serif';g.textAlign='center';g.fillText('ai',120,150);var d=g.getImageData(0,0,240,240).data,R=rnd(5),n=0;
+    while(n<1400){var px=Math.floor(R()*240),py=Math.floor(R()*240);if(d[(py*240+px)*4+3]>128){n++;dot(x,px,py,[AI,AI,HU,INK][Math.floor(R()*4)],.8,1.1)}}})();
+  (function(){var x=document.getElementById('st2').getContext('2d'),R=rnd(7);for(var l=0;l<7;l++)for(var i=0;i<160;i++){var px=R()*240,env=Math.exp(-Math.pow((px-120)/80,2));dot(x,px,120+(l-3)*12+Math.sin(px/18+l)*30*env,l===3?HU:AI,.75,1.1)}})();
+  (function(){var x=document.getElementById('st3').getContext('2d'),R=rnd(9);for(var i=0;i<1300;i++){var gz=Math.floor(R()*10),gx=R()*2-1,z=1+gz*.35,px=120+gx*120/z,py=200-110*(1-1/z);if(R()<.5){px=120+(Math.round(gx*6)/6)*120/z}dot(x,px,py,AI,.5,1)}for(var k=0;k<9;k++){var bx=30+R()*180,bh=20+R()*60;for(var j=0;j<40;j++)dot(x,bx,170-R()*bh,R()<.5?HU:GR,.85,1.2)}})();
+  (function(){var x=document.getElementById('st4').getContext('2d'),R=rnd(11);for(var i=0;i<2200;i++){var th=R()*6.283,ph=Math.acos(2*R()-1),hs=R()<.5?-1:1,dx=Math.sin(ph)*Math.cos(th),dy=Math.cos(ph),dz=Math.sin(ph)*Math.sin(th);
+      var X=hs*.38+dx*(dx*hs<0?.36:.64),Y=.08+dy*(dy<0?.52:.84),Z=dz*1.18,g=Math.sin(X*7+Math.sin(Z*5)*1.3)+Math.sin(Z*6.5+Math.sin(Y*6)*1.4)+Math.sin(Y*7.5+X*2.2);if(Math.abs(g)>.3&&R()>.25)continue;
+      var px=120+Z*80+X*18,py=128-Y*80+X*10,col=Z/1.18>.42?AI:(hs>0&&Z/1.18<.25?HU:'110,118,140');dot(x,px,py,col,col==='110,118,140'?.35:.8,1.1)}})();
+
+  /* index scroll-spy */
+  var links=[].slice.call(document.querySelectorAll('.toc ul a')),parts=[].slice.call(document.querySelectorAll('.toc>li'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1)});
+  function spy(){var y=innerHeight*.3,cur=ids[0];ids.forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<y)cur=id});
+    links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)});parts.forEach(function(li){li.classList.toggle('on',!!li.querySelector('a.on'))})}
+  addEventListener('scroll',spy,{passive:true});spy();
+})();
+</script>
+
+<style is:global>
+@media (prefers-reduced-motion:reduce){.ds *{transition:none!important;animation:none!important}
+}
+.ds .lab,.ds .intro p.lab,.ds .item>.d p.lab,.ds .part>header p.lab{font:500 11.5px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.ds .shell{display:grid;grid-template-columns:260px minmax(0,1fr);min-height:100vh;max-width:var(--maxw);margin:0 auto}
+.ds aside{min-width:0;position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));overflow:auto;border-right:1px solid var(--line);padding:28px 22px;background:var(--bg)}
+.ds .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.ds .brand i{width:9px;height:9px;border-radius:50%;background:var(--human);box-shadow:0 0 0 4px var(--human-bg)}
+.ds .brand b{font-weight:600;font-size:22px;letter-spacing:-.03em}
+.ds .brand+p{margin:6px 0 26px}
+.ds .toc{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.ds .toc>li>a{display:flex;gap:12px;padding:9px 8px;border-radius:8px;text-decoration:none;font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.ds .toc>li>a span{color:var(--ink-faint)}
+.ds .toc ul{list-style:none;margin:0 0 8px;padding:0 0 0 38px;display:none}
+.ds .toc li.on ul{display:block}
+.ds .toc li.on>a{color:var(--ink);background:var(--panel)}
+.ds .toc ul a{display:block;padding:5px 0;text-decoration:none;font-size:14px;color:var(--ink-faint)}
+.ds .toc ul a.on{color:var(--ink)}
+.ds .toc ul a.on::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--ai);margin:0 8px 2px -13px}
+.ds aside .foot{margin-top:28px;padding-top:18px;border-top:1px solid var(--line);color:var(--ink-faint);font-size:13px}
+.ds{--gut:clamp(16px,3.5vw,48px)}
+.ds .ds-main{min-width:0;padding:0 var(--gut) 120px}
+@media (max-width:900px){.ds .shell{grid-template-columns:minmax(0,1fr)}
+.ds aside{position:sticky;top:var(--header-h);height:auto;z-index:10;border-right:0;border-bottom:1px solid var(--line);padding:12px var(--gut);display:flex;align-items:center;gap:16px;overflow-x:auto;background:rgba(244,245,248,.94);backdrop-filter:blur(10px)}
+.ds .brand+p,.ds aside .foot,.ds .toc ul{display:none!important}
+.ds .toc{display:flex;gap:4px}
+.ds .toc>li>a{white-space:nowrap}
+
+}
+.ds .intro{padding:72px 0 40px;max-width:900px}
+.ds .intro h1{font-size:clamp(44px,7vw,92px);line-height:.98;letter-spacing:-.05em;font-weight:600;margin:16px 0 0}
+.ds .intro h1 span{color:var(--ai)}
+.ds .intro p{font-size:clamp(17px,1.6vw,20px);color:var(--ink-soft);max-width:62ch;margin:24px 0 0}
+.ds .facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:36px}
+.ds .facts div{background:var(--panel);padding:18px}
+.ds .facts b{display:block;font-size:30px;letter-spacing:-.04em;font-weight:600;font-variant-numeric:tabular-nums}
+@media (max-width:640px){.ds .facts{grid-template-columns:1fr 1fr}
+}
+.ds .part{border-top:1px solid var(--line);padding-top:56px;margin-top:56px}
+.ds .part>header h2{font-size:clamp(34px,4.4vw,56px);letter-spacing:-.045em;line-height:1;font-weight:600;margin:12px 0 0}
+.ds .part>header p{color:var(--ink-soft);max-width:60ch;margin:14px 0 0;font-size:17px}
+.ds .item{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:clamp(24px,4vw,56px);padding:56px 0;border-bottom:1px solid var(--line-soft)}
+.ds .item:last-child{border-bottom:0}
+.ds .item>.d{min-width:0}
+.ds .item>.d h3{font-size:26px;letter-spacing:-.03em;margin:10px 0 0;font-weight:600}
+.ds .item>.d p{color:var(--ink-soft);margin:10px 0 0;font-size:15.5px}
+.ds .item>.d ul{margin:14px 0 0;padding-left:18px;color:var(--ink-soft);font-size:14.5px}
+.ds .item>.d li{margin:6px 0}
+.ds .demo{min-width:0}
+@media (max-width:1100px){.ds .item{grid-template-columns:1fr}
+}
+.ds .canvas{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:clamp(18px,3vw,32px);position:relative;min-width:0}
+.ds .canvas.grid{background-color:var(--panel);background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);background-size:24px 24px}
+.ds .canvas+.spec{margin-top:14px}
+.ds .spec{width:100%;border-collapse:collapse;font-size:14px}
+.ds .spec-wrap{overflow-x:auto}
+.ds .spec th{text-align:left;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);padding:10px 12px;border-bottom:1px solid var(--line)}
+.ds .spec td{padding:11px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+.ds .spec td:first-child{font-weight:500;white-space:nowrap}
+.ds .spec code{font:500 12.5px var(--mono);color:var(--ink-2);background:var(--bg-deep);padding:2px 6px;border-radius:4px;white-space:nowrap}
+.ds .rules{list-style:none;padding:0;margin:16px 0 0;counter-reset:r;display:grid;gap:10px}
+.ds .rules li{counter-increment:r;display:grid;grid-template-columns:34px 1fr;font-size:14.5px;color:var(--ink-soft)}
+.ds .rules li::before{content:counter(r,decimal-leading-zero);font:500 12px var(--mono);color:var(--human);padding-top:2px}
+.ds .roles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ds .role{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.ds .role .sw{height:84px;display:flex;align-items:flex-end;padding:10px;font:500 11px var(--mono);color:#fff}
+.ds .role .tint{display:flex;border-top:1px solid var(--line)}
+.ds .role .tint span{flex:1;height:22px}
+.ds .role .t{padding:12px}
+.ds .role .t b{display:block;font-size:15px}
+.ds .role .t p{margin:4px 0 0;font-size:13px;color:var(--ink-soft);line-height:1.45}
+@media (max-width:860px){.ds .roles{grid-template-columns:1fr 1fr}
+}
+.ds .inks{display:grid;gap:8px}
+.ds .inks div{display:grid;grid-template-columns:120px 90px 1fr;align-items:center;gap:12px;font-size:14px}
+.ds .inks i{height:10px;border-radius:5px}
+@media (max-width:640px){.ds .inks div{grid-template-columns:70px 1fr}
+.ds .inks div>span{grid-column:1/-1}
+.ds .inks div>span span{min-width:0!important}
+}
+.ds .neutrals{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:22px}
+.ds .neutrals div{border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:12px}
+.ds .neutrals span{display:block;height:54px}
+.ds .neutrals p{margin:0;padding:8px 10px}
+@media (max-width:640px){.ds .neutrals{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+.ds .ratio{font:500 12px var(--mono);padding:2px 7px;border-radius:999px;white-space:nowrap}
+.ds .ratio.aa{color:var(--live);background:var(--live-bg)}
+.ds .ratio.no{color:var(--risk);background:var(--risk-bg)}
+.ds .type-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line-soft)}
+.ds .type-row:first-child{padding-top:0}
+.ds .type-row:last-child{border-bottom:0}
+.ds .type-row .meta{font:500 11px/1.5 var(--mono);color:var(--ink-faint);letter-spacing:.04em}
+.ds .t-display{font-size:clamp(40px,5.2vw,84px);line-height:1.02;letter-spacing:-.035em;font-weight:600}
+.ds .t-h1{font-size:clamp(30px,3.6vw,60px);line-height:1.05;letter-spacing:-.03em;font-weight:600}
+.ds .t-h2{font-size:clamp(24px,2.6vw,38px);line-height:1.12;letter-spacing:-.022em;font-weight:600}
+.ds .t-h3{font-size:20px;line-height:1.3;letter-spacing:-.01em;font-weight:600}
+.ds .t-lead{font-size:clamp(17px,1.6vw,21px);line-height:1.55;color:var(--ink-2)}
+.ds .t-
+.t-eyebrow{font:500 12.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.ds .t-data{font:500 13px var(--mono);color:var(--ink-2)}
+@media (max-width:640px){.ds .type-row{grid-template-columns:1fr;gap:6px}
+}
+.ds .space{display:grid;gap:8px}
+.ds .space div{display:grid;grid-template-columns:70px 60px 1fr;align-items:center;gap:12px;font-size:13px}
+.ds .space i{display:block;height:14px;background:var(--ai-bg);border:1px solid var(--ai-line);border-radius:3px}
+.ds .radii{display:flex;flex-wrap:wrap;gap:16px;margin-top:22px}
+.ds .radii div{text-align:center;font-size:12px;color:var(--ink-faint)}
+.ds .radii span{display:block;width:84px;height:64px;border:1.5px solid var(--ink-2);background:var(--panel-2);margin-bottom:8px}
+.ds .btn{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 18px;border-radius:999px;font:500 15px var(--sans);text-decoration:none;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s;background:none;color:var(--ink)}
+.ds .btn--primary{background:var(--ink);color:var(--on-accent)}
+.ds .btn--primary:hover{background:#000}
+.ds .btn--ghost{border-color:var(--line-strong)}
+.ds .btn--ghost:hover{border-color:var(--ink-faint);background:var(--panel-2)}
+.ds .btn--play{border-color:var(--ai);color:var(--ai);background:var(--ai-bg);font:500 13px var(--mono)}
+.ds .btn--sm{height:36px;padding:0 14px;font-size:14px}
+.ds .btn[disabled]{opacity:.45;cursor:not-allowed}
+.ds .row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.ds .badge{display:inline-flex;align-items:center;gap:6px;font:500 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:4px 9px;border-radius:6px}
+.ds .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.ds .badge--live{color:var(--live);background:var(--live-bg)}
+.ds .badge--ai{color:var(--ai);background:var(--ai-bg)}
+.ds .badge--human{color:var(--human);background:var(--human-bg)}
+.ds .badge--risk{color:var(--risk);background:var(--risk-bg)}
+.ds .badge--neutral{color:var(--ink-2);background:var(--bg-deep)}
+.ds .chip{font:400 12.5px var(--mono);padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink-2);background:var(--panel-2)}
+.ds .ev{font:500 11.5px var(--mono);letter-spacing:.05em;text-transform:uppercase;padding:3px 8px;border-radius:5px;border:1px solid}
+.ds .ev--validated{color:var(--live);border-color:var(--live-line)}
+.ds .ev--measured{color:var(--live);border-color:var(--live-line);background:var(--live-bg)}
+.ds .ev--shipped{color:var(--ink-2);border-color:var(--line-strong)}
+.ds .ev--hypothesis{color:var(--human);border-color:var(--human-line)}
+.ds .dial{display:inline-flex;align-items:center;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--panel-2)}
+.ds .dial button{font:500 12.5px/1 var(--mono);color:var(--ink-faint);background:none;border:0;padding:8px 11px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.ds .dial button[aria-pressed=true]{background:var(--ink);color:var(--on-accent)}
+.ds .dial .t{opacity:.7;margin-left:4px}
+.ds .depth p{margin:14px 0 0;color:var(--ink-2);font-size:15px;transition:opacity .2s}
+.ds .depth [data-d][hidden]{display:none}
+.ds .card{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;max-width:380px;transition:border-color .25s,transform .25s,box-shadow .25s}
+.ds .card:hover{border-color:var(--line-strong);transform:translateY(-3px);box-shadow:0 12px 32px -18px rgba(20,26,38,.35)}
+.ds .card .bar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font:500 11.5px var(--mono);color:var(--ink-faint)}
+.ds .card .bar .st{margin-left:auto;color:var(--live)}
+.ds .card .bar .ai{color:var(--ai);background:var(--ai-bg);padding:1px 6px;border-radius:4px}
+.ds .card .shot{aspect-ratio:16/10;background:linear-gradient(135deg,#0E1320,#1F2A52);display:grid;place-items:center;color:#9AA6DD;font:500 12px var(--mono)}
+.ds .card .body{padding:18px 18px 16px;display:grid;gap:10px}
+.ds .card h4{margin:0;font-size:20px;letter-spacing:-.02em}
+.ds .card .foot{display:flex;justify-content:space-between;padding-top:12px;border-top:1px dashed var(--line);font-size:13px;color:var(--ink-faint)}
+.ds .cmd{display:flex;align-items:center;gap:10px;font:400 18px var(--mono);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;max-width:520px}
+.ds .cmd .p{color:var(--human)}
+.ds .cmd button{margin-left:auto;font:500 12px var(--mono);color:var(--ink-soft);background:transparent;border:1px solid var(--line);border-radius:6px;padding:7px 10px;cursor:pointer}
+.ds .states{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:18px}
+.ds .states figure{margin:0;text-align:center}
+.ds .states figcaption{font:500 11px var(--mono);color:var(--ink-faint);margin-top:8px;text-transform:uppercase;letter-spacing:.06em}
+.ds .force-hover{background:#000!important}
+.ds .force-focus{outline:2px solid var(--ai);outline-offset:3px}
+@media (max-width:640px){.ds .states{grid-template-columns:1fr 1fr}
+}
+.ds .field{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel);transition:border-color .2s,background .2s}
+.ds .field.low{border-color:var(--human-line);background:#FFFCF6}
+.ds .field .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ds .field .val{font-size:20px;font-weight:600;margin-top:6px;letter-spacing:-.01em}
+.ds .field .src{margin-top:10px;font-size:13.5px;color:var(--ink-soft);display:none}
+.ds .field.low .src{display:block}
+.ds .conf{display:flex;align-items:center;gap:10px;margin-top:12px}
+.ds .conf .meter{flex:1;height:6px;border-radius:3px;background:var(--bg-deep);position:relative;overflow:visible}
+.ds .conf .meter i{position:absolute;inset:0 auto 0 0;border-radius:3px;background:var(--ai);transition:width .2s,background .2s}
+.ds .conf .meter b{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--ink);left:85%}
+.ds .conf .meter b::after{content:"85%";position:absolute;top:-18px;left:-11px;font:500 10px var(--mono);color:var(--ink-faint)}
+.ds .slider{margin-top:22px;display:grid;gap:8px}
+.ds .slider input{width:100%;accent-color:var(--ai)}
+.ds .outcome{margin-top:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-top:14px;border-top:1px dashed var(--line);font-size:14px;color:var(--ink-soft)}
+.ds .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--panel-2)}
+.ds .seg button{border:0;background:none;padding:10px 14px;font:500 13px var(--sans);cursor:pointer;color:var(--ink-soft);border-right:1px solid var(--line)}
+.ds .seg button:last-child{border-right:0}
+.ds .seg button[aria-pressed=true]{background:var(--ink);color:var(--on-accent)}
+.ds .lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:18px}
+.ds .lane{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--panel);font-size:13.5px;min-height:96px}
+.ds .lane .lab{display:block;margin-bottom:6px}
+.ds .lane.ai{border-color:var(--ai-line);background:var(--ai-bg)}
+.ds .lane.hu{border-color:var(--human-line);background:var(--human-bg)}
+@media (max-width:640px){.ds .lanes{grid-template-columns:1fr}
+}
+.ds .trace{border:1px solid var(--line);border-radius:12px;background:var(--panel);font:400 12.5px var(--mono);overflow:hidden}
+.ds .trace header{display:flex;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+.ds .trace ol{list-style:none;margin:0;padding:6px 0}
+.ds .trace li{display:grid;grid-template-columns:48px 76px 1fr;gap:8px;padding:6px 14px;color:var(--ink-soft);align-items:baseline}
+.ds .trace .tag{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:4px;text-align:center}
+.ds .trace .tag.a{color:var(--ai);background:var(--ai-bg)}
+.ds .trace .tag.h{color:var(--human);background:var(--human-bg)}
+.ds .trace .tag.r{color:var(--ink-2);background:var(--bg-deep)}
+.ds .trace li.key{background:var(--human-bg)}
+.ds .trace li.key span:last-child{color:var(--ink)}
+.ds .trace footer{display:flex;gap:16px;padding:9px 14px;border-top:1px solid var(--line);font-size:11px;color:var(--ink-faint)}
+.ds .tabs{display:flex;gap:6px;flex-wrap:wrap}
+.ds .tabs button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:8px 12px;font:500 13px var(--sans);cursor:pointer;color:var(--ink-soft)}
+.ds .tabs button[aria-selected=true]{border-color:var(--ink);color:var(--ink)}
+.ds .fail{margin-top:16px;border:1px solid var(--risk-line);background:var(--risk-bg);border-radius:12px;padding:16px}
+.ds .fail h5{margin:0;font-size:16px;color:var(--ink)}
+.ds .fail p{margin:6px 0 0;font-size:14px;color:var(--ink-2)}
+.ds .fail .row{margin-top:12px}
+.ds .fail.warn{border-color:var(--human-line);background:var(--human-bg)}
+.ds .curves{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ds .curve{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:14px}
+.ds .curve svg{width:100%;height:auto;display:block}
+.ds .curve svg path{fill:none;stroke:var(--ai);stroke-width:2}
+.ds .curve svg line{stroke:var(--line);stroke-width:1}
+.ds .curve .track{position:relative;height:6px;border-radius:3px;background:var(--bg-deep);margin-top:12px}
+.ds .curve .track i{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:var(--ink);left:0}
+.ds .curve p{margin:10px 0 0;font-size:13px;color:var(--ink-soft)}
+@media (max-width:860px){.ds .curves{grid-template-columns:1fr}
+}
+.ds .stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.ds .stages div{border:1px solid var(--line);border-radius:10px;background:var(--panel);padding:12px;font-size:13px}
+.ds .stages canvas{display:block;width:100%;height:auto;aspect-ratio:1;border-radius:6px;background:var(--panel-2)}
+.ds .stages b{display:block;margin-top:8px;font-size:13.5px}
+.ds .stages span{color:var(--ink-faint);font:500 11px var(--mono)}
+@media (max-width:860px){.ds .stages{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width:480px){.ds .stages{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+.ds .replay{margin-top:12px}
+
+
+</style>

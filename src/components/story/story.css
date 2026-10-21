@@ -1,4 +1,4 @@
-.story { --bg:#F4F5F8; --panel:#FFFFFF; --line:#DCE0E9; --ink:#141A26; --ink-2:#454D5E; --ink-3:#5F6778; --ai:#4757CF; --ai-soft:#ECEEFB; --human:#A35F00; --human-soft:#FBF1E3; --ok:#1E8452; --ok-soft:#E6F3EC; --font:var(--sans); color:var(--ink); font-family:var(--font); font-size:17px; line-height:1.6; }
+.story { --bg:#F4F5F8; --panel:#FFFFFF; --line:#DCE0E9; --ink:#141A26; --ink-2:#454D5E; --ink-3:#5F6778; --ai:#4757CF; --ai-soft:#ECEEFB; --human:#9A5900; --human-soft:#FBF1E3; --ok:#1B7A4B; --ok-soft:#E6F3EC; --font:var(--sans); color:var(--ink); font-family:var(--font); font-size:17px; line-height:1.6; }
 .story.wrap { max-width:1120px; }
 .story .mono { font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
 .story footer.next .nx { display:grid; gap:4px; text-decoration:none; color:var(--ink-2); text-align:right; }

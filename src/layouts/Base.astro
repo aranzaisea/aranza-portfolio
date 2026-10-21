@@ -90,6 +90,7 @@ const anchor = (id: string) => (variant === 'home' ? `#${id}` : `${h}#${id}`);
             <a href={anchor('work')}>{t.nav.work}</a>
             <a href={anchor('approach')}>{t.nav.approach}</a>
             <a href={patternsUrl(lang)} aria-current={path.includes('/patterns') ? 'page' : undefined}>{t.nav.patterns}</a>
+            <a href="/design-system/" hreflang="en" aria-current={path.includes('/design-system') ? 'page' : undefined}>{t.nav.system}</a>
             <a href={anchor('experience')}>{t.nav.experience}</a>
             <a href={anchor('contact')}>{t.nav.about}</a>
             {!noAlt && (
