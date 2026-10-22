@@ -9,8 +9,8 @@ Contact: aranzaisea@gmail.com · https://www.linkedin.com/in/aranzaiseaux
 - [CV (Spanish, PDF)](https://aranzaisea.netlify.app/cv/Aranza_Isea_CV_ES.pdf)
 
 ## Experience
-- Planned sabbatical, Sep 2025 – present: completed a Diploma in Product Design (Coderhouse), earned AI certifications from IBM and Coderhouse, designed Numi (independent iOS product) and rebuilt the portfolio.
-- Senior Product Designer, AI Products — Perficient, Jan 2024 – Aug 2025: owned ClaimPro end to end (generative AI claims copilot, ~500 insurance adjusters, −68% claim resolution time client-reported over 3 months, 90%+ adoption); designed Vantage (multi-agent AI for AML compliance at a neobank).
+- Independent product work, Sep 2026 – present: designed Numi (independent iOS product), earned AI certifications from IBM and Coderhouse and rebuilt the portfolio.
+- Senior Product Designer, AI Products — Perficient, Jan 2024 – Aug 2026: owned ClaimPro end to end (generative AI claims copilot, ~500 insurance adjusters, −68% claim resolution time client-reported over 3 months, 90%+ adoption); designed Vantage (multi-agent AI for AML compliance at a neobank).
 - Senior UX/UI Designer — Perficient, 2022 – 2024: Off Dep Business (AI-assisted B2B purchasing, research with 20 Business buyers; +65% Business accounts, +56% B2B sales, +47% retention), Club Rumbo (loyalty app MVP, iOS and Android, one month).
 - Senior Visual Designer — Perficient, 2019 – 2022: built and scaled Perficient's Advanced Design System.
 - Product Designer — Distrito Moda, 2017 – 2019. Junior UX/UI Designer — Tsserapp, 2015 – 2017.
